@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 type TagVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
-type FontSizes = "14px" | "16px" | "24px" | "32px";
+type FontSizes = "14px" | "16px" | "18px" | "24px" | "32px";
 type FontFamilies = "primary" | "secondary";
 type FontColors = "black" | "white" | "gray";
 
@@ -22,6 +22,7 @@ const colorClasses: Record<FontColors, string> = {
 const sizeClasses: Record<FontSizes, string> = {
   "14px": "text-sm",
   "16px": "text-base",
+  "18px": "text-lg",
   "24px": "text-2xl",
   "32px": "text-3xl",
 };
@@ -36,14 +37,13 @@ const Typography: React.FC<TypographyProps> = ({
   size = "16px",
   fontFamily = "primary",
   color = "black",
-  className,
+  className = "",
   children,
 }) => {
   const Tag = tag;
   return (
     <Tag
       className={cn(
-        " font-second text-sm",
         sizeClasses[size],
         fontFamilyClasses[fontFamily],
         colorClasses[color],

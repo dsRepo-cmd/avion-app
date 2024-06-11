@@ -4,7 +4,9 @@ interface Props {
   children: React.ReactNode;
 }
 function Container({ children }: Props) {
-  return <div className=" flex  justify-between p-20">{children}</div>;
+  return (
+    <div className=" flex  justify-between p-20 w-full h-full">{children}</div>
+  );
 }
 
 export default Container;
