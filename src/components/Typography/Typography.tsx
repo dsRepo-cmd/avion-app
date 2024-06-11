@@ -35,6 +35,7 @@ const Typography: React.FC<TypographyProps> = ({
   tag,
   size = "16px",
   fontFamily = "primary",
+  color = "black",
   className,
   children,
 }) => {
@@ -45,6 +46,7 @@ const Typography: React.FC<TypographyProps> = ({
         " font-second text-sm",
         sizeClasses[size],
         fontFamilyClasses[fontFamily],
+        colorClasses[color],
         className
       )}
     >
