@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/Header/Header";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Regular.woff",
@@ -32,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${satoshi.variable} ${clashDisplay.variable}`}>
+        <Header />
         {children}
       </body>
     </html>

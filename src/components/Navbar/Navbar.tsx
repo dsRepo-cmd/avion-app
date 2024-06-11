@@ -2,6 +2,7 @@ import React from "react";
 import SearchIcon from "@/assets/search.svg";
 import CartIcon from "@/assets/shopping-cart.svg";
 import UserAvatarIcon from "@/assets/user-avatar.svg";
+import Typography from "../Typography/Typography";
 
 function Navbar() {
   return (
@@ -11,7 +12,11 @@ function Navbar() {
           <SearchIcon />
         </button>
       </div>
-      <h2 className=" text-2xl text-darkPrimary font-second">Avion</h2>
+
+      <Typography fontFamily="secondary" size="24px" tag="h3" color="black">
+        Avion
+      </Typography>
+
       <div className=" flex gap-4">
         <button title="cart">
           <CartIcon />

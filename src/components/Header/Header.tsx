@@ -14,7 +14,7 @@ const filterTabs = [
 
 function Header() {
   return (
-    <header className=" w-full p-4  ">
+    <header className=" w-full px-4  ">
       <Navbar />
       <Divider />
       <div className=" flex justify-center items-center py-5">

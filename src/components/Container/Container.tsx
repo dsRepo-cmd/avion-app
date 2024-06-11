@@ -1,7 +1,10 @@
 import React from "react";
 
-function Container() {
-  return <div className=" flex  justify-between p-20">Container</div>;
+interface Props {
+  children: React.ReactNode;
+}
+function Container({ children }: Props) {
+  return <div className=" flex  justify-between p-20">{children}</div>;
 }
 
 export default Container;
