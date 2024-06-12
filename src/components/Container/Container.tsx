@@ -1,11 +1,29 @@
+import { cn } from "@/lib/utils";
 import React from "react";
+
+type BackgroundColor = "white" | "dark" | "light";
 
 interface Props {
   children: React.ReactNode;
+  bgColor?: BackgroundColor;
 }
-function Container({ children }: Props) {
+
+const bgColorClasses: Record<BackgroundColor, string> = {
+  white: "bg-white",
+  dark: "bg-darkPrimary",
+  light: "bg-lightGrey",
+};
+
+function Container({ children, bgColor = "white" }: Props) {
   return (
-    <div className=" flex  justify-between p-20 w-full h-full">{children}</div>
+    <div
+      className={cn(
+        " flex  flex-col justify-between p-20 w-full h-full ",
+        bgColorClasses[bgColor]
+      )}
+    >
+      {children}
+    </div>
   );
 }
 

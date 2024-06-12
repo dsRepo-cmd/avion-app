@@ -2,23 +2,24 @@ import { cn } from "@/lib/utils";
 import React, { ButtonHTMLAttributes } from "react";
 
 type ButtonVariant = "clear" | "filled";
-type BackgroundColors = "black" | "light" | "clear";
+type BackgroundColor = "black" | "light" | "clear" | "gray";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   children?: React.ReactNode;
   variant?: ButtonVariant;
-  bgColor?: BackgroundColors;
+  bgColor?: BackgroundColor;
 }
 
 const variantClasses: { [key in ButtonVariant]: string } = {
   clear: "",
-  filled: "py-4 px-8 text-base text-white ",
+  filled: "py-4 px-8 text-base  ",
 };
 
-const bgColorClasses: { [key in BackgroundColors]: string } = {
-  black: "bg-darkPrimaryk",
-  light: "bg-buttonLight",
+const bgColorClasses: { [key in BackgroundColor]: string } = {
+  black: "bg-darkPrimaryk text-white",
+  light: "bg-buttonLight text-white",
+  gray: "bg-lightGrey text-darkPrimary",
   clear: "",
 };
 
@@ -32,7 +33,7 @@ function Button({
   return (
     <button
       className={cn(
-        " duration-300 hover:opacity-70",
+        " duration-300 hover:opacity-70 ",
         variantClasses[variant],
         bgColorClasses[bgColor],
         className
