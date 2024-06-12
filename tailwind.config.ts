@@ -19,6 +19,7 @@ const config: Config = {
       grey: "var(--grey)",
 
       buttonLight: "#F9F9F926",
+      textLight: "#505977",
     },
 
     extend: {

@@ -1,6 +1,7 @@
 import HomeEmailSignUp from "@/containers/HomeEmailSignUp/HomeEmailSignUp";
 import HomeFeatures from "@/containers/HomeFeatures/HomeFeatures";
 import HomeHero from "@/containers/HomeHero/HomeHero";
+import HomeInfo from "@/containers/HomeInfo/HomeInfo";
 import HomeListings from "@/containers/HomeListings/HomeListings";
 import { homeListingsNew, homeListingsPopular } from "@/data/home";
 
@@ -12,6 +13,7 @@ export default function Home() {
       <HomeListings data={homeListingsNew} />
       <HomeListings data={homeListingsPopular} />
       <HomeEmailSignUp />
+      <HomeInfo />
     </main>
   );
 }

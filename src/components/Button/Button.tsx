@@ -27,7 +27,7 @@ function Button({
   children,
   className = "",
   variant = "filled",
-  bgColor = "clear",
+  bgColor = "black",
   ...props
 }: Props) {
   return (
