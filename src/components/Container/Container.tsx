@@ -18,7 +18,7 @@ function Container({ children, bgColor = "white" }: Props) {
   return (
     <div
       className={cn(
-        " flex  flex-col justify-between p-20 w-full h-full ",
+        " flex  flex-col justify-between p-20 w-full h-full lg:p-0 ",
         bgColorClasses[bgColor]
       )}
     >

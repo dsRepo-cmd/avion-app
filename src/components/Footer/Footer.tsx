@@ -8,11 +8,12 @@ import EmailSignUpForm from "../InputForm/EmailSignUpForm";
 
 function Footer() {
   return (
-    <footer className=" flex flex-col gap-6 w-full bg-darkPrimary px-20 pt-20 pb-6 text-white">
-      <div className=" flex justify-between">
-        <div className=" flex w-full gap-36">
-          <div className=" flex flex-col gap-3">
+    <footer className=" flex flex-col gap-6 w-full bg-darkPrimary px-20 pt-20 pb-6 text-white lg:px-6 lg:py-12">
+      <div className=" flex justify-between gap-12 lg:flex-col ">
+        <div className=" flex w-full gap-36 lg:grid lg:grid-cols-2 lg:gap-6">
+          <div className=" flex flex-col w-full  gap-3 ">
             <Typography
+              className=" text-nowrap"
               fontFamily="secondary"
               size="16px"
               color="white"
@@ -31,8 +32,9 @@ function Footer() {
             </ul>
           </div>
 
-          <div className=" flex flex-col gap-3">
+          <div className=" flex flex-col w-full  gap-3 ">
             <Typography
+              className=" text-nowrap"
               fontFamily="secondary"
               size="16px"
               color="white"
@@ -51,8 +53,9 @@ function Footer() {
             </ul>
           </div>
 
-          <div className=" flex flex-col gap-3">
+          <div className=" flex flex-col w-full gap-3">
             <Typography
+              className=" text-nowrap"
               fontFamily="secondary"
               size="16px"
               color="white"
@@ -77,18 +80,18 @@ function Footer() {
             {footer.joinUs.title}
           </Typography>
 
-          <EmailSignUpForm variant="dark" className=" w-full" />
+          <EmailSignUpForm variant="dark" className=" w-full " />
         </div>
       </div>
 
       <Divider />
 
-      <div className=" flex  items-center justify-between">
+      <div className=" flex  items-center justify-between lg:justify-center">
         <Typography fontFamily="primary" size="14px" color="white" tag="span">
           {footer.copyright}
         </Typography>
 
-        <ul className=" flex items-center justify-center gap-6">
+        <ul className=" flex items-center justify-center gap-6 lg:hidden">
           {footer.socialLinks.map((link) => (
             <li key={link.id}>
               <Link title={link.title} href={link.href} target="_blank">

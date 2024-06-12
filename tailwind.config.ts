@@ -22,6 +22,15 @@ const config: Config = {
       textLight: "#505977",
     },
 
+    screens: {
+      "2xl": { max: "1535px" },
+      xl: { max: "1279px" },
+      lg: { max: "1023px" },
+      md: { max: "836px" },
+      sm: { max: "639px" },
+      exsm: { max: "380px" },
+    },
+
     extend: {
       fontFamily: {
         primary: ["var(--font-family)"],

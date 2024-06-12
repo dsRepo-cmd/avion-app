@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <nav className=" flex justify-between items-center py-5">
       <div>
-        <button title="search">
+        <button className=" md:hidden" title="search">
           <SearchIcon />
         </button>
       </div>

@@ -15,10 +15,10 @@ const variantClasses: { [key in VariantForm]: string } = {
 
 function EmailSignUpForm({ variant = "light", className = "" }: Props) {
   return (
-    <form className={cn("  flex", className)}>
+    <form className={cn(" flex", className)}>
       <input
         className={cn(
-          " bg-[#FFFFFF1F] text-white grow px-8 py-4 ",
+          " bg-[#FFFFFF1F] text-white grow px-8 py-4  lg:w-[200px]",
           variantClasses[variant]
         )}
         type="text"

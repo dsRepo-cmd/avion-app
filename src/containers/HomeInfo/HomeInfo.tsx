@@ -5,8 +5,8 @@ import Image from "next/image";
 
 function HomeInfo() {
   return (
-    <div className=" w-full flex justify-between">
-      <div className=" flex flex-col justify-between p-20">
+    <div className=" w-full flex justify-between lg:flex-col">
+      <div className=" flex flex-col gap-6 justify-between p-20 lg:px-6 lg:py-12 lg:gap-6">
         <div className="flex flex-col gap-6">
           <Typography tag="h3" size="24px" fontFamily="secondary">
             {homeInfo.title}
@@ -24,7 +24,7 @@ function HomeInfo() {
             </Typography>
           ))}
         </div>
-        <Button bgColor="gray" className=" self-start">
+        <Button bgColor="gray" className=" self-start lg:w-full">
           {homeInfo.button}
         </Button>
       </div>
@@ -34,7 +34,7 @@ function HomeInfo() {
         alt="home-place"
         width={720}
         height={603}
-        className=" object-contain"
+        className=" object-contain w-full"
       />
     </div>
   );

@@ -8,20 +8,24 @@ import React from "react";
 function HomeHero() {
   return (
     <Container>
-      <div className=" flex w-full ">
-        <div className=" flex flex-col justify-between w-2/3 bg-darkPrimary  p-[60px]">
+      <div className=" relative flex w-full ">
+        <div className=" flex flex-col justify-between w-2/3 bg-darkPrimary  p-[60px] lg:w-full lg:px-6 lg:pt-10 pb-28">
           <div className=" flex flex-col gap-10 items-start ">
             <Typography
               tag="h2"
               size="32px"
               color="white"
               fontFamily="secondary"
-              className=" max-w-[480px]"
+              className=" max-w-[480px] lg:w-full lg:pb-20"
             >
               {homeHero.title}
             </Typography>
 
-            <Button variant="filled" bgColor="light">
+            <Button
+              variant="filled"
+              bgColor="light"
+              className=" lg:w-[calc(100%-48px)] lg:translate-x-[24px] lg:absolute z-40 lg:bottom-6 lg:left-0  "
+            >
               {homeHero.button}
             </Button>
           </div>
@@ -37,14 +41,13 @@ function HomeHero() {
           </Typography>
         </div>
 
-        <div className=" w-1/3">
-          <Image
-            src={homeHero.imgSrc}
-            alt="hero-image"
-            width={520}
-            height={584}
-          />
-        </div>
+        <Image
+          src={homeHero.imgSrc}
+          alt="hero-image"
+          width={520}
+          height={584}
+          className=" sm:hidden lg:hidden "
+        />
       </div>
     </Container>
   );

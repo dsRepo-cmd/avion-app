@@ -6,14 +6,14 @@ import Image from "next/image";
 function HomeFeatures() {
   return (
     <Container>
-      <div className=" flex items-center justify-center flex-col gap-12">
+      <div className=" flex items-center justify-center flex-col gap-12 lg:px-6 lg:py-12 ">
         <Typography fontFamily="secondary" size="24px" tag="h3">
           {homeFeatures.title}
         </Typography>
 
-        <ul className=" flex items-center justify-between gap-16">
+        <ul className=" flex flex-wrap items-center justify-between gap-16">
           {homeFeatures.features.map((feature) => (
-            <li className=" flex flex-col gap-2" key={feature.id}>
+            <li className=" flex grow flex-col gap-2" key={feature.id}>
               <Image
                 src={feature.iconSrc}
                 alt="feature.iconSrc"

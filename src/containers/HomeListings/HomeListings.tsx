@@ -2,6 +2,7 @@ import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import { ListingData } from "@/data/home";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 interface Props {
@@ -11,13 +12,19 @@ interface Props {
 function HomeListings({ data }: Props) {
   return (
     <Container>
-      <div className=" flex flex-col items-start gap-9">
+      <div className="flex flex-col items-start gap-9 lg:py-12 lg:px-6">
         <Typography fontFamily="secondary" size="32px" tag="h2">
           {data.title}
         </Typography>
-        <ul className=" flex gap-5">
+        <ul className="flex gap-5 lg:grid lg:grid-cols-2 lg:self-center">
           {data.products.map((product) => (
-            <li className=" flex flex-col gap-2" key={product.id}>
+            <li
+              className={cn(
+                "flex flex-col gap-2",
+                product.isPhotoBig ? "lg:col-span-2" : "lg:col-span-1"
+              )}
+              key={product.id}
+            >
               <Image
                 src={product.photoSrc}
                 alt={product.photoSrc}
@@ -36,7 +43,7 @@ function HomeListings({ data }: Props) {
           ))}
         </ul>
 
-        <Button className=" self-center" bgColor="gray" variant="filled">
+        <Button className="self-center" bgColor="gray" variant="filled">
           View collection
         </Button>
       </div>

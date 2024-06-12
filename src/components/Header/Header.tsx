@@ -17,7 +17,7 @@ function Header() {
     <header className=" w-full px-4  ">
       <Navbar />
       <Divider />
-      <div className=" flex justify-center items-center py-5">
+      <div className=" flex justify-center items-center py-5 md:hidden">
         <ul className=" flex justify-center gap-11">
           {filterTabs.map((tab) => (
             <li key={tab.id}>

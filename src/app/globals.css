@@ -24,3 +24,7 @@ body {
     text-wrap: balance;
   }
 }
+
+/* .button {
+  width: calc(100% - 48px);
+} */
