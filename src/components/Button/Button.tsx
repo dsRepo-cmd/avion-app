@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import React, { ButtonHTMLAttributes } from "react";
 
 type ButtonVariant = "clear" | "filled";
-type BackgroundColor = "black" | "light" | "clear" | "gray";
+type BackgroundColor = "black" | "light" | "clear" | "gray" | "white";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
@@ -20,6 +20,7 @@ const bgColorClasses: { [key in BackgroundColor]: string } = {
   black: "bg-darkPrimary text-white",
   light: "bg-buttonLight text-white",
   gray: "bg-lightGrey text-darkPrimary",
+  white: " bg-white text-darkPrimary",
   clear: "",
 };
 

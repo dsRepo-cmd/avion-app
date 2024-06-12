@@ -1,5 +1,6 @@
-import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
+import EmailSignUpForm from "@/components/InputForm/EmailSignUpForm";
+
 import Typography from "@/components/Typography/Typography";
 import { homeEmailSignUp } from "@/data/home";
 
@@ -13,17 +14,7 @@ function HomeEmailSignUp() {
         <Typography className=" mb-14" fontFamily="primary" size="16px" tag="p">
           {homeEmailSignUp.text}
         </Typography>
-
-        <form>
-          <input
-            className=" w-[354px] bg-lightGrey px-8 py-4"
-            type="text"
-            placeholder="your@email.com"
-          />
-          <Button variant="filled" bgColor="black" type="submit">
-            Sign up
-          </Button>
-        </form>
+        <EmailSignUpForm className=" w-[472px]" />
       </div>
     </Container>
   );
