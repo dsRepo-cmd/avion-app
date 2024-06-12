@@ -17,7 +17,7 @@ const variantClasses: { [key in ButtonVariant]: string } = {
 };
 
 const bgColorClasses: { [key in BackgroundColor]: string } = {
-  black: "bg-darkPrimaryk text-white",
+  black: "bg-darkPrimary text-white",
   light: "bg-buttonLight text-white",
   gray: "bg-lightGrey text-darkPrimary",
   clear: "",

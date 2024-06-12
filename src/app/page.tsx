@@ -1,3 +1,4 @@
+import HomeEmailSignUp from "@/containers/HomeEmailSignUp/HomeEmailSignUp";
 import HomeFeatures from "@/containers/HomeFeatures/HomeFeatures";
 import HomeHero from "@/containers/HomeHero/HomeHero";
 import HomeListings from "@/containers/HomeListings/HomeListings";
@@ -10,6 +11,7 @@ export default function Home() {
       <HomeFeatures />
       <HomeListings data={homeListingsNew} />
       <HomeListings data={homeListingsPopular} />
+      <HomeEmailSignUp />
     </main>
   );
 }

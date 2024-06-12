@@ -108,3 +108,8 @@ export const homeListingsPopular: ListingData = {
   ],
   link: "/",
 };
+
+export const homeEmailSignUp = {
+  title: "Join the club and get the benefits",
+  text: "Sign up for our newsletter and receive exclusive offers on new ranges, sales, pop up stores and more",
+};
