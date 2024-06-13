@@ -1,35 +1,36 @@
 import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
-import { ListingData } from "@/data/home";
+import { Product } from "@/data/home";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  data: ListingData;
+  title: string;
+  products: Product[];
 }
 
-function HomeListings({ data }: Props) {
+function Listings({ title, products }: Props) {
   return (
     <Container>
       <div className="flex flex-col items-start gap-9 lg:py-12 lg:px-6">
         <Typography fontFamily="secondary" size="32px" tag="h2">
-          {data.title}
+          {title}
         </Typography>
         <ul className="flex gap-5 lg:grid lg:grid-cols-2 lg:self-center">
-          {data.products.map((product) => (
+          {products.map((product) => (
             <li
               className={cn(
                 "flex flex-col gap-2",
                 product.isPhotoBig ? "lg:col-span-2" : "lg:col-span-1"
               )}
-              key={product.id}
+              key={product._id}
             >
-              <Link href={`/product/${product.id}`}>
+              <Link href={`/product/${product._id}`}>
                 <Image
-                  src={product.photoSrc}
-                  alt={product.photoSrc}
+                  src={product.imageSrc}
+                  alt={product.name}
                   width={product.isPhotoBig ? 630 : 305}
                   height={375}
                 />
@@ -54,4 +55,4 @@ function HomeListings({ data }: Props) {
   );
 }
 
-export default HomeListings;
+export default Listings;

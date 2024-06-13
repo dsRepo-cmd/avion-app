@@ -41,32 +41,32 @@ export const footer = {
     title: "Categories",
     links: [
       {
-        id: "1",
+        id: "6",
         title: "Crockery",
         href: "/",
       },
       {
-        id: "2",
+        id: "7",
         title: "Furniture",
         href: "/",
       },
       {
-        id: "3",
+        id: "8",
         title: "Homeware",
         href: "/",
       },
       {
-        id: "4",
+        id: "9",
         title: "Plant pots",
         href: "/",
       },
       {
-        id: "5",
+        id: "10",
         title: "Chairs",
         href: "/",
       },
       {
-        id: "6",
+        id: "11",
         title: "Crockery",
         href: "/",
       },
@@ -77,27 +77,27 @@ export const footer = {
     title: "Our company",
     links: [
       {
-        id: "1",
+        id: "12",
         title: "About us",
         href: "/",
       },
       {
-        id: "2",
+        id: "13",
         title: "Vacancies",
         href: "/",
       },
       {
-        id: "3",
+        id: "14",
         title: "Contact us",
         href: "/",
       },
       {
-        id: "4",
+        id: "15",
         title: "Privacy",
         href: "/",
       },
       {
-        id: "5",
+        id: "16",
         title: "Returns policy",
         href: "/",
       },
@@ -113,37 +113,37 @@ export const footer = {
 
   socialLinks: [
     {
-      id: "1",
+      id: "17",
       title: "Linkedin",
       href: "/",
       icon: <LinkedinIcon />,
     },
     {
-      id: "2",
+      id: "18",
       title: "Facebook",
       href: "/",
       icon: <FacebookIcon />,
     },
     {
-      id: "2",
+      id: "19",
       title: "Instagram",
       href: "/",
       icon: <InstagramIcon />,
     },
     {
-      id: "3",
+      id: "20",
       title: "Skype",
       href: "/",
       icon: <SkypeIcon />,
     },
     {
-      id: "7",
+      id: "21",
       title: "Twitter",
       href: "/",
       icon: <TwitterIcon />,
     },
     {
-      id: "4",
+      id: "22",
       title: "Pinterest",
       href: "/",
       icon: <PinterestIcon />,
