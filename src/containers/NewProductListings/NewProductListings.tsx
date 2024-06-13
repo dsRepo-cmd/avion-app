@@ -1,14 +1,17 @@
 import HomeListings from "@/components/Listings/Listings";
-import { Product } from "@/data/home";
+import { ProductListing } from "@/data/home";
 import dbConnect from "@/lib/dbConnect";
 import ProductModel, { IProduct } from "@/models/Product";
 
-export async function getNewProducts(): Promise<Product[] | undefined> {
+export async function getNewProducts(): Promise<ProductListing[] | undefined> {
   await dbConnect();
   try {
-    const newProducts = await ProductModel.find()
+    const newProducts = await ProductModel.find(
+      {},
+      "_id name price imageSrc isPhotoBig"
+    )
       .sort({ dateAdded: -1 })
-      .limit(4)
+      .limit(5)
       .lean();
 
     const formattedProducts = newProducts.map((product: IProduct) => ({
@@ -17,24 +20,39 @@ export async function getNewProducts(): Promise<Product[] | undefined> {
       price: product.price,
       imageSrc: product.imageSrc,
       isPhotoBig: product.isPhotoBig,
-    })) as Product[];
+    })) as ProductListing[];
 
-    let countBigPhotos = formattedProducts.filter(
-      (product) => product.isPhotoBig
-    ).length;
-    if (countBigPhotos > 1) {
-      for (const product of formattedProducts) {
-        if (product.isPhotoBig) {
-          product.isPhotoBig = false;
-          countBigPhotos--;
-          if (countBigPhotos <= 1) break;
-        }
+    let resultProducts: ProductListing[] = [];
+
+    // Find indices of products with isPhotoBig=true
+    const bigPhotoIndices = formattedProducts
+      .map((product, index) => (product.isPhotoBig ? index : -1))
+      .filter((index) => index !== -1);
+
+    if (bigPhotoIndices.length > 0) {
+      if (bigPhotoIndices[0] <= 2) {
+        resultProducts = formattedProducts.slice(0, 3);
+      } else if (bigPhotoIndices[0] === 3) {
+        // Case 2: Fourth product is big photo
+        resultProducts = [
+          formattedProducts[0],
+          formattedProducts[1],
+          formattedProducts[2],
+          formattedProducts[4],
+        ];
+      } else if (bigPhotoIndices.includes(0) && bigPhotoIndices.includes(1)) {
+        resultProducts = formattedProducts.slice(0, 2);
+      } else {
+        resultProducts = formattedProducts.slice(0, 3);
       }
+    } else {
+      resultProducts = formattedProducts.slice(0, 3);
     }
 
-    return formattedProducts;
+    return resultProducts;
   } catch (error) {
     console.log(error);
+    return undefined;
   }
 }
 

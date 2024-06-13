@@ -35,7 +35,7 @@ export const homeFeatures = {
   ],
 };
 
-export interface Product {
+export interface ProductListing {
   _id: string;
   name: string;
   price: string;

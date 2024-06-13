@@ -1,14 +1,15 @@
 import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
-import { Product } from "@/data/home";
+import { ProductListing } from "@/data/home";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
   title: string;
-  products: Product[];
+  products: ProductListing[];
 }
 
 function Listings({ title, products }: Props) {
@@ -22,12 +23,14 @@ function Listings({ title, products }: Props) {
           {products.map((product) => (
             <li
               className={cn(
-                "flex flex-col gap-2",
                 product.isPhotoBig ? "lg:col-span-2" : "lg:col-span-1"
               )}
               key={product._id}
             >
-              <Link href={`/product/${product._id}`}>
+              <Link
+                className="flex flex-col gap-2"
+                href={`/product/${product._id}`}
+              >
                 <Image
                   src={product.imageSrc}
                   alt={product.name}
