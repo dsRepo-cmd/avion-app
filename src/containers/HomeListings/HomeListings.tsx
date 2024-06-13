@@ -4,6 +4,7 @@ import Typography from "@/components/Typography/Typography";
 import { ListingData } from "@/data/home";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   data: ListingData;
@@ -25,20 +26,22 @@ function HomeListings({ data }: Props) {
               )}
               key={product.id}
             >
-              <Image
-                src={product.photoSrc}
-                alt={product.photoSrc}
-                width={product.isPhotoBig ? 630 : 305}
-                height={375}
-              />
+              <Link href={`/product/${product.id}`}>
+                <Image
+                  src={product.photoSrc}
+                  alt={product.photoSrc}
+                  width={product.isPhotoBig ? 630 : 305}
+                  height={375}
+                />
 
-              <Typography fontFamily="secondary" size="20px" tag="h4">
-                {product.name}
-              </Typography>
+                <Typography fontFamily="secondary" size="20px" tag="h4">
+                  {product.name}
+                </Typography>
 
-              <Typography fontFamily="primary" size="18px" tag="p">
-                {product.price}
-              </Typography>
+                <Typography fontFamily="primary" size="18px" tag="p">
+                  {product.price}
+                </Typography>
+              </Link>
             </li>
           ))}
         </ul>
