@@ -1,8 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import localFont from "next/font/local";
+import "./globals.css";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+
+const satoshi = localFont({
+  src: "./fonts/Satoshi-Regular.woff",
+  weight: "400",
+  display: "swap",
+  style: "normal",
+  variable: "--font-family",
+});
+
+const clashDisplay = localFont({
+  src: "./fonts/ClashDisplay-Regular.woff",
+  weight: "400",
+  display: "swap",
+  style: "normal",
+  variable: "--second-family",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +33,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${satoshi.variable} ${clashDisplay.variable}`}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
