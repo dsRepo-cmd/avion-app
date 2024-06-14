@@ -16,7 +16,6 @@ const CreateProduct = () => {
     depth: "",
     brand: "",
     imageSrc: "",
-    isPhotoBig: false,
   });
 
   const handleChange = (
@@ -27,11 +26,10 @@ const CreateProduct = () => {
       | HTMLFormElement
     >
   ) => {
-    const { name, value, type } = e.target;
+    const { name, value } = e.target;
 
     // Handle checkboxes separately
-    const newValue =
-      type === "checkbox" ? (e.target as HTMLInputElement).checked : value;
+    const newValue = value;
 
     setProductData({
       ...productData,
@@ -206,17 +204,7 @@ const CreateProduct = () => {
             required
           />
         </div>
-        <div className="flex gap-10">
-          <label htmlFor="isPhotoBig">Big Photo</label>
-          <input
-            className="bg-lightGrey  px-4 py-2"
-            type="checkbox"
-            id="isPhotoBig"
-            name="isPhotoBig"
-            checked={productData.isPhotoBig}
-            onChange={handleChange}
-          />
-        </div>
+
         <button type="submit">Create Product</button>
       </form>
     </div>

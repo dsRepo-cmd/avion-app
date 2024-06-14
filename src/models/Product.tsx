@@ -38,7 +38,7 @@ const ProductSchema = new mongoose.Schema<IProduct>(
     brand: { type: String, required: true, trim: true },
     dateAdded: { type: Date, default: Date.now },
     imageSrc: { type: String, trim: true },
-    isPhotoBig: { type: Boolean, default: false },
+
     views: { type: Number, default: 0 },
   },
   { timestamps: true }

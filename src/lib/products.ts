@@ -4,9 +4,12 @@ import {
   SortBy,
   SortOrder,
 } from "@/app/product/types";
-import ProductModel from "@/models/Product";
+import ProductModel, { IProduct } from "@/models/Product";
+import dbConnect from "./dbConnect";
 
 export const getProducts = async (searchParams: SearchParams) => {
+  await dbConnect();
+
   const {
     category,
     productType,
@@ -42,7 +45,7 @@ export const getProducts = async (searchParams: SearchParams) => {
   // get products from DB
   const products = await ProductModel.find(filter)
     .sort(sort)
-    .select("_id name price imageSrc isPhotoBig")
+    .select("_id name price imageSrc ")
     .exec();
 
   const formattedProducts = products.map(
@@ -52,8 +55,56 @@ export const getProducts = async (searchParams: SearchParams) => {
         name: product.name,
         price: product.price,
         imageSrc: product.imageSrc,
-        isPhotoBig: product.isPhotoBig,
       } as ProductListing)
   );
   return formattedProducts;
 };
+
+export async function getPopularProducts(): Promise<
+  ProductListing[] | undefined
+> {
+  await dbConnect();
+  try {
+    const newProducts = await ProductModel.find({}, "_id name price imageSrc ")
+      .sort({ views: 1 })
+      .limit(4)
+      .lean();
+
+    const formattedProducts = newProducts.map((product: IProduct) => ({
+      _id: product._id.toString(),
+      name: product.name,
+      price: product.price,
+      imageSrc: product.imageSrc,
+    })) as ProductListing[];
+
+    return formattedProducts;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+export async function getNewProducts(): Promise<ProductListing[] | undefined> {
+  await dbConnect();
+  try {
+    const newProducts = await ProductModel.find(
+      {},
+      "_id name price imageSrc isPhotoBig"
+    )
+      .sort({ dateAdded: -1 })
+      .limit(4)
+      .lean();
+
+    const formattedProducts = newProducts.map((product: IProduct) => ({
+      _id: product._id.toString(),
+      name: product.name,
+      price: product.price,
+      imageSrc: product.imageSrc,
+    })) as ProductListing[];
+
+    return formattedProducts;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}

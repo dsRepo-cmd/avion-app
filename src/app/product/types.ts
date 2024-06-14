@@ -3,7 +3,6 @@ export interface ProductListing {
   name: string;
   price: string;
   imageSrc: string;
-  isPhotoBig?: boolean;
 }
 
 export enum ProductType {
@@ -36,7 +35,6 @@ export interface IProductBase {
   depth: string;
   brand: string;
   imageSrc: string;
-  isPhotoBig: boolean;
 }
 
 export enum SortOrder {

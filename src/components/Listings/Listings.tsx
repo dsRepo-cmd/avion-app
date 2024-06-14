@@ -2,7 +2,6 @@ import { ProductListing } from "@/app/product/types";
 import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,10 +19,7 @@ function Listings({ title, products }: Props) {
         </Typography>
         <ul className="grid grid-cols-4 gap-5 lg:grid lg:grid-cols-2 lg:self-center">
           {products.map((product) => (
-            <li
-              className={cn(product.isPhotoBig ? "col-span-2" : "col-span-1")}
-              key={product._id}
-            >
+            <li key={product._id}>
               <Link
                 className="flex flex-col gap-2"
                 href={`/product/${product._id}`}
@@ -31,7 +27,7 @@ function Listings({ title, products }: Props) {
                 <Image
                   src={product.imageSrc}
                   alt={product.name}
-                  width={product.isPhotoBig ? 630 : 305}
+                  width={305}
                   height={375}
                 />
 
