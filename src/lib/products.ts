@@ -18,14 +18,14 @@ export const getProducts = async (searchParams: SearchParams) => {
     minPrice,
     sortBy,
     sortOrder,
+    page = 1,
+    limit = 12,
   } = searchParams;
 
-  //   filter
   const filter: any = {};
   if (category) filter.category = category;
   if (productType) filter.productType = productType;
   if (brand) filter.brand = brand;
-
   if (minPrice && maxPrice) {
     filter.price = { $gte: minPrice, $lte: maxPrice };
   } else if (minPrice) {
@@ -34,30 +34,28 @@ export const getProducts = async (searchParams: SearchParams) => {
     filter.price = { $lte: maxPrice };
   }
 
-  //   sort
-  let sort: any = { dateAdded: -1 }; // Default sort by dateAdded
-
+  let sort: any = { dateAdded: -1 };
   if (sortBy === SortBy.price) {
     sort = { price: sortOrder === SortOrder.asc ? 1 : -1 };
   } else if (sortBy === SortBy.dateAdded) {
     sort = { dateAdded: sortOrder === SortOrder.asc ? 1 : -1 };
   }
-  // get products from DB
+
+  const skip = (page - 1) * limit;
+
   const products = await ProductModel.find(filter)
     .sort(sort)
-    .select("_id name price imageSrc ")
+    .skip(skip)
+    .limit(limit)
+    .select("_id name price imageSrc")
     .exec();
 
-  const formattedProducts = products.map(
-    (product) =>
-      ({
-        _id: product._id.toString(),
-        name: product.name,
-        price: product.price,
-        imageSrc: product.imageSrc,
-      } as ProductListing)
-  );
-  return formattedProducts;
+  return products.map((product) => ({
+    _id: product._id.toString(),
+    name: product.name,
+    price: product.price,
+    imageSrc: product.imageSrc,
+  })) as ProductListing[];
 };
 
 export async function getPopularProducts(): Promise<

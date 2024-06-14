@@ -54,4 +54,6 @@ export interface SearchParams {
   maxPrice: string;
   sortBy: SortBy;
   sortOrder: SortOrder;
+  page: number;
+  limit: number;
 }

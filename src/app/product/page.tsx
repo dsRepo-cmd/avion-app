@@ -8,14 +8,21 @@ interface Props {
 }
 
 async function Products({ searchParams }: Props) {
-  const products = await getProducts(searchParams);
+  const { page = 1, limit = 12, ...otherParams } = searchParams;
+
+  const products = await getProducts({ page, limit, ...otherParams });
 
   if (!products) null;
 
   return (
     <main className="flex  flex-col items-center justify-between  max-w-[1440px] m-auto">
       <ProductTitle category={searchParams.category} />
-      <Listings products={products} />
+      <Listings
+        products={products}
+        currentPage={page}
+        limit={limit}
+        searchParams={searchParams}
+      />
     </main>
   );
 }
