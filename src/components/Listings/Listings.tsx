@@ -1,16 +1,17 @@
 import { ProductListing } from "@/app/product/types";
-import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import Image from "next/image";
 import Link from "next/link";
+import AppLink from "../AppLink/AppLink";
 
 interface Props {
-  title: string;
+  title?: string;
   products: ProductListing[];
+  href?: string;
 }
 
-function Listings({ title, products }: Props) {
+function Listings({ title = "", products, href = "" }: Props) {
   return (
     <Container>
       <div className="flex flex-col items-start gap-9 lg:py-12 lg:px-6">
@@ -43,9 +44,14 @@ function Listings({ title, products }: Props) {
           ))}
         </ul>
 
-        <Button className="self-center" bgColor="gray" variant="filled">
+        <AppLink
+          href={href}
+          className="self-center"
+          bgColor="gray"
+          variant="filled"
+        >
           View collection
-        </Button>
+        </AppLink>
       </div>
     </Container>
   );

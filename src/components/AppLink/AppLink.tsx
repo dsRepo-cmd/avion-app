@@ -29,7 +29,7 @@ function AppLink({
   children,
   className = "",
   variant = "filled",
-  bgColor = "black",
+  bgColor = "clear",
 
   ...props
 }: Props) {
