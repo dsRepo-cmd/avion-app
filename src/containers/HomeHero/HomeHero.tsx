@@ -1,4 +1,4 @@
-import Button from "@/components/Button/Button";
+import AppLink from "@/components/AppLink/AppLink";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import { homeHero } from "@/data/home";
@@ -21,13 +21,14 @@ function HomeHero() {
               {homeHero.title}
             </Typography>
 
-            <Button
+            <AppLink
+              href={"/product"}
               variant="filled"
               bgColor="light"
               className=" lg:w-[calc(100%-48px)] lg:translate-x-[24px] lg:absolute z-40 lg:bottom-6 lg:left-0  "
             >
               {homeHero.button}
-            </Button>
+            </AppLink>
           </div>
 
           <Typography
