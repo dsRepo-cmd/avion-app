@@ -6,10 +6,7 @@ export async function POST(req: NextRequest) {
   await dbConnect();
   try {
     const productData = await req.json();
-    console.log(
-      "productData==================================================",
-      productData
-    );
+    console.log("new productData", productData);
     const newProduct = new ProductModel(productData);
     await newProduct.save();
     return NextResponse.json({ newProduct });

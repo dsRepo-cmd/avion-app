@@ -1,13 +1,32 @@
 "use client";
+
 import React, { ChangeEvent, FormEvent, useState } from "react";
+
+enum ProductType {
+  Furniture = "Furniture",
+  Accessories = "Accessories",
+  LightFittings = "Light fittings",
+  Sofas = "Sofas",
+  Homeware = "Homeware",
+}
+
+enum ProductCategory {
+  PlantPots = "Plant pots",
+  Ceramics = "Ceramics",
+  Tables = "Tables",
+  Tableware = "Tableware",
+  Cutlery = "Cutlery",
+  Chairs = "Chairs",
+  Crockery = "Crockery",
+}
 
 interface IProduct {
   name: string;
   description: string;
   price: string;
   designer: string;
-  productType: string;
-  category: string;
+  productType: ProductType;
+  category: ProductCategory;
   height: string;
   width: string;
   depth: string;
@@ -17,13 +36,13 @@ interface IProduct {
 }
 
 const CreateProduct = () => {
-  const [productData, setProductData] = useState<Partial<IProduct>>({
+  const [productData, setProductData] = useState<IProduct>({
     name: "",
     description: "",
     price: "",
     designer: "",
-    productType: "Furniture",
-    category: "Plant pots",
+    productType: ProductType.Accessories,
+    category: ProductCategory.Ceramics,
     height: "",
     width: "",
     depth: "",
@@ -136,11 +155,11 @@ const CreateProduct = () => {
             value={productData.productType}
             onChange={handleChange}
           >
-            <option value="Furniture">Furniture</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Light fittings">Light fittings</option>
-            <option value="Sofas">Sofas</option>
-            <option value="Homeware">Homeware</option>
+            {Object.values(ProductType).map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
           </select>
         </div>
         <div className="flex gap-10">
@@ -152,11 +171,11 @@ const CreateProduct = () => {
             value={productData.category}
             onChange={handleChange}
           >
-            <option value="Plant pots">Plant pots</option>
-            <option value="Ceramics">Ceramics</option>
-            <option value="Tables">Tables</option>
-            <option value="Tableware">Tableware</option>
-            <option value="Cutlery">Cutlery</option>
+            {Object.values(ProductCategory).map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </select>
         </div>
         <div className="flex gap-10">

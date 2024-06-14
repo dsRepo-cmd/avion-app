@@ -1,18 +1,22 @@
 import mongoose, { Model, Document, Types } from "mongoose";
 
-export type ProductType =
-  | "Furniture"
-  | "Accessories"
-  | "Light fittings"
-  | "Sofas"
-  | "Homeware";
+export enum ProductType {
+  Furniture = "Furniture",
+  Accessories = "Accessories",
+  LightFittings = "Light fittings",
+  Sofas = "Sofas",
+  Homeware = "Homeware",
+}
 
-export type ProductCategory =
-  | "Plant pots"
-  | "Ceramics"
-  | "Tables"
-  | "Tableware"
-  | "Cutlery";
+export enum ProductCategory {
+  PlantPots = "Plant pots",
+  Ceramics = "Ceramics",
+  Tables = "Tables",
+  Tableware = "Tableware",
+  Cutlery = "Cutlery",
+  Chairs = "Chairs",
+  Crockery = "Crockery",
+}
 
 export interface IProduct extends Document {
   _id: Types.ObjectId;
@@ -25,12 +29,11 @@ export interface IProduct extends Document {
   brand: string;
   dateAdded: Date;
   imageSrc: string;
-  isPhotoBig: boolean;
+  isPhotoBig?: boolean;
   height: string;
   width: string;
   depth: string;
-
-  views: number;
+  views?: number;
 }
 
 const ProductSchema = new mongoose.Schema<IProduct>(
@@ -40,7 +43,7 @@ const ProductSchema = new mongoose.Schema<IProduct>(
     productType: {
       type: String,
       required: true,
-      enum: ["Furniture", "Accessories", "Light fittings", "Sofas", "Homeware"],
+      enum: Object.values(ProductType),
     },
     name: { type: String, required: true, trim: true },
     description: {
@@ -55,11 +58,11 @@ const ProductSchema = new mongoose.Schema<IProduct>(
     category: {
       type: String,
       required: true,
-      enum: ["Plant pots", "Ceramics", "Tables", "Tableware", "Cutlery"],
+      enum: Object.values(ProductCategory),
     },
     brand: { type: String, required: true, trim: true },
     dateAdded: { type: Date, default: Date.now },
-    imageSrc: { type: String, required: true, trim: true },
+    imageSrc: { type: String, trim: true },
     isPhotoBig: { type: Boolean, default: false },
     views: { type: Number, default: 0 },
   },
