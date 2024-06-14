@@ -1,38 +1,13 @@
+import {
+  ProductType,
+  ProductCategory,
+  IProductBase,
+} from "@/app/product/types";
 import mongoose, { Model, Document, Types } from "mongoose";
 
-export enum ProductType {
-  Furniture = "Furniture",
-  Accessories = "Accessories",
-  LightFittings = "Light fittings",
-  Sofas = "Sofas",
-  Homeware = "Homeware",
-}
-
-export enum ProductCategory {
-  PlantPots = "Plant pots",
-  Ceramics = "Ceramics",
-  Tables = "Tables",
-  Tableware = "Tableware",
-  Cutlery = "Cutlery",
-  Chairs = "Chairs",
-  Crockery = "Crockery",
-}
-
-export interface IProduct extends Document {
+export interface IProduct extends Document, IProductBase {
   _id: Types.ObjectId;
-  price: string;
-  designer: string;
-  productType: ProductType;
-  name: string;
-  description: string;
-  category: ProductCategory;
-  brand: string;
   dateAdded: Date;
-  imageSrc: string;
-  isPhotoBig?: boolean;
-  height: string;
-  width: string;
-  depth: string;
   views?: number;
 }
 

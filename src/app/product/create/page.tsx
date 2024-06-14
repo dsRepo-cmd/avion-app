@@ -1,42 +1,10 @@
 "use client";
 
 import React, { ChangeEvent, FormEvent, useState } from "react";
-
-enum ProductType {
-  Furniture = "Furniture",
-  Accessories = "Accessories",
-  LightFittings = "Light fittings",
-  Sofas = "Sofas",
-  Homeware = "Homeware",
-}
-
-enum ProductCategory {
-  PlantPots = "Plant pots",
-  Ceramics = "Ceramics",
-  Tables = "Tables",
-  Tableware = "Tableware",
-  Cutlery = "Cutlery",
-  Chairs = "Chairs",
-  Crockery = "Crockery",
-}
-
-interface IProduct {
-  name: string;
-  description: string;
-  price: string;
-  designer: string;
-  productType: ProductType;
-  category: ProductCategory;
-  height: string;
-  width: string;
-  depth: string;
-  brand: string;
-  imageSrc: string;
-  isPhotoBig: boolean;
-}
+import { IProductBase, ProductCategory, ProductType } from "../types";
 
 const CreateProduct = () => {
-  const [productData, setProductData] = useState<IProduct>({
+  const [productData, setProductData] = useState<IProductBase>({
     name: "",
     description: "",
     price: "",
