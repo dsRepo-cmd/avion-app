@@ -1,5 +1,6 @@
+import { ProductListing } from "@/app/product/types";
 import HomeListings from "@/components/Listings/Listings";
-import { ProductListing } from "@/data/home";
+
 import dbConnect from "@/lib/dbConnect";
 import ProductModel, { IProduct } from "@/models/Product";
 
@@ -24,7 +25,7 @@ export async function getNewProducts(): Promise<ProductListing[] | undefined> {
 
     let resultProducts: ProductListing[] = [];
 
-    // Find indices of products with isPhotoBig=true
+    // Find indices of products with isPhotoBig
     const bigPhotoIndices = formattedProducts
       .map((product, index) => (product.isPhotoBig ? index : -1))
       .filter((index) => index !== -1);
@@ -41,12 +42,12 @@ export async function getNewProducts(): Promise<ProductListing[] | undefined> {
           formattedProducts[4],
         ];
       } else if (bigPhotoIndices.includes(0) && bigPhotoIndices.includes(1)) {
-        resultProducts = formattedProducts.slice(0, 2);
+        resultProducts = formattedProducts.slice(0, 3);
       } else {
         resultProducts = formattedProducts.slice(0, 3);
       }
     } else {
-      resultProducts = formattedProducts.slice(0, 3);
+      resultProducts = formattedProducts.slice(0, 4);
     }
 
     return resultProducts;

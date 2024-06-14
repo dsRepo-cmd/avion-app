@@ -1,6 +1,5 @@
+import { ProductListing } from "@/app/product/types";
 import HomeListings from "@/components/Listings/Listings";
-import { ProductListing } from "@/data/home";
-
 import dbConnect from "@/lib/dbConnect";
 import ProductModel, { IProduct } from "@/models/Product";
 
@@ -49,7 +48,7 @@ export async function getPopularProducts(): Promise<
         resultProducts = formattedProducts.slice(0, 3);
       }
     } else {
-      resultProducts = formattedProducts.slice(0, 3);
+      resultProducts = formattedProducts.slice(0, 4);
     }
 
     return resultProducts;

@@ -1,8 +1,7 @@
+import { ProductListing } from "@/app/product/types";
 import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
-import { ProductListing } from "@/data/home";
-
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,12 +18,10 @@ function Listings({ title, products }: Props) {
         <Typography fontFamily="secondary" size="32px" tag="h2">
           {title}
         </Typography>
-        <ul className="flex gap-5 lg:grid lg:grid-cols-2 lg:self-center">
+        <ul className="grid grid-cols-4 gap-5 lg:grid lg:grid-cols-2 lg:self-center">
           {products.map((product) => (
             <li
-              className={cn(
-                product.isPhotoBig ? "lg:col-span-2" : "lg:col-span-1"
-              )}
+              className={cn(product.isPhotoBig ? "col-span-2" : "col-span-1")}
               key={product._id}
             >
               <Link
