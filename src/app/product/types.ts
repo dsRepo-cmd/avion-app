@@ -38,3 +38,22 @@ export interface IProductBase {
   imageSrc: string;
   isPhotoBig: boolean;
 }
+
+export enum SortOrder {
+  asc = "asc",
+  desc = "desc",
+}
+export enum SortBy {
+  price = "price",
+  dateAdded = "dateAdded",
+}
+
+export interface SearchParams {
+  category: ProductCategory;
+  productType: ProductType;
+  brand: string;
+  minPrice: string;
+  maxPrice: string;
+  sortBy: SortBy;
+  sortOrder: SortOrder;
+}

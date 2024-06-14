@@ -1,36 +1,16 @@
-"use client";
-
+import { SearchParams } from "./types";
 import Listings from "@/components/Listings/Listings";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { ProductListing } from "./types";
+import { getProducts } from "@/lib/products";
 
-function Products() {
-  const [products, setProducts] = useState<ProductListing[]>([]);
-  const searchParams = useSearchParams();
+interface Props {
+  searchParams: SearchParams;
+}
 
-  const category = searchParams.get("category");
-  console.log(category);
-
-  const fetchProducts = async (category: string) => {
-    try {
-      const res = await fetch(`/api/product?category=${category}`);
-      const data = await res.json();
-      setProducts(data);
-    } catch (error) {
-      console.error("Error fetching stories:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (category) fetchProducts(category);
-  }, [category]);
-
-  if (!products) null;
-
+async function Products({ searchParams }: Props) {
+  const products = await getProducts(searchParams);
   return (
     <main className="flex  flex-col items-center justify-between  max-w-[1440px] m-auto">
-      <Listings title="Products" products={products} />
+      <Listings title="" products={products} />
     </main>
   );
 }
