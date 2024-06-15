@@ -1,3 +1,4 @@
+import { SortBy } from "@/app/product/types";
 import Listings from "@/components/Listings/Listings";
 import { getNewProducts } from "@/lib/products";
 
@@ -6,7 +7,13 @@ async function NewProductListings() {
 
   if (!newProducts || newProducts.length === 0) return null;
 
-  return <Listings title="New products" products={newProducts} />;
+  return (
+    <Listings
+      title="New products"
+      href={`/product?sortBy=${SortBy.views}`}
+      products={newProducts}
+    />
+  );
 }
 
 export default NewProductListings;

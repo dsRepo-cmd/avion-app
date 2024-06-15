@@ -8,17 +8,21 @@ import AppLink from "../AppLink/AppLink";
 interface Props {
   title?: string;
   products: ProductListing[];
-  currentPage: number;
-  limit: number;
-  searchParams: SearchParams;
+  currentPage?: number;
+  limit?: number;
+  searchParams?: SearchParams;
+  href?: string;
+  isPegination?: boolean;
 }
 
 function Listings({
   title = "",
   products,
   currentPage,
-  limit,
+  limit = 12,
   searchParams,
+  isPegination = false,
+  href,
 }: Props) {
   const createPaginationLink = (page: number) => {
     const params = new URLSearchParams({
@@ -61,29 +65,41 @@ function Listings({
           ))}
         </ul>
 
-        <div className=" relative flex h-[56px]  w-full">
-          {Number(currentPage) > 1 && (
-            <AppLink
-              className=" absolute left-0 top-0   "
-              bgColor="gray"
-              variant="filled"
-              href={createPaginationLink(Number(currentPage) - 1)}
-            >
-              <button>Previous</button>
-            </AppLink>
-          )}
+        {isPegination && (
+          <div className=" relative flex h-[56px]  w-full">
+            {Number(currentPage) > 1 && (
+              <AppLink
+                className=" absolute left-0 top-0   "
+                bgColor="gray"
+                variant="filled"
+                href={createPaginationLink(Number(currentPage) - 1)}
+              >
+                <button>Previous</button>
+              </AppLink>
+            )}
 
-          {Number(limit) === products.length && (
-            <AppLink
-              className=" absolute right-0 top-0 "
-              bgColor="gray"
-              variant="filled"
-              href={createPaginationLink(Number(currentPage) + 1)}
-            >
-              Next
-            </AppLink>
-          )}
-        </div>
+            {Number(limit) === products.length && (
+              <AppLink
+                className=" absolute right-0 top-0 "
+                bgColor="gray"
+                variant="filled"
+                href={createPaginationLink(Number(currentPage) + 1)}
+              >
+                Next
+              </AppLink>
+            )}
+          </div>
+        )}
+        {href && (
+          <AppLink
+            className=" self-center"
+            bgColor="gray"
+            variant="filled"
+            href={href}
+          >
+            View more
+          </AppLink>
+        )}
       </div>
     </Container>
   );

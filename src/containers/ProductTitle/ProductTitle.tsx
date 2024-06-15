@@ -10,6 +10,7 @@ function ProductTitle({ category }: Props) {
   return (
     <div className=" relative">
       <Image
+        className=" lg:h-[146px]"
         src={"/products-hero.png"}
         alt="products-hero"
         width={1440}

@@ -1,5 +1,6 @@
 import { SearchParams } from "./types";
 import Listings from "@/components/Listings/Listings";
+import ProductSortPanel from "@/containers/ProductSortPanel/ProductSortPanel";
 import ProductTitle from "@/containers/ProductTitle/ProductTitle";
 import { getProducts } from "@/lib/products";
 
@@ -17,10 +18,15 @@ async function Products({ searchParams }: Props) {
   return (
     <main className="flex  flex-col items-center justify-between  max-w-[1440px] m-auto">
       <ProductTitle category={searchParams.category} />
+
+      <div className=" flex w-full items-center justify-between">
+        <ProductSortPanel />
+      </div>
       <Listings
         products={products}
         currentPage={page}
         limit={limit}
+        isPegination
         searchParams={searchParams}
       />
     </main>

@@ -39,6 +39,8 @@ export const getProducts = async (searchParams: SearchParams) => {
     sort = { price: sortOrder === SortOrder.asc ? 1 : -1 };
   } else if (sortBy === SortBy.dateAdded) {
     sort = { dateAdded: sortOrder === SortOrder.asc ? 1 : -1 };
+  } else if (sortBy === SortBy.views) {
+    sort = { views: sortOrder === SortOrder.asc ? 1 : -1 };
   }
 
   const skip = (page - 1) * limit;

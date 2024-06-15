@@ -44,6 +44,7 @@ export enum SortOrder {
 export enum SortBy {
   price = "price",
   dateAdded = "dateAdded",
+  views = "views",
 }
 
 export interface SearchParams {
