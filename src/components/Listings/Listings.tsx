@@ -4,12 +4,13 @@ import Typography from "@/components/Typography/Typography";
 import Image from "next/image";
 import Link from "next/link";
 import AppLink from "../AppLink/AppLink";
+import { cn } from "@/lib/utils";
 
 interface Props {
   title?: string;
   products: ProductListing[];
-  currentPage?: number;
-  limit?: number;
+  currentPage?: string;
+  limit?: string;
   searchParams?: SearchParams;
   href?: string;
   isPegination?: boolean;
@@ -19,7 +20,7 @@ function Listings({
   title = "",
   products,
   currentPage,
-  limit = 12,
+  limit = "12",
   searchParams,
   isPegination = false,
   href,
@@ -39,7 +40,11 @@ function Listings({
         <Typography fontFamily="secondary" size="32px" tag="h2">
           {title}
         </Typography>
-        <ul className="grid grid-cols-4 gap-5 lg:grid lg:grid-cols-2 lg:self-center">
+        <ul
+          className={cn(
+            "grid grid-cols-4 gap-5 lg:grid lg:grid-cols-2 lg:self-center"
+          )}
+        >
           {products.map((product) => (
             <li key={product._id}>
               <Link

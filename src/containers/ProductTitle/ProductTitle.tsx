@@ -1,9 +1,8 @@
-import { ProductCategory } from "@/app/product/types";
 import Typography from "@/components/Typography/Typography";
 import Image from "next/image";
 
 interface Props {
-  category?: ProductCategory;
+  category?: string | undefined;
 }
 
 function ProductTitle({ category }: Props) {

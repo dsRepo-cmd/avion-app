@@ -1,51 +1,127 @@
 "use client";
 import { ProductType } from "@/app/product/types";
-import React, { ChangeEvent,  useState } from "react";
+import { useRouter } from "next/navigation";
 
-function ProductSortPanel() {
-  const [productTypeForm, setProductTypeForm] = useState({});
+interface ProductSortPanelProps {
+  selectedTypes: string[];
+  selectedPriceRanges: string[];
+  selectedDesigners: string[];
+  searchParams: Record<string, any>;
+}
 
-  const handleChange = (
-    e: ChangeEvent<
-      | HTMLInputElement
-      | HTMLTextAreaElement
-      | HTMLSelectElement
-      | HTMLFormElement
-    >
-  ) => {
-    const { name, value, type } = e.target;
+const ProductSortPanel = ({
+  selectedTypes,
+  selectedPriceRanges,
+  selectedDesigners,
+  searchParams,
+}: ProductSortPanelProps) => {
+  const productTypes = Object.values(ProductType);
+  const priceRanges = ["0-100", "101-250", "250+"];
+  const designers = [
+    "Robert Smith",
+    "Liam Gallagher",
+    "Biggie Smalls",
+    "Tom Yorke",
+  ];
 
-    const newValue =
-      type === "checkbox" ? (e.target as HTMLInputElement).checked : value;
+  const router = useRouter();
+  const handleCheckboxChange = (type: string, category: string) => {
+    const isSelected =
+      category === "productType"
+        ? selectedTypes.includes(type as ProductType)
+        : category === "priceRange"
+        ? selectedPriceRanges.includes(type)
+        : selectedDesigners.includes(type);
 
-    console.log("name", name, "value", value, "type", type);
+    let updatedTypes =
+      category === "productType"
+        ? isSelected
+          ? selectedTypes.filter((t) => t !== type)
+          : [...selectedTypes, type as ProductType]
+        : selectedTypes;
 
-    setProductTypeForm({
-      ...productTypeForm,
-      [name]: newValue,
-    });
-    console.log(productTypeForm);
+    let updatedPriceRanges =
+      category === "priceRange"
+        ? isSelected
+          ? selectedPriceRanges.filter((t) => t !== type)
+          : [...selectedPriceRanges, type]
+        : selectedPriceRanges;
+
+    let updatedDesigners =
+      category === "designer"
+        ? isSelected
+          ? selectedDesigners.filter((t) => t !== type)
+          : [...selectedDesigners, type]
+        : selectedDesigners;
+
+    const updatedParams = {
+      ...searchParams,
+      productType: updatedTypes.join(","),
+      priceRange: updatedPriceRanges.join(","),
+      designer: updatedDesigners.join(","),
+      page: "1",
+    };
+
+    const params = new URLSearchParams(updatedParams).toString();
+    router.push(`?${params}`);
   };
 
   return (
-    <div className=" flex flex-col gap-10 p-10">
-      <div className="flex flex-col items-start gap-4">
-        {Object.values(ProductType).map((key) => (
-          <div className=" flex gap-2 items-center justify-center" key={key}>
+    <div className="filter-panel">
+      <h2>Filter by</h2>
+
+      <div className="filter-category">
+        <h3>Product Type</h3>
+        {productTypes.map((type) => (
+          <div key={type}>
             <input
               type="checkbox"
-              id={key}
-              name={key}
-              key={key}
-              value={key}
-              onChange={handleChange}
+              id={type}
+              name="productType"
+              value={type}
+              checked={selectedTypes.includes(type)}
+              onChange={() => handleCheckboxChange(type, "productType")}
             />
-            <label htmlFor={key}>{key}</label>
+            <label htmlFor={type}>{type}</label>
+          </div>
+        ))}
+      </div>
+
+      <div className="filter-category">
+        <h3>Price Range</h3>
+        {priceRanges.map((range) => (
+          <div key={range}>
+            <input
+              type="checkbox"
+              id={range}
+              name="priceRange"
+              value={range}
+              checked={selectedPriceRanges.includes(range)}
+              onChange={() => handleCheckboxChange(range, "priceRange")}
+            />
+            <label htmlFor={range}>{range}</label>
+          </div>
+        ))}
+      </div>
+
+      <div className="filter-category">
+        <h3>Designer</h3>
+        {designers.map((designer) => (
+          <div key={designer}>
+            <input
+              type="checkbox"
+              id={designer}
+              name="designer"
+              value={designer}
+              checked={selectedDesigners.includes(designer)}
+              onChange={() => handleCheckboxChange(designer, "designer")}
+            />
+            <label htmlFor={designer}>{designer}</label>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default ProductSortPanel;

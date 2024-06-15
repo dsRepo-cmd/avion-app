@@ -48,13 +48,15 @@ export enum SortBy {
 }
 
 export interface SearchParams {
-  category: ProductCategory;
-  productType: ProductType;
+  category: string;
+  productType: string;
   brand: string;
   minPrice: string;
   maxPrice: string;
   sortBy: SortBy;
   sortOrder: SortOrder;
-  page: number;
-  limit: number;
+  page: string;
+  limit: string;
+  priceRange: string;
+  designer: string;
 }

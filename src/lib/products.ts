@@ -20,11 +20,37 @@ export const getProducts = async (searchParams: SearchParams) => {
     sortOrder,
     page = 1,
     limit = 12,
+    designer,
+    priceRange,
   } = searchParams;
 
   const filter: any = {};
   if (category) filter.category = category;
-  if (productType) filter.productType = productType;
+  if (productType) filter.productType = { $in: productType.split(",") };
+  if (designer) filter.designer = { $in: designer.split(",") };
+
+  if (priceRange) {
+    const ranges = priceRange.split(",");
+    const priceFilters = ranges.map((range) => {
+      if (range === "250+") {
+        return { price: { $gte: 250 } };
+      }
+      const [min, max] = range.split("-").map((v) => parseFloat(v));
+      if (!isNaN(min) && !isNaN(max)) {
+        return { price: { $gte: min, $lte: max } };
+      } else if (!isNaN(min)) {
+        return { price: { $gte: min } };
+      } else if (!isNaN(max)) {
+        return { price: { $lte: max } };
+      }
+      return {};
+    });
+
+    if (priceFilters.length > 0) {
+      filter.$or = priceFilters;
+    }
+  }
+
   if (brand) filter.brand = brand;
   if (minPrice && maxPrice) {
     filter.price = { $gte: minPrice, $lte: maxPrice };
@@ -33,6 +59,8 @@ export const getProducts = async (searchParams: SearchParams) => {
   } else if (maxPrice) {
     filter.price = { $lte: maxPrice };
   }
+
+  console.log("searchParams===", searchParams, "filter+++++++++", filter);
 
   let sort: any = { dateAdded: -1 };
   if (sortBy === SortBy.price) {
@@ -43,12 +71,12 @@ export const getProducts = async (searchParams: SearchParams) => {
     sort = { views: sortOrder === SortOrder.asc ? 1 : -1 };
   }
 
-  const skip = (page - 1) * limit;
+  const skip = (Number(page) - 1) * Number(limit);
 
   const products = await ProductModel.find(filter)
     .sort(sort)
     .skip(skip)
-    .limit(limit)
+    .limit(Number(limit))
     .select("_id name price imageSrc")
     .exec();
 
@@ -87,10 +115,7 @@ export async function getPopularProducts(): Promise<
 export async function getNewProducts(): Promise<ProductListing[] | undefined> {
   await dbConnect();
   try {
-    const newProducts = await ProductModel.find(
-      {},
-      "_id name price imageSrc isPhotoBig"
-    )
+    const newProducts = await ProductModel.find({}, "_id name price imageSrc ")
       .sort({ dateAdded: -1 })
       .limit(4)
       .lean();

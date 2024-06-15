@@ -9,9 +9,19 @@ interface Props {
 }
 
 async function Products({ searchParams }: Props) {
-  const { page = 1, limit = 12, ...otherParams } = searchParams;
+  const {
+    page = "1",
+    limit = "12",
+    productType,
+    priceRange,
+    designer,
+  } = searchParams;
 
-  const products = await getProducts({ page, limit, ...otherParams });
+  const selectedTypes = productType ? productType.split(",") : [];
+  const selectedPriceRanges = priceRange ? priceRange.split(",") : [];
+  const selectedDesigners = designer ? designer.split(",") : [];
+
+  const products = await getProducts({ ...searchParams, page, limit });
 
   if (!products) null;
 
@@ -19,16 +29,25 @@ async function Products({ searchParams }: Props) {
     <main className="flex  flex-col items-center justify-between  max-w-[1440px] m-auto">
       <ProductTitle category={searchParams.category} />
 
-      <div className=" flex w-full items-center justify-between">
-        <ProductSortPanel />
+      <div className=" flex gap-10">
+        <div className=" flex p-10 justify-between">
+          <ProductSortPanel
+            selectedTypes={selectedTypes}
+            searchParams={searchParams}
+            selectedPriceRanges={selectedPriceRanges}
+            selectedDesigners={selectedDesigners}
+          />
+        </div>
+        <div className=" w-full">
+          <Listings
+            products={products}
+            currentPage={page}
+            limit={limit}
+            isPegination
+            searchParams={searchParams}
+          />
+        </div>
       </div>
-      <Listings
-        products={products}
-        currentPage={page}
-        limit={limit}
-        isPegination
-        searchParams={searchParams}
-      />
     </main>
   );
 }
