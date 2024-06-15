@@ -7,9 +7,9 @@ import React from "react";
 
 function HomeHero() {
   return (
-    <Container>
+    <Container className=" lg:p-0">
       <div className=" relative flex w-full ">
-        <div className=" flex flex-col justify-between w-2/3 bg-darkPrimary  p-[60px] lg:w-full lg:px-6 lg:pt-10 pb-28">
+        <div className=" flex flex-col justify-between w-2/3 bg-darkPrimary  p-[60px] lg:w-full  lg:pt-10 lg:px-4 pb-28">
           <div className=" flex flex-col gap-10 items-start ">
             <Typography
               tag="h2"

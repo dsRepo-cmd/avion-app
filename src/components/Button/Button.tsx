@@ -34,7 +34,7 @@ function Button({
   return (
     <button
       className={cn(
-        " text-nowrap duration-300 hover:opacity-70 ",
+        " text-nowrap duration-300 hover:opacity-70 text-center  ",
         variantClasses[variant],
         bgColorClasses[bgColor],
         className

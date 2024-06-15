@@ -6,7 +6,7 @@ import Image from "next/image";
 function HomeFeatures() {
   return (
     <Container>
-      <div className=" flex items-center justify-center flex-col gap-12 lg:px-6 lg:py-12 ">
+      <div className=" flex  self-start flex-col gap-12 ">
         <Typography fontFamily="secondary" size="24px" tag="h3">
           {homeFeatures.title}
         </Typography>

@@ -1,8 +1,10 @@
+import Listing from "@/components/Listing/Listing";
 import { SearchParams } from "./types";
-import Listings from "@/components/Listings/Listings";
+
 import ProductSortPanel from "@/containers/ProductSortPanel/ProductSortPanel";
 import ProductTitle from "@/containers/ProductTitle/ProductTitle";
 import { getProducts } from "@/lib/products";
+import Container from "@/components/Container/Container";
 
 interface Props {
   searchParams: SearchParams;
@@ -29,25 +31,26 @@ async function Products({ searchParams }: Props) {
     <main className="flex  flex-col items-center justify-between  max-w-[1440px] m-auto">
       <ProductTitle category={searchParams.category} />
 
-      <div className=" flex gap-10">
-        <div className=" flex p-10 justify-between">
-          <ProductSortPanel
-            selectedTypes={selectedTypes}
-            searchParams={searchParams}
-            selectedPriceRanges={selectedPriceRanges}
-            selectedDesigners={selectedDesigners}
-          />
+      <Container>
+        <div className=" grid grid-cols-4 justify-start">
+          <div className=" flex ">
+            <ProductSortPanel
+              selectedTypes={selectedTypes}
+              searchParams={searchParams}
+              selectedPriceRanges={selectedPriceRanges}
+              selectedDesigners={selectedDesigners}
+            />
+          </div>
+          <div className=" col-span-3 w-full">
+            <Listing
+              products={products}
+              currentPage={page}
+              limit={limit}
+              searchParams={searchParams}
+            />
+          </div>
         </div>
-        <div className=" w-full">
-          <Listings
-            products={products}
-            currentPage={page}
-            limit={limit}
-            isPegination
-            searchParams={searchParams}
-          />
-        </div>
-      </div>
+      </Container>
     </main>
   );
 }

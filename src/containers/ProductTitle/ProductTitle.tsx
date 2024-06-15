@@ -14,6 +14,7 @@ function ProductTitle({ category }: Props) {
         alt="products-hero"
         width={1440}
         height={209}
+        priority
       />
       <Typography
         className=" absolute z-20  bottom-9 left-20"

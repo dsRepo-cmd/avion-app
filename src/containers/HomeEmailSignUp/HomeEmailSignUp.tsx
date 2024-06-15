@@ -6,8 +6,8 @@ import { homeEmailSignUp } from "@/data/home";
 
 function HomeEmailSignUp() {
   return (
-    <Container bgColor="light">
-      <div className=" flex flex-col justify-center items-center gap-4  bg-white p-14 lg:py-12 lg:px-6">
+    <Container className=" lg:p-0" bgColor="light">
+      <div className=" flex flex-col justify-center items-center gap-4  bg-white p-14 lg:px-6 lg:py-12 ">
         <Typography fontFamily="secondary" size="32px" tag="h2">
           {homeEmailSignUp.title}
         </Typography>
