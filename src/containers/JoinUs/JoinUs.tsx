@@ -4,7 +4,7 @@ import EmailSignUpForm from "@/components/InputForm/EmailSignUpForm";
 import Typography from "@/components/Typography/Typography";
 import { homeEmailSignUp } from "@/data/home";
 
-function HomeEmailSignUp() {
+function JoinUs() {
   return (
     <Container className=" lg:p-0" bgColor="light">
       <div className=" flex flex-col justify-center items-center gap-4  bg-white p-14 lg:px-6 lg:py-12 ">
@@ -20,4 +20,4 @@ function HomeEmailSignUp() {
   );
 }
 
-export default HomeEmailSignUp;
+export default JoinUs;

@@ -24,6 +24,8 @@ export const getProducts = async (searchParams: SearchParams) => {
     priceRange,
   } = searchParams;
 
+  // Filtration ===================================================
+
   const filter: any = {};
   if (category) filter.category = category;
   if (productType) filter.productType = { $in: productType.split(",") };
@@ -60,7 +62,7 @@ export const getProducts = async (searchParams: SearchParams) => {
     filter.price = { $lte: maxPrice };
   }
 
-  console.log("searchParams===", searchParams, "filter+++++++++", filter);
+  // Sorting ===================================================
 
   let sort: any = { dateAdded: -1 };
   if (sortBy === SortBy.price) {
@@ -71,8 +73,11 @@ export const getProducts = async (searchParams: SearchParams) => {
     sort = { views: sortOrder === SortOrder.asc ? 1 : -1 };
   }
 
+  //  Pagination ===================================================
+
   const skip = (Number(page) - 1) * Number(limit);
 
+  //  ===================================================
   const products = await ProductModel.find(filter)
     .sort(sort)
     .skip(skip)
@@ -94,7 +99,7 @@ export async function getPopularProducts(): Promise<
   await dbConnect();
   try {
     const newProducts = await ProductModel.find({}, "_id name price imageSrc ")
-      .sort({ views: 1 })
+      .sort({ views: -1 })
       .limit(4)
       .lean();
 
@@ -128,6 +133,20 @@ export async function getNewProducts(): Promise<ProductListing[] | undefined> {
     })) as ProductListing[];
 
     return formattedProducts;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+export async function getProductsByID(
+  id: string
+): Promise<IProduct | undefined | null> {
+  await dbConnect();
+  try {
+    const product = await ProductModel.findById(id);
+
+    return product;
   } catch (error) {
     console.log(error);
     return undefined;

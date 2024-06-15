@@ -12,10 +12,14 @@ function ListingItem({ product, key }: Props) {
   return (
     <>
       <li key={key}>
-        <Link className="flex flex-col gap-2" href={`/product/${product._id}`}>
+        <Link
+          className=" duration-300 flex flex-col gap-2 h-full w-full hover:scale-[1.04]"
+          href={`/product/${product._id}`}
+        >
           <Image
             src={product.imageSrc}
             alt={product.name}
+            className=" w-full h-full"
             width={305}
             height={375}
           />

@@ -1,5 +1,6 @@
 "use client";
 import { ProductType } from "@/app/product/types";
+import CheckBox from "@/components/CheckBox/CheckBox";
 import Typography from "@/components/Typography/Typography";
 import { useRouter } from "next/navigation";
 
@@ -74,26 +75,13 @@ const ProductSortPanel = ({
           Product Type
         </Typography>
         {productTypes.map((type) => (
-          <div className=" flex gap-3" key={type}>
-            <input
-              type="checkbox"
-              id={type}
-              name="productType"
-              value={type}
-              checked={selectedTypes.includes(type)}
-              onChange={() => handleCheckboxChange(type, "productType")}
-            />
-            <label htmlFor={type}>
-              <Typography
-                color="black"
-                size="16px"
-                fontFamily="primary"
-                tag="p"
-              >
-                {type}
-              </Typography>
-            </label>
-          </div>
+          <CheckBox
+            key={type}
+            checked={selectedTypes.includes(type)}
+            name="productType"
+            value={type}
+            onChange={() => handleCheckboxChange(type, "productType")}
+          />
         ))}
       </div>
 
@@ -102,26 +90,13 @@ const ProductSortPanel = ({
           Price Range
         </Typography>
         {priceRanges.map((range) => (
-          <div className=" flex gap-3" key={range}>
-            <input
-              type="checkbox"
-              id={range}
-              name="priceRange"
-              value={range}
-              checked={selectedPriceRanges.includes(range)}
-              onChange={() => handleCheckboxChange(range, "priceRange")}
-            />
-            <label htmlFor={range}>
-              <Typography
-                color="black"
-                size="16px"
-                fontFamily="primary"
-                tag="p"
-              >
-                {range}
-              </Typography>
-            </label>
-          </div>
+          <CheckBox
+            key={range}
+            name="priceRange"
+            checked={selectedPriceRanges.includes(range)}
+            value={range}
+            onChange={() => handleCheckboxChange(range, "priceRange")}
+          />
         ))}
       </div>
 
@@ -130,26 +105,13 @@ const ProductSortPanel = ({
           Designer
         </Typography>
         {designers.map((designer) => (
-          <div className=" flex gap-3" key={designer}>
-            <input
-              type="checkbox"
-              id={designer}
-              name="designer"
-              value={designer}
-              checked={selectedDesigners.includes(designer)}
-              onChange={() => handleCheckboxChange(designer, "designer")}
-            />
-            <label className=" text-nowrap" htmlFor={designer}>
-              <Typography
-                color="black"
-                size="16px"
-                fontFamily="primary"
-                tag="p"
-              >
-                {designer}
-              </Typography>
-            </label>
-          </div>
+          <CheckBox
+            key={designer}
+            name="designer"
+            checked={selectedDesigners.includes(designer)}
+            value={designer}
+            onChange={() => handleCheckboxChange(designer, "designer")}
+          />
         ))}
       </div>
     </div>

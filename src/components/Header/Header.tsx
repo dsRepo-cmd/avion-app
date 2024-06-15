@@ -2,7 +2,7 @@ import React from "react";
 import Divider from "../Divider/Divider";
 import Navbar from "../Navbar/Navbar";
 import { ProductCategory } from "@/app/product/types";
-import Link from "next/link";
+import AppLink from "../AppLink/AppLink";
 
 function Header() {
   return (
@@ -11,14 +11,20 @@ function Header() {
       <Divider />
       <div className=" flex justify-center items-center py-5 md:hidden">
         <ul className=" flex justify-center gap-11">
+          <li>
+            <AppLink variant="clear" href={"/product"} className=" text-grey">
+              All products
+            </AppLink>
+          </li>
           {Object.values(ProductCategory).map((category) => (
             <li key={category}>
-              <Link
+              <AppLink
+                variant="clear"
                 href={`/product?category=${category}`}
                 className=" text-grey"
               >
                 {category}
-              </Link>
+              </AppLink>
             </li>
           ))}
         </ul>

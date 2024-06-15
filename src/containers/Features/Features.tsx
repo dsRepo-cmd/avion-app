@@ -1,25 +1,24 @@
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import { homeFeatures } from "@/data/home";
-import Image from "next/image";
 
-function HomeFeatures() {
+function Features() {
   return (
     <Container>
       <div className=" flex  self-start flex-col gap-12 ">
-        <Typography fontFamily="secondary" size="24px" tag="h3">
-          {homeFeatures.title}
-        </Typography>
+        <div className="flex  justify-center md:justify-start w-full">
+          <Typography fontFamily="secondary" size="24px" tag="h3">
+            {homeFeatures.title}
+          </Typography>
+        </div>
 
-        <ul className=" flex flex-wrap items-center justify-between gap-16">
+        <ul className=" grid grid-cols-4 items-center justify-between gap-4 xl:grid-cols-2 md:grid-cols-1  ">
           {homeFeatures.features.map((feature) => (
-            <li className=" flex grow flex-col gap-2" key={feature.id}>
-              <Image
-                src={feature.iconSrc}
-                alt="feature.iconSrc"
-                width={24}
-                height={24}
-              />
+            <li
+              className=" flex grow flex-col gap-2 bg-lightGrey p-12 w-full h-full  md:px-6 md:py-9"
+              key={feature.id}
+            >
+              {feature.icon}
               <Typography
                 className=" mt-2"
                 fontFamily="secondary"
@@ -39,4 +38,4 @@ function HomeFeatures() {
   );
 }
 
-export default HomeFeatures;
+export default Features;
