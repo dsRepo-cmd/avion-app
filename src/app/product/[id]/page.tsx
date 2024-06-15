@@ -1,4 +1,5 @@
 import Features from "@/containers/Features/Features";
+import JoinUs from "@/containers/JoinUs/JoinUs";
 import ProductMenu from "@/containers/ProductMenu/ProductMenu";
 import SimularProductListings from "@/containers/SimularProductListings/SimularProductListings";
 
@@ -12,6 +13,7 @@ function Products({ params }: Props) {
       <ProductMenu id={params.id} />
       <SimularProductListings />
       <Features />
+      <JoinUs />
     </main>
   );
 }

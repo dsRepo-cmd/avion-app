@@ -15,7 +15,7 @@ async function ProductMenu({ id }: Props) {
   if (!product) return null;
   return (
     <Container bgColor="light">
-      <div className=" flex">
+      <div className=" flex w-full ">
         <Image
           className=" w-full"
           src={product.imageSrc}

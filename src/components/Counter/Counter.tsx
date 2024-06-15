@@ -10,7 +10,7 @@ function Counter({}: Props) {
     []
   );
   const decrement = useCallback(
-    () => setCount((prevCount) => Math.max(prevCount - 1, 0)),
+    () => setCount((prevCount) => Math.max(prevCount - 1, 1)),
     []
   );
 
