@@ -1,10 +1,10 @@
 import Listing from "@/components/Listing/Listing";
 import { SearchParams } from "./types";
-
 import ProductSortPanel from "@/containers/ProductSortPanel/ProductSortPanel";
 import ProductTitle from "@/containers/ProductTitle/ProductTitle";
 import { getProducts } from "@/lib/products";
 import Container from "@/components/Container/Container";
+import Typography from "@/components/Typography/Typography";
 
 interface Props {
   searchParams: SearchParams;
@@ -42,12 +42,20 @@ async function Products({ searchParams }: Props) {
             />
           </div>
           <div className=" col-span-3 w-full">
-            <Listing
-              products={products}
-              currentPage={page}
-              limit={limit}
-              searchParams={searchParams}
-            />
+            {products.length === 0 ? (
+              <div className=" flex justify-center w-full">
+                <Typography tag="h2" size="24px" fontFamily="secondary">
+                  Not Found
+                </Typography>
+              </div>
+            ) : (
+              <Listing
+                products={products}
+                currentPage={page}
+                limit={limit}
+                searchParams={searchParams}
+              />
+            )}
           </div>
         </div>
       </Container>
