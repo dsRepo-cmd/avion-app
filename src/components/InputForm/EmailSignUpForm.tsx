@@ -9,8 +9,8 @@ interface Props {
 }
 
 const variantClasses: { [key in VariantForm]: string } = {
-  light: " bg-lightGrey",
-  dark: " ",
+  light: " bg-lightGrey ",
+  dark: " bg-[#FFFFFF1F] text-white ",
 };
 
 function EmailSignUpForm({ variant = "light", className = "" }: Props) {
@@ -18,7 +18,7 @@ function EmailSignUpForm({ variant = "light", className = "" }: Props) {
     <form className={cn(" flex", className)}>
       <input
         className={cn(
-          " bg-[#FFFFFF1F] text-white grow px-8 py-4  lg:w-[200px]",
+          "  grow px-8 py-4  lg:w-[200px]",
           variantClasses[variant]
         )}
         type="text"

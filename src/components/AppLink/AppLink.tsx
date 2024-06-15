@@ -1,17 +1,18 @@
 import { cn } from "@/lib/utils";
-import React, { ButtonHTMLAttributes } from "react";
+import Link from "next/link";
+import { ComponentProps } from "react";
 
-type ButtonVariant = "clear" | "filled";
+type AppLinkVariant = "clear" | "filled";
 type BackgroundColor = "black" | "light" | "clear" | "gray" | "white";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends ComponentProps<typeof Link> {
   className?: string;
   children?: React.ReactNode;
-  variant?: ButtonVariant;
+  variant?: AppLinkVariant;
   bgColor?: BackgroundColor;
 }
 
-const variantClasses: { [key in ButtonVariant]: string } = {
+const variantClasses: { [key in AppLinkVariant]: string } = {
   clear: "",
   filled: "py-4 px-8 text-base  ",
 };
@@ -24,15 +25,16 @@ const bgColorClasses: { [key in BackgroundColor]: string } = {
   clear: "",
 };
 
-function Button({
+function AppLink({
   children,
   className = "",
   variant = "filled",
-  bgColor = "black",
+  bgColor = "clear",
+
   ...props
 }: Props) {
   return (
-    <button
+    <Link
       className={cn(
         " text-nowrap duration-300 hover:opacity-70 text-center  ",
         variantClasses[variant],
@@ -42,8 +44,8 @@ function Button({
       {...props}
     >
       {children}
-    </button>
+    </Link>
   );
 }
 
-export default Button;
+export default AppLink;

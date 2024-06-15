@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { HTMLAttributes } from "react";
 
 type BackgroundColor = "white" | "dark" | "light";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   bgColor?: BackgroundColor;
+  className?: string;
 }
 
 const bgColorClasses: Record<BackgroundColor, string> = {
@@ -14,13 +15,20 @@ const bgColorClasses: Record<BackgroundColor, string> = {
   light: "bg-lightGrey",
 };
 
-function Container({ children, bgColor = "white" }: Props) {
+function Container({
+  children,
+  bgColor = "white",
+  className,
+  ...props
+}: Props) {
   return (
     <div
       className={cn(
-        " flex  flex-col justify-between p-20 w-full h-full lg:p-0 ",
-        bgColorClasses[bgColor]
+        " flex  flex-col justify-between p-20 w-full h-full lg:px-6 lg:py-12 ",
+        bgColorClasses[bgColor],
+        className
       )}
+      {...props}
     >
       {children}
     </div>
