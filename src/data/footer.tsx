@@ -12,27 +12,27 @@ export const footer = {
       {
         id: "1",
         title: "New arrivals",
-        href: "/",
+        href: "/product?sortBy=dateAdded",
       },
       {
         id: "2",
         title: "Best sellers",
-        href: "/",
+        href: "/product?SortBy=views",
       },
       {
         id: "3",
         title: "Recently viewed",
-        href: "/",
+        href: "/product?SortBy=views",
       },
       {
         id: "4",
         title: "Popular this week",
-        href: "/",
+        href: "/product?SortBy=views",
       },
       {
         id: "5",
         title: "All products",
-        href: "/",
+        href: "/product",
       },
     ],
   },
@@ -41,34 +41,34 @@ export const footer = {
     title: "Categories",
     links: [
       {
+        id: "9",
+        title: "Plant pots",
+        href: "/product?category=Plant%20pots",
+      },
+      {
         id: "6",
-        title: "Crockery",
-        href: "/",
+        title: "Ceramics",
+        href: "/product?category=Ceramics",
       },
       {
         id: "7",
-        title: "Furniture",
-        href: "/",
+        title: "Tables",
+        href: "/product?category=Tables",
       },
       {
         id: "8",
         title: "Homeware",
-        href: "/",
-      },
-      {
-        id: "9",
-        title: "Plant pots",
-        href: "/",
+        href: "/product?category=Homeware",
       },
       {
         id: "10",
         title: "Chairs",
-        href: "/",
+        href: "/product?category=Chairs",
       },
       {
         id: "11",
-        title: "Crockery",
-        href: "/",
+        title: "Tableware",
+        href: "/product?category=Tableware",
       },
     ],
   },
@@ -79,7 +79,7 @@ export const footer = {
       {
         id: "12",
         title: "About us",
-        href: "/",
+        href: "/about",
       },
       {
         id: "13",

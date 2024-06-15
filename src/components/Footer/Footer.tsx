@@ -5,6 +5,7 @@ import Typography from "../Typography/Typography";
 
 import Divider from "../Divider/Divider";
 import EmailSignUpForm from "../InputForm/EmailSignUpForm";
+import AppLink from "../AppLink/AppLink";
 
 function Footer() {
   return (
@@ -24,9 +25,13 @@ function Footer() {
             <ul className=" flex flex-col gap-3">
               {footer.menu.links.map((link) => (
                 <li key={link.id}>
-                  <Link className=" font-primary text-sm" href={link.href}>
+                  <AppLink
+                    variant="clear"
+                    className=" text-sm"
+                    href={link.href}
+                  >
                     {link.title}
-                  </Link>
+                  </AppLink>
                 </li>
               ))}
             </ul>
@@ -45,9 +50,13 @@ function Footer() {
             <ul className=" flex flex-col gap-3">
               {footer.categories.links.map((link) => (
                 <li key={link.id}>
-                  <Link className=" font-primary text-sm" href={link.href}>
+                  <AppLink
+                    variant="clear"
+                    className=" text-sm"
+                    href={link.href}
+                  >
                     {link.title}
-                  </Link>
+                  </AppLink>
                 </li>
               ))}
             </ul>
@@ -66,9 +75,13 @@ function Footer() {
             <ul className=" flex flex-col gap-3">
               {footer.ourCompany.links.map((link) => (
                 <li key={link.id}>
-                  <Link className=" font-primary text-sm" href={link.href}>
+                  <AppLink
+                    variant="clear"
+                    className=" text-sm"
+                    href={link.href}
+                  >
                     {link.title}
-                  </Link>
+                  </AppLink>
                 </li>
               ))}
             </ul>

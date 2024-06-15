@@ -22,7 +22,7 @@ const bgColorClasses: { [key in BackgroundColor]: string } = {
   light: "bg-buttonLight text-white",
   gray: "bg-lightGrey text-darkPrimary",
   white: " bg-white text-darkPrimary",
-  clear: "",
+  clear: "font-primary ",
 };
 
 function AppLink({
@@ -36,7 +36,7 @@ function AppLink({
   return (
     <Link
       className={cn(
-        " text-nowrap duration-300 hover:opacity-70 text-center  ",
+        " text-nowrap duration-300 hover:opacity-70 text-center ",
         variantClasses[variant],
         bgColorClasses[bgColor],
         className
