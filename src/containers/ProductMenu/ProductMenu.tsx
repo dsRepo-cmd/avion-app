@@ -20,8 +20,8 @@ async function ProductMenu({ id }: Props) {
           className=" w-full"
           src={product.imageSrc}
           alt={product.imageSrc}
-          width={305}
-          height={375}
+          width={607}
+          height={661}
         />
 
         <div className=" flex w-full flex-col gap-4 p-14">

@@ -22,12 +22,12 @@ function Counter({}: Props) {
   };
 
   return (
-    <div className="flex items-center justify-around max-w-[8rem] bg-white p-3 shadow-sm rounded-md">
+    <div className="flex items-center justify-around max-w-[8rem] bg-white shadow-sm rounded-md">
       <button
-        onClick={increment}
-        className=" duration-300 text-borderGrey hover:text-darkPrimary"
+        onClick={decrement}
+        className=" duration-300 text-borderGrey hover:text-darkPrimary p-3"
       >
-        +
+        -
       </button>
       <input
         type="text"
@@ -37,10 +37,10 @@ function Counter({}: Props) {
         className="flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center"
       />
       <button
-        onClick={decrement}
-        className=" duration-300 text-borderGrey hover:text-darkPrimary"
+        onClick={increment}
+        className=" duration-300  text-borderGrey hover:text-darkPrimary p-3"
       >
-        -
+        +
       </button>
     </div>
   );
