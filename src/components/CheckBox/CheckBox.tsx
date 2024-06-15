@@ -22,7 +22,7 @@ function CheckBox({ value, onChange, className, ...props }: Props) {
         {...props}
       />
       <label
-        className="inline-block pl-[0.15rem] hover:cursor-pointer"
+        className="inline-block pl-[0.15rem] hover:cursor-pointer text-nowrap"
         htmlFor={value}
       >
         <Typography color="black" size="16px" fontFamily="primary" tag="p">

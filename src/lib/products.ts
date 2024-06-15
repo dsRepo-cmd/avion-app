@@ -94,7 +94,7 @@ export async function getPopularProducts(): Promise<
   await dbConnect();
   try {
     const newProducts = await ProductModel.find({}, "_id name price imageSrc ")
-      .sort({ views: 1 })
+      .sort({ views: -1 })
       .limit(4)
       .lean();
 
@@ -128,6 +128,20 @@ export async function getNewProducts(): Promise<ProductListing[] | undefined> {
     })) as ProductListing[];
 
     return formattedProducts;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+export async function getProductsByID(
+  id: string
+): Promise<IProduct | undefined | null> {
+  await dbConnect();
+  try {
+    const product = await ProductModel.findById(id);
+
+    return product;
   } catch (error) {
     console.log(error);
     return undefined;
