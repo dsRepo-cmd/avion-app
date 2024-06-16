@@ -22,7 +22,6 @@ export const POST = async (request: any) => {
       name,
     });
 
-    console.log("email, password, existingUser", email, password, newUser);
     await newUser.save();
 
     return new NextResponse("user is registered", { status: 200 });

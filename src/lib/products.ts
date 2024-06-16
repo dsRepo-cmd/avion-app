@@ -52,7 +52,6 @@ export const getProducts = async (searchParams: SearchParams) => {
       if (priceFilters.length > 0) {
         filter.$or = priceFilters;
       }
-      console.log(priceFilters);
     }
 
     if (brand) filter.brand = brand;
@@ -87,7 +86,7 @@ export const getProducts = async (searchParams: SearchParams) => {
       imageSrc: product.imageSrc,
     })) as ProductListing[];
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return [];
   }
 };
@@ -111,7 +110,7 @@ export async function getPopularProducts(): Promise<
 
     return formattedProducts;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return undefined;
   }
 }
@@ -133,7 +132,7 @@ export async function getNewProducts(): Promise<ProductListing[] | undefined> {
 
     return formattedProducts;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return undefined;
   }
 }
@@ -147,7 +146,7 @@ export async function getProductsByID(
 
     return product;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return undefined;
   }
 }

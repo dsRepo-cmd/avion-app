@@ -26,13 +26,6 @@ export async function POST(req: NextRequest) {
 
     const formattedProductData = formatProductData(productData);
 
-    console.log(
-      "formattedProductData",
-      formattedProductData,
-      "productData",
-      productData
-    );
-
     const newProduct = new ProductModel(formattedProductData);
     await newProduct.save();
 
