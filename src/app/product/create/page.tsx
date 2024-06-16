@@ -49,7 +49,6 @@ const CreateProduct = () => {
         body: JSON.stringify(productData),
       });
       const data = await response.json();
-      console.log(data);
 
       if (response.ok) {
         return data;
@@ -57,7 +56,7 @@ const CreateProduct = () => {
         alert("Failed to create product");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

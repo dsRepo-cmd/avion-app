@@ -4,9 +4,7 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  avatarUrl?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  image?: string;
 }
 
 const UserSchema = new mongoose.Schema<IUser>(
@@ -28,13 +26,13 @@ const UserSchema = new mongoose.Schema<IUser>(
     password: {
       type: String,
       required: true,
-      trim: true,
       minlength: [6, "Password cannot be less than 6 characters"],
     },
-    avatarUrl: {
+    image: {
       type: String,
       trim: true,
-      default: "https://picsum.photos/id/237/100/100",
+      default:
+        "https://lh3.googleusercontent.com/a/ACg8ocJo2h54hJKDBE-_lV4pMkwIz5VX1PHJEWSv_OP6qTK1LilysctK=s96-c",
     },
   },
   {
