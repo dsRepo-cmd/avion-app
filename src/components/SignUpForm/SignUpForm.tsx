@@ -142,7 +142,9 @@ function SignUpForm() {
           )}
         </div>
         {errors.signUp && <div className="text-red-500">{errors.signUp}</div>}
-        <Button type="submit">Sign Up</Button>
+        <Button className=" mt-4" type="submit">
+          Sign Up
+        </Button>
       </form>
     )
   );

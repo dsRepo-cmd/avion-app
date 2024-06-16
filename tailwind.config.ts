@@ -35,6 +35,7 @@ const config: Config = {
       fontFamily: {
         primary: ["var(--font-family)"],
         second: ["var(--second-family)"],
+        default: ["var(--second-family)"],
       },
     },
   },

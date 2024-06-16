@@ -91,7 +91,9 @@ function SignInForm() {
         )}
       </div>
       {errors.signIn && <div className="text-red-500">{errors.signIn}</div>}
-      <Button type="submit">Sign in</Button>
+      <Button className=" mt-4" type="submit">
+        Sign in
+      </Button>
     </form>
   );
 }
