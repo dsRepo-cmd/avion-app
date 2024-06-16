@@ -32,15 +32,14 @@ async function Products({ searchParams }: Props) {
       <ProductTitle category={searchParams.category} />
 
       <Container>
-        <div className=" grid grid-cols-4 justify-start">
-          <div className=" flex ">
-            <ProductSortPanel
-              selectedTypes={selectedTypes}
-              searchParams={searchParams}
-              selectedPriceRanges={selectedPriceRanges}
-              selectedDesigners={selectedDesigners}
-            />
-          </div>
+        <div className=" grid grid-cols-4 justify-start lg:flex lg:flex-col gap-10">
+          <ProductSortPanel
+            selectedTypes={selectedTypes}
+            searchParams={searchParams}
+            selectedPriceRanges={selectedPriceRanges}
+            selectedDesigners={selectedDesigners}
+          />
+
           <div className=" col-span-3 w-full">
             {products.length === 0 ? (
               <div className=" flex justify-center w-full">

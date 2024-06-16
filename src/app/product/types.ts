@@ -1,7 +1,7 @@
 export interface ProductListing {
   _id: string;
   name: string;
-  price: string;
+  price: number;
   imageSrc: string;
 }
 
@@ -26,13 +26,13 @@ export enum ProductCategory {
 export interface IProductBase {
   name: string;
   description: string;
-  price: string;
+  price: number;
   designer: string;
   productType: ProductType;
   category: ProductCategory;
-  height: string;
-  width: string;
-  depth: string;
+  height: number;
+  width: number;
+  depth: number;
   brand: string;
   imageSrc: string;
 }
@@ -51,8 +51,6 @@ export interface SearchParams {
   category: string;
   productType: string;
   brand: string;
-  minPrice: string;
-  maxPrice: string;
   sortBy: SortBy;
   sortOrder: SortOrder;
   page: string;

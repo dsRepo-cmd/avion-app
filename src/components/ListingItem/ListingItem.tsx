@@ -2,16 +2,16 @@ import Image from "next/image";
 import Typography from "../Typography/Typography";
 import Link from "next/link";
 import { ProductListing } from "@/app/product/types";
+import { Key } from "react";
 
 interface Props {
   product: ProductListing;
-  key: string;
 }
 
-function ListingItem({ product, key }: Props) {
+function ListingItem({ product }: Props) {
   return (
     <>
-      <li key={key}>
+      <li>
         <Link
           className=" duration-300 flex flex-col gap-2 h-full w-full hover:scale-[1.04]"
           href={`/product/${product._id}`}

@@ -48,6 +48,7 @@ function HomeHero() {
           width={520}
           height={584}
           className=" sm:hidden lg:hidden "
+          priority
         />
       </div>
     </Container>

@@ -7,13 +7,13 @@ const CreateProduct = () => {
   const [productData, setProductData] = useState<IProductBase>({
     name: "",
     description: "",
-    price: "",
+    price: 0,
     designer: "",
     productType: ProductType.Accessories,
     category: ProductCategory.Ceramics,
-    height: "",
-    width: "",
-    depth: "",
+    height: 0,
+    width: 0,
+    depth: 0,
     brand: "",
     imageSrc: "",
   });
@@ -92,7 +92,7 @@ const CreateProduct = () => {
           <label htmlFor="price">Price</label>
           <input
             className="bg-lightGrey grow px-4 py-2"
-            type="text"
+            type="number"
             id="price"
             name="price"
             value={productData.price}
@@ -148,7 +148,7 @@ const CreateProduct = () => {
           <label htmlFor="height">Height</label>
           <input
             className="bg-lightGrey px-4 py-2"
-            type="text"
+            type="number"
             id="height"
             name="height"
             value={productData.height}
@@ -160,7 +160,7 @@ const CreateProduct = () => {
           <label htmlFor="width">Width</label>
           <input
             className="bg-lightGrey px-4 py-2"
-            type="text"
+            type="number"
             id="width"
             name="width"
             value={productData.width}
@@ -172,7 +172,7 @@ const CreateProduct = () => {
           <label htmlFor="depth">Depth</label>
           <input
             className="bg-lightGrey px-4 py-2"
-            type="text"
+            type="number"
             id="depth"
             name="depth"
             value={productData.depth}
