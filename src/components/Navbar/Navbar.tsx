@@ -11,7 +11,7 @@ import Link from "next/link";
 
 function Navbar() {
   const session = useSession();
-  console.log(session);
+
   return (
     <nav className=" flex justify-between items-center py-5">
       <div>
