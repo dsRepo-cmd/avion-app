@@ -13,7 +13,7 @@ export interface IProduct extends Document, IProductBase {
 
 const ProductSchema = new mongoose.Schema<IProduct>(
   {
-    price: { type: String, required: true, trim: true },
+    price: { type: Number, required: true, trim: true },
     designer: { type: String, required: true, trim: true },
     productType: {
       type: String,
@@ -27,9 +27,9 @@ const ProductSchema = new mongoose.Schema<IProduct>(
       trim: true,
       maxlength: [5000, "Description cannot be more than 5000 characters"],
     },
-    height: { type: String },
-    width: { type: String },
-    depth: { type: String },
+    height: { type: Number },
+    width: { type: Number },
+    depth: { type: Number },
     category: {
       type: String,
       required: true,

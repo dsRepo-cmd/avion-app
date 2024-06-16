@@ -18,7 +18,7 @@ const ProductSortPanel = ({
   searchParams,
 }: ProductSortPanelProps) => {
   const productTypes = Object.values(ProductType);
-  const priceRanges = ["0-100", "101-250", "250+"];
+  const priceRanges = ["0-99", "100-249", "250+"];
   const designers = [
     "Robert Smith",
     "Liam Gallagher",
@@ -69,7 +69,7 @@ const ProductSortPanel = ({
   };
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-12 lg:flex-row ">
       <div className="flex flex-col gap-3">
         <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
           Product Type

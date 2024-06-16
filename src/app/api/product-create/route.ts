@@ -1,3 +1,4 @@
+import { IProductBase } from "@/app/product/types";
 import dbConnect from "@/lib/dbConnect";
 import ProductModel from "@/models/Product";
 import { NextRequest, NextResponse } from "next/server";
@@ -5,10 +6,36 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   await dbConnect();
   try {
-    const productData = await req.json();
-    console.log("new productData", productData);
-    const newProduct = new ProductModel(productData);
+    const productData: IProductBase = await req.json();
+
+    const formatProductData = (data: IProductBase) => {
+      return {
+        name: data.name,
+        description: data.description,
+        price: Number(data.price),
+        designer: data.designer,
+        productType: data.productType,
+        category: data.category,
+        height: data.height ? Number(data.height) : 0,
+        width: data.width ? Number(data.width) : 0,
+        depth: data.depth ? Number(data.depth) : 0,
+        brand: data.brand,
+        imageSrc: data.imageSrc,
+      };
+    };
+
+    const formattedProductData = formatProductData(productData);
+
+    console.log(
+      "formattedProductData",
+      formattedProductData,
+      "productData",
+      productData
+    );
+
+    const newProduct = new ProductModel(formattedProductData);
     await newProduct.save();
+
     return NextResponse.json({ newProduct });
   } catch (error) {
     console.error("Error fetching stories:", error);
