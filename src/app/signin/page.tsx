@@ -2,6 +2,7 @@ import Container from "@/components/Container/Container";
 import GoogleButton from "@/components/GoogleButton/GoogleButton";
 import SignInForm from "@/components/SignInForm/SignInForm";
 import Typography from "@/components/Typography/Typography";
+import Link from "next/link";
 import React from "react";
 
 async function Signin() {
@@ -12,6 +13,7 @@ async function Signin() {
           <Typography tag="h2">Sign In</Typography>
           <SignInForm />
           <GoogleButton />
+          <Link href={"/signup"}>Sign Up</Link>
         </div>
       </Container>
     </main>

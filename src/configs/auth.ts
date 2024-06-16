@@ -1,7 +1,8 @@
+import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/User";
-import type { AuthOptions, User } from "next-auth";
+import type { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-
+import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
 
 export const authConfig: AuthOptions = {
@@ -15,15 +16,32 @@ export const authConfig: AuthOptions = {
         email: { label: "email", type: "email", required: true },
         password: { label: "password", type: "password", required: true },
       },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials.password) return null;
-
-        const user = await UserModel.findOne({ email: credentials.email });
-        if (user && user.password === credentials.password) {
-          const { password, ...userWithoutPass } = user;
-
-          return userWithoutPass as User;
+      async authorize(
+        credentials: { email: string; password: string } | undefined
+      ) {
+        if (!credentials) {
+          return null;
         }
+
+        await dbConnect();
+
+        try {
+          const user = await UserModel.findOne({
+            email: credentials.email,
+          }).lean();
+          if (user) {
+            const isPasswordCorrect = await bcrypt.compare(
+              credentials.password,
+              user.password
+            );
+            if (isPasswordCorrect) {
+              return { ...user, id: user._id.toString() };
+            }
+          }
+        } catch (err: any) {
+          throw new Error(err);
+        }
+
         return null;
       },
     }),
