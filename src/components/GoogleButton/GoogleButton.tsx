@@ -3,14 +3,21 @@ import { signIn } from "next-auth/react";
 import Button from "../Button/Button";
 import { useSearchParams } from "next/navigation";
 
-function GoogleButton() {
+interface Props {
+  title: string;
+}
+function GoogleButton({ title }: Props) {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/profile";
   const handleSignIn = () => {
     signIn("google", { callbackUrl });
   };
 
-  return <Button onClick={handleSignIn}>Sign in with Google</Button>;
+  return (
+    <Button bgColor="white" onClick={handleSignIn}>
+      {title}
+    </Button>
+  );
 }
 
 export default GoogleButton;
