@@ -1,6 +1,5 @@
 import mongoose, { Model, Schema, Document, Types } from "mongoose";
 import { IProduct } from "./Product";
-import { IUser } from "./User";
 
 export interface ICartProduct {
   product: Types.ObjectId | IProduct;
@@ -9,7 +8,7 @@ export interface ICartProduct {
 
 export interface ICart extends Document {
   _id: Types.ObjectId;
-  user: Types.ObjectId | IUser;
+  userEmail: string;
   products: ICartProduct[];
   totalPrice: number;
   status: "active" | "completed" | "canceled";
@@ -37,8 +36,8 @@ const CartProductSchema = new mongoose.Schema<ICartProduct>(
 
 const CartSchema = new mongoose.Schema<ICart>(
   {
-    user: {
-      type: Schema.Types.ObjectId,
+    userEmail: {
+      type: String,
       ref: "User",
       required: true,
     },
