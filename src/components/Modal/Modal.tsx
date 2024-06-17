@@ -11,5 +11,12 @@ export default function Modal({ children }: Props) {
 
   useEffect(() => setMounted(true), []);
 
-  return mounted ? createPortal(<>{children}</>, document.body) : null;
+  return mounted
+    ? createPortal(
+        <div className=" absolute z-50 flex justify-center items-center bg-[#00000055] w-screen h-screen">
+          {children}
+        </div>,
+        document.body
+      )
+    : null;
 }

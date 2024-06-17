@@ -11,8 +11,8 @@ import Divider from "@/components/Divider/Divider";
 const SignUp = () => {
   return (
     <main>
-      <Container className=" items-center">
-        <div className=" flex w-[500px] flex-col gap-6 p-10 bg-lightGrey">
+      <Container className=" items-center md:p-2">
+        <div className=" flex w-[500px] flex-col gap-6 p-10 bg-lightGrey md:w-full ">
           <SignUpForm />
 
           <div className=" flex items-center justify-center gap-10">
