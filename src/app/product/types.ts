@@ -3,6 +3,7 @@ export interface ProductListing {
   name: string;
   price: number;
   imageSrc: string;
+  description?: string;
 }
 
 export enum ProductType {
@@ -57,4 +58,14 @@ export interface SearchParams {
   limit: string;
   priceRange: string;
   designer: string;
+}
+
+export interface ICartProduct {
+  product: ProductListing;
+  quantity: number;
+}
+export interface ICartBase {
+  id: string;
+  userEmail: string;
+  products: ICartProduct[];
 }

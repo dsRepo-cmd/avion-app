@@ -1,5 +1,5 @@
-import Features from "@/containers/Features/Features";
-import JoinUs from "@/containers/JoinUs/JoinUs";
+import Features from "@/components/Features/Features";
+import JoinUs from "@/components/JoinUs/JoinUs";
 import ProductMenu from "@/containers/ProductMenu/ProductMenu";
 import SimularProductListings from "@/containers/SimularProductListings/SimularProductListings";
 

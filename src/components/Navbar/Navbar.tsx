@@ -26,10 +26,10 @@ function Navbar() {
         </Typography>
       </AppLink>
 
-      <div className=" flex gap-4">
-        <button title="cart">
+      <div className=" flex gap-4 items-center">
+        <Link href={"/cart"} title="cart">
           <CartIcon />
-        </button>
+        </Link>
 
         <button title="user-avatar">
           {session?.data ? (

@@ -1,31 +1,54 @@
 "use client";
-import { memo, useState, useCallback, ChangeEvent } from "react";
+import { cn } from "@/lib/utils";
+import { memo, useState, useEffect, useCallback, ChangeEvent } from "react";
 
-interface Props {}
-function Counter({}: Props) {
-  const [count, setCount] = useState(1);
+interface Props {
+  value?: number;
+  onCountChange?: (count: number) => void;
+  className?: string;
+}
 
-  const increment = useCallback(
-    () => setCount((prevCount) => prevCount + 1),
-    []
-  );
-  const decrement = useCallback(
-    () => setCount((prevCount) => Math.max(prevCount - 1, 1)),
-    []
-  );
+function Counter({ value = 1, onCountChange = () => {}, className }: Props) {
+  const [count, setCount] = useState(value);
+
+  useEffect(() => {
+    setCount(value);
+  }, [value]);
+
+  const increment = useCallback(() => {
+    setCount((prevCount) => {
+      const newCount = prevCount + 1;
+      onCountChange(newCount);
+      return newCount;
+    });
+  }, [onCountChange]);
+
+  const decrement = useCallback(() => {
+    setCount((prevCount) => {
+      const newCount = Math.max(prevCount - 1, 1);
+      onCountChange(newCount);
+      return newCount;
+    });
+  }, [onCountChange]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value, 10);
-    if (!isNaN(value) && value >= 1) {
-      setCount(value);
+    const inputValue = parseInt(event.target.value, 10);
+    if (!isNaN(inputValue) && inputValue >= 1) {
+      setCount(inputValue);
+      onCountChange(inputValue);
     }
   };
 
   return (
-    <div className="flex items-center justify-around max-w-[8rem] bg-white shadow-sm rounded-md">
+    <div
+      className={cn(
+        "flex items-center justify-around max-w-[8rem] bg-white rounded-md",
+        className
+      )}
+    >
       <button
         onClick={decrement}
-        className=" duration-300 text-borderGrey hover:text-darkPrimary p-3"
+        className="duration-300 text-borderGrey hover:text-darkPrimary p-3"
       >
         -
       </button>
@@ -34,11 +57,14 @@ function Counter({}: Props) {
         value={count}
         onChange={handleInputChange}
         id="quantity-input"
-        className="flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center"
+        className={cn(
+          "flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center",
+          className
+        )}
       />
       <button
         onClick={increment}
-        className=" duration-300  text-borderGrey hover:text-darkPrimary p-3"
+        className="duration-300 text-borderGrey hover:text-darkPrimary p-3"
       >
         +
       </button>
