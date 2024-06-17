@@ -17,6 +17,7 @@ const config: Config = {
       white: "var(--white)",
       darkChair: "var(--images---dark-chair)",
       grey: "var(--grey)",
+      error: "#f44336",
 
       buttonLight: "#F9F9F926",
       textLight: "#505977",

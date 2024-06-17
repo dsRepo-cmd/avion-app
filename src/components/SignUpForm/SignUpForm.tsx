@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import Button from "../Button/Button";
 import { useSession } from "next-auth/react";
 import Typography from "../Typography/Typography";
+import Input from "../Input/Input";
 
 function SignUpForm() {
   const { data: session, status: sessionStatus } = useSession();
 
   const router = useRouter();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -99,52 +101,45 @@ function SignUpForm() {
 
   return (
     sessionStatus !== "authenticated" && (
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <Typography size="24px" tag="h2">
+      <form className="flex flex-col gap-1" onSubmit={handleSubmit}>
+        <Typography size="24px" className=" mb-3" tag="h2">
           Sign Up
         </Typography>
-        <div className="flex flex-col gap-2">
-          <input
-            type="name"
-            name="name"
-            className="px-8 py-4  "
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-          {errors.name && <div className="text-red-500">{errors.name}</div>}
-        </div>
-        <div className="flex flex-col gap-2">
-          <input
-            type="email"
-            className="px-8 py-4  "
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          {errors.email && <div className="text-red-500">{errors.email}</div>}
-        </div>
-        <div className="flex flex-col gap-2">
-          <input
-            type="password"
-            className="px-8 py-4  "
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          {errors.password && (
-            <div className="text-red-500">{errors.password}</div>
-          )}
-        </div>
-        {errors.signUp && <div className="text-red-500">{errors.signUp}</div>}
+
+        <Input
+          type="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          error={errors.name}
+          label="Name"
+          required
+        />
+
+        <Input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          error={errors.email}
+          label="Email"
+          required
+        />
+
+        <Input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          error={errors.password}
+          label="Password"
+          required
+        />
+
         <Button className=" mt-4" type="submit">
           Sign Up
         </Button>
+        {errors.signUp && <div className=" text-error">{errors.signUp}</div>}
       </form>
     )
   );

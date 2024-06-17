@@ -29,20 +29,23 @@ export const authConfig: AuthOptions = {
           const user = await UserModel.findOne({
             email: credentials.email,
           }).lean();
-          if (user) {
-            const isPasswordCorrect = await bcrypt.compare(
-              credentials.password,
-              user.password
-            );
-            if (isPasswordCorrect) {
-              return { ...user, id: user._id.toString() };
-            }
+          if (!user) {
+            throw new Error("User not found");
           }
-        } catch (err: any) {
-          throw new Error(err);
-        }
 
-        return null;
+          const isPasswordCorrect = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+
+          if (!isPasswordCorrect) {
+            throw new Error("Incorrect password");
+          }
+
+          return { ...user, id: user._id.toString() };
+        } catch (err: any) {
+          throw new Error(err.message || "Authorization error");
+        }
       },
     }),
   ],
