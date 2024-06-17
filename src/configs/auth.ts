@@ -30,7 +30,7 @@ export const authConfig: AuthOptions = {
             email: credentials.email,
           }).lean();
           if (!user) {
-            throw new Error("User not found");
+            throw new Error("User with this email not found");
           }
 
           const isPasswordCorrect = await bcrypt.compare(
