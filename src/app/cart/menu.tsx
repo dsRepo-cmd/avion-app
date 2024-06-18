@@ -6,7 +6,6 @@ import Typography from "@/components/Typography/Typography";
 import Image from "next/image";
 
 import { ICartBase } from "../product/types";
-import Divider from "@/components/Divider/Divider";
 
 interface Props {
   cart: ICartBase;

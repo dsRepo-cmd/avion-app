@@ -45,7 +45,10 @@ function SignInForm() {
       password: formData.password,
       redirect: false,
     });
-    console.log("res?.error", res);
+    if (res?.ok) {
+      router.push("/login");
+    }
+
     if (res && !res.error) {
       router.push("/");
     } else {

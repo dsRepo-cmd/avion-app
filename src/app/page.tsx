@@ -7,7 +7,7 @@ import PopularProductListings from "@/containers/PopularProductListings/PopularP
 
 export default function Home() {
   return (
-    <main className="flex  flex-col items-center justify-between  max-w-[1440px] m-auto">
+    <main className="flex  flex-col items-center justify-between  max-w-[1440px]">
       <HomeHero />
       <Features />
       <NewProductListings />

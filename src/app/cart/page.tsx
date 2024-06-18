@@ -38,7 +38,7 @@ const cart: ICartBase = {
 };
 function Cart() {
   return (
-    <main className="flex  flex-col items-center justify-between  w-[1440px] m-auto">
+    <main className="flex  flex-col items-center justify-between  w-[1440px] ">
       <CartMenu cart={cart} />
     </main>
   );

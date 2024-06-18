@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 export interface ProductListing {
   _id: string;
   name: string;
@@ -24,7 +26,8 @@ export enum ProductCategory {
   Crockery = "Crockery",
 }
 
-export interface IProductBase {
+export interface Product {
+  _id: Types.ObjectId;
   name: string;
   description: string;
   price: number;
@@ -36,6 +39,8 @@ export interface IProductBase {
   depth: number;
   brand: string;
   imageSrc: string;
+  views: number;
+  dateAdded: Date;
 }
 
 export enum SortOrder {

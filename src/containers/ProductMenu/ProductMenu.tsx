@@ -4,7 +4,9 @@ import Counter from "@/components/Counter/Counter";
 import Divider from "@/components/Divider/Divider";
 import Typography from "@/components/Typography/Typography";
 import { getProductsByID } from "@/lib/products";
+
 import Image from "next/image";
+import AddToCard from "../AddToCard/AddToCard";
 
 interface Props {
   id: string;
@@ -103,10 +105,8 @@ async function ProductMenu({ id }: Props) {
             Quantitity
           </Typography>
 
-          <Counter />
-
+          <AddToCard product={product} />
           <div className=" flex gap-4 mt-9">
-            <Button variant="filled">Add to cart</Button>
             <Button variant="filled" bgColor="white">
               Save to favorites
             </Button>

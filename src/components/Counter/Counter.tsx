@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { memo, useState, useEffect, useCallback, ChangeEvent } from "react";
+import { useState, useEffect, useCallback, ChangeEvent } from "react";
 
 interface Props {
   value?: number;
@@ -72,4 +72,4 @@ function Counter({ value = 1, onCountChange = () => {}, className }: Props) {
   );
 }
 
-export default memo(Counter);
+export default Counter;

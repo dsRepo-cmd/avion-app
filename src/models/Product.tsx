@@ -1,14 +1,8 @@
-import {
-  ProductType,
-  ProductCategory,
-  IProductBase,
-} from "@/app/product/types";
+import { ProductType, ProductCategory, Product } from "@/app/product/types";
 import mongoose, { Model, Document, Types } from "mongoose";
 
-export interface IProduct extends Document, IProductBase {
+export interface IProduct extends Document, Product {
   _id: Types.ObjectId;
-  dateAdded: Date;
-  views?: number;
 }
 
 const ProductSchema = new mongoose.Schema<IProduct>(
