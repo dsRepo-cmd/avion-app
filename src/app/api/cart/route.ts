@@ -13,14 +13,12 @@ export const GET = async (req: NextRequest) => {
       return new NextResponse("Email is required", { status: 400 });
     }
 
-    // Find cart and populate product details
     let cart: ICart | null = await CartModel.findOne({ userEmail }).populate({
       path: "products.product",
       model: ProductModel,
     });
 
     if (!cart) {
-      // If no cart exists, create a new one
       cart = new CartModel({
         userEmail,
         products: [],
@@ -28,7 +26,7 @@ export const GET = async (req: NextRequest) => {
         status: "active",
       });
       await cart.save();
-      // Re-fetch the cart to ensure it includes the populated products
+
       cart = await CartModel.findOne({ userEmail }).populate({
         path: "products.product",
         model: ProductModel,

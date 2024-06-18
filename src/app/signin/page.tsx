@@ -1,6 +1,7 @@
 import Container from "@/components/Container/Container";
 import Divider from "@/components/Divider/Divider";
 import GoogleButton from "@/components/GoogleButton/GoogleButton";
+import Page from "@/components/Page/Page";
 
 import SignInForm from "@/components/SignInForm/SignInForm";
 import Typography from "@/components/Typography/Typography";
@@ -10,7 +11,7 @@ import React, { Suspense } from "react";
 
 async function Signin() {
   return (
-    <main className=" h-full">
+    <Page>
       <Container className=" items-center md:p-2">
         <div className=" flex w-[500px] flex-col gap-6 p-10 bg-lightGrey md:w-full ">
           <SignInForm />
@@ -47,7 +48,7 @@ async function Signin() {
           </div>
         </div>
       </Container>
-    </main>
+    </Page>
   );
 }
 

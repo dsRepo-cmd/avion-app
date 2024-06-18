@@ -7,10 +7,11 @@ import { Suspense } from "react";
 import GoogleButton from "@/components/GoogleButton/GoogleButton";
 import Typography from "@/components/Typography/Typography";
 import Divider from "@/components/Divider/Divider";
+import Page from "@/components/Page/Page";
 
 const SignUp = () => {
   return (
-    <main>
+    <Page>
       <Container className=" items-center md:p-2">
         <div className=" flex w-[500px] flex-col gap-6 p-10 bg-lightGrey md:w-full ">
           <SignUpForm />
@@ -46,7 +47,7 @@ const SignUp = () => {
           </div>
         </div>
       </Container>
-    </main>
+    </Page>
   );
 };
 

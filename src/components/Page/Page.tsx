@@ -10,7 +10,7 @@ function Page({ children, className, ...props }: Props) {
   return (
     <main
       className={cn(
-        "flex  flex-col items-center justify-between  max-w-[1440px]",
+        "flex  flex-col items-center justify-between w-full  max-w-[1440px]",
         className
       )}
       {...props}
