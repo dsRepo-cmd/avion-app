@@ -8,9 +8,16 @@ import AppLink from "../AppLink/AppLink";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import useCart from "@/lib/cart";
 
 function Navbar() {
   const session = useSession();
+
+  const userEmail = session.data?.user?.email || "";
+
+  const { cart, setCart } = useCart(userEmail);
+
+  console.log("cart", cart);
 
   return (
     <nav className=" flex justify-between items-center py-5">

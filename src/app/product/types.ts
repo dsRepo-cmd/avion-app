@@ -73,4 +73,6 @@ export interface ICartBase {
   id: string;
   userEmail: string;
   products: ICartProduct[];
+  totalPrice: number;
+  status: "active" | "completed" | "canceled";
 }

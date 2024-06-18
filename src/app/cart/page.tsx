@@ -1,44 +1,16 @@
 "use client";
 
+import useCart from "@/lib/cart";
 import CartMenu from "./menu";
-import { ICartBase } from "../product/types";
+import { useSession } from "next-auth/react";
 
-const cart: ICartBase = {
-  id: "1",
-  userEmail: "mail",
-  products: [
-    {
-      product: {
-        _id: "1",
-        name: "name",
-        imageSrc: "/vase-set.png",
-        price: 100,
-      },
-      quantity: 3,
-    },
-    {
-      product: {
-        _id: "2",
-        name: "name",
-        imageSrc: "/vase-set.png",
-        price: 100,
-      },
-      quantity: 5,
-    },
-    {
-      product: {
-        _id: "3",
-        name: "name",
-        imageSrc: "/vase-set.png",
-        price: 100,
-      },
-      quantity: 5,
-    },
-  ],
-};
 function Cart() {
+  const session = useSession();
+  const { cart, setCart } = useCart(session?.data?.user?.email || "");
+  if (cart === null) return <>Register</>;
+
   return (
-    <main className="flex  flex-col items-center justify-between  w-[1440px] ">
+    <main className="flex  flex-col items-center justify-between  max-w-[1440px] ">
       <CartMenu cart={cart} />
     </main>
   );

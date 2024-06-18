@@ -1,14 +1,13 @@
-import { IProductBase } from "@/app/product/types";
 import dbConnect from "@/lib/dbConnect";
-import ProductModel from "@/models/Product";
+import ProductModel, { IProduct } from "@/models/Product";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   await dbConnect();
   try {
-    const productData: IProductBase = await req.json();
+    const productData: IProduct = await req.json();
 
-    const formatProductData = (data: IProductBase) => {
+    const formatProductData = (data: IProduct) => {
       return {
         name: data.name,
         description: data.description,

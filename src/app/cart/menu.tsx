@@ -47,10 +47,7 @@ function CartMenu({ cart }: Props) {
 
           <tbody className=" border-b border-b-borderGrey ">
             {cart.products.map((cartItem) => (
-              <tr
-                key={cartItem.product._id.toString()}
-                className=" border-none"
-              >
+              <tr key={cartItem.product._id} className=" border-none">
                 <td className="py-4 px-6 flex items-center">
                   <Image
                     src={cartItem.product.imageSrc}
