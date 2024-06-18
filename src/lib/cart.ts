@@ -1,7 +1,7 @@
 import { ICartBase } from "@/app/product/types";
 import { useEffect, useState } from "react";
 
-export const useCart = (userEmail: string) => {
+const useCart = (userEmail: string) => {
   const [cart, setCart] = useState<ICartBase>({
     id: "",
     userEmail,
@@ -30,5 +30,52 @@ export const useCart = (userEmail: string) => {
     }
   }, [userEmail]);
 
-  return { cart, setCart };
+  const removeProduct = async (productId: string) => {
+    try {
+      const res = await fetch(`/api/cart`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail, productId }),
+      });
+      if (res.ok) {
+        const updatedCart = await res.json();
+        setCart(updatedCart);
+      } else {
+        const errorData = await res.json();
+        console.error("Failed to remove product", errorData);
+      }
+    } catch (error) {
+      console.error("Error removing product:", error);
+    }
+  };
+
+  const updateProductQuantity = async (
+    productId: string,
+    newQuantity: number
+  ) => {
+    try {
+      const res = await fetch(`/api/cart`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail, productId, quantity: newQuantity }),
+      });
+      if (res.ok) {
+        const updatedCart = await res.json();
+        setCart(updatedCart);
+      } else {
+        const errorData = await res.json();
+        console.error("Failed to update product quantity", errorData);
+      }
+    } catch (error) {
+      console.error("Error updating product quantity:", error);
+    }
+  };
+
+  return { cart, setCart, removeProduct, updateProductQuantity };
 };
+
+export default useCart;

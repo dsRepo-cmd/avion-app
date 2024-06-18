@@ -6,13 +6,13 @@ import Typography from "@/components/Typography/Typography";
 import Image from "next/image";
 import DeleteIcon from "@/assets/x.svg";
 import Link from "next/link";
-import { useCart } from "@/lib/cart";
+import useCart from "@/lib/cart";
 import { useSession } from "next-auth/react";
 
 function CartMenu() {
   const session = useSession();
-
-  const { setCart, cart } = useCart(session?.data?.user?.email || "");
+  const userEmail = session?.data?.user?.email || "";
+  const { cart, removeProduct, updateProductQuantity } = useCart(userEmail);
 
   const calculateSubtotal = () => {
     return cart.products.reduce(
@@ -26,52 +26,6 @@ function CartMenu() {
       return description.substring(0, maxLength) + "...";
     }
     return description;
-  };
-
-  const handleRemoveProduct = async (productId: string) => {
-    try {
-      const res = await fetch(`/api/cart`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userEmail: cart.userEmail, productId }),
-      });
-      if (res.ok) {
-        const updatedCart = await res.json();
-        setCart(updatedCart);
-      } else {
-        const errorData = await res.json();
-        console.error("Failed to remove product", errorData);
-      }
-    } catch (error) {
-      console.error("Error removing product:", error);
-    }
-  };
-
-  const handleCountChange = async (productId: string, newQuantity: number) => {
-    try {
-      const res = await fetch(`/api/cart`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userEmail: cart.userEmail,
-          productId,
-          quantity: newQuantity,
-        }),
-      });
-      if (res.ok) {
-        const updatedCart = await res.json();
-        setCart(updatedCart);
-      } else {
-        const errorData = await res.json();
-        console.error("Failed to update product quantity", errorData);
-      }
-    } catch (error) {
-      console.error("Error updating product quantity:", error);
-    }
   };
 
   return (
@@ -105,12 +59,8 @@ function CartMenu() {
         <tbody className="border-b border-b-borderGrey">
           {cart.products.map((cartItem) => (
             <tr key={cartItem.product._id} className="border-none">
-              <td className="py-4  ">
-                <Link
-                  className=" flex items-center gap-5"
-                  href={`/product/${cartItem.product._id}`}
-                  title="product"
-                >
+              <td className="py-4  flex items-center gap-5">
+                <Link href={`/product/${cartItem.product._id}`} title="product">
                   <Image
                     src={cartItem.product.imageSrc}
                     alt={cartItem.product._id}
@@ -118,29 +68,29 @@ function CartMenu() {
                     height={375}
                     className="w-[109px] h-[134px] object-cover md:w-[133px] md:h-[166px] "
                   />
-                  <div className=" max-w-[250px] flex flex-col gap-2">
-                    <Typography tag="h3" size="20px" fontFamily="secondary">
-                      {cartItem.product.name}
-                    </Typography>
-                    <Typography tag="p" size="14px" fontFamily="primary">
-                      {truncateDescription(
-                        cartItem.product.description || "",
-                        60
-                      )}
-                    </Typography>
-                    <Typography tag="p" size="16px" fontFamily="primary">
-                      £{cartItem.product.price}
-                    </Typography>
-
-                    <Counter
-                      value={cartItem.quantity}
-                      className="bg-lightGrey hidden md:flex"
-                      onCountChange={(count) =>
-                        handleCountChange(cartItem.product._id, count)
-                      }
-                    />
-                  </div>
                 </Link>
+                <div className=" max-w-[250px] flex flex-col gap-2">
+                  <Typography tag="h3" size="20px" fontFamily="secondary">
+                    {cartItem.product.name}
+                  </Typography>
+                  <Typography tag="p" size="14px" fontFamily="primary">
+                    {truncateDescription(
+                      cartItem.product.description || "",
+                      60
+                    )}
+                  </Typography>
+                  <Typography tag="p" size="16px" fontFamily="primary">
+                    £{cartItem.product.price}
+                  </Typography>
+
+                  <Counter
+                    value={cartItem.quantity}
+                    className="bg-lightGrey hidden md:flex"
+                    onCountChange={(count) =>
+                      updateProductQuantity(cartItem.product._id, count)
+                    }
+                  />
+                </div>
               </td>
               <td className="py-4  md:hidden">
                 <div className=" flex gap-4">
@@ -148,21 +98,21 @@ function CartMenu() {
                     value={cartItem.quantity}
                     className="bg-lightGrey"
                     onCountChange={(count) =>
-                      handleCountChange(cartItem.product._id, count)
+                      updateProductQuantity(cartItem.product._id, count)
                     }
                   />
                 </div>
               </td>
               <td className=" py-4 ps-6">
                 <Button
-                  onClick={() => handleRemoveProduct(cartItem.product._id)}
+                  onClick={() => removeProduct(cartItem.product._id)}
                   variant="clear"
                   bgColor="gray"
                 >
                   <DeleteIcon />
                 </Button>
               </td>
-              <td className="py-4 text-end md:hidden">
+              <td className="py-4 text-end md:hidden w-14">
                 <Typography tag="p" size="18px" fontFamily="primary">
                   £{cartItem.product.price * cartItem.quantity}
                 </Typography>
