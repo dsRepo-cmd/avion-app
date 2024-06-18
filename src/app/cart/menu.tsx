@@ -7,25 +7,16 @@ import Image from "next/image";
 import DeleteIcon from "@/assets/x.svg";
 import Link from "next/link";
 import useCart from "@/lib/useCart";
-import { useSession } from "next-auth/react";
+import { truncateDescription } from "@/lib/cart";
 
 function CartMenu() {
-  const session = useSession();
-  const userEmail = session?.data?.user?.email || "";
-  const { cart, removeProduct, updateProductQuantity } = useCart(userEmail);
+  const { cart, removeProduct, updateProductQuantity } = useCart();
 
   const calculateSubtotal = () => {
     return cart.products.reduce(
       (total, item) => total + item.product.price * item.quantity,
       0
     );
-  };
-
-  const truncateDescription = (description: string, maxLength: number) => {
-    if (description.length > maxLength) {
-      return description.substring(0, maxLength) + "...";
-    }
-    return description;
   };
 
   return (

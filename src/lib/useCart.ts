@@ -1,8 +1,11 @@
 import { ICartBase, ICartData } from "@/app/product/types";
-import { ICart } from "@/models/Cart";
-import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-const useCart = (userEmail: string) => {
+const useCart = () => {
+  const session = useSession();
+  const userEmail = session?.data?.user?.email || "guest";
+
   const [cart, setCart] = useState<ICartBase>({
     id_: "",
     userEmail,
@@ -11,6 +14,7 @@ const useCart = (userEmail: string) => {
     status: "active",
   });
 
+  //initialize
   useEffect(() => {
     const fetchCart = async () => {
       try {
@@ -33,6 +37,7 @@ const useCart = (userEmail: string) => {
     }
   }, [userEmail]);
 
+  //===========================================
   const removeProduct = async (productId: string) => {
     try {
       const res = await fetch(`/api/cart`, {
@@ -55,6 +60,35 @@ const useCart = (userEmail: string) => {
     }
   };
 
+  //===========================================
+  const addProductToCart = async (
+    productId: string,
+    quantity: number,
+    setLoading: Dispatch<SetStateAction<boolean>>
+  ) => {
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail, productId, quantity }),
+      });
+
+      const data: ICartData = await res.json();
+
+      if (res.ok) {
+        setLoading(false);
+        setCart(data.cart);
+      } else {
+        console.error(data.message, "Error:", data.error);
+      }
+    } catch (error) {
+      console.error("Error updating product quantity:", error);
+    }
+  };
+  //===========================================
   const updateProductQuantity = async (
     productId: string,
     newQuantity: number
@@ -80,7 +114,13 @@ const useCart = (userEmail: string) => {
     }
   };
 
-  return { cart, setCart, removeProduct, updateProductQuantity };
+  return {
+    cart,
+    setCart,
+    removeProduct,
+    updateProductQuantity,
+    addProductToCart,
+  };
 };
 
 export default useCart;

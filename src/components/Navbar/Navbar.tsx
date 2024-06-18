@@ -13,9 +13,7 @@ import useCart from "@/lib/useCart";
 function Navbar() {
   const session = useSession();
 
-  const userEmail = session.data?.user?.email || "";
-
-  useCart(userEmail);
+  useCart();
 
   return (
     <nav className=" flex justify-between items-center py-5">
