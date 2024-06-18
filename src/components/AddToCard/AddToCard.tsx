@@ -21,14 +21,24 @@ function AddToCard({ product }: Props) {
 
   return (
     <>
-      <Counter value={quantity} onCountChange={getQuantity} />
-      <Button
-        disabled={loading}
-        onClick={() => addProductToCart(product.id_, quantity, setLoading)}
-        variant="filled"
-      >
-        Add to cart
-      </Button>
+      <Counter
+        className=" lg:max-w-full"
+        value={quantity}
+        onCountChange={getQuantity}
+      />
+
+      <div className=" flex gap-4 mt-9 lg:flex-col">
+        <Button
+          disabled={loading}
+          onClick={() => addProductToCart(product.id_, quantity, setLoading)}
+          variant="filled"
+        >
+          Add to cart
+        </Button>
+        <Button variant="filled" bgColor="white">
+          Save to favorites
+        </Button>
+      </div>
     </>
   );
 }

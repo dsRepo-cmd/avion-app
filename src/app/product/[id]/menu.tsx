@@ -15,8 +15,8 @@ async function Menu({ id }: Props) {
 
   if (!product) return null;
   return (
-    <Container bgColor="light">
-      <div className=" flex w-full ">
+    <Container className=" lg:px-0 lg:pt-0" bgColor="light">
+      <div className=" flex w-full lg:flex-col ">
         <Image
           className=" w-full"
           src={product.imageSrc}
@@ -26,7 +26,7 @@ async function Menu({ id }: Props) {
           priority
         />
 
-        <div className=" flex w-full flex-col gap-4 p-14">
+        <div className=" flex w-full flex-col gap-4 p-14 lg:p-6 ">
           <Typography fontFamily="secondary" size="32px" tag="h2">
             {product.name}
           </Typography>
@@ -106,11 +106,6 @@ async function Menu({ id }: Props) {
           </Typography>
 
           <AddToCard product={product} />
-          <div className=" flex gap-4 mt-9">
-            <Button variant="filled" bgColor="white">
-              Save to favorites
-            </Button>
-          </div>
         </div>
       </div>
     </Container>
