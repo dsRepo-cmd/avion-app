@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
+import Input from "../Input/Input";
 
 function SignInForm() {
   const router = useRouter();
@@ -44,7 +45,10 @@ function SignInForm() {
       password: formData.password,
       redirect: false,
     });
-    console.log("res?.error", res?.error);
+    if (res?.ok) {
+      router.push("/login");
+    }
+
     if (res && !res.error) {
       router.push("/");
     } else {
@@ -64,34 +68,31 @@ function SignInForm() {
       <Typography size="24px" tag="h2">
         Sign In
       </Typography>
-      <div className="flex flex-col gap-2">
-        <input
-          type="email"
-          className="px-8 py-4  "
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        {errors.email && <div className="text-red-500">{errors.email}</div>}
-      </div>
-      <div className="flex flex-col gap-2">
-        <input
-          type="password"
-          name="password"
-          className="px-8 py-4  "
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        {errors.password && (
-          <div className="text-red-500">{errors.password}</div>
-        )}
-      </div>
-      {errors.signIn && <div className="text-red-500">{errors.signIn}</div>}
-      <Button type="submit">Sign in</Button>
+
+      <Input
+        type="email"
+        name="email"
+        label="Email"
+        onChange={handleChange}
+        error={errors.email}
+        value={formData.email}
+        required
+      />
+
+      <Input
+        type="password"
+        name="password"
+        label="Password"
+        onChange={handleChange}
+        error={errors.password}
+        value={formData.password}
+        required
+      />
+
+      <Button className=" mt-4" type="submit">
+        Sign in
+      </Button>
+      {errors.signIn && <div className=" text-error">{errors.signIn}</div>}
     </form>
   );
 }

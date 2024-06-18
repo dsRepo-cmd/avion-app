@@ -1,19 +1,20 @@
-import Features from "@/containers/Features/Features";
+import Features from "@/components/Features/Features";
 import HomeHero from "@/containers/HomeHero/HomeHero";
 import HomeInfo from "@/containers/HomeInfo/HomeInfo";
-import JoinUs from "@/containers/JoinUs/JoinUs";
+import JoinUs from "@/components/JoinUs/JoinUs";
 import NewProductListings from "@/containers/NewProductListings/NewProductListings";
 import PopularProductListings from "@/containers/PopularProductListings/PopularProductListings";
+import Page from "@/components/Page/Page";
 
 export default function Home() {
   return (
-    <main className="flex  flex-col items-center justify-between  max-w-[1440px] m-auto">
+    <Page>
       <HomeHero />
       <Features />
       <NewProductListings />
       <PopularProductListings />
       <JoinUs />
       <HomeInfo />
-    </main>
+    </Page>
   );
 }

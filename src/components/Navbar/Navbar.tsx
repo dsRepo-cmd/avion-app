@@ -8,9 +8,12 @@ import AppLink from "../AppLink/AppLink";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import useCart from "@/lib/useCart";
 
 function Navbar() {
   const session = useSession();
+
+  useCart();
 
   return (
     <nav className=" flex justify-between items-center py-5">
@@ -26,10 +29,10 @@ function Navbar() {
         </Typography>
       </AppLink>
 
-      <div className=" flex gap-4">
-        <button title="cart">
+      <div className=" flex gap-4 items-center">
+        <Link href={"/cart"} title="cart">
           <CartIcon />
-        </button>
+        </Link>
 
         <button title="user-avatar">
           {session?.data ? (

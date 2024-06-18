@@ -5,6 +5,7 @@ import ProductTitle from "@/containers/ProductTitle/ProductTitle";
 import { getProducts } from "@/lib/products";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
+import Page from "@/components/Page/Page";
 
 interface Props {
   searchParams: SearchParams;
@@ -28,7 +29,7 @@ async function Products({ searchParams }: Props) {
   if (!products) null;
 
   return (
-    <main className="flex  flex-col items-center justify-between  max-w-[1440px] m-auto">
+    <Page>
       <ProductTitle category={searchParams.category} />
 
       <Container>
@@ -58,7 +59,7 @@ async function Products({ searchParams }: Props) {
           </div>
         </div>
       </Container>
-    </main>
+    </Page>
   );
 }
 

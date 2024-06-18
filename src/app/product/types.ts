@@ -3,6 +3,7 @@ export interface ProductListing {
   name: string;
   price: number;
   imageSrc: string;
+  description?: string;
 }
 
 export enum ProductType {
@@ -23,7 +24,22 @@ export enum ProductCategory {
   Crockery = "Crockery",
 }
 
-export interface IProductBase {
+export interface ProductCreate {
+  name: string;
+  description: string;
+  price: number;
+  designer: string;
+  productType: ProductType;
+  category: ProductCategory.Ceramics;
+  height: number;
+  width: number;
+  depth: number;
+  brand: string;
+  imageSrc: string;
+}
+
+export interface Product {
+  id_: string;
   name: string;
   description: string;
   price: number;
@@ -35,6 +51,8 @@ export interface IProductBase {
   depth: number;
   brand: string;
   imageSrc: string;
+  views: number;
+  dateAdded: Date;
 }
 
 export enum SortOrder {
@@ -57,4 +75,23 @@ export interface SearchParams {
   limit: string;
   priceRange: string;
   designer: string;
+}
+//++++++++++++++ CART
+export interface ICartData {
+  error?: string;
+  message?: string;
+  cart: ICartBase;
+}
+
+export interface ICartProduct {
+  product: ProductListing;
+  quantity: number;
+}
+
+export interface ICartBase {
+  userEmail: string;
+  id_: string;
+  products: ICartProduct[];
+  totalPrice: number;
+  status: "active" | "completed" | "canceled";
 }

@@ -1,4 +1,5 @@
 import {
+  Product,
   ProductListing,
   SearchParams,
   SortBy,
@@ -6,6 +7,33 @@ import {
 } from "@/app/product/types";
 import ProductModel, { IProduct } from "@/models/Product";
 import dbConnect from "./dbConnect";
+
+const transformProduct = (productModel: IProduct): Product => ({
+  id_: productModel._id.toString(),
+  name: productModel.name,
+  price: productModel.price,
+  imageSrc: productModel.imageSrc,
+  description: productModel.description,
+  designer: productModel.designer,
+  productType: productModel.productType,
+  category: productModel.category,
+  height: productModel.height,
+  width: productModel.width,
+  depth: productModel.depth,
+  brand: productModel.brand,
+  views: productModel.views,
+  dateAdded: productModel.dateAdded,
+});
+
+const transformProductListing = (products: IProduct[]): ProductListing[] => {
+  return products.map((product) => ({
+    _id: product._id.toString(),
+    name: product.name,
+    price: product.price,
+    imageSrc: product.imageSrc,
+    description: product.description,
+  }));
+};
 
 export const getProducts = async (searchParams: SearchParams) => {
   await dbConnect();
@@ -79,12 +107,7 @@ export const getProducts = async (searchParams: SearchParams) => {
       .select("_id name price imageSrc")
       .exec();
 
-    return products.map((product) => ({
-      _id: product._id.toString(),
-      name: product.name,
-      price: product.price,
-      imageSrc: product.imageSrc,
-    })) as ProductListing[];
+    return transformProductListing(products);
   } catch (error) {
     console.error(error);
     return [];
@@ -101,14 +124,7 @@ export async function getPopularProducts(): Promise<
       .limit(4)
       .lean();
 
-    const formattedProducts = newProducts.map((product: IProduct) => ({
-      _id: product._id.toString(),
-      name: product.name,
-      price: product.price,
-      imageSrc: product.imageSrc,
-    })) as ProductListing[];
-
-    return formattedProducts;
+    return transformProductListing(newProducts);
   } catch (error) {
     console.error(error);
     return undefined;
@@ -123,14 +139,7 @@ export async function getNewProducts(): Promise<ProductListing[] | undefined> {
       .limit(4)
       .lean();
 
-    const formattedProducts = newProducts.map((product: IProduct) => ({
-      _id: product._id.toString(),
-      name: product.name,
-      price: product.price,
-      imageSrc: product.imageSrc,
-    })) as ProductListing[];
-
-    return formattedProducts;
+    return transformProductListing(newProducts);
   } catch (error) {
     console.error(error);
     return undefined;
@@ -139,10 +148,16 @@ export async function getNewProducts(): Promise<ProductListing[] | undefined> {
 
 export async function getProductsByID(
   id: string
-): Promise<IProduct | undefined | null> {
+): Promise<Product | undefined | null> {
   await dbConnect();
   try {
-    const product = await ProductModel.findById(id);
+    const productModel = await ProductModel.findById(id);
+
+    if (!productModel) {
+      return null;
+    }
+
+    const product = transformProduct(productModel);
 
     return product;
   } catch (error) {

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 type TagVariant = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
-type FontSizes = "14px" | "16px" | "18px" | "20px" | "24px" | "32px";
+type FontSizes = "14px" | "16px" | "18px" | "20px" | "24px" | "32px" | "36px";
 type FontFamily = "primary" | "secondary";
 type FontColor = "black" | "white" | "gray" | "light";
 
@@ -27,6 +27,7 @@ const sizeClasses: Record<FontSizes, string> = {
   "20px": "text-xl",
   "24px": "text-2xl",
   "32px": "text-3xl",
+  "36px": "text[36px]",
 };
 
 const fontFamilyClasses: Record<FontFamily, string> = {

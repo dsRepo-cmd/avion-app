@@ -1,5 +1,6 @@
-import Features from "@/containers/Features/Features";
-import JoinUs from "@/containers/JoinUs/JoinUs";
+import Features from "@/components/Features/Features";
+import JoinUs from "@/components/JoinUs/JoinUs";
+import Page from "@/components/Page/Page";
 import ProductMenu from "@/containers/ProductMenu/ProductMenu";
 import SimularProductListings from "@/containers/SimularProductListings/SimularProductListings";
 
@@ -9,12 +10,12 @@ interface Props {
 
 function Products({ params }: Props) {
   return (
-    <main className="flex  flex-col items-center justify-between  max-w-[1440px] m-auto">
+    <Page>
       <ProductMenu id={params.id} />
       <SimularProductListings />
       <Features />
       <JoinUs />
-    </main>
+    </Page>
   );
 }
 
