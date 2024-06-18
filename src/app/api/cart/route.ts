@@ -85,3 +85,101 @@ export const POST = async (req: NextRequest) => {
     });
   }
 };
+
+export const DELETE = async (req: NextRequest) => {
+  await dbConnect();
+  try {
+    const { userEmail, productId } = await req.json();
+
+    if (!userEmail || !productId) {
+      return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+    }
+
+    let cart = await CartModel.findOne({ userEmail });
+    if (!cart) {
+      return NextResponse.json({ error: "Cart not found" }, { status: 404 });
+    }
+
+    const productIndex = cart.products.findIndex(
+      (item) => item.product.toString() === productId
+    );
+
+    if (productIndex === -1) {
+      return NextResponse.json(
+        { error: "Product not found in cart" },
+        { status: 404 }
+      );
+    }
+
+    const product = await ProductModel.findById(productId);
+    if (!product) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
+    cart.totalPrice -= cart.products[productIndex].quantity * product.price;
+    cart.products.splice(productIndex, 1);
+
+    await cart.save();
+
+    const updatedCart = await CartModel.findOne({ userEmail }).populate({
+      path: "products.product",
+      model: ProductModel,
+    });
+
+    return NextResponse.json(updatedCart);
+  } catch (err: any) {
+    return new NextResponse(err.message || "Internal Server Error", {
+      status: 500,
+    });
+  }
+};
+
+export const PATCH = async (req: NextRequest) => {
+  await dbConnect();
+  try {
+    const { userEmail, productId, quantity } = await req.json();
+
+    if (!userEmail || !productId || quantity == null) {
+      return new NextResponse("Invalid data", { status: 400 });
+    }
+
+    let cart = await CartModel.findOne({ userEmail });
+    if (!cart) {
+      return new NextResponse("Cart not found", { status: 404 });
+    }
+
+    const product = await ProductModel.findById(productId);
+    if (!product) {
+      return new NextResponse("Product not found", { status: 404 });
+    }
+
+    const productIndex = cart.products.findIndex(
+      (item) => item.product.toString() === productId
+    );
+
+    if (productIndex === -1) {
+      return new NextResponse("Product not found in cart", { status: 404 });
+    }
+
+    const currentQuantity = cart.products[productIndex].quantity;
+    cart.products[productIndex].quantity = quantity;
+
+    // Update total price
+    cart.totalPrice += (quantity - currentQuantity) * product.price;
+
+    await cart.save();
+
+    // Populate the cart products to return full product details
+    const updatedCart = await CartModel.findOne({ userEmail }).populate({
+      path: "products.product",
+      model: ProductModel,
+    });
+
+    // Return the updated cart with full product details
+    return NextResponse.json(updatedCart);
+  } catch (err: any) {
+    return new NextResponse(err.message || "Internal Server Error", {
+      status: 500,
+    });
+  }
+};

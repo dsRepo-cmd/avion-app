@@ -1,8 +1,7 @@
 import { ICartBase } from "@/app/product/types";
-
 import { useEffect, useState } from "react";
 
-const useCart = (userEmail: string) => {
+export const useCart = (userEmail: string) => {
   const [cart, setCart] = useState<ICartBase>({
     id: "",
     userEmail,
@@ -33,5 +32,3 @@ const useCart = (userEmail: string) => {
 
   return { cart, setCart };
 };
-
-export default useCart;

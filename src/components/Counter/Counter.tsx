@@ -48,7 +48,7 @@ function Counter({ value = 1, onCountChange = () => {}, className }: Props) {
     >
       <button
         onClick={decrement}
-        className="duration-300 text-borderGrey hover:text-darkPrimary p-3"
+        className="duration-300 text-grey hover:text-darkPrimary p-3"
       >
         -
       </button>
@@ -64,7 +64,7 @@ function Counter({ value = 1, onCountChange = () => {}, className }: Props) {
       />
       <button
         onClick={increment}
-        className="duration-300 text-borderGrey hover:text-darkPrimary p-3"
+        className="duration-300 text-grey hover:text-darkPrimary p-3"
       >
         +
       </button>
