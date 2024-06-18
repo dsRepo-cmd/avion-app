@@ -3,7 +3,7 @@ import Typography from "@/components/Typography/Typography";
 import { homeInfo } from "@/data/home";
 import Image from "next/image";
 
-function HomeInfo() {
+function Info() {
   return (
     <div className=" w-full flex justify-between lg:flex-col">
       <div className=" flex flex-col gap-6 justify-between p-20 lg:px-6 lg:py-12 lg:gap-6">
@@ -40,4 +40,4 @@ function HomeInfo() {
   );
 }
 
-export default HomeInfo;
+export default Info;

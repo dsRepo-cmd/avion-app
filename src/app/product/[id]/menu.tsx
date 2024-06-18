@@ -5,12 +5,12 @@ import Typography from "@/components/Typography/Typography";
 import { getProductsByID } from "@/lib/products";
 
 import Image from "next/image";
-import AddToCard from "../AddToCard/AddToCard";
+import AddToCard from "../../../components/AddToCard/AddToCard";
 
 interface Props {
   id: string;
 }
-async function ProductMenu({ id }: Props) {
+async function Menu({ id }: Props) {
   const product = await getProductsByID(id);
 
   if (!product) return null;
@@ -117,4 +117,4 @@ async function ProductMenu({ id }: Props) {
   );
 }
 
-export default ProductMenu;
+export default Menu;

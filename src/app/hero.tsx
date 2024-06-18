@@ -5,7 +5,7 @@ import { homeHero } from "@/data/home";
 import Image from "next/image";
 import React from "react";
 
-function HomeHero() {
+function Hero() {
   return (
     <Container className=" lg:p-0">
       <div className=" relative flex w-full ">
@@ -55,4 +55,4 @@ function HomeHero() {
   );
 }
 
-export default HomeHero;
+export default Hero;

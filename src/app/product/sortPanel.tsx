@@ -11,7 +11,7 @@ interface ProductSortPanelProps {
   searchParams: Record<string, any>;
 }
 
-const ProductSortPanel = ({
+const SortPanel = ({
   selectedTypes,
   selectedPriceRanges,
   selectedDesigners,
@@ -118,4 +118,4 @@ const ProductSortPanel = ({
   );
 };
 
-export default ProductSortPanel;
+export default SortPanel;

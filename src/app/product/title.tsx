@@ -5,7 +5,7 @@ interface Props {
   category?: string | undefined;
 }
 
-function ProductTitle({ category }: Props) {
+function Title({ category }: Props) {
   return (
     <div className=" relative">
       <Image
@@ -29,4 +29,4 @@ function ProductTitle({ category }: Props) {
   );
 }
 
-export default ProductTitle;
+export default Title;
