@@ -1,57 +1,79 @@
+import { Types } from "mongoose";
+import { ICartData } from "@/app/product/types";
+import { transformCart } from "@/lib/cart";
 import dbConnect from "@/lib/dbConnect";
 import CartModel, { ICart } from "@/models/Cart";
 import ProductModel from "@/models/Product";
-
 import { NextRequest, NextResponse } from "next/server";
-export const GET = async (req: NextRequest) => {
+
+// ================================================= GET
+
+export const GET = async (
+  req: NextRequest
+): Promise<NextResponse<Partial<ICartData>>> => {
   await dbConnect();
   try {
     const url = new URL(req.url);
     const userEmail = url.searchParams.get("userEmail");
 
     if (!userEmail) {
-      return new NextResponse("Email is required", { status: 400 });
+      return NextResponse.json(
+        { message: "Email is required" },
+        { status: 400 }
+      );
     }
 
-    let cart: ICart | null = await CartModel.findOne({ userEmail }).populate({
+    let cartModel: ICart | null = await CartModel.findOne({
+      userEmail,
+    }).populate({
       path: "products.product",
       model: ProductModel,
     });
 
-    if (!cart) {
-      cart = new CartModel({
+    if (!cartModel) {
+      cartModel = new CartModel({
         userEmail,
         products: [],
         totalPrice: 0,
         status: "active",
       });
-      await cart.save();
+      await cartModel.save();
 
-      cart = await CartModel.findOne({ userEmail }).populate({
+      cartModel = await CartModel.findOne({ userEmail }).populate({
         path: "products.product",
         model: ProductModel,
       });
     }
+    if (!cartModel) {
+      return NextResponse.json({ message: "Cart not found" }, { status: 404 });
+    }
 
-    return NextResponse.json(cart);
+    const cart = transformCart(cartModel);
+
+    return NextResponse.json({ cart });
   } catch (err: any) {
-    return new NextResponse(err.message || "Internal Server Error", {
-      status: 500,
-    });
+    return NextResponse.json(
+      { message: "Internal Server Error", error: err },
+      { status: 500 }
+    );
   }
 };
 
-export const POST = async (req: NextRequest) => {
+// ================================================= POST
+
+export const POST = async (
+  req: NextRequest
+): Promise<NextResponse<Partial<ICartData>>> => {
   await dbConnect();
   try {
     const { userEmail, productId, quantity } = await req.json();
 
     if (!userEmail || !productId || !quantity) {
-      return NextResponse.json({ error: "Story not found" }, { status: 404 });
+      return NextResponse.json({ message: "Story not found" }, { status: 404 });
     }
-    let cart = await CartModel.findOne({ userEmail });
-    if (!cart) {
-      cart = new CartModel({
+    let cartModel = await CartModel.findOne({ userEmail });
+    if (!cartModel) {
+      cartModel = new CartModel({
         userEmail,
         products: [],
         totalPrice: 0,
@@ -61,32 +83,42 @@ export const POST = async (req: NextRequest) => {
     const product = await ProductModel.findById(productId);
     if (!product) {
       return NextResponse.json(
-        { success: false, message: "Product not found" },
+        { message: "Product not found" },
         { status: 404 }
       );
     }
-    const existingProductIndex = cart.products.findIndex((item) =>
-      item.product.equals(productId)
-    );
+    const existingProductIndex = cartModel.products.findIndex((item) => {
+      if (typeof item.product === "string") {
+        return item.product === productId;
+      } else if (item.product instanceof Types.ObjectId) {
+        return item.product.equals(productId);
+      }
+      return false;
+    });
+
     if (existingProductIndex > -1) {
-      cart.products[existingProductIndex].quantity += quantity;
+      cartModel.products[existingProductIndex].quantity += quantity;
     } else {
-      cart.products.push({ product: productId, quantity });
+      cartModel.products.push({ product: productId, quantity });
     }
-    cart.totalPrice += product.price * quantity;
+    cartModel.totalPrice += product.price * quantity;
 
-    await cart.save();
-    console.log(cart);
-
+    await cartModel.save();
+    const cart = transformCart(cartModel);
     return NextResponse.json({ cart });
   } catch (err: any) {
-    return new NextResponse(err, {
-      status: 500,
-    });
+    return NextResponse.json(
+      { message: "Internal Server Error", error: err },
+      { status: 500 }
+    );
   }
 };
 
-export const DELETE = async (req: NextRequest) => {
+// ================================================= DELETE
+
+export const DELETE = async (
+  req: NextRequest
+): Promise<NextResponse<Partial<ICartData>>> => {
   await dbConnect();
   try {
     const { userEmail, productId } = await req.json();
@@ -95,44 +127,56 @@ export const DELETE = async (req: NextRequest) => {
       return NextResponse.json({ error: "Invalid data" }, { status: 400 });
     }
 
-    let cart = await CartModel.findOne({ userEmail });
-    if (!cart) {
-      return NextResponse.json({ error: "Cart not found" }, { status: 404 });
+    let cartModel = await CartModel.findOne({ userEmail });
+    if (!cartModel) {
+      return NextResponse.json({ message: "Cart not found" }, { status: 404 });
     }
 
-    const productIndex = cart.products.findIndex(
+    const productIndex = cartModel.products.findIndex(
       (item) => item.product.toString() === productId
     );
 
     if (productIndex === -1) {
       return NextResponse.json(
-        { error: "Product not found in cart" },
+        { message: "Product not found in cart" },
         { status: 404 }
       );
     }
 
     const product = await ProductModel.findById(productId);
     if (!product) {
-      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: "Product not found" },
+        { status: 404 }
+      );
     }
 
-    cart.totalPrice -= cart.products[productIndex].quantity * product.price;
-    cart.products.splice(productIndex, 1);
+    cartModel.totalPrice -=
+      cartModel.products[productIndex].quantity * product.price;
+    cartModel.products.splice(productIndex, 1);
 
-    await cart.save();
+    await cartModel.save();
 
-    const updatedCart = await CartModel.findOne({ userEmail }).populate({
+    const cart = await CartModel.findOne({ userEmail }).populate({
       path: "products.product",
       model: ProductModel,
     });
 
-    return NextResponse.json(updatedCart);
+    if (!cart) {
+      return NextResponse.json({ message: "Cart not found" }, { status: 404 });
+    }
+
+    const transformedCart = transformCart(cart);
+    return NextResponse.json({ cart: transformedCart });
   } catch (err: any) {
-    return new NextResponse(err.message || "Internal Server Error", {
-      status: 500,
-    });
+    return NextResponse.json(
+      { message: "Internal Server Error", error: err },
+      { status: 500 }
+    );
   }
 };
+
+// ================================================= PATCH
 
 export const PATCH = async (req: NextRequest) => {
   await dbConnect();
@@ -140,46 +184,55 @@ export const PATCH = async (req: NextRequest) => {
     const { userEmail, productId, quantity } = await req.json();
 
     if (!userEmail || !productId || quantity == null) {
-      return new NextResponse("Invalid data", { status: 400 });
+      return NextResponse.json({ message: "Invalid data" }, { status: 404 });
     }
 
-    let cart = await CartModel.findOne({ userEmail });
-    if (!cart) {
-      return new NextResponse("Cart not found", { status: 404 });
+    let cartModel = await CartModel.findOne({ userEmail });
+    if (!cartModel) {
+      return NextResponse.json({ message: "Cart not found" }, { status: 404 });
     }
 
     const product = await ProductModel.findById(productId);
     if (!product) {
-      return new NextResponse("Product not found", { status: 404 });
+      return NextResponse.json(
+        { message: "Product not found" },
+        { status: 404 }
+      );
     }
 
-    const productIndex = cart.products.findIndex(
+    const productIndex = cartModel.products.findIndex(
       (item) => item.product.toString() === productId
     );
 
     if (productIndex === -1) {
-      return new NextResponse("Product not found in cart", { status: 404 });
+      return NextResponse.json(
+        { message: "Product not found in cart" },
+        { status: 404 }
+      );
     }
 
-    const currentQuantity = cart.products[productIndex].quantity;
-    cart.products[productIndex].quantity = quantity;
+    const currentQuantity = cartModel.products[productIndex].quantity;
+    cartModel.products[productIndex].quantity = quantity;
 
-    // Update total price
-    cart.totalPrice += (quantity - currentQuantity) * product.price;
+    cartModel.totalPrice += (quantity - currentQuantity) * product.price;
 
-    await cart.save();
+    await cartModel.save();
 
-    // Populate the cart products to return full product details
-    const updatedCart = await CartModel.findOne({ userEmail }).populate({
+    const cart = await CartModel.findOne({ userEmail }).populate({
       path: "products.product",
       model: ProductModel,
     });
 
-    // Return the updated cart with full product details
-    return NextResponse.json(updatedCart);
+    if (!cart) {
+      return NextResponse.json({ message: "Cart not found" }, { status: 404 });
+    }
+
+    const transformedCart = transformCart(cart);
+    return NextResponse.json({ cart: transformedCart });
   } catch (err: any) {
-    return new NextResponse(err.message || "Internal Server Error", {
-      status: 500,
-    });
+    return NextResponse.json(
+      { message: "Internal Server Error", error: err },
+      { status: 500 }
+    );
   }
 };

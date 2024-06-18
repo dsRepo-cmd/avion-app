@@ -1,19 +1,16 @@
 import mongoose, { Model, Schema, Document, Types } from "mongoose";
-import { IProduct } from "./Product";
+
+import { ICartBase } from "@/app/product/types";
 
 export interface ICartProduct {
-  product: Types.ObjectId | IProduct;
+  product: Types.ObjectId;
   quantity: number;
 }
 
-export interface ICart extends Document {
+export interface ICart extends Document, ICartBase {
   _id: Types.ObjectId;
-  userEmail: string;
-  products: ICartProduct[];
-  totalPrice: number;
-  status: "active" | "completed" | "canceled";
-  createdAt: Date;
   updatedAt: Date;
+  createdAt: Date;
 }
 
 const CartProductSchema = new mongoose.Schema<ICartProduct>(

@@ -5,6 +5,7 @@ import { ProductCategory, ProductCreate, ProductType } from "../types";
 import Page from "@/components/Page/Page";
 
 const CreateProduct = () => {
+  const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState<ProductCreate>({
     name: "",
     description: "",
@@ -29,16 +30,14 @@ const CreateProduct = () => {
   ) => {
     const { name, value } = e.target;
 
-    // Handle checkboxes separately
-    const newValue = value;
-
     setProductData({
       ...productData,
-      [name]: newValue,
+      [name]: value,
     });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleCreateProduct = async (e: FormEvent) => {
+    setLoading(true);
     e.preventDefault();
 
     try {
@@ -49,9 +48,11 @@ const CreateProduct = () => {
         },
         body: JSON.stringify(productData),
       });
+
       const data = await response.json();
 
       if (response.ok) {
+        setLoading(false);
         return data;
       } else {
         alert("Failed to create product");
@@ -65,7 +66,10 @@ const CreateProduct = () => {
     <Page>
       <div className="flex flex-col gap-10 p-10">
         <h1>Create a New Product</h1>
-        <form className="flex flex-col w-1/2 gap-4" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col w-1/2 gap-4"
+          onSubmit={handleCreateProduct}
+        >
           <div className="flex gap-10">
             <label htmlFor="name">Name</label>
             <input
@@ -206,7 +210,9 @@ const CreateProduct = () => {
             />
           </div>
 
-          <button type="submit">Create Product</button>
+          <button disabled={loading} type="submit">
+            Create Product
+          </button>
         </form>
       </div>
     </Page>

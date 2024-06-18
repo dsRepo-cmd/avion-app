@@ -8,7 +8,7 @@ import AppLink from "../AppLink/AppLink";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import useCart from "@/lib/cart";
+import useCart from "@/lib/useCart";
 
 function Navbar() {
   const session = useSession();

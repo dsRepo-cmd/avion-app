@@ -78,14 +78,21 @@ export interface SearchParams {
   priceRange: string;
   designer: string;
 }
+//++++++++++++++ CART
+export interface ICartData {
+  error?: string;
+  message?: string;
+  cart: ICartBase;
+}
 
 export interface ICartProduct {
   product: ProductListing;
   quantity: number;
 }
+
 export interface ICartBase {
-  id: string;
   userEmail: string;
+  id_: string;
   products: ICartProduct[];
   totalPrice: number;
   status: "active" | "completed" | "canceled";
