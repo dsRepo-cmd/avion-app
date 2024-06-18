@@ -1,23 +1,27 @@
 "use client";
+import { Product } from "@/app/product/types";
 import Button from "@/components/Button/Button";
 import Counter from "@/components/Counter/Counter";
 
-import { IProduct } from "@/models/Product";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 interface Props {
-  product: IProduct;
+  product: Product;
 }
 
 let quantity = 1;
 function AddToCard({ product }: Props) {
   const session = useSession();
 
+  const [loading, setLoading] = useState(false);
+
   const getQuantity = (value: number) => {
     quantity = value;
   };
 
-  const handleAddToCart = async (product: IProduct) => {
+  const handleAddToCart = async (product: Product) => {
+    setLoading(true);
     const userEmail = session?.data?.user?.email;
     if (!userEmail) {
       alert("Please log in to add items to your cart.");
@@ -32,7 +36,7 @@ function AddToCard({ product }: Props) {
         },
         body: JSON.stringify({
           userEmail: userEmail,
-          productId: product._id,
+          productId: product.id_,
           quantity,
         }),
       });
@@ -40,9 +44,9 @@ function AddToCard({ product }: Props) {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Product added to cart!");
+        setLoading(false);
       } else {
-        alert(data.message || "Something went wrong!");
+        console.log(data.message || "Something went wrong!");
       }
     } catch (error) {
       console.error("Error adding product to cart:", error);
@@ -53,7 +57,11 @@ function AddToCard({ product }: Props) {
   return (
     <>
       <Counter value={quantity} onCountChange={getQuantity} />
-      <Button onClick={() => handleAddToCart(product)} variant="filled">
+      <Button
+        disabled={loading}
+        onClick={() => handleAddToCart(product)}
+        variant="filled"
+      >
         Add to cart
       </Button>
     </>

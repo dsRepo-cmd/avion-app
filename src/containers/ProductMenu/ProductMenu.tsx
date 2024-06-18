@@ -23,6 +23,7 @@ async function ProductMenu({ id }: Props) {
           alt={product.imageSrc}
           width={607}
           height={661}
+          priority
         />
 
         <div className=" flex w-full flex-col gap-4 p-14">

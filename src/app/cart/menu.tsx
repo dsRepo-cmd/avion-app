@@ -66,10 +66,10 @@ function CartMenu() {
                     alt={cartItem.product._id}
                     width={305}
                     height={375}
-                    className="w-[109px] h-[134px] object-cover md:w-[133px] md:h-[166px] "
+                    className="w-[109px] h-[134px] object-cover md:min-w-[133px] md:h-[166px] "
                   />
                 </Link>
-                <div className=" max-w-[250px] flex flex-col gap-2">
+                <div className=" max-w-[250px] flex  flex-col gap-2">
                   <Typography tag="h3" size="20px" fontFamily="secondary">
                     {cartItem.product.name}
                   </Typography>
@@ -82,14 +82,22 @@ function CartMenu() {
                   <Typography tag="p" size="16px" fontFamily="primary">
                     £{cartItem.product.price}
                   </Typography>
-
-                  <Counter
-                    value={cartItem.quantity}
-                    className="bg-lightGrey hidden md:flex"
-                    onCountChange={(count) =>
-                      updateProductQuantity(cartItem.product._id, count)
-                    }
-                  />
+                  <div className=" hidden md:flex  justify-between ">
+                    <Counter
+                      value={cartItem.quantity}
+                      className="bg-lightGrey "
+                      onCountChange={(count) =>
+                        updateProductQuantity(cartItem.product._id, count)
+                      }
+                    />
+                    <Button
+                      onClick={() => removeProduct(cartItem.product._id)}
+                      variant="clear"
+                      bgColor="gray"
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </div>
                 </div>
               </td>
               <td className="py-4  md:hidden">
@@ -103,7 +111,7 @@ function CartMenu() {
                   />
                 </div>
               </td>
-              <td className=" py-4 ps-6">
+              <td className=" py-4 ps-6 md:hidden">
                 <Button
                   onClick={() => removeProduct(cartItem.product._id)}
                   variant="clear"

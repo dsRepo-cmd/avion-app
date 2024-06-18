@@ -1,5 +1,3 @@
-import { Types } from "mongoose";
-
 export interface ProductListing {
   _id: string;
   name: string;
@@ -41,7 +39,7 @@ export interface ProductCreate {
 }
 
 export interface Product {
-  _id: Types.ObjectId;
+  id_: string;
   name: string;
   description: string;
   price: number;
