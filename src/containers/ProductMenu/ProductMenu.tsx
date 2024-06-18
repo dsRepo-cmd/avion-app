@@ -1,6 +1,5 @@
 import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
-import Counter from "@/components/Counter/Counter";
 import Divider from "@/components/Divider/Divider";
 import Typography from "@/components/Typography/Typography";
 import { getProductsByID } from "@/lib/products";

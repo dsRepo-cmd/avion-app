@@ -26,6 +26,20 @@ export enum ProductCategory {
   Crockery = "Crockery",
 }
 
+export interface ProductCreate {
+  name: string;
+  description: string;
+  price: number;
+  designer: string;
+  productType: ProductType;
+  category: ProductCategory.Ceramics;
+  height: number;
+  width: number;
+  depth: number;
+  brand: string;
+  imageSrc: string;
+}
+
 export interface Product {
   _id: Types.ObjectId;
   name: string;

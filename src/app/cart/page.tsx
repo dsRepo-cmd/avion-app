@@ -3,6 +3,7 @@
 import useCart from "@/lib/cart";
 import CartMenu from "./menu";
 import { useSession } from "next-auth/react";
+import Page from "@/components/Page/Page";
 
 function Cart() {
   const session = useSession();
@@ -10,9 +11,9 @@ function Cart() {
   if (cart === null) return <>Register</>;
 
   return (
-    <main className="flex  flex-col items-center justify-between  max-w-[1440px] ">
+    <Page>
       <CartMenu cart={cart} />
-    </main>
+    </Page>
   );
 }
 

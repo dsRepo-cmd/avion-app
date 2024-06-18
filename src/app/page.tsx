@@ -4,16 +4,17 @@ import HomeInfo from "@/containers/HomeInfo/HomeInfo";
 import JoinUs from "@/components/JoinUs/JoinUs";
 import NewProductListings from "@/containers/NewProductListings/NewProductListings";
 import PopularProductListings from "@/containers/PopularProductListings/PopularProductListings";
+import Page from "@/components/Page/Page";
 
 export default function Home() {
   return (
-    <main className="flex  flex-col items-center justify-between  max-w-[1440px]">
+    <Page>
       <HomeHero />
       <Features />
       <NewProductListings />
       <PopularProductListings />
       <JoinUs />
       <HomeInfo />
-    </main>
+    </Page>
   );
 }

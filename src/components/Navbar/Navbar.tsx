@@ -15,9 +15,7 @@ function Navbar() {
 
   const userEmail = session.data?.user?.email || "";
 
-  const { cart, setCart } = useCart(userEmail);
-
-  console.log("cart", cart);
+  useCart(userEmail);
 
   return (
     <nav className=" flex justify-between items-center py-5">
