@@ -1,11 +1,10 @@
-import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Divider from "@/components/Divider/Divider";
 import Typography from "@/components/Typography/Typography";
+import AddToCard from "@/features/AddToCard/AddToCard";
 import { getProductsByID } from "@/lib/products";
 
 import Image from "next/image";
-import AddToCard from "../../../components/AddToCard/AddToCard";
 
 interface Props {
   id: string;
@@ -18,7 +17,7 @@ async function Menu({ id }: Props) {
     <Container className=" lg:px-0 lg:pt-0" bgColor="light">
       <div className=" flex w-full lg:flex-col ">
         <Image
-          className=" w-full"
+          className=" w-full object-contain"
           src={product.imageSrc}
           alt={product.imageSrc}
           width={607}

@@ -3,9 +3,9 @@
 import { FormEventHandler, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Button from "../Button/Button";
-import Typography from "../Typography/Typography";
-import Input from "../Input/Input";
+import Button from "../../components/Button/Button";
+import Typography from "../../components/Typography/Typography";
+import Input from "../../components/Input/Input";
 
 function SignInForm() {
   const router = useRouter();
