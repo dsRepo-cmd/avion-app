@@ -10,7 +10,7 @@ import useCart from "@/lib/useCart";
 import { truncateDescription } from "@/lib/cart";
 
 function CartMenu() {
-  const { cart, removeProduct, updateProductQuantity } = useCart();
+  const { cart, removeProduct, updateProductQuantity, loading } = useCart();
 
   const calculateSubtotal = () => {
     return cart.products.reduce(
@@ -75,6 +75,7 @@ function CartMenu() {
                   </Typography>
                   <div className=" hidden md:flex w-full  justify-between ">
                     <Counter
+                      loading={loading}
                       value={cartItem.quantity}
                       className="bg-lightGrey "
                       onCountChange={(count) =>

@@ -6,9 +6,15 @@ interface Props {
   value?: number;
   onCountChange?: (count: number) => void;
   className?: string;
+  loading?: boolean;
 }
 
-function Counter({ value = 1, onCountChange = () => {}, className }: Props) {
+function Counter({
+  value = 1,
+  onCountChange = () => {},
+  className,
+  loading = false,
+}: Props) {
   const [count, setCount] = useState(value);
 
   useEffect(() => {
@@ -47,6 +53,7 @@ function Counter({ value = 1, onCountChange = () => {}, className }: Props) {
       )}
     >
       <button
+        disabled={loading}
         onClick={decrement}
         className="duration-300 text-grey hover:text-darkPrimary p-3"
       >
@@ -63,6 +70,7 @@ function Counter({ value = 1, onCountChange = () => {}, className }: Props) {
         )}
       />
       <button
+        disabled={loading}
         onClick={increment}
         className="duration-300 text-grey hover:text-darkPrimary p-3"
       >
