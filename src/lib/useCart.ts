@@ -1,118 +1,127 @@
 import { ICartBase, ICartData } from "@/app/product/types";
 import { useSession } from "next-auth/react";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const useCart = () => {
-  const session = useSession();
-  const userEmail = session?.data?.user?.email || "guest";
+  const { data: session } = useSession();
+  const userEmail = session?.user?.email || null;
+  const [loading, setLoading] = useState(false);
+
+  const temporaryCartId = "temporaryCartId";
+  const isClient = typeof window !== "undefined";
+  const storedCartId = isClient ? localStorage.getItem(temporaryCartId) : null;
+  const [tempUserId, setTempUserId] = useState(storedCartId || uuidv4());
+
+  useEffect(() => {
+    if (!userEmail && !storedCartId && isClient) {
+      localStorage.setItem(temporaryCartId, tempUserId);
+    }
+  }, [tempUserId, userEmail, storedCartId, isClient]);
+
+  const userIdentifier = userEmail || tempUserId;
 
   const [cart, setCart] = useState<ICartBase>({
     id_: "",
-    userEmail,
+    userIdentifier: userIdentifier,
     products: [],
     totalPrice: 0,
     status: "active",
   });
 
-  //initialize
+  const handleApiResponse = async (response: Response) => {
+    const data: ICartData = await response.json();
+    if (response.ok) {
+      setCart(data.cart);
+    } else {
+      console.error(data.message, "Error:", data.error);
+    }
+  };
+
+  const fetchCart = useCallback(async () => {
+    setLoading(true);
+    try {
+      if (userIdentifier) {
+        const res = await fetch(`/api/cart?userIdentifier=${userIdentifier}`);
+        await handleApiResponse(res);
+      }
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [userIdentifier]);
+
   useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const res = await fetch(`/api/cart?userEmail=${userEmail}`);
+    fetchCart();
+  }, [fetchCart]);
 
-        const data: ICartData = await res.json();
-
-        if (res.ok) {
-          setCart(data.cart);
-        } else {
-          console.error(data.message, "Error:", data.error);
-        }
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-      }
-    };
-
-    if (userEmail) {
-      fetchCart();
-    }
-  }, [userEmail]);
-
-  //===========================================
-  const removeProduct = async (productId: string) => {
-    try {
-      const res = await fetch(`/api/cart`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userEmail, productId }),
-      });
-
-      const data: ICartData = await res.json();
-
-      if (res.ok) {
-        setCart(data.cart);
-      } else {
-        console.error(data.message, "Error:", data.error);
-      }
-    } catch (error) {
-      console.error("Error removing product:", error);
-    }
-  };
-
-  //===========================================
-  const addProductToCart = async (
-    productId: string,
-    quantity: number,
-    setLoading: Dispatch<SetStateAction<boolean>>
-  ) => {
-    try {
+  const removeProduct = useCallback(
+    async (productId: string) => {
       setLoading(true);
-      const res = await fetch(`/api/cart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userEmail, productId, quantity }),
-      });
-
-      const data: ICartData = await res.json();
-
-      if (res.ok) {
+      try {
+        const res = await fetch(`/api/cart`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userIdentifier, productId }),
+        });
+        await handleApiResponse(res);
+      } catch (error) {
+        console.error("Error removing product:", error);
+      } finally {
         setLoading(false);
-        setCart(data.cart);
-      } else {
-        console.error(data.message, "Error:", data.error);
       }
-    } catch (error) {
-      console.error("Error updating product quantity:", error);
-    }
-  };
-  //===========================================
-  const updateProductQuantity = async (
-    productId: string,
-    newQuantity: number
-  ) => {
-    try {
-      const res = await fetch(`/api/cart`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userEmail, productId, quantity: newQuantity }),
-      });
+    },
+    [userIdentifier]
+  );
 
-      const data: ICartData = await res.json();
-
-      if (res.ok) {
-        setCart(data.cart);
-      } else {
-        console.error(data.message, "Error:", data.error);
+  const addProductToCart = useCallback(
+    async (productId: string, quantity: number) => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/cart`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userIdentifier, productId, quantity }),
+        });
+        await handleApiResponse(res);
+      } catch (error) {
+        console.error("Error adding product to cart:", error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error updating product quantity:", error);
-    }
-  };
+    },
+    [userIdentifier]
+  );
+
+  const updateProductQuantity = useCallback(
+    async (productId: string, newQuantity: number) => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/cart`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userIdentifier,
+            productId,
+            quantity: newQuantity,
+          }),
+        });
+        await handleApiResponse(res);
+      } catch (error) {
+        console.error("Error updating product quantity:", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [userIdentifier]
+  );
 
   return {
     cart,
@@ -120,6 +129,7 @@ const useCart = () => {
     removeProduct,
     updateProductQuantity,
     addProductToCart,
+    loading,
   };
 };
 

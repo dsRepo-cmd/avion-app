@@ -14,17 +14,17 @@ export const GET = async (
   await dbConnect();
   try {
     const url = new URL(req.url);
-    const userEmail = url.searchParams.get("userEmail");
+    const userIdentifier = url.searchParams.get("userIdentifier");
 
-    if (!userEmail) {
+    if (!userIdentifier) {
       return NextResponse.json(
-        { message: "Email is required" },
+        { message: "User Identifier is required" },
         { status: 400 }
       );
     }
 
     let cartModel: ICart | null = await CartModel.findOne({
-      userEmail,
+      userIdentifier,
     }).populate({
       path: "products.product",
       model: ProductModel,
@@ -32,14 +32,14 @@ export const GET = async (
 
     if (!cartModel) {
       cartModel = new CartModel({
-        userEmail,
+        userIdentifier,
         products: [],
         totalPrice: 0,
         status: "active",
       });
       await cartModel.save();
 
-      cartModel = await CartModel.findOne({ userEmail }).populate({
+      cartModel = await CartModel.findOne({ userIdentifier }).populate({
         path: "products.product",
         model: ProductModel,
       });
@@ -66,15 +66,15 @@ export const POST = async (
 ): Promise<NextResponse<Partial<ICartData>>> => {
   await dbConnect();
   try {
-    const { userEmail, productId, quantity } = await req.json();
+    const { userIdentifier, productId, quantity } = await req.json();
 
-    if (!userEmail || !productId || !quantity) {
+    if (!userIdentifier || !productId || !quantity) {
       return NextResponse.json({ message: "Story not found" }, { status: 404 });
     }
-    let cartModel = await CartModel.findOne({ userEmail });
+    let cartModel = await CartModel.findOne({ userIdentifier });
     if (!cartModel) {
       cartModel = new CartModel({
-        userEmail,
+        userIdentifier,
         products: [],
         totalPrice: 0,
         status: "active",
@@ -121,13 +121,13 @@ export const DELETE = async (
 ): Promise<NextResponse<Partial<ICartData>>> => {
   await dbConnect();
   try {
-    const { userEmail, productId } = await req.json();
+    const { userIdentifier, productId } = await req.json();
 
-    if (!userEmail || !productId) {
+    if (!userIdentifier || !productId) {
       return NextResponse.json({ error: "Invalid data" }, { status: 400 });
     }
 
-    let cartModel = await CartModel.findOne({ userEmail });
+    let cartModel = await CartModel.findOne({ userIdentifier });
     if (!cartModel) {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
     }
@@ -157,7 +157,7 @@ export const DELETE = async (
 
     await cartModel.save();
 
-    const cart = await CartModel.findOne({ userEmail }).populate({
+    const cart = await CartModel.findOne({ userIdentifier }).populate({
       path: "products.product",
       model: ProductModel,
     });
@@ -181,13 +181,13 @@ export const DELETE = async (
 export const PATCH = async (req: NextRequest) => {
   await dbConnect();
   try {
-    const { userEmail, productId, quantity } = await req.json();
+    const { userIdentifier, productId, quantity } = await req.json();
 
-    if (!userEmail || !productId || quantity == null) {
+    if (!userIdentifier || !productId || quantity == null) {
       return NextResponse.json({ message: "Invalid data" }, { status: 404 });
     }
 
-    let cartModel = await CartModel.findOne({ userEmail });
+    let cartModel = await CartModel.findOne({ userIdentifier });
     if (!cartModel) {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
     }
@@ -218,7 +218,7 @@ export const PATCH = async (req: NextRequest) => {
 
     await cartModel.save();
 
-    const cart = await CartModel.findOne({ userEmail }).populate({
+    const cart = await CartModel.findOne({ userIdentifier }).populate({
       path: "products.product",
       model: ProductModel,
     });

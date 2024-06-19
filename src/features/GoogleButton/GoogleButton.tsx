@@ -1,6 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
-import Button from "../Button/Button";
+import Button from "../../components/Button/Button";
 import { useSearchParams } from "next/navigation";
 import GoogleIcon from "@/assets/google-square.svg";
 

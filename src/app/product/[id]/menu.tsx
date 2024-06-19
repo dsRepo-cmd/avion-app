@@ -1,24 +1,23 @@
-import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Divider from "@/components/Divider/Divider";
 import Typography from "@/components/Typography/Typography";
+import AddToCard from "@/features/AddToCard/AddToCard";
 import { getProductsByID } from "@/lib/products";
 
 import Image from "next/image";
-import AddToCard from "../AddToCard/AddToCard";
 
 interface Props {
   id: string;
 }
-async function ProductMenu({ id }: Props) {
+async function Menu({ id }: Props) {
   const product = await getProductsByID(id);
 
   if (!product) return null;
   return (
-    <Container bgColor="light">
-      <div className=" flex w-full ">
+    <Container className=" lg:px-0 lg:pt-0" bgColor="light">
+      <div className=" flex w-full lg:flex-col ">
         <Image
-          className=" w-full"
+          className=" w-full object-contain"
           src={product.imageSrc}
           alt={product.imageSrc}
           width={607}
@@ -26,7 +25,7 @@ async function ProductMenu({ id }: Props) {
           priority
         />
 
-        <div className=" flex w-full flex-col gap-4 p-14">
+        <div className=" flex w-full flex-col gap-4 p-14 lg:p-6 ">
           <Typography fontFamily="secondary" size="32px" tag="h2">
             {product.name}
           </Typography>
@@ -106,15 +105,10 @@ async function ProductMenu({ id }: Props) {
           </Typography>
 
           <AddToCard product={product} />
-          <div className=" flex gap-4 mt-9">
-            <Button variant="filled" bgColor="white">
-              Save to favorites
-            </Button>
-          </div>
         </div>
       </div>
     </Container>
   );
 }
 
-export default ProductMenu;
+export default Menu;

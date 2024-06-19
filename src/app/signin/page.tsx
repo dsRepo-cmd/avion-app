@@ -1,9 +1,9 @@
 import Container from "@/components/Container/Container";
 import Divider from "@/components/Divider/Divider";
-import GoogleButton from "@/components/GoogleButton/GoogleButton";
+import GoogleButton from "@/features/GoogleButton/GoogleButton";
 import Page from "@/components/Page/Page";
 
-import SignInForm from "@/components/SignInForm/SignInForm";
+import SignInForm from "@/features/SignInForm/SignInForm";
 import Typography from "@/components/Typography/Typography";
 
 import Link from "next/link";

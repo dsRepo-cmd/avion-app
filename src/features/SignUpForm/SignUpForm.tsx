@@ -2,10 +2,10 @@
 
 import { FormEventHandler, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Button from "../Button/Button";
+import Button from "../../components/Button/Button";
 import { useSession } from "next-auth/react";
-import Typography from "../Typography/Typography";
-import Input from "../Input/Input";
+import Typography from "../../components/Typography/Typography";
+import Input from "../../components/Input/Input";
 
 function SignUpForm() {
   const { data: session, status: sessionStatus } = useSession();

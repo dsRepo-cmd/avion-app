@@ -1,11 +1,11 @@
 import Listing from "@/components/Listing/Listing";
 import { SearchParams } from "./types";
-import ProductSortPanel from "@/containers/ProductSortPanel/ProductSortPanel";
-import ProductTitle from "@/containers/ProductTitle/ProductTitle";
 import { getProducts } from "@/lib/products";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import Page from "@/components/Page/Page";
+import SortPanel from "./sortPanel";
+import Title from "./title";
 
 interface Props {
   searchParams: SearchParams;
@@ -30,11 +30,11 @@ async function Products({ searchParams }: Props) {
 
   return (
     <Page>
-      <ProductTitle category={searchParams.category} />
+      <Title category={searchParams.category} />
 
       <Container>
         <div className=" grid grid-cols-4 justify-start lg:flex lg:flex-col gap-10">
-          <ProductSortPanel
+          <SortPanel
             selectedTypes={selectedTypes}
             searchParams={searchParams}
             selectedPriceRanges={selectedPriceRanges}

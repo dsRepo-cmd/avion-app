@@ -58,7 +58,7 @@ function Counter({ value = 1, onCountChange = () => {}, className }: Props) {
         onChange={handleInputChange}
         id="quantity-input"
         className={cn(
-          "flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center",
+          "flex-shrink-0 border-0 font-primary  text-sm  focus:outline-none focus:ring-0 max-w-[2.5rem] text-center",
           className
         )}
       />
