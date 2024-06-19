@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+
 import SearchIcon from "@/assets/search.svg";
 import CartIcon from "@/assets/shopping-cart.svg";
 import UserAvatarIcon from "@/assets/user-avatar.svg";
@@ -8,16 +8,50 @@ import AppLink from "../../components/AppLink/AppLink";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import SignInIcon from "@/assets/sign-in.svg";
+import SignUpIcon from "@/assets/sign-up.svg";
+import SignOutIcon from "@/assets/sign-out.svg";
+
+import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
 
 function Navbar() {
   const session = useSession();
-  const [isOpen, setOpen] = useState(false);
 
-  const handleAvatar = () => {
-    setOpen((prev) => !prev);
-    console.log(isOpen);
-  };
+  const items: DropdownItem[] = session.data
+    ? [
+        {
+          id: "1",
+          content: (
+            <Typography tag="span" size="14px" fontFamily="secondary">
+              Sign Out
+            </Typography>
+          ),
+          onClick: () => signOut({ callbackUrl: "/" }),
+          svg: SignOutIcon,
+        },
+      ]
+    : [
+        {
+          id: "2",
+          content: (
+            <Typography tag="span" size="14px" fontFamily="secondary">
+              Sign in
+            </Typography>
+          ),
+          href: "/signin",
+          svg: SignInIcon,
+        },
+        {
+          id: "3",
+          content: (
+            <Typography tag="span" size="14px" fontFamily="secondary">
+              Sign up
+            </Typography>
+          ),
+          href: "/signup",
+          svg: SignUpIcon,
+        },
+      ];
 
   return (
     <nav className=" relative flex justify-between items-center py-5 ">
@@ -33,42 +67,30 @@ function Navbar() {
         </Typography>
       </AppLink>
 
-      <div className=" flex gap-4 items-center">
+      <div className=" flex gap-4 justify-center items-center">
         <Link href={"/cart"} title="cart">
           <CartIcon />
         </Link>
 
-        <button onClick={handleAvatar} title="user-avatar">
-          {session?.data ? (
-            <Image
-              src={session.data.user?.image || ""}
-              alt="user avatar"
-              width={96}
-              height={96}
-              className=" w-6 h-6 rounded-full"
-            />
-          ) : (
-            <UserAvatarIcon />
-          )}
-        </button>
-
-        <div
-          className={cn(
-            " duration-300 border p-3 rounded-xl flex flex-col gap-2  bg-lightGrey absolute right-0 top-[-50px] ",
-            isOpen && " top-16 "
-          )}
-        >
-          {session?.data ? (
-            <Link href={"#"} onClick={() => signOut({ callbackUrl: "/" })}>
-              Sign Out
-            </Link>
-          ) : (
+        <Dropdown
+          items={items}
+          anchor="bottom"
+          trigger={
             <>
-              <Link href={"/signin"}>Sign in</Link>
-              <Link href={"/signup"}>Sign up</Link>
+              {session?.data ? (
+                <Image
+                  src={session.data.user?.image || ""}
+                  alt="user avatar"
+                  width={96}
+                  height={96}
+                  className=" w-5 h-5 rounded-full"
+                />
+              ) : (
+                <UserAvatarIcon />
+              )}
             </>
-          )}
-        </div>
+          }
+        />
       </div>
     </nav>
   );

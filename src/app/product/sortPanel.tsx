@@ -1,7 +1,15 @@
 "use client";
 import { ProductType } from "@/app/product/types";
 import CheckBox from "@/components/CheckBox/CheckBox";
+import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
 import Typography from "@/components/Typography/Typography";
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from "@headlessui/react";
 import { useRouter } from "next/navigation";
 
 interface ProductSortPanelProps {
@@ -104,16 +112,49 @@ const SortPanel = ({
         <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
           Designer
         </Typography>
-        {designers.map((designer) => (
-          <CheckBox
-            key={designer}
-            name="designer"
-            checked={selectedDesigners.includes(designer)}
-            value={designer}
-            onChange={() => handleCheckboxChange(designer, "designer")}
-          />
-        ))}
+        <div className=" flex flex-col gap-3">
+          {designers.map((designer) => (
+            <CheckBox
+              key={designer}
+              name="designer"
+              checked={selectedDesigners.includes(designer)}
+              value={designer}
+              onChange={() => handleCheckboxChange(designer, "designer")}
+            />
+          ))}
+        </div>
       </div>
+
+      {/* <Menu>
+        <MenuButton>
+          <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
+            Designer
+          </Typography>
+        </MenuButton>
+
+        <Transition
+          enter="transition ease-out duration-75"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          <MenuItems className={"  rounded-lg bg-white  "} anchor="bottom">
+            {designers.map((designer) => (
+              <MenuItem disabled key={designer}>
+                <CheckBox
+                  className=""
+                  name="designer"
+                  checked={selectedDesigners.includes(designer)}
+                  value={designer}
+                  onChange={() => handleCheckboxChange(designer, "designer")}
+                />
+              </MenuItem>
+            ))}
+          </MenuItems>
+        </Transition>
+      </Menu> */}
     </div>
   );
 };
