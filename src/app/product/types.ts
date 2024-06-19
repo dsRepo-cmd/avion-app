@@ -89,7 +89,7 @@ export interface ICartProduct {
 }
 
 export interface ICartBase {
-  userEmail: string;
+  userIdentifier: string;
   id_: string;
   products: ICartProduct[];
   totalPrice: number;

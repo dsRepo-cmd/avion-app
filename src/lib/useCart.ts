@@ -1,14 +1,31 @@
 import { ICartBase, ICartData } from "@/app/product/types";
 import { useSession } from "next-auth/react";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const useCart = () => {
   const session = useSession();
-  const userEmail = session?.data?.user?.email || "guest";
+  const userEmail = session?.data?.user?.email || null;
+  const [loading, setLoading] = useState(false);
+
+  const temporaryCartId = "temporaryCartId";
+  const storedCartId =
+    typeof window !== "undefined"
+      ? localStorage.getItem(temporaryCartId)
+      : null;
+  const [tempUserId, setTempUserId] = useState(storedCartId || uuidv4());
+
+  useEffect(() => {
+    if (!userEmail && !storedCartId) {
+      localStorage.setItem(temporaryCartId, tempUserId);
+    }
+  }, [tempUserId, userEmail, storedCartId]);
+
+  const userIdentifier = userEmail || tempUserId;
 
   const [cart, setCart] = useState<ICartBase>({
     id_: "",
-    userEmail,
+    userIdentifier: userIdentifier,
     products: [],
     totalPrice: 0,
     status: "active",
@@ -17,40 +34,45 @@ const useCart = () => {
   //initialize
   useEffect(() => {
     const fetchCart = async () => {
+      console.log("userIdentifier============", userIdentifier);
+      setLoading(true);
       try {
-        const res = await fetch(`/api/cart?userEmail=${userEmail}`);
+        if (userIdentifier) {
+          const res = await fetch(`/api/cart?userIdentifier=${userIdentifier}`);
+          const data: ICartData = await res.json();
 
-        const data: ICartData = await res.json();
-
-        if (res.ok) {
-          setCart(data.cart);
-        } else {
-          console.error(data.message, "Error:", data.error);
+          if (res.ok) {
+            setLoading(false);
+            setCart(data.cart);
+          } else {
+            console.error(data.message, "Error:", data.error);
+          }
         }
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching cart:", error);
       }
     };
 
-    if (userEmail) {
-      fetchCart();
-    }
-  }, [userEmail]);
+    fetchCart();
+  }, [userIdentifier]);
 
   //===========================================
   const removeProduct = async (productId: string) => {
+    setLoading(true);
     try {
       const res = await fetch(`/api/cart`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userEmail, productId }),
+        body: JSON.stringify({ userIdentifier, productId }),
       });
 
       const data: ICartData = await res.json();
 
       if (res.ok) {
+        setLoading(false);
         setCart(data.cart);
       } else {
         console.error(data.message, "Error:", data.error);
@@ -61,11 +83,8 @@ const useCart = () => {
   };
 
   //===========================================
-  const addProductToCart = async (
-    productId: string,
-    quantity: number,
-    setLoading: Dispatch<SetStateAction<boolean>>
-  ) => {
+  const addProductToCart = async (productId: string, quantity: number) => {
+    setLoading(true);
     try {
       setLoading(true);
       const res = await fetch(`/api/cart`, {
@@ -73,7 +92,7 @@ const useCart = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userEmail, productId, quantity }),
+        body: JSON.stringify({ userIdentifier, productId, quantity }),
       });
 
       const data: ICartData = await res.json();
@@ -93,18 +112,24 @@ const useCart = () => {
     productId: string,
     newQuantity: number
   ) => {
+    setLoading(true);
     try {
       const res = await fetch(`/api/cart`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userEmail, productId, quantity: newQuantity }),
+        body: JSON.stringify({
+          userIdentifier,
+          productId,
+          quantity: newQuantity,
+        }),
       });
 
       const data: ICartData = await res.json();
 
       if (res.ok) {
+        setLoading(false);
         setCart(data.cart);
       } else {
         console.error(data.message, "Error:", data.error);
@@ -120,6 +145,7 @@ const useCart = () => {
     removeProduct,
     updateProductQuantity,
     addProductToCart,
+    loading,
   };
 };
 

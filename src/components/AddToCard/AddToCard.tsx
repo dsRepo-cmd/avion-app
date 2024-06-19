@@ -3,21 +3,19 @@ import { Product } from "@/app/product/types";
 import Button from "@/components/Button/Button";
 import Counter from "@/components/Counter/Counter";
 import useCart from "@/lib/useCart";
-import { useState } from "react";
 
 interface Props {
   product: Product;
 }
 
 function AddToCard({ product }: Props) {
-  const [loading, setLoading] = useState(false);
   let quantity = 1;
 
   const getQuantity = (value: number) => {
     quantity = value;
   };
 
-  const { addProductToCart } = useCart();
+  const { addProductToCart, loading } = useCart();
 
   return (
     <>
@@ -30,7 +28,7 @@ function AddToCard({ product }: Props) {
       <div className=" flex gap-4 mt-9 lg:flex-col">
         <Button
           disabled={loading}
-          onClick={() => addProductToCart(product.id_, quantity, setLoading)}
+          onClick={() => addProductToCart(product.id_, quantity)}
           variant="filled"
         >
           Add to cart

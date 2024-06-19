@@ -34,9 +34,9 @@ const CartProductSchema = new mongoose.Schema<ICartProduct>(
 
 const CartSchema = new mongoose.Schema<ICart>(
   {
-    userEmail: {
+    userIdentifier: {
       type: String,
-      ref: "User",
+
       required: true,
     },
     products: [CartProductSchema],
