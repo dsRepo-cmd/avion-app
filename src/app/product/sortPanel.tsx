@@ -1,17 +1,12 @@
 "use client";
-import { ProductType } from "@/app/product/types";
-import CheckBox from "@/components/CheckBox/CheckBox";
-import Typography from "@/components/Typography/Typography";
 import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Transition,
-} from "@headlessui/react";
+  Designer,
+  PriceRange,
+  ProductType,
+  SortCategory,
+} from "@/app/product/types";
 import { useRouter } from "next/navigation";
-import DownIcon from "@/assets/chevron-down.svg";
-import Icon from "@/components/Icon/Icon";
+import DropdownOptions from "@/components/DropdownOptions/DropdownOptions";
 
 interface ProductSortPanelProps {
   selectedTypes: string[];
@@ -27,39 +22,34 @@ const SortPanel = ({
   searchParams,
 }: ProductSortPanelProps) => {
   const productTypes = Object.values(ProductType);
-  const priceRanges = ["0-99", "100-249", "250+"];
-  const designers = [
-    "Robert Smith",
-    "Liam Gallagher",
-    "Biggie Smalls",
-    "Tom Yorke",
-  ];
+  const priceRanges = Object.values(PriceRange);
+  const designers = Object.values(Designer);
 
   const router = useRouter();
   const handleCheckboxChange = (type: string, category: string) => {
     const isSelected =
-      category === "productType"
+      category === SortCategory.ProductType
         ? selectedTypes.includes(type as ProductType)
-        : category === "priceRange"
+        : category === SortCategory.PriceRange
         ? selectedPriceRanges.includes(type)
         : selectedDesigners.includes(type);
 
     let updatedTypes =
-      category === "productType"
+      category === SortCategory.ProductType
         ? isSelected
           ? selectedTypes.filter((t) => t !== type)
           : [...selectedTypes, type as ProductType]
         : selectedTypes;
 
     let updatedPriceRanges =
-      category === "priceRange"
+      category === SortCategory.PriceRange
         ? isSelected
           ? selectedPriceRanges.filter((t) => t !== type)
           : [...selectedPriceRanges, type]
         : selectedPriceRanges;
 
     let updatedDesigners =
-      category === "designer"
+      category === SortCategory.Designer
         ? isSelected
           ? selectedDesigners.filter((t) => t !== type)
           : [...selectedDesigners, type]
@@ -78,102 +68,31 @@ const SortPanel = ({
   };
 
   return (
-    <div className="flex   ">
-      <Menu>
-        <MenuButton className={"flex gap-4 py-3 px-6"}>
-          <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
-            Product Type
-          </Typography>
-          <Icon width={9} Svg={DownIcon} />
-        </MenuButton>
+    <div className="flex">
+      <DropdownOptions
+        title="Product Type"
+        options={productTypes}
+        selectedOptions={selectedTypes}
+        onChange={(value) =>
+          handleCheckboxChange(value, SortCategory.ProductType)
+        }
+      />
 
-        <Transition
-          enter="transition ease-out duration-75"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <MenuItems className={"  rounded-lg bg-white  "} anchor="bottom">
-            {productTypes.map((type) => (
-              <MenuItem disabled key={type}>
-                <CheckBox
-                  key={type}
-                  checked={selectedTypes.includes(type)}
-                  name="productType"
-                  value={type}
-                  onChange={() => handleCheckboxChange(type, "productType")}
-                />
-              </MenuItem>
-            ))}
-          </MenuItems>
-        </Transition>
-      </Menu>
+      <DropdownOptions
+        title="Price"
+        options={priceRanges}
+        selectedOptions={selectedPriceRanges}
+        onChange={(value) =>
+          handleCheckboxChange(value, SortCategory.PriceRange)
+        }
+      />
 
-      <Menu>
-        <MenuButton className={"flex gap-4 py-3 px-6"}>
-          <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
-            Price
-          </Typography>
-          <Icon width={9} Svg={DownIcon} />
-        </MenuButton>
-
-        <Transition
-          enter="transition ease-out duration-75"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <MenuItems className={"  rounded-lg bg-white  "} anchor="bottom">
-            {priceRanges.map((range) => (
-              <MenuItem disabled key={range}>
-                <CheckBox
-                  key={range}
-                  name="priceRange"
-                  checked={selectedPriceRanges.includes(range)}
-                  value={range}
-                  onChange={() => handleCheckboxChange(range, "priceRange")}
-                />
-              </MenuItem>
-            ))}
-          </MenuItems>
-        </Transition>
-      </Menu>
-
-      <Menu>
-        <MenuButton className={"flex gap-4 py-3 px-6"}>
-          <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
-            Designer
-          </Typography>
-          <Icon width={9} Svg={DownIcon} />
-        </MenuButton>
-
-        <Transition
-          enter="transition ease-out duration-75"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <MenuItems className={"  rounded-lg bg-white  "} anchor="bottom">
-            {designers.map((designer) => (
-              <MenuItem disabled key={designer}>
-                <CheckBox
-                  className=""
-                  name="designer"
-                  checked={selectedDesigners.includes(designer)}
-                  value={designer}
-                  onChange={() => handleCheckboxChange(designer, "designer")}
-                />
-              </MenuItem>
-            ))}
-          </MenuItems>
-        </Transition>
-      </Menu>
+      <DropdownOptions
+        title="Designer"
+        options={designers}
+        selectedOptions={selectedDesigners}
+        onChange={(value) => handleCheckboxChange(value, SortCategory.Designer)}
+      />
     </div>
   );
 };
