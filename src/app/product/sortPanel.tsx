@@ -85,7 +85,7 @@ const SortPanel = ({
 
       <DropdownOptions
         title="Designer"
-        options={Object.values(ProductType)}
+        options={Object.values(Designer)}
         selectedOptions={selectedDesigners}
         onChange={(value) => handleCheckboxChange(value, SortCategory.Designer)}
       />
