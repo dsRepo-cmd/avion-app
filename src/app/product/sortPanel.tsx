@@ -6,11 +6,15 @@ import {
   SortBy,
   SortCategory,
   SortOrder,
-  SearchParams,
 } from "@/app/product/types";
 import { useRouter } from "next/navigation";
-import DropdownOptions from "@/components/DropdownOptions/DropdownOptions";
-import { Select } from "@headlessui/react";
+import DropdownCustom from "@/components/DropdownCustom/DropdownCustom";
+import CheckBox from "@/components/CheckBox/CheckBox";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+
+import ArrowIcon from "@/assets/arrow-up.svg";
+import Icon from "@/components/Icon/Icon";
 
 interface Props {
   selectedTypes: string[];
@@ -26,6 +30,14 @@ const SortPanel = ({
   searchParams,
 }: Props) => {
   const router = useRouter();
+  const [currentSortBy, setCurrentSortBy] = useState<SortBy>(SortBy.dateAdded);
+  const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.asc);
+
+  const toggleSortOrder = () => {
+    setSortOrder((prevSortOrder) =>
+      prevSortOrder === SortOrder.desc ? SortOrder.asc : SortOrder.desc
+    );
+  };
 
   const handleCheckboxChange = (type: string, category: string) => {
     const isSelected =
@@ -68,11 +80,18 @@ const SortPanel = ({
     router.push(`?${params}`);
   };
 
-  const handleSortChange = (sortBy: SortBy, sortOrder: SortOrder) => {
+  const handleSortChange = (sortBy: SortBy) => {
+    if (sortBy === currentSortBy) {
+      toggleSortOrder();
+    } else {
+      setCurrentSortBy(sortBy);
+      setSortOrder(sortOrder);
+    }
+
     const updatedParams = {
       ...searchParams,
       sortBy,
-      sortOrder,
+      sortOrder: sortOrder === SortOrder.desc ? SortOrder.desc : SortOrder.asc,
       page: "1",
     };
 
@@ -83,65 +102,72 @@ const SortPanel = ({
   return (
     <div className="flex justify-between items-center">
       <div className="flex">
-        <DropdownOptions
-          title="Product Type"
-          options={Object.values(ProductType)}
-          selectedOptions={selectedTypes}
-          onChange={(value) =>
-            handleCheckboxChange(value, SortCategory.ProductType)
-          }
-        />
+        <DropdownCustom title="Product Type">
+          {Object.values(ProductType).map((option) => (
+            <CheckBox
+              key={option}
+              name={option.toLowerCase()}
+              checked={selectedTypes.includes(option)}
+              value={option}
+              onChange={() =>
+                handleCheckboxChange(option, SortCategory.ProductType)
+              }
+            />
+          ))}
+        </DropdownCustom>
 
-        <DropdownOptions
-          title="Price"
-          options={Object.values(PriceRange)}
-          selectedOptions={selectedPriceRanges}
-          onChange={(value) =>
-            handleCheckboxChange(value, SortCategory.PriceRange)
-          }
-        />
+        <DropdownCustom title="Price">
+          {Object.values(PriceRange).map((option) => (
+            <CheckBox
+              key={option}
+              name={option.toLowerCase()}
+              checked={selectedPriceRanges.includes(option)}
+              value={option}
+              onChange={() =>
+                handleCheckboxChange(option, SortCategory.PriceRange)
+              }
+            />
+          ))}
+        </DropdownCustom>
 
-        <DropdownOptions
-          title="Designer"
-          options={Object.values(Designer)}
-          selectedOptions={selectedDesigners}
-          onChange={(value) =>
-            handleCheckboxChange(value, SortCategory.Designer)
-          }
-        />
+        <DropdownCustom title="Designers">
+          {Object.values(Designer).map((option) => (
+            <CheckBox
+              key={option}
+              name={option.toLowerCase()}
+              checked={selectedDesigners.includes(option)}
+              value={option}
+              onChange={() =>
+                handleCheckboxChange(option, SortCategory.Designer)
+              }
+            />
+          ))}
+        </DropdownCustom>
       </div>
 
-      <div className="flex items-center space-x-2">
-        <Select
-          className="py-3 px-6 font-second"
-          name="sortBy"
-          aria-label="Sort By"
-          onChange={(e) =>
-            handleSortChange(e.target.value as SortBy, searchParams.sortOrder)
-          }
-        >
-          {Object.values(SortBy).map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </Select>
-
-        <Select
-          className="py-3 px-6 font-second"
-          name="sortOrder"
-          aria-label="Sort Order"
-          onChange={(e) =>
-            handleSortChange(searchParams.sortBy, e.target.value as SortOrder)
-          }
-        >
-          {Object.values(SortOrder).map((order) => (
-            <option key={order} value={order}>
-              {order}
-            </option>
-          ))}
-        </Select>
-      </div>
+      <DropdownCustom title={currentSortBy}>
+        {Object.values(SortBy).map((sortBy) => (
+          <button
+            key={sortBy}
+            className={cn(
+              "grid grid-cols-2 w-full items-center justify-start gap-3 p-3 hover:bg-lightGrey font-primary",
+              sortBy === currentSortBy && "bg-lightGrey"
+            )}
+            onClick={() => handleSortChange(sortBy)}
+          >
+            {sortBy}
+            {sortBy === currentSortBy && (
+              <span className="justify-self-end">
+                {sortOrder === SortOrder.asc ? (
+                  <Icon width={16} Svg={ArrowIcon} />
+                ) : (
+                  <Icon className="rotate-180" width={16} Svg={ArrowIcon} />
+                )}
+              </span>
+            )}
+          </button>
+        ))}
+      </DropdownCustom>
     </div>
   );
 };

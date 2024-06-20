@@ -18,7 +18,6 @@ async function Products({ searchParams }: Props) {
     productType,
     priceRange,
     designer,
-    sortBy,
   } = searchParams;
 
   const selectedTypes = productType ? productType.split(",") : [];
