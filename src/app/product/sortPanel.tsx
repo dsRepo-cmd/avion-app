@@ -5,6 +5,8 @@ import {
   ProductType,
   SortBy,
   SortCategory,
+  SortOrder,
+  SearchParams,
 } from "@/app/product/types";
 import { useRouter } from "next/navigation";
 import DropdownOptions from "@/components/DropdownOptions/DropdownOptions";
@@ -24,6 +26,7 @@ const SortPanel = ({
   searchParams,
 }: Props) => {
   const router = useRouter();
+
   const handleCheckboxChange = (type: string, category: string) => {
     const isSelected =
       category === SortCategory.ProductType
@@ -65,9 +68,21 @@ const SortPanel = ({
     router.push(`?${params}`);
   };
 
+  const handleSortChange = (sortBy: SortBy, sortOrder: SortOrder) => {
+    const updatedParams = {
+      ...searchParams,
+      sortBy,
+      sortOrder,
+      page: "1",
+    };
+
+    const params = new URLSearchParams(updatedParams).toString();
+    router.push(`?${params}`);
+  };
+
   return (
-    <div className="flex  justify-between items-center">
-      <div className=" flex">
+    <div className="flex justify-between items-center">
+      <div className="flex">
         <DropdownOptions
           title="Product Type"
           options={Object.values(ProductType)}
@@ -96,17 +111,37 @@ const SortPanel = ({
         />
       </div>
 
-      <Select
-        className={" py-3 px-6 font-second"}
-        name={SortBy.dateAdded}
-        aria-label="Project status"
-      >
-        {Object.values(SortBy).map((type) => (
-          <option key={type} className=" font-second p-2" value={type}>
-            {type}
-          </option>
-        ))}
-      </Select>
+      <div className="flex items-center space-x-2">
+        <Select
+          className="py-3 px-6 font-second"
+          name="sortBy"
+          aria-label="Sort By"
+          onChange={(e) =>
+            handleSortChange(e.target.value as SortBy, searchParams.sortOrder)
+          }
+        >
+          {Object.values(SortBy).map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </Select>
+
+        <Select
+          className="py-3 px-6 font-second"
+          name="sortOrder"
+          aria-label="Sort Order"
+          onChange={(e) =>
+            handleSortChange(searchParams.sortBy, e.target.value as SortOrder)
+          }
+        >
+          {Object.values(SortOrder).map((order) => (
+            <option key={order} value={order}>
+              {order}
+            </option>
+          ))}
+        </Select>
+      </div>
     </div>
   );
 };
