@@ -32,31 +32,31 @@ async function Products({ searchParams }: Props) {
     <Page>
       <Title category={searchParams.category} />
 
-      <Container>
-        <div className=" grid grid-cols-4 justify-start lg:flex lg:flex-col gap-10">
-          <SortPanel
-            selectedTypes={selectedTypes}
-            searchParams={searchParams}
-            selectedPriceRanges={selectedPriceRanges}
-            selectedDesigners={selectedDesigners}
-          />
+      <div className=" self-start p-4">
+        <SortPanel
+          selectedTypes={selectedTypes}
+          searchParams={searchParams}
+          selectedPriceRanges={selectedPriceRanges}
+          selectedDesigners={selectedDesigners}
+        />
+      </div>
 
-          <div className=" col-span-3 w-full">
-            {products.length === 0 ? (
-              <div className=" flex justify-center w-full">
-                <Typography tag="h2" size="24px" fontFamily="secondary">
-                  Not Found
-                </Typography>
-              </div>
-            ) : (
-              <Listing
-                products={products}
-                currentPage={page}
-                limit={limit}
-                searchParams={searchParams}
-              />
-            )}
-          </div>
+      <Container className="py-10">
+        <div className=" w-full">
+          {products.length === 0 ? (
+            <div className=" flex justify-center w-full">
+              <Typography tag="h2" size="24px" fontFamily="secondary">
+                Not Found
+              </Typography>
+            </div>
+          ) : (
+            <Listing
+              products={products}
+              currentPage={page}
+              limit={limit}
+              searchParams={searchParams}
+            />
+          )}
         </div>
       </Container>
     </Page>

@@ -1,7 +1,6 @@
 "use client";
 import { ProductType } from "@/app/product/types";
 import CheckBox from "@/components/CheckBox/CheckBox";
-import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
 import Typography from "@/components/Typography/Typography";
 import {
   Menu,
@@ -11,6 +10,8 @@ import {
   Transition,
 } from "@headlessui/react";
 import { useRouter } from "next/navigation";
+import DownIcon from "@/assets/chevron-down.svg";
+import Icon from "@/components/Icon/Icon";
 
 interface ProductSortPanelProps {
   selectedTypes: string[];
@@ -77,59 +78,77 @@ const SortPanel = ({
   };
 
   return (
-    <div className="flex flex-col gap-12 lg:flex-row ">
-      <div className="flex flex-col gap-3">
-        <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
-          Product Type
-        </Typography>
-        {productTypes.map((type) => (
-          <CheckBox
-            key={type}
-            checked={selectedTypes.includes(type)}
-            name="productType"
-            value={type}
-            onChange={() => handleCheckboxChange(type, "productType")}
-          />
-        ))}
-      </div>
+    <div className="flex   ">
+      <Menu>
+        <MenuButton className={"flex gap-4 py-3 px-6"}>
+          <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
+            Product Type
+          </Typography>
+          <Icon width={9} Svg={DownIcon} />
+        </MenuButton>
 
-      <div className="flex flex-col gap-3">
-        <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
-          Price Range
-        </Typography>
-        {priceRanges.map((range) => (
-          <CheckBox
-            key={range}
-            name="priceRange"
-            checked={selectedPriceRanges.includes(range)}
-            value={range}
-            onChange={() => handleCheckboxChange(range, "priceRange")}
-          />
-        ))}
-      </div>
+        <Transition
+          enter="transition ease-out duration-75"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          <MenuItems className={"  rounded-lg bg-white  "} anchor="bottom">
+            {productTypes.map((type) => (
+              <MenuItem disabled key={type}>
+                <CheckBox
+                  key={type}
+                  checked={selectedTypes.includes(type)}
+                  name="productType"
+                  value={type}
+                  onChange={() => handleCheckboxChange(type, "productType")}
+                />
+              </MenuItem>
+            ))}
+          </MenuItems>
+        </Transition>
+      </Menu>
 
-      <div className=" flex flex-col gap-3">
-        <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
-          Designer
-        </Typography>
-        <div className=" flex flex-col gap-3">
-          {designers.map((designer) => (
-            <CheckBox
-              key={designer}
-              name="designer"
-              checked={selectedDesigners.includes(designer)}
-              value={designer}
-              onChange={() => handleCheckboxChange(designer, "designer")}
-            />
-          ))}
-        </div>
-      </div>
+      <Menu>
+        <MenuButton className={"flex gap-4 py-3 px-6"}>
+          <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
+            Price
+          </Typography>
+          <Icon width={9} Svg={DownIcon} />
+        </MenuButton>
 
-      {/* <Menu>
-        <MenuButton>
+        <Transition
+          enter="transition ease-out duration-75"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          <MenuItems className={"  rounded-lg bg-white  "} anchor="bottom">
+            {priceRanges.map((range) => (
+              <MenuItem disabled key={range}>
+                <CheckBox
+                  key={range}
+                  name="priceRange"
+                  checked={selectedPriceRanges.includes(range)}
+                  value={range}
+                  onChange={() => handleCheckboxChange(range, "priceRange")}
+                />
+              </MenuItem>
+            ))}
+          </MenuItems>
+        </Transition>
+      </Menu>
+
+      <Menu>
+        <MenuButton className={"flex gap-4 py-3 px-6"}>
           <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
             Designer
           </Typography>
+          <Icon width={9} Svg={DownIcon} />
         </MenuButton>
 
         <Transition
@@ -154,7 +173,7 @@ const SortPanel = ({
             ))}
           </MenuItems>
         </Transition>
-      </Menu> */}
+      </Menu>
     </div>
   );
 };
