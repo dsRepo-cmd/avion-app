@@ -18,6 +18,7 @@ async function Products({ searchParams }: Props) {
     productType,
     priceRange,
     designer,
+    sortBy,
   } = searchParams;
 
   const selectedTypes = productType ? productType.split(",") : [];
@@ -32,7 +33,7 @@ async function Products({ searchParams }: Props) {
     <Page>
       <Title category={searchParams.category} />
 
-      <div className=" self-start p-4">
+      <div className=" self-start w-full p-4">
         <SortPanel
           selectedTypes={selectedTypes}
           searchParams={searchParams}

@@ -3,10 +3,12 @@ import {
   Designer,
   PriceRange,
   ProductType,
+  SortBy,
   SortCategory,
 } from "@/app/product/types";
 import { useRouter } from "next/navigation";
 import DropdownOptions from "@/components/DropdownOptions/DropdownOptions";
+import { Select } from "@headlessui/react";
 
 interface Props {
   selectedTypes: string[];
@@ -64,31 +66,47 @@ const SortPanel = ({
   };
 
   return (
-    <div className="flex">
-      <DropdownOptions
-        title="Product Type"
-        options={Object.values(ProductType)}
-        selectedOptions={selectedTypes}
-        onChange={(value) =>
-          handleCheckboxChange(value, SortCategory.ProductType)
-        }
-      />
+    <div className="flex  justify-between items-center">
+      <div className=" flex">
+        <DropdownOptions
+          title="Product Type"
+          options={Object.values(ProductType)}
+          selectedOptions={selectedTypes}
+          onChange={(value) =>
+            handleCheckboxChange(value, SortCategory.ProductType)
+          }
+        />
 
-      <DropdownOptions
-        title="Price"
-        options={Object.values(PriceRange)}
-        selectedOptions={selectedPriceRanges}
-        onChange={(value) =>
-          handleCheckboxChange(value, SortCategory.PriceRange)
-        }
-      />
+        <DropdownOptions
+          title="Price"
+          options={Object.values(PriceRange)}
+          selectedOptions={selectedPriceRanges}
+          onChange={(value) =>
+            handleCheckboxChange(value, SortCategory.PriceRange)
+          }
+        />
 
-      <DropdownOptions
-        title="Designer"
-        options={Object.values(Designer)}
-        selectedOptions={selectedDesigners}
-        onChange={(value) => handleCheckboxChange(value, SortCategory.Designer)}
-      />
+        <DropdownOptions
+          title="Designer"
+          options={Object.values(Designer)}
+          selectedOptions={selectedDesigners}
+          onChange={(value) =>
+            handleCheckboxChange(value, SortCategory.Designer)
+          }
+        />
+      </div>
+
+      <Select
+        className={" py-3 px-6 font-second"}
+        name={SortBy.dateAdded}
+        aria-label="Project status"
+      >
+        {Object.values(SortBy).map((type) => (
+          <option key={type} className=" font-second p-2" value={type}>
+            {type}
+          </option>
+        ))}
+      </Select>
     </div>
   );
 };
