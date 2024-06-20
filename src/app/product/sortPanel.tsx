@@ -8,7 +8,7 @@ import {
 import { useRouter } from "next/navigation";
 import DropdownOptions from "@/components/DropdownOptions/DropdownOptions";
 
-interface ProductSortPanelProps {
+interface Props {
   selectedTypes: string[];
   selectedPriceRanges: string[];
   selectedDesigners: string[];
@@ -20,11 +20,7 @@ const SortPanel = ({
   selectedPriceRanges,
   selectedDesigners,
   searchParams,
-}: ProductSortPanelProps) => {
-  const productTypes = Object.values(ProductType);
-  const priceRanges = Object.values(PriceRange);
-  const designers = Object.values(Designer);
-
+}: Props) => {
   const router = useRouter();
   const handleCheckboxChange = (type: string, category: string) => {
     const isSelected =
@@ -71,7 +67,7 @@ const SortPanel = ({
     <div className="flex">
       <DropdownOptions
         title="Product Type"
-        options={productTypes}
+        options={Object.values(ProductType)}
         selectedOptions={selectedTypes}
         onChange={(value) =>
           handleCheckboxChange(value, SortCategory.ProductType)
@@ -80,7 +76,7 @@ const SortPanel = ({
 
       <DropdownOptions
         title="Price"
-        options={priceRanges}
+        options={Object.values(PriceRange)}
         selectedOptions={selectedPriceRanges}
         onChange={(value) =>
           handleCheckboxChange(value, SortCategory.PriceRange)
@@ -89,7 +85,7 @@ const SortPanel = ({
 
       <DropdownOptions
         title="Designer"
-        options={designers}
+        options={Object.values(ProductType)}
         selectedOptions={selectedDesigners}
         onChange={(value) => handleCheckboxChange(value, SortCategory.Designer)}
       />
