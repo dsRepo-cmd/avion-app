@@ -8,6 +8,7 @@ import ArrowIcon from "@/assets/arrow-up.svg";
 import Icon from "@/components/Icon/Icon";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { useClientMediaQuery } from "@/lib/useClientMediaQuery";
 
 interface Props {
   searchParams: Record<string, any>;
@@ -17,6 +18,9 @@ function SortChange({ searchParams }: Props) {
   const [currentSortBy, setCurrentSortBy] = useState<SortBy>(SortBy.dateAdded);
   const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.asc);
 
+  const isMobile = useClientMediaQuery("mobile");
+
+  console.log(isMobile);
   const handleSortChange = (sortBy: SortBy) => {
     const newSortOrder =
       sortBy === currentSortBy
@@ -47,7 +51,8 @@ function SortChange({ searchParams }: Props) {
       >
         Sorting by:
       </Typography>
-      <DropdownCustom title={currentSortBy}>
+
+      <DropdownCustom title={isMobile ? "Sorting" : currentSortBy}>
         {Object.values(SortBy).map((sortBy) => (
           <MenuItem key={sortBy}>
             <button
