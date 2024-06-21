@@ -4,13 +4,14 @@ import CheckboxChange from "@/features/CheckboxChange/CheckboxChange";
 
 interface Props {
   searchParams: Record<string, any>;
+  isMobile?: boolean;
 }
 
-const SortPanel = ({ searchParams }: Props) => {
+const SortPanel = ({ searchParams, isMobile }: Props) => {
   return (
     <div className="flex justify-between items-center">
-      <CheckboxChange searchParams={searchParams} />
-      <SortChange searchParams={searchParams} />
+      <CheckboxChange isMobile={isMobile} searchParams={searchParams} />
+      <SortChange isMobile={isMobile} searchParams={searchParams} />
     </div>
   );
 };

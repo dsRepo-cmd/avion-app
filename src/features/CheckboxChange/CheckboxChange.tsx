@@ -8,17 +8,15 @@ import CheckBox from "@/components/CheckBox/CheckBox";
 import DropdownCustom from "@/components/DropdownCustom/DropdownCustom";
 import Typography from "@/components/Typography/Typography";
 
-import { useClientMediaQuery } from "@/lib/useClientMediaQuery";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 interface Props {
   searchParams: Record<string, any>;
+  isMobile?: boolean;
 }
-function CheckboxChange({ searchParams }: Props) {
+function CheckboxChange({ searchParams, isMobile }: Props) {
   const { productType, priceRange, designer } = searchParams;
-
-  const isMobile = useClientMediaQuery("mobile");
 
   const selectedTypes = productType
     ? (productType.split(",") as ProductType[])

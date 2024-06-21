@@ -8,19 +8,18 @@ import ArrowIcon from "@/assets/arrow-up.svg";
 import Icon from "@/components/Icon/Icon";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useClientMediaQuery } from "@/lib/useClientMediaQuery";
 
 interface Props {
   searchParams: Record<string, any>;
+  isMobile?: boolean;
 }
-function SortChange({ searchParams }: Props) {
+function SortChange({ searchParams, isMobile }: Props) {
   const router = useRouter();
   const [currentSortBy, setCurrentSortBy] = useState<SortBy>(SortBy.dateAdded);
   const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.asc);
 
-  const isMobile = useClientMediaQuery("mobile");
-
   console.log(isMobile);
+
   const handleSortChange = (sortBy: SortBy) => {
     const newSortOrder =
       sortBy === currentSortBy

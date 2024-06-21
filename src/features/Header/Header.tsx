@@ -5,7 +5,7 @@ import { ProductCategory } from "@/app/product/types";
 import AppLink from "../../components/AppLink/AppLink";
 
 interface Props {
-  isMobile: boolean;
+  isMobile?: boolean;
 }
 function Header({ isMobile }: Props) {
   return (
