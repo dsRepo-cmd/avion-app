@@ -3,13 +3,15 @@ import Typography from "@/components/Typography/Typography";
 import Icon from "@/components/Icon/Icon";
 import DownIcon from "@/assets/chevron-down.svg";
 import { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 interface Props {
   title: string;
   children: ReactNode;
+  className?: string;
 }
 
-const DropdownCustom = ({ title, children }: Props) => {
+const DropdownCustom = ({ title, children, className }: Props) => {
   return (
     <Menu>
       <MenuButton className={"flex gap-4 py-3 items-center px-6"}>
@@ -27,7 +29,10 @@ const DropdownCustom = ({ title, children }: Props) => {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <MenuItems className={"rounded-lg bg-white"} anchor="bottom end">
+        <MenuItems
+          className={cn("rounded-lg bg-white", className)}
+          anchor="bottom end"
+        >
           {children}
         </MenuItems>
       </Transition>

@@ -6,6 +6,9 @@ import {
 } from "@/app/product/types";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import DropdownCustom from "@/components/DropdownCustom/DropdownCustom";
+import Typography from "@/components/Typography/Typography";
+
+import { useClientMediaQuery } from "@/lib/useClientMediaQuery";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -14,6 +17,8 @@ interface Props {
 }
 function CheckboxChange({ searchParams }: Props) {
   const { productType, priceRange, designer } = searchParams;
+
+  const isMobile = useClientMediaQuery("mobile");
 
   const selectedTypes = productType
     ? (productType.split(",") as ProductType[])
@@ -57,8 +62,83 @@ function CheckboxChange({ searchParams }: Props) {
     const params = new URLSearchParams(updatedParams).toString();
     router.push(`?${params}`);
   };
+
+  if (isMobile) {
+    return (
+      <div className=" flex">
+        <DropdownCustom className=" w-full" title="Filtering">
+          <div className=" grid grid-cols-2">
+            <div>
+              <Typography
+                className="m-3"
+                tag="h5"
+                size="16px"
+                fontFamily="secondary"
+              >
+                Product Type
+              </Typography>
+              {Object.values(ProductType).map((option) => (
+                <CheckBox
+                  key={option}
+                  name={option.toLowerCase()}
+                  checked={selectedTypes.includes(option)}
+                  value={option}
+                  onChange={() =>
+                    handleCheckboxChange(option, SortCategory.ProductType)
+                  }
+                />
+              ))}
+            </div>
+            <div>
+              <Typography
+                className="m-3"
+                tag="h5"
+                size="16px"
+                fontFamily="secondary"
+              >
+                Product Type
+              </Typography>
+              {Object.values(PriceRange).map((option) => (
+                <CheckBox
+                  key={option}
+                  name={option.toLowerCase()}
+                  checked={selectedPriceRanges.includes(option)}
+                  value={option}
+                  onChange={() =>
+                    handleCheckboxChange(option, SortCategory.PriceRange)
+                  }
+                />
+              ))}
+            </div>
+            <div>
+              <Typography
+                className="m-3"
+                tag="h5"
+                size="16px"
+                fontFamily="secondary"
+              >
+                Product Type
+              </Typography>
+              {Object.values(PriceRange).map((option) => (
+                <CheckBox
+                  key={option}
+                  name={option.toLowerCase()}
+                  checked={selectedPriceRanges.includes(option)}
+                  value={option}
+                  onChange={() =>
+                    handleCheckboxChange(option, SortCategory.PriceRange)
+                  }
+                />
+              ))}
+            </div>
+          </div>
+        </DropdownCustom>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex space-x-4">
+    <div className="flex ">
       <DropdownCustom title="Product Type">
         {Object.values(ProductType).map((option) => (
           <CheckBox
