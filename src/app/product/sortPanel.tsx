@@ -18,18 +18,16 @@ import Typography from "@/components/Typography/Typography";
 import { MenuItem } from "@headlessui/react";
 
 interface Props {
-  selectedTypes: string[];
-  selectedPriceRanges: string[];
-  selectedDesigners: string[];
   searchParams: Record<string, any>;
 }
 
-const SortPanel = ({
-  selectedTypes,
-  selectedPriceRanges,
-  selectedDesigners,
-  searchParams,
-}: Props) => {
+const SortPanel = ({ searchParams }: Props) => {
+  const { productType, priceRange, designer } = searchParams;
+
+  const selectedTypes = productType ? productType.split(",") : [];
+  const selectedPriceRanges = priceRange ? priceRange.split(",") : [];
+  const selectedDesigners = designer ? designer.split(",") : [];
+
   const router = useRouter();
   const [currentSortBy, setCurrentSortBy] = useState<SortBy>(SortBy.dateAdded);
   const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.asc);
@@ -45,21 +43,21 @@ const SortPanel = ({
     let updatedTypes =
       category === SortCategory.ProductType
         ? isSelected
-          ? selectedTypes.filter((t) => t !== type)
+          ? selectedTypes.filter((t: string) => t !== type)
           : [...selectedTypes, type as ProductType]
         : selectedTypes;
 
     let updatedPriceRanges =
       category === SortCategory.PriceRange
         ? isSelected
-          ? selectedPriceRanges.filter((t) => t !== type)
+          ? selectedPriceRanges.filter((t: string) => t !== type)
           : [...selectedPriceRanges, type]
         : selectedPriceRanges;
 
     let updatedDesigners =
       category === SortCategory.Designer
         ? isSelected
-          ? selectedDesigners.filter((t) => t !== type)
+          ? selectedDesigners.filter((t: string) => t !== type)
           : [...selectedDesigners, type]
         : selectedDesigners;
 

@@ -12,20 +12,8 @@ interface Props {
 }
 
 async function Products({ searchParams }: Props) {
-  const {
-    page = "1",
-    limit = "12",
-    productType,
-    priceRange,
-    designer,
-  } = searchParams;
-
-  const selectedTypes = productType ? productType.split(",") : [];
-  const selectedPriceRanges = priceRange ? priceRange.split(",") : [];
-  const selectedDesigners = designer ? designer.split(",") : [];
-
+  const { page = "1", limit = "12" } = searchParams;
   const products = await getProducts({ ...searchParams, page, limit });
-
   if (!products) null;
 
   return (
@@ -33,12 +21,7 @@ async function Products({ searchParams }: Props) {
       <Title category={searchParams.category} />
 
       <div className=" self-start w-full p-4">
-        <SortPanel
-          selectedTypes={selectedTypes}
-          searchParams={searchParams}
-          selectedPriceRanges={selectedPriceRanges}
-          selectedDesigners={selectedDesigners}
-        />
+        <SortPanel searchParams={searchParams} />
       </div>
 
       <Container className="py-10">
