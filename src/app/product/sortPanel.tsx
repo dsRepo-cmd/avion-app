@@ -12,9 +12,10 @@ import DropdownCustom from "@/components/DropdownCustom/DropdownCustom";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-
 import ArrowIcon from "@/assets/arrow-up.svg";
 import Icon from "@/components/Icon/Icon";
+import Typography from "@/components/Typography/Typography";
+import { MenuItem } from "@headlessui/react";
 
 interface Props {
   selectedTypes: string[];
@@ -142,29 +143,45 @@ const SortPanel = ({
         </DropdownCustom>
       </div>
 
-      <DropdownCustom title={currentSortBy}>
-        {Object.values(SortBy).map((sortBy) => (
-          <button
-            key={sortBy}
-            className={cn(
-              "grid grid-cols-2 w-full items-center justify-start gap-3 p-3 hover:bg-lightGrey font-primary",
-              sortBy === currentSortBy && "bg-lightGrey"
-            )}
-            onClick={() => handleSortChange(sortBy)}
-          >
-            {sortBy}
-            {sortBy === currentSortBy && (
-              <span className="justify-self-end">
-                {sortOrder === SortOrder.asc ? (
-                  <Icon width={16} Svg={ArrowIcon} />
-                ) : (
-                  <Icon className="rotate-180" width={16} Svg={ArrowIcon} />
+      <div className=" flex   items-center">
+        <Typography
+          className=" md:hidden"
+          tag="h5"
+          size="14px"
+          fontFamily="primary"
+        >
+          Sorting by:
+        </Typography>
+        <DropdownCustom title={currentSortBy}>
+          {Object.values(SortBy).map((sortBy) => (
+            <MenuItem key={sortBy}>
+              <button
+                className={cn(
+                  "grid grid-cols-2 w-full items-center justify-start gap-3 p-3 hover:bg-lightGrey font-primary",
+                  sortBy === currentSortBy && "bg-lightGrey"
                 )}
-              </span>
-            )}
-          </button>
-        ))}
-      </DropdownCustom>
+                onClick={() => handleSortChange(sortBy)}
+              >
+                {sortBy}
+                {sortBy === currentSortBy && (
+                  <span className="justify-self-end">
+                    {sortOrder === SortOrder.asc ? (
+                      <Icon width={18} height={18} Svg={ArrowIcon} />
+                    ) : (
+                      <Icon
+                        className="rotate-180"
+                        width={18}
+                        height={18}
+                        Svg={ArrowIcon}
+                      />
+                    )}
+                  </span>
+                )}
+              </button>
+            </MenuItem>
+          ))}
+        </DropdownCustom>
+      </div>
     </div>
   );
 };

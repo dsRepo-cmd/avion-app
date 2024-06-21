@@ -79,9 +79,9 @@ export enum SortOrder {
   desc = "desc",
 }
 export enum SortBy {
-  price = "price",
-  dateAdded = "dateAdded",
-  views = "views",
+  price = "Price",
+  dateAdded = "Date Added",
+  views = "Views",
 }
 
 export interface SearchParams {

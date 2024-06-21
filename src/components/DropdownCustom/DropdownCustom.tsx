@@ -12,7 +12,7 @@ interface Props {
 const DropdownCustom = ({ title, children }: Props) => {
   return (
     <Menu>
-      <MenuButton className={"flex gap-4 py-3 px-6"}>
+      <MenuButton className={"flex gap-4 py-3 items-center px-6"}>
         <Typography color="black" size="16px" fontFamily="secondary" tag="h5">
           {title}
         </Typography>
