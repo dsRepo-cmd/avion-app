@@ -1,11 +1,11 @@
 import { footer } from "@/data/footer";
 import Link from "next/link";
 import React from "react";
-import Typography from "../Typography/Typography";
+import Typography from "../../components/Typography/Typography";
 
-import Divider from "../Divider/Divider";
-import EmailSignUpForm from "../InputForm/EmailSignUpForm";
-import AppLink from "../AppLink/AppLink";
+import Divider from "../../components/Divider/Divider";
+import EmailSignUpForm from "../../components/InputForm/EmailSignUpForm";
+import AppLink from "../../components/AppLink/AppLink";
 
 function Footer() {
   return (

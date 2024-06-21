@@ -1,10 +1,13 @@
 import React from "react";
-import Divider from "../Divider/Divider";
+import Divider from "../../components/Divider/Divider";
 import Navbar from "../Navbar/Navbar";
 import { ProductCategory } from "@/app/product/types";
-import AppLink from "../AppLink/AppLink";
+import AppLink from "../../components/AppLink/AppLink";
 
-function Header() {
+interface Props {
+  isMobile?: boolean;
+}
+function Header({ isMobile }: Props) {
   return (
     <header className=" w-full px-4  ">
       <Navbar />

@@ -1,3 +1,5 @@
+import { mediaQueries } from "@/lib/mediaQueries";
+
 export interface ProductListing {
   _id: string;
   name: string;
@@ -6,12 +8,31 @@ export interface ProductListing {
   description?: string;
 }
 
+export enum SortCategory {
+  ProductType = "productType",
+  PriceRange = "priceRange",
+  Designer = "designer",
+  ProductCategory = "productCategory",
+}
+
 export enum ProductType {
   Furniture = "Furniture",
   Accessories = "Accessories",
   LightFittings = "Light fittings",
   Sofas = "Sofas",
   Homeware = "Homeware",
+}
+
+export enum PriceRange {
+  M = "0-99",
+  S = "100-249",
+  L = "250+",
+}
+export enum Designer {
+  RobertSmith = "Robert Smith",
+  LiamGallagher = "Liam Gallagher",
+  BiggieSmalls = "Biggie Smalls",
+  TomYorke = "Tom Yorke",
 }
 
 export enum ProductCategory {
@@ -60,9 +81,9 @@ export enum SortOrder {
   desc = "desc",
 }
 export enum SortBy {
-  price = "price",
-  dateAdded = "dateAdded",
-  views = "views",
+  price = "Price",
+  dateAdded = "Date Added",
+  views = "Views",
 }
 
 export interface SearchParams {
@@ -95,3 +116,6 @@ export interface ICartBase {
   totalPrice: number;
   status: "active" | "completed" | "canceled";
 }
+
+// =============================
+export type MediaQueryKey = keyof typeof mediaQueries;
