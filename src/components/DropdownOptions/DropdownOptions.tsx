@@ -42,15 +42,13 @@ const DropdownOptions = ({
       >
         <MenuItems className={"rounded-lg bg-white"} anchor="bottom">
           {options.map((option) => (
-            <MenuItem disabled key={option}>
-              <CheckBox
-                key={option}
-                name={title.toLowerCase()}
-                checked={selectedOptions.includes(option)}
-                value={option}
-                onChange={() => onChange(option)}
-              />
-            </MenuItem>
+            <CheckBox
+              key={option}
+              name={title.toLowerCase()}
+              checked={selectedOptions.includes(option)}
+              value={option}
+              onChange={() => onChange(option)}
+            />
           ))}
         </MenuItems>
       </Transition>
