@@ -33,12 +33,6 @@ const SortPanel = ({
   const [currentSortBy, setCurrentSortBy] = useState<SortBy>(SortBy.dateAdded);
   const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.asc);
 
-  const toggleSortOrder = () => {
-    setSortOrder((prevSortOrder) =>
-      prevSortOrder === SortOrder.desc ? SortOrder.asc : SortOrder.desc
-    );
-  };
-
   const handleCheckboxChange = (type: string, category: string) => {
     const isSelected =
       category === SortCategory.ProductType
@@ -81,17 +75,20 @@ const SortPanel = ({
   };
 
   const handleSortChange = (sortBy: SortBy) => {
-    if (sortBy === currentSortBy) {
-      toggleSortOrder();
-    } else {
-      setCurrentSortBy(sortBy);
-      setSortOrder(sortOrder);
-    }
+    const newSortOrder =
+      sortBy === currentSortBy
+        ? sortOrder === SortOrder.asc
+          ? SortOrder.desc
+          : SortOrder.asc
+        : SortOrder.asc;
+
+    setCurrentSortBy(sortBy);
+    setSortOrder(newSortOrder);
 
     const updatedParams = {
       ...searchParams,
       sortBy,
-      sortOrder: sortOrder === SortOrder.desc ? SortOrder.desc : SortOrder.asc,
+      sortOrder: newSortOrder,
       page: "1",
     };
 
