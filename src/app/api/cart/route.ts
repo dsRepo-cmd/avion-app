@@ -105,7 +105,10 @@ export const POST = async (
 
     await cartModel.save();
     const cart = transformCart(cartModel);
-    return NextResponse.json({ cart });
+    return NextResponse.json({
+      cart,
+      message: "Product has been added to cart",
+    });
   } catch (err: any) {
     return NextResponse.json(
       { message: "Internal Server Error", error: err },

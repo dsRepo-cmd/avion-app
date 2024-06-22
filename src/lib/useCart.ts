@@ -7,6 +7,7 @@ const useCart = () => {
   const { data: session } = useSession();
   const userEmail = session?.user?.email || null;
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<string>("");
 
   const temporaryCartId = "temporaryCartId";
   const isClient = typeof window !== "undefined";
@@ -33,6 +34,7 @@ const useCart = () => {
     const data: ICartData = await response.json();
     if (response.ok) {
       setCart(data.cart);
+      if (data.message) setMessage(data.message);
     } else {
       console.error(data.message, "Error:", data.error);
     }
@@ -130,6 +132,7 @@ const useCart = () => {
     updateProductQuantity,
     addProductToCart,
     loading,
+    message,
   };
 };
 

@@ -2,6 +2,7 @@
 import { Product } from "@/app/product/types";
 import Button from "@/components/Button/Button";
 import Counter from "@/components/Counter/Counter";
+import Typography from "@/components/Typography/Typography";
 import useCart from "@/lib/useCart";
 
 interface Props {
@@ -15,7 +16,7 @@ function AddToCard({ product }: Props) {
     quantity = value;
   };
 
-  const { addProductToCart, loading } = useCart();
+  const { addProductToCart, loading, message } = useCart();
 
   return (
     <>
@@ -25,6 +26,9 @@ function AddToCard({ product }: Props) {
         onCountChange={getQuantity}
       />
 
+      <Typography tag="p" size="16px" fontFamily="primary">
+        {message}
+      </Typography>
       <div className=" flex gap-4 mt-9 lg:flex-col">
         <Button
           disabled={loading}
