@@ -7,6 +7,6 @@ export async function createUser(user: any) {
     const newUser = await UserModel.create(user);
     return newUser;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }

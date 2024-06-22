@@ -14,8 +14,17 @@ import SignOutIcon from "@/assets/sign-out.svg";
 
 import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
 
-function Navbar() {
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import useIsMobile from "@/lib/useIsMobile";
+interface Props {
+  isMobile?: boolean;
+}
+function Navbar({ isMobile }: Props) {
   const session = useSession();
+
+  const isMobileClient = useIsMobile();
+
+  const isShowMobile = isMobile || isMobileClient;
 
   const items: DropdownItem[] = session.data
     ? [
@@ -91,6 +100,8 @@ function Navbar() {
             </>
           }
         />
+
+        {isShowMobile && <BurgerMenu />}
       </div>
     </nav>
   );

@@ -5,6 +5,8 @@ import "./globals.css";
 import Header from "@/features/Header/Header";
 import Footer from "@/features/Footer/Footer";
 import Providers from "@/components/Providers/Providers";
+import { headers } from "next/headers";
+import { isMobile } from "@/lib/isMobile";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Regular.woff",
@@ -32,11 +34,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const userAgent = headers().get("user-agent") || "";
+  const mobileCheck = isMobile(userAgent);
+
   return (
     <html lang="en">
       <body className={`${satoshi.variable} ${clashDisplay.variable}`}>
         <Providers>
-          <Header />
+          <Header isMobile={mobileCheck} />
           {children}
           <Footer />
         </Providers>

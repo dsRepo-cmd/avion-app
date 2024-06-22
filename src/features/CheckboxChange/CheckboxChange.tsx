@@ -7,6 +7,7 @@ import {
 import CheckBox from "@/components/CheckBox/CheckBox";
 import DropdownCustom from "@/components/DropdownCustom/DropdownCustom";
 import Typography from "@/components/Typography/Typography";
+import useIsMobile from "@/lib/useIsMobile";
 
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -61,7 +62,11 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
     router.push(`?${params}`);
   };
 
-  if (isMobile) {
+  const isMobileClient = useIsMobile();
+
+  const isShowMobile = isMobile || isMobileClient;
+
+  if (isShowMobile) {
     return (
       <div className=" flex">
         <DropdownCustom className=" w-full" title="Filtering">
