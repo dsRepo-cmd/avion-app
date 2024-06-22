@@ -28,7 +28,7 @@ function Navbar({ isMobile }: Props) {
         {
           id: "1",
           content: (
-            <Typography tag="span" size="14px" fontFamily="secondary">
+            <Typography tag="span" size="16px" fontFamily="primary">
               Sign Out
             </Typography>
           ),
@@ -40,7 +40,7 @@ function Navbar({ isMobile }: Props) {
         {
           id: "2",
           content: (
-            <Typography tag="span" size="14px" fontFamily="secondary">
+            <Typography tag="span" size="16px" fontFamily="primary">
               Sign in
             </Typography>
           ),
@@ -50,7 +50,7 @@ function Navbar({ isMobile }: Props) {
         {
           id: "3",
           content: (
-            <Typography tag="span" size="14px" fontFamily="secondary">
+            <Typography tag="span" size="16px" fontFamily="primary">
               Sign up
             </Typography>
           ),

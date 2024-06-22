@@ -61,15 +61,22 @@ function SortChange({ searchParams, isMobile }: Props) {
         trigger={isShowMobile ? "Sorting" : currentSortBy}
       >
         {Object.values(SortBy).map((sortBy) => (
-          <li className="w-full" key={sortBy}>
+          <li className=" w-full" key={sortBy}>
             <button
               className={cn(
-                "grid grid-cols-2 w-full items-center justify-start gap-3 p-3 hover:bg-lightGrey font-primary",
+                "grid grid-cols-2 w-full items-start justify-items-start gap-3 p-3 hover:bg-lightGrey ",
                 sortBy === currentSortBy && "bg-lightGrey"
               )}
               onClick={() => handleSortChange(sortBy)}
             >
-              {sortBy}
+              <Typography
+                className=" text-base"
+                tag="span"
+                size="16px"
+                fontFamily="primary"
+              >
+                {sortBy}
+              </Typography>
               {sortBy === currentSortBy && (
                 <span className="justify-self-end">
                   {sortOrder === SortOrder.asc ? (
