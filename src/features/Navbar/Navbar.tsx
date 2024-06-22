@@ -63,7 +63,7 @@ function Navbar({ isMobile }: Props) {
       ];
 
   return (
-    <nav className=" relative flex justify-between items-center py-5 ">
+    <nav className=" relative flex justify-between items-center py-5  bg-white z-50">
       <div>
         <button className=" md:hidden" title="search">
           <SearchIcon />

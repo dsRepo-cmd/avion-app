@@ -23,7 +23,7 @@ function BurgerMenu() {
       >
         <div
           className={
-            " relative w-[16px] h-[16px] mx-auto cursor-pointer transition-transform duration-200 ease-in-out  "
+            " relative w-[16px] h-[16px] mx-auto cursor-pointer transition-transform duration-200 ease-in-out z-50  "
           }
         >
           <span
@@ -56,8 +56,8 @@ function BurgerMenu() {
       <Portal>
         <div
           className={cn(
-            " duration-300 flex absolute items-center justify-center left-0 top-[73px] bg-white w-screen p-3  z-50 ",
-            isOpen ? " left-0 " : " left-[100%]"
+            " duration-300 flex absolute items-center justify-center left-0 top-[73px] bg-white w-screen p-3  z-40 ",
+            isOpen ? " top-[73px]" : " top-[-100%]"
           )}
         >
           <CategoryLinks className=" flex-col  gap-4 " />
