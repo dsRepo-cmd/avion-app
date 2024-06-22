@@ -5,7 +5,7 @@ import {
   SortCategory,
 } from "@/app/product/types";
 import CheckBox from "@/components/CheckBox/CheckBox";
-import DropdownCustom from "@/components/DropdownCustom/DropdownCustom";
+import Dropdown from "@/components/Dropdown/Dropdown";
 import Typography from "@/components/Typography/Typography";
 import useIsMobile from "@/lib/useIsMobile";
 
@@ -69,8 +69,14 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
   if (isShowMobile) {
     return (
       <div className=" flex">
-        <DropdownCustom className=" w-full" title="Filtering">
-          <div className=" grid grid-cols-2">
+        <Dropdown
+          className="  w-screen"
+          classTrigger=" py-3 px-6 "
+          isDownIcon
+          trigger={"Filtering"}
+          position="bottomStart"
+        >
+          <li className=" grid grid-cols-2 gap-6 p-4">
             <div>
               <Typography
                 className="m-3"
@@ -134,15 +140,21 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
                 />
               ))}
             </div>
-          </div>
-        </DropdownCustom>
+          </li>
+        </Dropdown>
       </div>
     );
   }
 
   return (
-    <div className="flex ">
-      <DropdownCustom title="Product Type">
+    <div className="flex gap-2 ">
+      <Dropdown
+        className=" w-[210px]"
+        classTrigger=" py-3 px-6 "
+        isDownIcon
+        trigger={"Product Type"}
+        position="bottomStart"
+      >
         {Object.values(ProductType).map((option) => (
           <CheckBox
             key={option}
@@ -154,9 +166,15 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
             }
           />
         ))}
-      </DropdownCustom>
+      </Dropdown>
 
-      <DropdownCustom title="Price">
+      <Dropdown
+        className=" w-[210px]"
+        classTrigger=" py-3 px-6 "
+        isDownIcon
+        trigger={"Price"}
+        position="bottomStart"
+      >
         {Object.values(PriceRange).map((option) => (
           <CheckBox
             key={option}
@@ -168,9 +186,15 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
             }
           />
         ))}
-      </DropdownCustom>
+      </Dropdown>
 
-      <DropdownCustom title="Designers">
+      <Dropdown
+        className=" w-[210px]"
+        classTrigger=" py-3 px-6 "
+        isDownIcon
+        trigger={"Designers"}
+        position="bottomStart"
+      >
         {Object.values(Designer).map((option) => (
           <CheckBox
             key={option}
@@ -180,7 +204,7 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
             onChange={() => handleCheckboxChange(option, SortCategory.Designer)}
           />
         ))}
-      </DropdownCustom>
+      </Dropdown>
     </div>
   );
 }

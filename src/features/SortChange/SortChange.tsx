@@ -1,14 +1,13 @@
 "use client";
 import { SortBy, SortOrder } from "@/app/product/types";
-import DropdownCustom from "@/components/DropdownCustom/DropdownCustom";
 import Typography from "@/components/Typography/Typography";
-import { MenuItem } from "@headlessui/react";
 import { useState } from "react";
 import ArrowIcon from "@/assets/arrow-up.svg";
 import Icon from "@/components/Icon/Icon";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import useIsMobile from "@/lib/useIsMobile";
+import Dropdown from "@/components/Dropdown/Dropdown";
 
 interface Props {
   searchParams: Record<string, any>;
@@ -55,9 +54,14 @@ function SortChange({ searchParams, isMobile }: Props) {
         Sorting by:
       </Typography>
 
-      <DropdownCustom title={isShowMobile ? "Sorting" : currentSortBy}>
+      <Dropdown
+        className=" w-[210px]"
+        classTrigger=" py-3 px-6 "
+        isDownIcon
+        trigger={isShowMobile ? "Sorting" : currentSortBy}
+      >
         {Object.values(SortBy).map((sortBy) => (
-          <MenuItem key={sortBy}>
+          <li className="w-full" key={sortBy}>
             <button
               className={cn(
                 "grid grid-cols-2 w-full items-center justify-start gap-3 p-3 hover:bg-lightGrey font-primary",
@@ -81,9 +85,9 @@ function SortChange({ searchParams, isMobile }: Props) {
                 </span>
               )}
             </button>
-          </MenuItem>
+          </li>
         ))}
-      </DropdownCustom>
+      </Dropdown>
     </div>
   );
 }
