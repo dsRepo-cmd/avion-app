@@ -1,12 +1,8 @@
-import { FC, ReactNode } from "react";
-import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Transition,
-} from "@headlessui/react";
+"use client";
+import { FC, ReactNode, useCallback, useState } from "react";
+import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
+import DownIcon from "@/assets/chevron-down.svg";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -18,47 +14,52 @@ export interface DropdownItem {
   id: string;
   svg?: FC<React.SVGProps<SVGSVGElement>>;
 }
-
-type AnchorProps =
-  | "bottom"
-  | "bottom end"
-  | "bottom start"
-  | "left"
-  | "left end"
-  | "left start"
-  | "right"
-  | "right end"
-  | "right start"
-  | "top"
-  | "top end"
-  | "top start";
-
 interface Props {
+  items?: DropdownItem[];
   trigger: ReactNode;
-  items: DropdownItem[];
-  anchor?: AnchorProps;
+  isDownIcon?: boolean;
+  className?: string;
+  customIstems?: ReactNode;
 }
-export default function Dropdown({ trigger, items, anchor = "bottom" }: Props) {
-  return (
-    <Menu>
-      <MenuButton>{trigger}</MenuButton>
+function Dropdown({
+  items,
+  trigger,
+  isDownIcon = false,
+  className = "",
+  customIstems,
+}: Props) {
+  const [isOpen, setOpen] = useState(false);
 
-      <Transition
-        enter="transition ease-out duration-75"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="transition ease-in duration-100"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
+  const toggleOpen = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
+
+  return (
+    <div className=" relative">
+      <Button
+        className=" flex items-center gap-2"
+        variant="clear"
+        bgColor="white"
+        onClick={toggleOpen}
       >
-        <MenuItems className={"  bg-lightGrey rounded-lg  "} anchor={anchor}>
-          {items.map((item) => {
-            const content = ({ active }: { active: boolean }) => (
+        {trigger} {isDownIcon && <Icon width={8} height={8} Svg={DownIcon} />}
+      </Button>
+
+      <div
+        className={cn(
+          " duration-200 absolute top-10 right-0 bg-white rounded-lg overflow-hidden",
+          isOpen ? " scale-75 opacity-0" : " scale-100 opacity-100",
+          className
+        )}
+      >
+        <ul>
+          {items?.map((item) => {
+            const content = (
               <button
                 type="button"
                 disabled={item.disabled}
                 onClick={item.onClick}
-                className={cn(" w-full   p-3", active && " bg-borderDark")}
+                className={cn(" w-full   p-3 hover:bg-lightGrey")}
               >
                 <div className=" flex gap-5 items-center ">
                   {item.svg && <Icon Svg={item.svg} width={16} height={16} />}
@@ -69,25 +70,21 @@ export default function Dropdown({ trigger, items, anchor = "bottom" }: Props) {
 
             if (item.href) {
               return (
-                <MenuItem
-                  as={Link}
-                  href={item.href}
-                  disabled={item.disabled}
-                  key={item.id}
-                >
+                <Link key={item.id} href={item.href}>
                   {content}
-                </MenuItem>
+                </Link>
               );
             }
-
             return (
-              <MenuItem key={item.id} disabled={item.disabled}>
+              <li className=" flex flex-col" key={item.id}>
                 {content}
-              </MenuItem>
+              </li>
             );
           })}
-        </MenuItems>
-      </Transition>
-    </Menu>
+        </ul>
+      </div>
+    </div>
   );
 }
+
+export default Dropdown;

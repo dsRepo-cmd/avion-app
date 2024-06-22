@@ -1,5 +1,4 @@
 "use client";
-
 import SearchIcon from "@/assets/search.svg";
 import CartIcon from "@/assets/shopping-cart.svg";
 import UserAvatarIcon from "@/assets/user-avatar.svg";
@@ -11,11 +10,9 @@ import Link from "next/link";
 import SignInIcon from "@/assets/sign-in.svg";
 import SignUpIcon from "@/assets/sign-up.svg";
 import SignOutIcon from "@/assets/sign-out.svg";
-
-import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
-
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import useIsMobile from "@/lib/useIsMobile";
+import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
 interface Props {
   isMobile?: boolean;
 }
@@ -82,8 +79,8 @@ function Navbar({ isMobile }: Props) {
         </Link>
 
         <Dropdown
+          className=" w-[210px]"
           items={items}
-          anchor="bottom"
           trigger={
             <>
               {session?.data ? (
