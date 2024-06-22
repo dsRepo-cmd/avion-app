@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import Listing from "@/components/Listing/Listing";
 import { SearchParams } from "./types";
 import { getProducts } from "@/lib/products";
@@ -6,24 +7,27 @@ import Typography from "@/components/Typography/Typography";
 import Page from "@/components/Page/Page";
 import SortPanel from "./sortPanel";
 import Title from "./title";
-import { isMobileDevice } from "@/lib/isMobileDevice";
+import { isMobile } from "@/lib/isMobile";
 
 interface Props {
   searchParams: SearchParams;
 }
 
 async function Products({ searchParams }: Props) {
-  const { page = "1", limit = "12" } = searchParams;
-  const products = await getProducts({ ...searchParams, page, limit });
-  if (!products) null;
-  const mobile = await isMobileDevice();
+  const userAgent = headers().get("user-agent") || "";
+  const mobileCheck = isMobile(userAgent);
 
+  const { page = "1", limit = "12" } = searchParams;
+
+  const products = await getProducts({ ...searchParams, page, limit });
+
+  if (!products) null;
   return (
     <Page>
       <Title category={searchParams.category} />
 
       <div className=" self-start w-full p-4">
-        <SortPanel isMobile={mobile} searchParams={searchParams} />
+        <SortPanel isMobile={mobileCheck} searchParams={searchParams} />
       </div>
 
       <Container className="py-10">

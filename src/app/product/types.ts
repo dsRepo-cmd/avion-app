@@ -1,5 +1,3 @@
-import { mediaQueries } from "@/lib/mediaQueries";
-
 export interface ProductListing {
   _id: string;
   name: string;
@@ -116,6 +114,3 @@ export interface ICartBase {
   totalPrice: number;
   status: "active" | "completed" | "canceled";
 }
-
-// =============================
-export type MediaQueryKey = keyof typeof mediaQueries;

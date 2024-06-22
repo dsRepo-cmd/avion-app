@@ -7,6 +7,7 @@ import {
 import CheckBox from "@/components/CheckBox/CheckBox";
 import DropdownCustom from "@/components/DropdownCustom/DropdownCustom";
 import Typography from "@/components/Typography/Typography";
+import useIsMobile from "@/lib/useIsMobile";
 
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -61,7 +62,11 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
     router.push(`?${params}`);
   };
 
-  if (isMobile) {
+  const isMobileClient = useIsMobile();
+
+  const isShowMobile = isMobile || isMobileClient;
+
+  if (isShowMobile) {
     return (
       <div className=" flex">
         <DropdownCustom className=" w-full" title="Filtering">
@@ -94,7 +99,7 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
                 size="16px"
                 fontFamily="secondary"
               >
-                Product Type
+                Price Range
               </Typography>
               {Object.values(PriceRange).map((option) => (
                 <CheckBox
@@ -115,16 +120,16 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
                 size="16px"
                 fontFamily="secondary"
               >
-                Product Type
+                Designer
               </Typography>
-              {Object.values(PriceRange).map((option) => (
+              {Object.values(Designer).map((option) => (
                 <CheckBox
                   key={option}
                   name={option.toLowerCase()}
                   checked={selectedPriceRanges.includes(option)}
                   value={option}
                   onChange={() =>
-                    handleCheckboxChange(option, SortCategory.PriceRange)
+                    handleCheckboxChange(option, SortCategory.Designer)
                   }
                 />
               ))}
