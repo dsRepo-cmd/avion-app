@@ -14,12 +14,15 @@ import SignOutIcon from "@/assets/sign-out.svg";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
+import { useCart } from "@/lib/CartContext";
 
 interface Props {
   isMobile?: boolean;
 }
 
 function Navbar({ isMobile }: Props) {
+  const { productCount } = useCart();
+  console.log("productCount", productCount);
   const session = useSession();
 
   const isMobileClient = useIsMobile();
@@ -77,7 +80,10 @@ function Navbar({ isMobile }: Props) {
       </AppLink>
 
       <div className=" flex gap-4 justify-center items-center">
-        <Link href={"/cart"} title="cart">
+        <Link className=" relative" href={"/cart"} title="cart">
+          <span className=" absolute text-[14px] top-[-8px] right-[-8px]">
+            {productCount}
+          </span>
           <CartIcon />
         </Link>
 

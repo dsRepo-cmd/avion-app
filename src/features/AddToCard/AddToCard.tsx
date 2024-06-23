@@ -3,7 +3,7 @@ import { Product } from "@/app/product/types";
 import Button from "@/components/Button/Button";
 import Counter from "@/components/Counter/Counter";
 import Typography from "@/components/Typography/Typography";
-import useCart from "@/lib/useCart";
+import { useCart } from "@/lib/CartContext";
 
 interface Props {
   product: Product;
