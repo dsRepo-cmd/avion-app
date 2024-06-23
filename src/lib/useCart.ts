@@ -1,7 +1,8 @@
-import { ICartBase, ICartData } from "@/app/product/types";
-import { useSession } from "next-auth/react";
+"use client";
 import { useEffect, useState, useCallback } from "react";
+import { useSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
+import { ICartBase, ICartData } from "@/app/product/types";
 
 const useCart = () => {
   const { data: session } = useSession();
@@ -125,14 +126,20 @@ const useCart = () => {
     [userIdentifier]
   );
 
+  const monitorProductCount = useCallback(() => {
+    return cart.products.length;
+  }, [cart.products]);
+
+
+
   return {
     cart,
-    setCart,
     removeProduct,
     updateProductQuantity,
     addProductToCart,
     loading,
     message,
+    monitorProductCount,
   };
 };
 

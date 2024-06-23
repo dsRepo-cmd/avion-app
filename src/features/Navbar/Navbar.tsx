@@ -1,6 +1,7 @@
 "use client";
-import SearchIcon from "@/assets/search.svg";
+
 import CartIcon from "@/assets/shopping-cart.svg";
+import SearchIcon from "@/assets/search.svg";
 import UserAvatarIcon from "@/assets/user-avatar.svg";
 import Typography from "../../components/Typography/Typography";
 import AppLink from "../../components/AppLink/AppLink";
@@ -13,9 +14,11 @@ import SignOutIcon from "@/assets/sign-out.svg";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
+
 interface Props {
   isMobile?: boolean;
 }
+
 function Navbar({ isMobile }: Props) {
   const session = useSession();
 
