@@ -22,7 +22,7 @@ interface Props {
 
 function Navbar({ isMobile }: Props) {
   const { productCount } = useCart();
-  console.log("productCount", productCount);
+
   const session = useSession();
 
   const isMobileClient = useIsMobile();

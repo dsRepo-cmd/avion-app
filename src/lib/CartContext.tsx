@@ -60,7 +60,6 @@ export const CartProvider = ({ children }: Props) => {
 
   useEffect(() => {
     setProductCount(cart.products.length);
-    console.log("cart.products.length", cart.products.length);
   }, [cart.products]);
 
   useEffect(() => {

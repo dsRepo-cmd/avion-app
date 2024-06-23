@@ -20,8 +20,6 @@ function CartMenu() {
     );
   };
 
-  console.log("cart", cart);
-
   return (
     <Container bgColor="light">
       <Typography fontFamily="secondary" size="32px" tag="h1" className=" mb-8">

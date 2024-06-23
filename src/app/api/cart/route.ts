@@ -47,7 +47,6 @@ export const GET = async (
     if (!cartModel) {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
     }
-
     const cart = transformCart(cartModel);
 
     return NextResponse.json({ cart });
@@ -69,8 +68,12 @@ export const POST = async (
     const { userIdentifier, productId, quantity } = await req.json();
 
     if (!userIdentifier || !productId || !quantity) {
-      return NextResponse.json({ message: "Story not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: "Missing required fields" },
+        { status: 400 }
+      );
     }
+
     let cartModel = await CartModel.findOne({ userIdentifier });
     if (!cartModel) {
       cartModel = new CartModel({
@@ -80,6 +83,7 @@ export const POST = async (
         status: "active",
       });
     }
+
     const product = await ProductModel.findById(productId);
     if (!product) {
       return NextResponse.json(
@@ -87,6 +91,7 @@ export const POST = async (
         { status: 404 }
       );
     }
+
     const existingProductIndex = cartModel.products.findIndex((item) => {
       if (typeof item.product === "string") {
         return item.product === productId;
@@ -104,7 +109,18 @@ export const POST = async (
     cartModel.totalPrice += product.price * quantity;
 
     await cartModel.save();
+
+    cartModel = await CartModel.findOne({ userIdentifier }).populate({
+      path: "products.product",
+      model: ProductModel,
+    });
+
+    if (!cartModel) {
+      return NextResponse.json({ message: "Cart not found" }, { status: 404 });
+    }
+
     const cart = transformCart(cartModel);
+
     return NextResponse.json({
       cart,
       message: "Product has been added to cart",
