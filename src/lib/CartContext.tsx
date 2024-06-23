@@ -141,7 +141,7 @@ export const CartProvider = ({ children }: Props) => {
         const data: ICartData = await res.json();
         if (res.ok) {
           setCart(data.cart);
-          setSuccessMessage("Product added to cart.");
+          setSuccessMessage("Product has been added to cart.");
           return true;
         } else {
           console.error(data.message, "Error:", data.error);

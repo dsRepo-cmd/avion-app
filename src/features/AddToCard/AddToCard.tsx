@@ -37,32 +37,31 @@ function AddToCard({ product }: Props) {
   }, [addProductToCart, product, quantity]);
 
   return (
-    <div className=" relative pb-8">
+    <>
       <Counter
         className="lg:max-w-full"
         value={quantity}
         onCountChange={getQuantity}
       />
 
-      <div className="flex gap-4 mt-9 lg:flex-col">
+      <div className=" relative flex gap-4 mt-9 lg:flex-col">
         <Button disabled={loading} onClick={handleAddToCart} variant="filled">
           Add to cart
         </Button>
         <Button variant="filled" bgColor="white">
           Save to favorites
         </Button>
+        {showSuccessMessage && (
+          <Typography
+            tag="span"
+            fontFamily="primary"
+            className=" absolute left-0  top-[-30px]"
+          >
+            {successMessage}
+          </Typography>
+        )}
       </div>
-
-      {showSuccessMessage && (
-        <Typography
-          tag="span"
-          fontFamily="primary"
-          className=" absolute left-0  bottom-0"
-        >
-          {successMessage}
-        </Typography>
-      )}
-    </div>
+    </>
   );
 }
 
