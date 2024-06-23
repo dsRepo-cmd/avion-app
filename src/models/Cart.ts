@@ -61,7 +61,7 @@ const CartSchema = new mongoose.Schema<ICart>(
     },
   },
   {
-    timestamps: true, // Automatically add createdAt and updatedAt fields
+    timestamps: true,
   }
 );
 

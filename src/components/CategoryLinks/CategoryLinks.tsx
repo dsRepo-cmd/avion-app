@@ -15,11 +15,11 @@ function CategoryLinks({ className }: Props) {
         </AppLink>
       </li>
       {Object.values(ProductCategory).map((category) => (
-        <li key={category}>
+        <li className=" flex justify-center" key={category}>
           <AppLink
             variant="clear"
             href={`/product?category=${category}`}
-            className=" text-grey"
+            className=" text-grey "
           >
             {category}
           </AppLink>

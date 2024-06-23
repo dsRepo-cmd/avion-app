@@ -24,7 +24,7 @@ function Counter({
   const increment = useCallback(() => {
     setCount((prevCount) => {
       const newCount = prevCount + 1;
-      onCountChange(newCount);
+      setTimeout(() => onCountChange(newCount), 0);
       return newCount;
     });
   }, [onCountChange]);
@@ -32,7 +32,7 @@ function Counter({
   const decrement = useCallback(() => {
     setCount((prevCount) => {
       const newCount = Math.max(prevCount - 1, 1);
-      onCountChange(newCount);
+      setTimeout(() => onCountChange(newCount), 0);
       return newCount;
     });
   }, [onCountChange]);
@@ -41,7 +41,8 @@ function Counter({
     const inputValue = parseInt(event.target.value, 10);
     if (!isNaN(inputValue) && inputValue >= 1) {
       setCount(inputValue);
-      onCountChange(inputValue);
+
+      setTimeout(() => onCountChange(inputValue), 0);
     }
   };
 

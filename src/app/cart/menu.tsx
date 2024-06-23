@@ -6,8 +6,9 @@ import Typography from "@/components/Typography/Typography";
 import Image from "next/image";
 import DeleteIcon from "@/assets/x.svg";
 import Link from "next/link";
-import useCart from "@/lib/useCart";
+
 import { truncateDescription } from "@/lib/cart";
+import { useCart } from "@/lib/CartContext";
 
 function CartMenu() {
   const { cart, removeProduct, updateProductQuantity, loading } = useCart();

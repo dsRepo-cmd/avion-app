@@ -1,7 +1,7 @@
 "use client";
 
-import SearchIcon from "@/assets/search.svg";
 import CartIcon from "@/assets/shopping-cart.svg";
+import SearchIcon from "@/assets/search.svg";
 import UserAvatarIcon from "@/assets/user-avatar.svg";
 import Typography from "../../components/Typography/Typography";
 import AppLink from "../../components/AppLink/AppLink";
@@ -11,15 +11,18 @@ import Link from "next/link";
 import SignInIcon from "@/assets/sign-in.svg";
 import SignUpIcon from "@/assets/sign-up.svg";
 import SignOutIcon from "@/assets/sign-out.svg";
-
-import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
-
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import useIsMobile from "@/lib/useIsMobile";
+import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
+import { useCart } from "@/lib/CartContext";
+
 interface Props {
   isMobile?: boolean;
 }
+
 function Navbar({ isMobile }: Props) {
+  const { productCount } = useCart();
+
   const session = useSession();
 
   const isMobileClient = useIsMobile();
@@ -31,7 +34,7 @@ function Navbar({ isMobile }: Props) {
         {
           id: "1",
           content: (
-            <Typography tag="span" size="14px" fontFamily="secondary">
+            <Typography tag="span" size="16px" fontFamily="primary">
               Sign Out
             </Typography>
           ),
@@ -43,7 +46,7 @@ function Navbar({ isMobile }: Props) {
         {
           id: "2",
           content: (
-            <Typography tag="span" size="14px" fontFamily="secondary">
+            <Typography tag="span" size="16px" fontFamily="primary">
               Sign in
             </Typography>
           ),
@@ -53,7 +56,7 @@ function Navbar({ isMobile }: Props) {
         {
           id: "3",
           content: (
-            <Typography tag="span" size="14px" fontFamily="secondary">
+            <Typography tag="span" size="16px" fontFamily="primary">
               Sign up
             </Typography>
           ),
@@ -77,13 +80,16 @@ function Navbar({ isMobile }: Props) {
       </AppLink>
 
       <div className=" flex gap-4 justify-center items-center">
-        <Link href={"/cart"} title="cart">
+        <Link className=" relative" href={"/cart"} title="cart">
+          <span className=" absolute text-[14px] top-[-8px] right-[-8px]">
+            {productCount}
+          </span>
           <CartIcon />
         </Link>
 
         <Dropdown
+          className=" w-[210px]"
           items={items}
-          anchor="bottom"
           trigger={
             <>
               {session?.data ? (

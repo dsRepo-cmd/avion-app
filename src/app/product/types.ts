@@ -112,5 +112,5 @@ export interface ICartBase {
   id_: string;
   products: ICartProduct[];
   totalPrice: number;
-  status: "active" | "completed" | "canceled";
+  status: string;
 }

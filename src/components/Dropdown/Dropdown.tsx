@@ -1,12 +1,9 @@
-import { FC, ReactNode } from "react";
-import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Transition,
-} from "@headlessui/react";
+"use client";
+
+import { FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
+import DownIcon from "@/assets/chevron-down.svg";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -19,48 +16,112 @@ export interface DropdownItem {
   svg?: FC<React.SVGProps<SVGSVGElement>>;
 }
 
-type AnchorProps =
-  | "bottom"
-  | "bottom end"
-  | "bottom start"
-  | "left"
-  | "left end"
-  | "left start"
-  | "right"
-  | "right end"
-  | "right start"
-  | "top"
-  | "top end"
-  | "top start";
+type Position = "bottom" | "bottomStart" | "bottomEnd";
 
 interface Props {
+  items?: DropdownItem[];
   trigger: ReactNode;
-  items: DropdownItem[];
-  anchor?: AnchorProps;
+  isDownIcon?: boolean;
+  className?: string;
+  children?: ReactNode;
+  classTrigger?: string;
+  position?: Position;
 }
-export default function Dropdown({ trigger, items, anchor = "bottom" }: Props) {
-  return (
-    <Menu>
-      <MenuButton>{trigger}</MenuButton>
 
-      <Transition
-        enter="transition ease-out duration-75"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="transition ease-in duration-100"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
+const positionClasses: { [key in Position]: string } = {
+  bottom: "",
+  bottomStart: "top-10 left-0",
+  bottomEnd: "top-10  right-0",
+};
+
+const Dropdown: FC<Props> = ({
+  items,
+  trigger,
+  isDownIcon = false,
+  className = "",
+  children,
+  classTrigger,
+  position = "bottomEnd",
+}) => {
+  const [isOpen, setOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const toggleOpen = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
+
+  const closeDropdown = useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [closeDropdown]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [closeDropdown]);
+
+  const itemClassName = "w-full p-3 text-left hover:bg-lightGrey";
+  const disabledClassName = "opacity-50 cursor-not-allowed";
+  const enabledClassName = "cursor-pointer";
+
+  return (
+    <div ref={dropdownRef} className="relative">
+      <Button
+        className={cn("flex items-center gap-3 font-second", classTrigger)}
+        variant="clear"
+        bgColor="white"
+        onClick={toggleOpen}
       >
-        <MenuItems className={"  bg-lightGrey rounded-lg  "} anchor={anchor}>
-          {items.map((item) => {
-            const content = ({ active }: { active: boolean }) => (
+        {trigger}
+        {isDownIcon && <Icon width={8} height={8} Svg={DownIcon} />}
+      </Button>
+
+      <div
+        className={cn(
+          "duration-200 absolute z-20  bg-white rounded-lg overflow-hidden shadow-lg",
+          isOpen
+            ? "scale-100 opacity-100"
+            : "scale-75 opacity-0 pointer-events-none",
+          positionClasses[position],
+          className
+        )}
+      >
+        <ul>
+          {items?.map((item) => {
+            const content = (
               <button
                 type="button"
                 disabled={item.disabled}
                 onClick={item.onClick}
-                className={cn(" w-full   p-3", active && " bg-borderDark")}
+                className={cn(
+                  itemClassName,
+                  item.disabled ? disabledClassName : enabledClassName
+                )}
               >
-                <div className=" flex gap-5 items-center ">
+                <div className="flex gap-5 items-center">
                   {item.svg && <Icon Svg={item.svg} width={16} height={16} />}
                   {item.content}
                 </div>
@@ -69,25 +130,23 @@ export default function Dropdown({ trigger, items, anchor = "bottom" }: Props) {
 
             if (item.href) {
               return (
-                <MenuItem
-                  as={Link}
-                  href={item.href}
-                  disabled={item.disabled}
-                  key={item.id}
-                >
-                  {content}
-                </MenuItem>
+                <li key={item.id} className="flex flex-col">
+                  <Link href={item.href}>{content}</Link>
+                </li>
               );
             }
 
             return (
-              <MenuItem key={item.id} disabled={item.disabled}>
+              <li key={item.id} className="flex flex-col">
                 {content}
-              </MenuItem>
+              </li>
             );
           })}
-        </MenuItems>
-      </Transition>
-    </Menu>
+          {children}
+        </ul>
+      </div>
+    </div>
   );
-}
+};
+
+export default Dropdown;
