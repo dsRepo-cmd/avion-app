@@ -11,6 +11,7 @@ const useCart = () => {
   const [message, setMessage] = useState<string>("");
 
   const temporaryCartId = "temporaryCartId";
+  const localStorageCartKey = "userCart";
   const isClient = typeof window !== "undefined";
   const storedCartId = isClient ? localStorage.getItem(temporaryCartId) : null;
   const [tempUserId, setTempUserId] = useState(storedCartId || uuidv4());
@@ -23,6 +24,15 @@ const useCart = () => {
 
   const userIdentifier = userEmail || tempUserId;
 
+  useEffect(() => {
+    if (isClient) {
+      const cachedCart = localStorage.getItem(localStorageCartKey);
+      if (cachedCart) {
+        setCart(JSON.parse(cachedCart));
+      }
+    }
+  }, [isClient]);
+
   const [cart, setCart] = useState<ICartBase>({
     id_: "",
     userIdentifier: userIdentifier,
@@ -30,6 +40,12 @@ const useCart = () => {
     totalPrice: 0,
     status: "active",
   });
+
+  useEffect(() => {
+    if (isClient) {
+      localStorage.setItem(localStorageCartKey, JSON.stringify(cart));
+    }
+  }, [cart, isClient]);
 
   const handleApiResponse = async (response: Response) => {
     const data: ICartData = await response.json();
@@ -129,8 +145,6 @@ const useCart = () => {
   const monitorProductCount = useCallback(() => {
     return cart.products.length;
   }, [cart.products]);
-
-
 
   return {
     cart,
