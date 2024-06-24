@@ -79,7 +79,10 @@ function Navbar({ isMobile }: Props) {
   return (
     <nav className=" relative flex justify-between items-center py-5  bg-white z-50">
       <div>
-        <button className=" md:hidden" title="search">
+        <button
+          className=" md:hidden duration-200 hover:scale-[1.2] active:scale-[1]"
+          title="search"
+        >
           <SearchIcon />
         </button>
       </div>
@@ -91,8 +94,12 @@ function Navbar({ isMobile }: Props) {
       </AppLink>
 
       <div className=" flex gap-4 justify-center items-center">
-        <Link className=" relative" href={"/cart"} title="cart">
-          <span className=" absolute text-[14px] top-[-8px] right-[-8px]">
+        <Link
+          className=" relative duration-200 hover:scale-[1.2] active:scale-[1]"
+          href={"/cart"}
+          title="cart"
+        >
+          <span className=" flex items-center justify-center absolute text-[12px] top-[-8px] right-[-8px] rounded-full  bg-borderGrey w-4 h-4">
             {productCount}
           </span>
           <CartIcon />
@@ -109,7 +116,7 @@ function Navbar({ isMobile }: Props) {
                   alt="user avatar"
                   width={96}
                   height={96}
-                  className=" w-5 h-5 rounded-full"
+                  className=" w-5 h-5 rounded-full duration-200 hover:scale-[1.2] active:scale-[1]"
                 />
               ) : (
                 <UserAvatarIcon />

@@ -14,7 +14,7 @@ async function Profile() {
       <Container className="">
         <div className=" flex justify-between w-full">
           <Typography fontFamily="secondary" size="32px" tag="h2">
-            Welcome {session?.user?.name}
+            Welcome, {session?.user?.name}
           </Typography>
           <div className=" flex items-center gap-4">
             <div>
