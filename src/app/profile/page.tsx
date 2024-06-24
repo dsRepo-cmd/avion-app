@@ -2,6 +2,7 @@ import Container from "@/components/Container/Container";
 import Page from "@/components/Page/Page";
 import Typography from "@/components/Typography/Typography";
 import { authConfig } from "@/configs/auth";
+import PopularProductListings from "@/features/PopularProductListings/PopularProductListings";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 
@@ -10,30 +11,34 @@ async function Profile() {
 
   return (
     <Page>
-      <Container className=" gap-5 justify-start">
+      <Container className="">
         <div className=" flex justify-between w-full">
-          <Typography size="24px" tag="h2">
-            Wellcome {session?.user?.name}
+          <Typography fontFamily="secondary" size="32px" tag="h2">
+            Welcome {session?.user?.name}
           </Typography>
-          <div className=" flex gap-4 items-top">
-            <div className=" rounded-full overflow-hidden self-center">
+          <div className=" flex items-center gap-4">
+            <div>
               <Image
+                className=" rounded-full"
                 src={
                   session?.user?.image
                     ? session.user.image
                     : "/google-square.svg"
                 }
                 alt={session?.user?.name ? session.user.name : "user-avatar"}
-                width={22}
-                height={22}
+                width={20}
+                height={20}
               />
             </div>
-            <Typography size="20px" tag="h2">
+
+            <Typography fontFamily="primary" size="20px" tag="h2">
               {session?.user?.email}
             </Typography>
           </div>
         </div>
       </Container>
+
+      <PopularProductListings />
     </Page>
   );
 }

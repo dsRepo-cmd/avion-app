@@ -11,6 +11,7 @@ import Link from "next/link";
 import SignInIcon from "@/assets/sign-in.svg";
 import SignUpIcon from "@/assets/sign-up.svg";
 import SignOutIcon from "@/assets/sign-out.svg";
+import ProfileIcon from "@/assets/user-avatar.svg";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
@@ -35,6 +36,16 @@ function Navbar({ isMobile }: Props) {
           id: "1",
           content: (
             <Typography tag="span" size="16px" fontFamily="primary">
+              Profile
+            </Typography>
+          ),
+          href: "/profile",
+          svg: ProfileIcon,
+        },
+        {
+          id: "2",
+          content: (
+            <Typography tag="span" size="16px" fontFamily="primary">
               Sign Out
             </Typography>
           ),
@@ -44,7 +55,7 @@ function Navbar({ isMobile }: Props) {
       ]
     : [
         {
-          id: "2",
+          id: "3",
           content: (
             <Typography tag="span" size="16px" fontFamily="primary">
               Sign in
@@ -54,7 +65,7 @@ function Navbar({ isMobile }: Props) {
           svg: SignInIcon,
         },
         {
-          id: "3",
+          id: "4",
           content: (
             <Typography tag="span" size="16px" fontFamily="primary">
               Sign up
