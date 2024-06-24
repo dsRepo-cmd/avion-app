@@ -16,6 +16,7 @@ import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
 import { useCart } from "@/lib/CartContext";
+import Icon from "@/components/Icon/Icon";
 
 interface Props {
   isMobile?: boolean;
@@ -99,9 +100,12 @@ function Navbar({ isMobile }: Props) {
           href={"/cart"}
           title="cart"
         >
-          <span className=" flex items-center justify-center absolute text-[12px] top-[-8px] right-[-8px] rounded-full  bg-borderGrey w-4 h-4">
-            {productCount}
-          </span>
+          {productCount && (
+            <span className=" flex items-center justify-center absolute text-[12px] top-[-8px] right-[-8px] rounded-full  bg-borderGrey w-4 h-4">
+              {productCount}
+            </span>
+          )}
+
           <CartIcon />
         </Link>
 
@@ -119,7 +123,12 @@ function Navbar({ isMobile }: Props) {
                   className=" w-5 h-5 rounded-full duration-200 hover:scale-[1.2] active:scale-[1]"
                 />
               ) : (
-                <UserAvatarIcon />
+                <Icon
+                  className="duration-200 hover:scale-[1.2] active:scale-[1]"
+                  width={16}
+                  height={16}
+                  Svg={UserAvatarIcon}
+                />
               )}
             </>
           }
