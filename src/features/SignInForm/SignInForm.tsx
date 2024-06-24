@@ -46,7 +46,9 @@ function SignInForm() {
       redirect: false,
     });
     if (res?.ok) {
-      router.push("/login");
+      router.push("/profile");
+
+      return;
     }
 
     if (res && !res.error) {

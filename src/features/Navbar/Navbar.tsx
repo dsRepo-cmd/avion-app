@@ -11,6 +11,7 @@ import Link from "next/link";
 import SignInIcon from "@/assets/sign-in.svg";
 import SignUpIcon from "@/assets/sign-up.svg";
 import SignOutIcon from "@/assets/sign-out.svg";
+import ProfileIcon from "@/assets/user-avatar.svg";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
@@ -35,6 +36,16 @@ function Navbar({ isMobile }: Props) {
           id: "1",
           content: (
             <Typography tag="span" size="16px" fontFamily="primary">
+              Profile
+            </Typography>
+          ),
+          href: "/profile",
+          svg: ProfileIcon,
+        },
+        {
+          id: "2",
+          content: (
+            <Typography tag="span" size="16px" fontFamily="primary">
               Sign Out
             </Typography>
           ),
@@ -44,7 +55,7 @@ function Navbar({ isMobile }: Props) {
       ]
     : [
         {
-          id: "2",
+          id: "3",
           content: (
             <Typography tag="span" size="16px" fontFamily="primary">
               Sign in
@@ -54,7 +65,7 @@ function Navbar({ isMobile }: Props) {
           svg: SignInIcon,
         },
         {
-          id: "3",
+          id: "4",
           content: (
             <Typography tag="span" size="16px" fontFamily="primary">
               Sign up
@@ -68,7 +79,10 @@ function Navbar({ isMobile }: Props) {
   return (
     <nav className=" relative flex justify-between items-center py-5  bg-white z-50">
       <div>
-        <button className=" md:hidden" title="search">
+        <button
+          className=" md:hidden duration-200 hover:scale-[1.2] active:scale-[1]"
+          title="search"
+        >
           <SearchIcon />
         </button>
       </div>
@@ -80,8 +94,12 @@ function Navbar({ isMobile }: Props) {
       </AppLink>
 
       <div className=" flex gap-4 justify-center items-center">
-        <Link className=" relative" href={"/cart"} title="cart">
-          <span className=" absolute text-[14px] top-[-8px] right-[-8px]">
+        <Link
+          className=" relative duration-200 hover:scale-[1.2] active:scale-[1]"
+          href={"/cart"}
+          title="cart"
+        >
+          <span className=" flex items-center justify-center absolute text-[12px] top-[-8px] right-[-8px] rounded-full  bg-borderGrey w-4 h-4">
             {productCount}
           </span>
           <CartIcon />
@@ -98,7 +116,7 @@ function Navbar({ isMobile }: Props) {
                   alt="user avatar"
                   width={96}
                   height={96}
-                  className=" w-5 h-5 rounded-full"
+                  className=" w-5 h-5 rounded-full duration-200 hover:scale-[1.2] active:scale-[1]"
                 />
               ) : (
                 <UserAvatarIcon />

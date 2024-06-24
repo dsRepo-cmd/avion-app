@@ -132,7 +132,7 @@ function CheckboxChange({ searchParams, isMobile }: Props) {
                 <CheckBox
                   key={option}
                   name={option.toLowerCase()}
-                  checked={selectedPriceRanges.includes(option)}
+                  checked={selectedDesigners.includes(option)}
                   value={option}
                   onChange={() =>
                     handleCheckboxChange(option, SortCategory.Designer)

@@ -16,10 +16,11 @@ interface CartContextType {
     productId: string,
     newQuantity: number
   ) => Promise<void>;
-  addProductToCart: (productId: string, quantity: number) => Promise<void>;
+  addProductToCart: (productId: string, quantity: number) => Promise<boolean>;
   loading: boolean;
-  message: string;
-  productCount: number;
+  productCount: number | null;
+  successMessage: string | null;
+  resetSuccessMessage: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -32,7 +33,7 @@ export const CartProvider = ({ children }: Props) => {
   const { data: session } = useSession();
   const userEmail = session?.user?.email || null;
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const temporaryCartId = "temporaryCartId";
   const localStorageCartKey = "userCart";
@@ -56,10 +57,14 @@ export const CartProvider = ({ children }: Props) => {
     status: "active",
   });
 
-  const [productCount, setProductCount] = useState(0);
+  const [productCount, setProductCount] = useState<number | null>(null);
 
   useEffect(() => {
-    setProductCount(cart.products.length);
+    if (cart.products.length === 0) {
+      setProductCount(null);
+    } else {
+      setProductCount(cart.products.length);
+    }
   }, [cart.products]);
 
   useEffect(() => {
@@ -77,22 +82,17 @@ export const CartProvider = ({ children }: Props) => {
     }
   }, [cart, isClient]);
 
-  const handleApiResponse = async (response: Response) => {
-    const data: ICartData = await response.json();
-    if (response.ok) {
-      setCart(data.cart);
-      if (data.message) setMessage(data.message);
-    } else {
-      console.error(data.message, "Error:", data.error);
-    }
-  };
-
   const fetchCart = useCallback(async () => {
     setLoading(true);
     try {
       if (userIdentifier) {
         const res = await fetch(`/api/cart?userIdentifier=${userIdentifier}`);
-        await handleApiResponse(res);
+        const data: ICartData = await res.json();
+        if (res.ok) {
+          setCart(data.cart);
+        } else {
+          console.error(data.message, "Error:", data.error);
+        }
       }
     } catch (error) {
       console.error("Error fetching cart:", error);
@@ -116,7 +116,12 @@ export const CartProvider = ({ children }: Props) => {
           },
           body: JSON.stringify({ userIdentifier, productId }),
         });
-        await handleApiResponse(res);
+        const data: ICartData = await res.json();
+        if (res.ok) {
+          setCart(data.cart);
+        } else {
+          console.error(data.message, "Error:", data.error);
+        }
       } catch (error) {
         console.error("Error removing product:", error);
       } finally {
@@ -137,12 +142,20 @@ export const CartProvider = ({ children }: Props) => {
           },
           body: JSON.stringify({ userIdentifier, productId, quantity }),
         });
-        await handleApiResponse(res);
+        const data: ICartData = await res.json();
+        if (res.ok) {
+          setCart(data.cart);
+          setSuccessMessage("Product has been added to cart.");
+          return true;
+        } else {
+          console.error(data.message, "Error:", data.error);
+        }
       } catch (error) {
         console.error("Error adding product to cart:", error);
       } finally {
         setLoading(false);
       }
+      return false;
     },
     [userIdentifier]
   );
@@ -162,7 +175,12 @@ export const CartProvider = ({ children }: Props) => {
             quantity: newQuantity,
           }),
         });
-        await handleApiResponse(res);
+        const data: ICartData = await res.json();
+        if (res.ok) {
+          setCart(data.cart);
+        } else {
+          console.error(data.message, "Error:", data.error);
+        }
       } catch (error) {
         console.error("Error updating product quantity:", error);
       } finally {
@@ -172,6 +190,10 @@ export const CartProvider = ({ children }: Props) => {
     [userIdentifier]
   );
 
+  const resetSuccessMessage = useCallback(() => {
+    setSuccessMessage(null);
+  }, []);
+
   return (
     <CartContext.Provider
       value={{
@@ -180,8 +202,9 @@ export const CartProvider = ({ children }: Props) => {
         updateProductQuantity,
         addProductToCart,
         loading,
-        message,
         productCount,
+        successMessage,
+        resetSuccessMessage,
       }}
     >
       {children}
