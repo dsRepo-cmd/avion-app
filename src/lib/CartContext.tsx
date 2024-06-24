@@ -18,7 +18,7 @@ interface CartContextType {
   ) => Promise<void>;
   addProductToCart: (productId: string, quantity: number) => Promise<boolean>;
   loading: boolean;
-  productCount: number;
+  productCount: number | null;
   successMessage: string | null;
   resetSuccessMessage: () => void;
 }
@@ -57,10 +57,14 @@ export const CartProvider = ({ children }: Props) => {
     status: "active",
   });
 
-  const [productCount, setProductCount] = useState(0);
+  const [productCount, setProductCount] = useState<number | null>(null);
 
   useEffect(() => {
-    setProductCount(cart.products.length);
+    if (cart.products.length === 0) {
+      setProductCount(null);
+    } else {
+      setProductCount(cart.products.length);
+    }
   }, [cart.products]);
 
   useEffect(() => {
