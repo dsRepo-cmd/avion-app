@@ -8,6 +8,10 @@ export const hero = {
   title: "It started with a small idea",
   text: "A global brand with local beginnings, our story begain in a small studio in South London in early 2014",
   link: { href: "/products", name: "View collection" },
+  image: {
+    src: "/home-place3.png",
+    alt: "home-place",
+  },
 };
 
 export const info = {
@@ -18,4 +22,8 @@ export const info = {
     "Handmade, and lovingly crafted furniture and homeware is what we live, breathe and design so our Chelsea boutique become the hotbed for the London interior design community.",
   ],
   link: { href: "/products", name: "Get in touch" },
+  image: {
+    src: "/home-place2.png",
+    alt: "home-place",
+  },
 };

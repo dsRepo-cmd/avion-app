@@ -4,8 +4,6 @@ import Typography from "@/components/Typography/Typography";
 import { hero } from "@/data/about";
 import Image from "next/image";
 
-import React from "react";
-
 function Hero() {
   return (
     <Container>
