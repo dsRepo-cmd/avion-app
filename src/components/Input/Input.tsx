@@ -1,14 +1,24 @@
+"use client";
 import { cn } from "@/lib/utils";
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useState } from "react";
+import EyeShowIcon from "@/assets/eye.svg";
+import EyeHideIcon from "@/assets/eye-hide.svg";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
   className?: string;
   error?: string;
+  password?: boolean;
 }
 
-function Input({ name, label, className, error, ...props }: Props) {
+function Input({ name, label, className, error, password, ...props }: Props) {
+  const [isHide, setHide] = useState(password);
+
+  const onChangeView = () => {
+    setHide(!isHide);
+  };
+
   return (
     <div className="relative z-0 w-full my-3">
       <input

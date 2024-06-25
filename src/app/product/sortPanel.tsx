@@ -1,6 +1,7 @@
 "use client";
-import SortChange from "@/features/SortChange/SortChange";
-import CheckboxChange from "@/features/CheckboxChange/CheckboxChange";
+
+import CheckboxFilter from "@/features/CheckboxFilter/CheckboxFilter";
+import SortFilter from "@/features/SortFilter/SortFilter";
 
 interface Props {
   searchParams: Record<string, any>;
@@ -10,8 +11,8 @@ interface Props {
 const SortPanel = ({ searchParams, isMobile }: Props) => {
   return (
     <div className="flex justify-between items-center">
-      <CheckboxChange isMobile={isMobile} searchParams={searchParams} />
-      <SortChange isMobile={isMobile} searchParams={searchParams} />
+      <CheckboxFilter isMobile={isMobile} searchParams={searchParams} />
+      <SortFilter isMobile={isMobile} searchParams={searchParams} />
     </div>
   );
 };

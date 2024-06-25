@@ -3,6 +3,8 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { ProductCategory, ProductCreate, ProductType } from "../types";
 import Page from "@/components/Page/Page";
+import Input from "@/components/Input/Input";
+import Button from "@/components/Button/Button";
 
 const CreateProduct = () => {
   const [loading, setLoading] = useState(false);
@@ -64,60 +66,99 @@ const CreateProduct = () => {
 
   return (
     <Page>
-      <div className="flex flex-col gap-10 p-10">
+      <div className="flex flex-col gap-10 p-10 bg-lightGrey w-full">
         <h1>Create a New Product</h1>
         <form
           className="flex flex-col w-1/2 gap-4"
           onSubmit={handleCreateProduct}
         >
-          <div className="flex gap-10">
-            <label htmlFor="name">Name</label>
-            <input
-              className="bg-lightGrey grow px-4 py-2"
-              type="text"
-              id="name"
-              name="name"
-              value={productData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="flex gap-10">
-            <label htmlFor="description">Description</label>
-            <textarea
-              className="bg-lightGrey grow px-4 py-2"
-              id="description"
-              name="description"
-              value={productData.description}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="flex gap-10">
-            <label htmlFor="price">Price</label>
-            <input
-              className="bg-lightGrey grow px-4 py-2"
-              type="number"
-              id="price"
-              name="price"
-              value={productData.price}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="flex gap-10">
-            <label htmlFor="designer">Designer</label>
-            <input
-              className="bg-lightGrey grow px-4 py-2"
-              type="text"
-              id="designer"
-              name="designer"
-              value={productData.designer}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="flex gap-10">
+          <Input
+            label="Name"
+            value={productData.name}
+            id="name"
+            name="name"
+            onChange={handleChange}
+            required
+          />
+
+          <Input
+            label="Description"
+            id="description"
+            name="description"
+            value={productData.description}
+            onChange={handleChange}
+            required
+          />
+
+          <Input
+            label="Price"
+            type="number"
+            id="price"
+            name="price"
+            value={productData.price}
+            onChange={handleChange}
+            required
+          />
+
+          <Input
+            label="Designer"
+            type="text"
+            id="designer"
+            name="designer"
+            value={productData.designer}
+            onChange={handleChange}
+            required
+          />
+
+          <Input
+            label="Height"
+            type="number"
+            id="height"
+            name="height"
+            value={productData.height}
+            onChange={handleChange}
+            required
+          />
+
+          <Input
+            label="Width"
+            type="number"
+            id="width"
+            name="width"
+            value={productData.width}
+            onChange={handleChange}
+            required
+          />
+
+          <Input
+            label="Depth"
+            type="number"
+            id="depth"
+            name="depth"
+            value={productData.depth}
+            onChange={handleChange}
+            required
+          />
+
+          <Input
+            label="Brand"
+            type="text"
+            id="brand"
+            name="brand"
+            value={productData.brand}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label="Image URL"
+            type="text"
+            id="imageSrc"
+            name="imageSrc"
+            value={productData.imageSrc}
+            onChange={handleChange}
+            required
+          />
+          <div className="flex items-center gap-10">
             <label htmlFor="productType">Product Type</label>
             <select
               className="bg-lightGrey px-4 py-2"
@@ -133,7 +174,7 @@ const CreateProduct = () => {
               ))}
             </select>
           </div>
-          <div className="flex gap-10">
+          <div className="flex items-center gap-10">
             <label htmlFor="category">Category</label>
             <select
               className="bg-lightGrey px-4 py-2"
@@ -149,70 +190,10 @@ const CreateProduct = () => {
               ))}
             </select>
           </div>
-          <div className="flex gap-10">
-            <label htmlFor="height">Height</label>
-            <input
-              className="bg-lightGrey px-4 py-2"
-              type="number"
-              id="height"
-              name="height"
-              value={productData.height}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="flex gap-10">
-            <label htmlFor="width">Width</label>
-            <input
-              className="bg-lightGrey px-4 py-2"
-              type="number"
-              id="width"
-              name="width"
-              value={productData.width}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="flex gap-10">
-            <label htmlFor="depth">Depth</label>
-            <input
-              className="bg-lightGrey px-4 py-2"
-              type="number"
-              id="depth"
-              name="depth"
-              value={productData.depth}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="flex gap-10">
-            <label htmlFor="brand">Brand</label>
-            <input
-              className="bg-lightGrey grow px-4 py-2"
-              type="text"
-              id="brand"
-              name="brand"
-              value={productData.brand}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="flex gap-10">
-            <label htmlFor="imageSrc">Image URL</label>
-            <input
-              className="bg-lightGrey grow px-4 py-2"
-              type="text"
-              id="imageSrc"
-              name="imageSrc"
-              value={productData.imageSrc}
-              onChange={handleChange}
-              required
-            />
-          </div>
 
-          <button disabled={loading} type="submit">
+          <Button disabled={loading} type="submit">
             Create Product
-          </button>
+          </Button>
         </form>
       </div>
     </Page>

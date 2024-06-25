@@ -2,7 +2,6 @@ import Image from "next/image";
 import Typography from "../Typography/Typography";
 import Link from "next/link";
 import { ProductListing } from "@/app/product/types";
-import { Key } from "react";
 
 interface Props {
   product: ProductListing;

@@ -55,6 +55,7 @@ function AddToCard({ product }: Props) {
           <Typography
             tag="span"
             fontFamily="primary"
+            color="light"
             className=" absolute left-0  top-[-30px]"
           >
             {successMessage}

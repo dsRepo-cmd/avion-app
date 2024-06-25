@@ -52,7 +52,11 @@ function CartMenu() {
           {cart.products.map((cartItem) => (
             <tr key={cartItem.product._id} className="border-none">
               <td className="py-4  flex items-center gap-5">
-                <Link href={`/product/${cartItem.product._id}`} title="product">
+                <Link
+                  href={`/product/${cartItem.product._id}`}
+                  className=" duration-200 hover:scale-[1.04]"
+                  title="product"
+                >
                   <Image
                     src={cartItem.product.imageSrc}
                     alt={cartItem.product._id}
@@ -114,7 +118,7 @@ function CartMenu() {
                   <DeleteIcon />
                 </Button>
               </td>
-              <td className="py-4 text-end md:hidden w-14">
+              <td className="py-4 text-end md:hidden w-16">
                 <Typography tag="p" size="18px" fontFamily="primary">
                   £{cartItem.product.price * cartItem.quantity}
                 </Typography>
@@ -136,12 +140,12 @@ function CartMenu() {
       )}
 
       <div className="flex self-end flex-col gap-3 mt-6 items-end">
-        <h3 className="text-xl font-semibold">
+        <Typography tag="h3" size="24px" fontFamily="secondary">
           Subtotal £{calculateSubtotal()}
-        </h3>
-        <p className="text-gray-500">
+        </Typography>
+        <Typography tag="p" size="16px" fontFamily="primary">
           Taxes and shipping are calculated at checkout
-        </p>
+        </Typography>
         <Button disabled={cart.products.length === 0}>Go to checkout</Button>
       </div>
     </Container>
