@@ -107,7 +107,7 @@ function SignUpForm() {
         </Typography>
 
         <Input
-          type="name"
+          type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
@@ -133,6 +133,7 @@ function SignUpForm() {
           onChange={handleChange}
           error={errors.password}
           label="Password"
+          password
           required
         />
 

@@ -88,6 +88,7 @@ function SignInForm() {
         onChange={handleChange}
         error={errors.password}
         value={formData.password}
+        password
         required
       />
 
