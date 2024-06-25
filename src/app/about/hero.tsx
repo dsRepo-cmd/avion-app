@@ -7,8 +7,8 @@ import Image from "next/image";
 function Hero() {
   return (
     <Container>
-      <div className=" flex gap-4 h-full ">
-        <div className=" flex flex-col justify-between w-full p-16 bg-darkPrimary">
+      <div className=" flex gap-4 h-full lg:flex-col ">
+        <div className=" flex flex-col justify-between w-full p-16 bg-darkPrimary gap-8 lg:p-8 ">
           <div className=" flex flex-col gap-3">
             <Typography
               size="32px"
@@ -35,8 +35,8 @@ function Hero() {
         <div className=" w-full">
           <Image
             className=" object-cover w-full h-full"
-            src={"/home-place3.png"}
-            alt="/home-place3.png"
+            src={hero.image.src}
+            alt={hero.image.alt}
             width={630}
             height={478}
           />

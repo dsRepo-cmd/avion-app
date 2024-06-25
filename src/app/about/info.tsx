@@ -6,17 +6,18 @@ import Image from "next/image";
 
 function Info() {
   return (
-    <Container className=" bg-lightGrey p-0">
-      <div className=" flex w-full ">
+    <Container className=" bg-lightGrey p-0 lg:p-0">
+      <div className=" flex w-full lg:flex-col ">
         <div className=" w-full">
           <Image
             src={info.image.src}
             alt={info.image.alt}
             width={720}
             height={603}
+            className=" object-cover w-full h-full"
           />
         </div>
-        <div className="flex flex-col justify-between p-20 w-full">
+        <div className="flex flex-col justify-between p-20 w-full gap-10 lg:px-6 lg:py-9">
           <div className=" flex flex-col gap-6">
             <Typography size="24px" fontFamily="secondary" tag="h1">
               {info.title}
