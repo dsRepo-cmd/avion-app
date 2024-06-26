@@ -52,7 +52,11 @@ function CartMenu() {
           {cart.products.map((cartItem) => (
             <tr key={cartItem.product._id} className="border-none">
               <td className="py-4  flex items-center gap-5">
-                <Link href={`/product/${cartItem.product._id}`} title="product">
+                <Link
+                  href={`/product/${cartItem.product._id}`}
+                  className=" duration-200 hover:scale-[1.04]"
+                  title="product"
+                >
                   <Image
                     src={cartItem.product.imageSrc}
                     alt={cartItem.product._id}
@@ -114,7 +118,7 @@ function CartMenu() {
                   <DeleteIcon />
                 </Button>
               </td>
-              <td className="py-4 text-end md:hidden w-14">
+              <td className="py-4 text-end md:hidden w-16">
                 <Typography tag="p" size="18px" fontFamily="primary">
                   £{cartItem.product.price * cartItem.quantity}
                 </Typography>
@@ -135,14 +139,24 @@ function CartMenu() {
         </Typography>
       )}
 
-      <div className="flex self-end flex-col gap-3 mt-6 items-end">
-        <h3 className="text-xl font-semibold">
-          Subtotal £{calculateSubtotal()}
-        </h3>
-        <p className="text-gray-500">
+      <div className="flex self-end flex-col gap-3 mt-6 items-end md:self-stretch">
+        <div className=" flex gap-4 items-end">
+          <Typography tag="h3" size="20px" fontFamily="secondary">
+            Subtotal
+          </Typography>
+          <Typography tag="h3" size="24px" fontFamily="secondary">
+            £{calculateSubtotal()}
+          </Typography>
+        </div>
+        <Typography tag="p" size="14px" fontFamily="primary">
           Taxes and shipping are calculated at checkout
-        </p>
-        <Button disabled={cart.products.length === 0}>Go to checkout</Button>
+        </Typography>
+        <Button
+          className=" md:self-stretch"
+          disabled={cart.products.length === 0}
+        >
+          Go to checkout
+        </Button>
       </div>
     </Container>
   );

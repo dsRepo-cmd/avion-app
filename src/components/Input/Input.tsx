@@ -1,17 +1,41 @@
 import { cn } from "@/lib/utils";
-import { InputHTMLAttributes } from "react";
+import { HTMLInputTypeAttribute, InputHTMLAttributes, useState } from "react";
+import EyeShowIcon from "@/assets/eye.svg";
+import EyeHideIcon from "@/assets/eye-hide.svg";
+import Icon from "../Icon/Icon";
+import Button from "../Button/Button";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
   className?: string;
   error?: string;
+  password?: boolean;
+  type?: HTMLInputTypeAttribute;
 }
 
-function Input({ name, label, className, error, ...props }: Props) {
+function Input({
+  name,
+  label,
+  className,
+  error,
+  password,
+  type = "text",
+  ...props
+}: Props) {
+  const [isHide, setHide] = useState(password);
+  const EyeIcon = isHide ? EyeShowIcon : EyeHideIcon;
+
+  const onChangeView = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setHide(!isHide);
+    console.log(EyeIcon, isHide);
+  };
+
   return (
     <div className="relative z-0 w-full my-3">
       <input
+        type={isHide ? "password" : "text"}
         name={name}
         className={cn(
           "peer block px-8 py-4 w-full bg-transparent  appearance-none  focus:ring-0 ",
@@ -30,6 +54,17 @@ function Input({ name, label, className, error, ...props }: Props) {
       >
         {label}
       </label>
+      {password && (
+        <Button
+          variant="clear"
+          type="button"
+          bgColor="white"
+          className=" duration-200 absolute right-7 top-[18px]"
+          onClick={onChangeView}
+        >
+          <Icon Svg={EyeIcon} width={22} height={22} />
+        </Button>
+      )}
       {error && <div className="text-error text-sm mt-1 ms-1">{error}</div>}
     </div>
   );

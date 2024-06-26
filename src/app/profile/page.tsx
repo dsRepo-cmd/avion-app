@@ -11,7 +11,7 @@ async function Profile() {
 
   return (
     <Page>
-      <Container className="">
+      <Container>
         <div className=" flex justify-between w-full">
           <Typography fontFamily="secondary" size="32px" tag="h2">
             Welcome, {session?.user?.name}

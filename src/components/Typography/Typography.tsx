@@ -27,7 +27,7 @@ const sizeClasses: Record<FontSizes, string> = {
   "20px": "text-xl",
   "24px": "text-2xl",
   "32px": "text-3xl",
-  "36px": "text[36px]",
+  "36px": "text-[36px]",
 };
 
 const fontFamilyClasses: Record<FontFamily, string> = {

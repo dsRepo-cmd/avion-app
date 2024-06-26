@@ -4,8 +4,9 @@ import React from "react";
 import Typography from "../../components/Typography/Typography";
 
 import Divider from "../../components/Divider/Divider";
-import EmailSignUpForm from "../../components/InputForm/EmailSignUpForm";
+import EmailSignUpForm from "../../components/EmailSignUpForm/EmailSignUpForm";
 import AppLink from "../../components/AppLink/AppLink";
+import Icon from "@/components/Icon/Icon";
 
 function Footer() {
   return (
@@ -107,9 +108,14 @@ function Footer() {
         <ul className=" flex items-center justify-center gap-6 lg:hidden">
           {footer.socialLinks.map((link) => (
             <li key={link.id}>
-              <Link title={link.title} href={link.href} target="_blank">
-                {link.icon}
-              </Link>
+              <AppLink
+                variant="clear"
+                className=" duration-200 hover:scale-[1.2] "
+                title={link.title}
+                href={link.href}
+              >
+                <Icon width={18} height={18} Svg={link.icon} />
+              </AppLink>
             </li>
           ))}
         </ul>

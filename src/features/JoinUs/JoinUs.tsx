@@ -1,5 +1,5 @@
 import Container from "@/components/Container/Container";
-import EmailSignUpForm from "@/components/InputForm/EmailSignUpForm";
+import EmailSignUpForm from "@/components/EmailSignUpForm/EmailSignUpForm";
 
 import Typography from "@/components/Typography/Typography";
 import { homeEmailSignUp } from "@/data/home";
