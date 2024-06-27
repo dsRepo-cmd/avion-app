@@ -1,7 +1,7 @@
 "use client";
 
 import CartIcon from "@/assets/shopping-cart.svg";
-import SearchIcon from "@/assets/search.svg";
+
 import UserAvatarIcon from "@/assets/user-avatar.svg";
 import Typography from "../../components/Typography/Typography";
 import AppLink from "../../components/AppLink/AppLink";
@@ -17,6 +17,7 @@ import useIsMobile from "@/lib/useIsMobile";
 import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
 import { useCart } from "@/lib/CartContext";
 import Icon from "@/components/Icon/Icon";
+import Search from "../Search/Search";
 
 interface Props {
   isMobile?: boolean;
@@ -79,14 +80,7 @@ function Navbar({ isMobile }: Props) {
 
   return (
     <nav className=" relative flex justify-between items-center py-5  bg-white z-50">
-      <div>
-        <button
-          className=" md:hidden duration-200 hover:scale-[1.2] active:scale-[1]"
-          title="search"
-        >
-          <SearchIcon />
-        </button>
-      </div>
+      <Search />
 
       <AppLink variant="clear" href={"/"}>
         <Typography fontFamily="secondary" size="24px" tag="h3" color="black">

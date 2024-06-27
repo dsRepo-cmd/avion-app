@@ -16,7 +16,7 @@ export interface DropdownItem {
   svg?: FC<React.SVGProps<SVGSVGElement>>;
 }
 
-type Position = "bottom" | "bottomStart" | "bottomEnd";
+type Position = "bottom" | "bottomStart" | "bottomEnd" | "right";
 
 interface Props {
   items?: DropdownItem[];
@@ -32,6 +32,7 @@ const positionClasses: { [key in Position]: string } = {
   bottom: "",
   bottomStart: "top-10 left-0",
   bottomEnd: "top-10  right-0",
+  right: "left-10 top-[-16px]",
 };
 
 const Dropdown: FC<Props> = ({
@@ -137,7 +138,7 @@ const Dropdown: FC<Props> = ({
             }
 
             return (
-              <li key={item.id} className="flex flex-col">
+              <li key={item.id} className="flex flex-col w-full">
                 {content}
               </li>
             );

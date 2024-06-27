@@ -48,6 +48,7 @@ export const getProducts = async (searchParams: SearchParams) => {
     limit = 12,
     designer,
     priceRange,
+    query,
   } = searchParams;
 
   // Filtration ==================================================
@@ -57,6 +58,15 @@ export const getProducts = async (searchParams: SearchParams) => {
     if (category) filter.category = category;
     if (productType) filter.productType = { $in: productType.split(",") };
     if (designer) filter.designer = { $in: designer.split(",") };
+
+    if (query) {
+      filter.$or = [
+        { name: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+        { designer: { $regex: query, $options: "i" } },
+        { brand: { $regex: query, $options: "i" } },
+      ];
+    }
 
     if (priceRange) {
       const ranges = priceRange.split(",");
