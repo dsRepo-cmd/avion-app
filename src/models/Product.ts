@@ -38,6 +38,13 @@ const ProductSchema = new mongoose.Schema<IProduct>(
   { timestamps: true }
 );
 
+ProductSchema.index({
+  name: "text",
+  description: "text",
+  designer: "text",
+  category: "text",
+});
+
 const ProductModel: Model<IProduct> =
   mongoose.models.Product || mongoose.model<IProduct>("Product", ProductSchema);
 

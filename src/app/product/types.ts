@@ -94,6 +94,7 @@ export interface SearchParams {
   limit: string;
   priceRange: string;
   designer: string;
+  query: string;
 }
 //++++++++++++++ CART
 export interface ICartData {

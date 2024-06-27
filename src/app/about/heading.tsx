@@ -6,7 +6,7 @@ import { heading } from "@/data/about";
 function Heading() {
   return (
     <Container>
-      <div className=" flex gap-20 px-16  items-start lg:flex-col lg:p-6">
+      <div className=" flex gap-20 px-16  items-start lg:flex-col lg:p-0">
         <Typography size="36px" fontFamily="secondary" tag="h1">
           {heading.title}
         </Typography>
