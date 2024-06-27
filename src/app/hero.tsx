@@ -9,14 +9,14 @@ function Hero() {
   return (
     <Container className=" lg:p-0">
       <div className=" relative flex w-full ">
-        <div className=" flex flex-col justify-between w-2/3 bg-darkPrimary  p-[60px] lg:w-full  lg:pt-10 lg:px-4 pb-28">
+        <div className=" flex flex-col gap-10 justify-between w-[60%] bg-darkPrimary  p-[60px] lg:w-full  lg:pt-10 lg:px-4 ">
           <div className=" flex flex-col gap-10 items-start ">
             <Typography
               tag="h2"
               size="32px"
               color="white"
               fontFamily="secondary"
-              className=" max-w-[480px] lg:w-full lg:pb-20"
+              className=" max-w-[480px] lg:w-full"
             >
               {homeHero.title}
             </Typography>
@@ -25,7 +25,7 @@ function Hero() {
               href={"/product"}
               variant="filled"
               bgColor="light"
-              className=" lg:w-[calc(100%-48px)] lg:translate-x-[24px] lg:absolute z-40 lg:bottom-6 lg:left-0  "
+              className=" lg:hidden "
             >
               {homeHero.button}
             </AppLink>
@@ -40,16 +40,27 @@ function Hero() {
           >
             {homeHero.text}
           </Typography>
+
+          <AppLink
+            href={"/product"}
+            variant="filled"
+            bgColor="light"
+            className=" hidden lg:inline-block"
+          >
+            {homeHero.button}
+          </AppLink>
         </div>
 
-        <Image
-          src={homeHero.imgSrc}
-          alt="hero-image"
-          width={520}
-          height={584}
-          className=" sm:hidden lg:hidden "
-          priority
-        />
+        <div className=" w-[40%] lg:hidden">
+          <Image
+            src={homeHero.imgSrc}
+            alt="hero-image"
+            width={520}
+            height={584}
+            className="object-cover w-full h-full    "
+            priority
+          />
+        </div>
       </div>
     </Container>
   );

@@ -24,7 +24,7 @@ function Container({
   return (
     <div
       className={cn(
-        " flex  flex-col justify-between p-20 w-full h-full lg:px-6 lg:py-12 ",
+        " flex  flex-col justify-between p-14 w-full h-full lg:px-6 lg:py-12 ",
         bgColorClasses[bgColor],
         className
       )}

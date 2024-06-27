@@ -110,7 +110,7 @@ const Dropdown: FC<Props> = ({
           className
         )}
       >
-        <ul>
+        <div>
           {items?.map((item) => {
             const content = (
               <button
@@ -131,20 +131,20 @@ const Dropdown: FC<Props> = ({
 
             if (item.href) {
               return (
-                <li key={item.id} className="flex flex-col">
+                <div key={item.id} className="flex flex-col">
                   <Link href={item.href}>{content}</Link>
-                </li>
+                </div>
               );
             }
 
             return (
-              <li key={item.id} className="flex flex-col w-full">
+              <div key={item.id} className="flex flex-col w-full">
                 {content}
-              </li>
+              </div>
             );
           })}
           {children}
-        </ul>
+        </div>
       </div>
     </div>
   );
