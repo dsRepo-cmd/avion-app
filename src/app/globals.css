@@ -14,11 +14,6 @@
   --grey: #726e8d;
 }
 
-html {
-  overflow-x: hidden;
-  margin-right: calc(-1 * (100vw - 100%));
-}
-
 body {
   display: flex;
   flex-direction: column;
@@ -40,8 +35,8 @@ body {
   width: 8px;
   scrollbar-color: var(--white);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--dark-primary);
   border-radius: 10px;
-  border: 1px solid #6c6c6c;
 }
