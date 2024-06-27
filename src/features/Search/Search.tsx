@@ -23,7 +23,7 @@ function Search() {
         position="bottomStart"
         trigger={<SearchIcon />}
       >
-        <div className=" p-4 bg-lightGrey ">
+        <div className=" p-2">
           <Input onChange={handleSearchChange} label="Search" name="search" />
         </div>
       </Dropdown>

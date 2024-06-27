@@ -1,5 +1,6 @@
 import {
   Product,
+  ProductCategory,
   ProductListing,
   SearchParams,
   SortBy,
@@ -55,7 +56,9 @@ export const getProducts = async (searchParams: SearchParams) => {
 
   try {
     const filter: any = {};
-    if (category) filter.category = category;
+    if (category && category !== ProductCategory.AllProducts) {
+      filter.category = category;
+    }
     if (productType) filter.productType = { $in: productType.split(",") };
     if (designer) filter.designer = { $in: designer.split(",") };
 
