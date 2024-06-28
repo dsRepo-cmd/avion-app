@@ -110,7 +110,7 @@ function Footer() {
             <li key={link.id}>
               <AppLink
                 variant="clear"
-                className=" duration-200 hover:scale-[1.2] "
+                className=" duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2]"
                 title={link.title}
                 href={link.href}
               >

@@ -36,7 +36,8 @@ function AppLink({
   return (
     <Link
       className={cn(
-        " text-nowrap duration-300 hover:opacity-70 text-center ",
+        " text-nowrap duration-300 text-center ",
+        "hover-hover:hover:opacity-70 hover-none:active:opacity-70",
         variantClasses[variant],
         bgColorClasses[bgColor],
         className

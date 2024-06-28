@@ -48,7 +48,7 @@ function Input({
       <label
         htmlFor={name}
         className={cn(
-          "absolute  px-1 text-[#999999] duration-300 transform -translate-y-10 scale-75 top-4 left-2 z-50 origin-[0]  peer-focus:text-[black] peer-placeholder-shown:left-[28px]   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:left-0 peer-focus:-translate-y-10 ",
+          "absolute pointer-events-none  px-1 text-[#999999] duration-300 transform -translate-y-10 scale-75 top-4 left-2 z-50 origin-[0]  peer-focus:text-[black] peer-placeholder-shown:left-[28px]   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:left-0 peer-focus:-translate-y-10 ",
 
           error && " text-error peer-focus:text-error"
         )}

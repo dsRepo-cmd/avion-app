@@ -114,11 +114,11 @@ function Navbar({ isMobile }: Props) {
                   alt="user avatar"
                   width={96}
                   height={96}
-                  className=" w-5 h-5 rounded-full duration-200 hover:scale-[1.2] active:scale-[1]"
+                  className=" w-5 h-5 rounded-full duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2] active:scale-[1]"
                 />
               ) : (
                 <Icon
-                  className="duration-200 hover:scale-[1.2] active:scale-[1]"
+                  className="duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2] active:scale-[1]"
                   width={16}
                   height={16}
                   Svg={UserAvatarIcon}
