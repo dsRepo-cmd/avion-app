@@ -90,7 +90,7 @@ function Navbar({ isMobile }: Props) {
 
       <div className=" flex gap-4 justify-center items-center">
         <Link
-          className=" relative duration-200 hover:scale-[1.2] active:scale-[1]"
+          className=" relative duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2] active:scale-[1]"
           href={"/cart"}
           title="cart"
         >

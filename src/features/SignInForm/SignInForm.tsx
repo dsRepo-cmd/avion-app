@@ -67,7 +67,7 @@ function SignInForm() {
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-      <Typography size="24px" tag="h2">
+      <Typography size="24px" className=" mb-3" fontFamily="secondary" tag="h2">
         Sign In
       </Typography>
 
