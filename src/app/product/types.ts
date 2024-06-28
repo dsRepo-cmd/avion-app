@@ -34,6 +34,7 @@ export enum Designer {
 }
 
 export enum ProductCategory {
+  AllProducts = "All products",
   PlantPots = "Plant pots",
   Ceramics = "Ceramics",
   Tables = "Tables",

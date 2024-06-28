@@ -31,6 +31,12 @@ body {
   }
 }
 
-/* .button {
-  width: calc(100% - 48px);
-} */
+::-webkit-scrollbar {
+  width: 8px;
+  scrollbar-color: var(--white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-primary);
+  border-radius: 10px;
+}

@@ -13,7 +13,7 @@ interface Props {
   searchParams: Record<string, any>;
   isMobile?: boolean;
 }
-function SortFilter({ searchParams, isMobile }: Props) {
+function Sorting({ searchParams, isMobile }: Props) {
   const router = useRouter();
   const [currentSortBy, setCurrentSortBy] = useState<SortBy>(SortBy.dateAdded);
   const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.asc);
@@ -61,7 +61,7 @@ function SortFilter({ searchParams, isMobile }: Props) {
         trigger={isShowMobile ? "Sorting" : currentSortBy}
       >
         {Object.values(SortBy).map((sortBy) => (
-          <li className=" w-full" key={sortBy}>
+          <div className=" w-full" key={sortBy}>
             <button
               className={cn(
                 "grid grid-cols-2 w-full items-start justify-items-start gap-3 p-3 hover:bg-lightGrey ",
@@ -92,11 +92,11 @@ function SortFilter({ searchParams, isMobile }: Props) {
                 </span>
               )}
             </button>
-          </li>
+          </div>
         ))}
       </Dropdown>
     </div>
   );
 }
 
-export default SortFilter;
+export default Sorting;
