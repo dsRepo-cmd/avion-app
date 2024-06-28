@@ -59,7 +59,7 @@ function Input({
         <Button
           variant="clear"
           type="button"
-          bgColor="white"
+          bgColor="clear"
           className=" duration-200 absolute right-7 top-[18px]"
           onClick={onChangeView}
         >
