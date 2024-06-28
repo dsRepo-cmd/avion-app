@@ -39,7 +39,7 @@ export const CartProvider = ({ children }: Props) => {
   const localStorageCartKey = "userCart";
   const isClient = typeof window !== "undefined";
   const storedCartId = isClient ? localStorage.getItem(temporaryCartId) : null;
-  const [tempUserId, setTempUserId] = useState(storedCartId || uuidv4());
+  const tempUserId = storedCartId || uuidv4();
 
   useEffect(() => {
     if (!userEmail && !storedCartId && isClient) {
