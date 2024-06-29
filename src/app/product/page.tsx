@@ -1,13 +1,13 @@
 import { headers } from "next/headers";
 import Listing from "@/components/Listing/Listing";
-import { SearchParams } from "../types";
-import { getProducts } from "@/lib/products";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import Page from "@/components/Page/Page";
+import { getProducts } from "@/lib/products";
+import { isMobile } from "@/lib/isMobile";
+import { SearchParams } from "../types";
 import SortPanel from "./sortPanel";
 import Title from "./title";
-import { isMobile } from "@/lib/isMobile";
 
 interface Props {
   searchParams: SearchParams;

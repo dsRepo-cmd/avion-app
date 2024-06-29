@@ -1,7 +1,7 @@
 import AppLink from "@/components/AppLink/AppLink";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
-import { heading } from "@/data/about";
+import { heading } from "./data";
 
 function Heading() {
   return (

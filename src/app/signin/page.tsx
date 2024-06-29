@@ -1,13 +1,11 @@
+import React, { Suspense } from "react";
+import Link from "next/link";
+import SignInForm from "@/features/SignInForm/SignInForm";
 import Container from "@/components/Container/Container";
 import Divider from "@/components/Divider/Divider";
 import GoogleButton from "@/features/GoogleButton/GoogleButton";
 import Page from "@/components/Page/Page";
-
-import SignInForm from "@/features/SignInForm/SignInForm";
 import Typography from "@/components/Typography/Typography";
-
-import Link from "next/link";
-import React, { Suspense } from "react";
 
 async function Signin() {
   return (

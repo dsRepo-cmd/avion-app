@@ -1,11 +1,11 @@
 "use client";
 
 import { FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import DownIcon from "@/assets/chevron-down.svg";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
-import DownIcon from "@/assets/chevron-down.svg";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 
 export interface DropdownItem {
   disabled?: boolean;

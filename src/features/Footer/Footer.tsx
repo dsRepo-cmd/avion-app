@@ -4,7 +4,7 @@ import Divider from "../../components/Divider/Divider";
 import EmailSignUpForm from "../../components/EmailSignUpForm/EmailSignUpForm";
 import SocialLinks from "../SocialLinks/SocialLinks";
 import LinksList from "@/components/LinksList/LinksList";
-import { categories, copyright, joinUs, menu, ourCompany } from "@/data/footer";
+import { categories, copyright, joinUs, menu, ourCompany } from "./data";
 
 function Footer() {
   return (

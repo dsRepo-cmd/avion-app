@@ -1,10 +1,9 @@
 "use client";
-
-import SignUpForm from "@/features/SignUpForm/SignUpForm";
-import Container from "@/components/Container/Container";
-import Link from "next/link";
 import { Suspense } from "react";
+import Link from "next/link";
+import SignUpForm from "@/features/SignUpForm/SignUpForm";
 import GoogleButton from "@/features/GoogleButton/GoogleButton";
+import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import Divider from "@/components/Divider/Divider";
 import Page from "@/components/Page/Page";

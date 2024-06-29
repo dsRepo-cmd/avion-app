@@ -1,5 +1,4 @@
 "use client";
-
 import CheckboxFilter from "@/features/CheckboxFilter/CheckboxFilter";
 import Sorting from "@/features/Sorting/Sorting";
 

@@ -1,12 +1,11 @@
 "use client";
+import Link from "next/link";
+import Image from "next/image";
 import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Counter from "@/components/Counter/Counter";
 import Typography from "@/components/Typography/Typography";
-import Image from "next/image";
 import DeleteIcon from "@/assets/x.svg";
-import Link from "next/link";
-
 import { truncateDescription } from "@/lib/cart";
 import { useCart } from "@/lib/CartContext";
 

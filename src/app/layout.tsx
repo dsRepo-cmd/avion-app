@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-
+import { headers } from "next/headers";
 import localFont from "next/font/local";
-import "./globals.css";
 import Header from "@/features/Header/Header";
 import Footer from "@/features/Footer/Footer";
-import Providers from "@/components/Providers/Providers";
-import { headers } from "next/headers";
-import { isMobile } from "@/lib/isMobile";
 import Banner from "@/features/Banner/Banner";
+import Providers from "@/components/Providers/Providers";
+import { isMobile } from "@/lib/isMobile";
+import "./globals.css";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Regular.woff",
