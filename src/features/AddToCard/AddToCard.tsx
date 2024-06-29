@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "@/app/product/types";
+import { Product } from "@/app/types";
 import Button from "@/components/Button/Button";
 import Counter from "@/components/Counter/Counter";
 import Typography from "@/components/Typography/Typography";

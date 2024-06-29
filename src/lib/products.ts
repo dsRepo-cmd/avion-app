@@ -5,7 +5,7 @@ import {
   SearchParams,
   SortBy,
   SortOrder,
-} from "@/app/product/types";
+} from "@/app/types";
 import ProductModel, { IProduct } from "@/models/Product";
 import dbConnect from "./dbConnect";
 

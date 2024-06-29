@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
-import { ICartBase, ICartData } from "@/app/product/types";
+import { ICartBase, ICartData } from "@/app/types";
 
 interface CartContextType {
   cart: ICartBase;

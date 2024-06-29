@@ -1,4 +1,4 @@
-import { ProductListing } from "@/app/product/types";
+import { ProductListing } from "@/app/types";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import AppLink from "../AppLink/AppLink";

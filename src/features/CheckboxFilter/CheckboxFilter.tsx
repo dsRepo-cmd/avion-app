@@ -1,9 +1,4 @@
-import {
-  Designer,
-  PriceRange,
-  ProductType,
-  SortCategory,
-} from "@/app/product/types";
+import { Designer, PriceRange, ProductType, SortCategory } from "@/app/types";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import Dropdown from "@/components/Dropdown/Dropdown";
 import Typography from "@/components/Typography/Typography";

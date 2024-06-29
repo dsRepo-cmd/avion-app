@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import Listing from "@/components/Listing/Listing";
-import { SearchParams } from "./types";
+import { SearchParams } from "../types";
 import { getProducts } from "@/lib/products";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";

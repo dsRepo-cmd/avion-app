@@ -1,4 +1,4 @@
-import { ProductListing, SearchParams } from "@/app/product/types";
+import { ProductListing, SearchParams } from "@/app/types";
 
 import AppLink from "../AppLink/AppLink";
 import { cn } from "@/lib/utils";
