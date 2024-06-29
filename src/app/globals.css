@@ -23,6 +23,7 @@ body {
   align-items: center;
   justify-content: space-between;
   overflow-x: hidden;
+  font-family: var(--font-family);
 }
 
 @layer utilities {
@@ -38,5 +39,4 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--dark-primary);
-  border-radius: 10px;
 }

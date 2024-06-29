@@ -1,5 +1,5 @@
-import Typography from "@/components/Typography/Typography";
 import Image from "next/image";
+import Typography from "@/components/Typography/Typography";
 
 interface Props {
   category?: string | undefined;

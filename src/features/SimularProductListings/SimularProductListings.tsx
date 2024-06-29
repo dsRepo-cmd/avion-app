@@ -1,4 +1,4 @@
-import { SortBy } from "@/app/product/types";
+import { SortBy } from "@/app/types";
 import Listings from "@/components/Listings/Listings";
 import { getPopularProducts } from "@/lib/products";
 

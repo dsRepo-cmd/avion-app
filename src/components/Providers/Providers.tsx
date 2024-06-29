@@ -1,7 +1,7 @@
 "use client";
-
-import { CartProvider } from "@/lib/CartContext";
 import { SessionProvider } from "next-auth/react";
+import { CartProvider } from "@/lib/CartContext";
+
 interface Props {
   children?: React.ReactNode;
 }

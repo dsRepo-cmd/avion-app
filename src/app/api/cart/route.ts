@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { ICartData } from "@/app/product/types";
+import { ICartData } from "@/app/types";
 import { transformCart } from "@/lib/cart";
 import dbConnect from "@/lib/dbConnect";
 import CartModel, { ICart } from "@/models/Cart";

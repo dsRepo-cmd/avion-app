@@ -1,7 +1,16 @@
+import Image from "next/image";
 import Button from "@/components/Button/Button";
 import Typography from "@/components/Typography/Typography";
-import { homeInfo } from "@/data/home";
-import Image from "next/image";
+
+const info = {
+  title: "From a studio in London to a global brand with over 400 outlets",
+  texts: [
+    "When we started Avion, the idea was simple. Make high quality furniture affordable and available for the mass market.",
+    "Handmade, and lovingly crafted furniture and homeware is what we live, breathe and design so our Chelsea boutique become the hotbed for the London interior design community.",
+  ],
+
+  button: "Get in touch",
+};
 
 function Info() {
   return (
@@ -9,10 +18,10 @@ function Info() {
       <div className=" flex flex-col gap-6 justify-between p-20 lg:px-6 lg:py-12 lg:gap-6">
         <div className="flex flex-col gap-6">
           <Typography tag="h3" size="24px" fontFamily="secondary">
-            {homeInfo.title}
+            {info.title}
           </Typography>
 
-          {homeInfo.texts.map((text, index) => (
+          {info.texts.map((text, index) => (
             <Typography
               tag="p"
               size="16px"
@@ -25,7 +34,7 @@ function Info() {
           ))}
         </div>
         <Button bgColor="gray" className=" self-start lg:w-full">
-          {homeInfo.button}
+          {info.button}
         </Button>
       </div>
 

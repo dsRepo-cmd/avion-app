@@ -1,9 +1,14 @@
+import Image from "next/image";
 import AppLink from "@/components/AppLink/AppLink";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
-import { homeHero } from "@/data/home";
-import Image from "next/image";
-import React from "react";
+
+const hero = {
+  title: "The furniture brand for the future, with timeless designs",
+  button: "View collection",
+  text: "A new era in eco friendly furniture with Avelon, the French luxury retail brand with nice fonts, tasteful colors and a beautiful way to display things digitally using modern web technologies.",
+  imgSrc: "/hero-image.png",
+};
 
 function Hero() {
   return (
@@ -18,7 +23,7 @@ function Hero() {
               fontFamily="secondary"
               className=" max-w-[480px] lg:w-full"
             >
-              {homeHero.title}
+              {hero.title}
             </Typography>
 
             <AppLink
@@ -27,7 +32,7 @@ function Hero() {
               bgColor="light"
               className=" lg:hidden "
             >
-              {homeHero.button}
+              {hero.button}
             </AppLink>
           </div>
 
@@ -38,7 +43,7 @@ function Hero() {
             fontFamily="primary"
             className=" "
           >
-            {homeHero.text}
+            {hero.text}
           </Typography>
 
           <AppLink
@@ -47,13 +52,13 @@ function Hero() {
             bgColor="light"
             className=" hidden lg:inline-block"
           >
-            {homeHero.button}
+            {hero.button}
           </AppLink>
         </div>
 
         <div className=" w-[40%] lg:hidden">
           <Image
-            src={homeHero.imgSrc}
+            src={hero.imgSrc}
             alt="hero-image"
             width={520}
             height={584}

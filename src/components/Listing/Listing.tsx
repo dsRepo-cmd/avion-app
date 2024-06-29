@@ -1,7 +1,6 @@
-import { ProductListing, SearchParams } from "@/app/product/types";
-
-import AppLink from "../AppLink/AppLink";
+import { ProductListing, SearchParams } from "@/app/types";
 import { cn } from "@/lib/utils";
+import AppLink from "../AppLink/AppLink";
 import ListingItem from "../ListingItem/ListingItem";
 
 interface Props {

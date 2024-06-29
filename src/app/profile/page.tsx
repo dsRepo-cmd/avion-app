@@ -1,10 +1,10 @@
+import Image from "next/image";
+import { getServerSession } from "next-auth";
+import { authConfig } from "@/configs/auth";
+import PopularProductListings from "@/features/PopularProductListings/PopularProductListings";
 import Container from "@/components/Container/Container";
 import Page from "@/components/Page/Page";
 import Typography from "@/components/Typography/Typography";
-import { authConfig } from "@/configs/auth";
-import PopularProductListings from "@/features/PopularProductListings/PopularProductListings";
-import { getServerSession } from "next-auth";
-import Image from "next/image";
 
 async function Profile() {
   const session = await getServerSession(authConfig);
@@ -12,7 +12,7 @@ async function Profile() {
   return (
     <Page>
       <Container>
-        <div className=" flex justify-between w-full">
+        <div className=" flex justify-between w-full lg:flex-col gap-10">
           <Typography fontFamily="secondary" size="32px" tag="h2">
             Welcome, {session?.user?.name}
           </Typography>

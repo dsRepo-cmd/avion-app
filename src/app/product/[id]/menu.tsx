@@ -1,10 +1,9 @@
+import Image from "next/image";
+import AddToCard from "@/features/AddToCard/AddToCard";
 import Container from "@/components/Container/Container";
 import Divider from "@/components/Divider/Divider";
 import Typography from "@/components/Typography/Typography";
-import AddToCard from "@/features/AddToCard/AddToCard";
 import { getProductsByID } from "@/lib/products";
-
-import Image from "next/image";
 
 interface Props {
   id: string;

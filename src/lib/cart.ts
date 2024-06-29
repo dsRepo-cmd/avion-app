@@ -1,4 +1,4 @@
-import { ICartBase } from "@/app/product/types";
+import { ICartBase } from "@/app/types";
 import { ICart } from "@/models/Cart";
 
 export const transformCart = (cart: ICart): ICartBase => ({

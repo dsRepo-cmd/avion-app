@@ -1,6 +1,6 @@
 import mongoose, { Model, Schema, Document, Types } from "mongoose";
 
-import { ICartBase } from "@/app/product/types";
+import { ICartBase } from "@/app/types";
 
 export interface ICartProduct {
   product: Types.ObjectId;

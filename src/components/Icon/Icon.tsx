@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
 import React, { FC } from "react";
+import { cn } from "@/lib/utils";
 
 interface Props extends React.SVGProps<SVGSVGElement> {
   className?: string;

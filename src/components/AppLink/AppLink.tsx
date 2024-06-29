@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { ComponentProps } from "react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 type AppLinkVariant = "clear" | "filled" | "clear-zommed";
 type BackgroundColor = "black" | "light" | "clear" | "gray" | "white";

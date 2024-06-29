@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-
+import { headers } from "next/headers";
 import localFont from "next/font/local";
-import "./globals.css";
 import Header from "@/features/Header/Header";
 import Footer from "@/features/Footer/Footer";
+import Banner from "@/features/Banner/Banner";
 import Providers from "@/components/Providers/Providers";
-import { headers } from "next/headers";
 import { isMobile } from "@/lib/isMobile";
+import "./globals.css";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Regular.woff",
@@ -41,6 +41,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${satoshi.variable} ${clashDisplay.variable}`}>
         <Providers>
+          <Banner />
           <Header isMobile={mobileCheck} />
           {children}
           <Footer />

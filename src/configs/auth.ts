@@ -1,9 +1,9 @@
-import dbConnect from "@/lib/dbConnect";
-import UserModel from "@/models/User";
 import type { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcryptjs";
+import dbConnect from "@/lib/dbConnect";
+import UserModel from "@/models/User";
 
 export const authConfig: AuthOptions = {
   providers: [

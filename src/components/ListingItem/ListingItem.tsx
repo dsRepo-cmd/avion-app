@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Typography from "../Typography/Typography";
 import Link from "next/link";
-import { ProductListing } from "@/app/product/types";
+import { ProductListing } from "@/app/types";
+import Typography from "../Typography/Typography";
 
 interface Props {
   product: ProductListing;
