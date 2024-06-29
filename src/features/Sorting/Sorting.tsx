@@ -47,7 +47,7 @@ function Sorting({ searchParams, isMobile }: Props) {
     <div className="flex items-center">
       <Typography
         className="md:hidden"
-        tag="h5"
+        tag="span"
         size="14px"
         fontFamily="primary"
       >

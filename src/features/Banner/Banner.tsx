@@ -6,11 +6,16 @@ import Button from "@/components/Button/Button";
 import Typography from "@/components/Typography/Typography";
 import { useEffect, useState } from "react";
 
+const banner = {
+  icon: DeliveryIcon,
+  text: " Free delivery on all orders over £50 with code easter checkout",
+};
+
 function Banner() {
   const [isBannerVisible, setIsBannerVisible] = useState(false);
 
   useEffect(() => {
-    const isBannerClosed = localStorage.getItem("isBannerClosed");
+    const isBannerClosed = sessionStorage.getItem("isBannerClosed");
     if (!isBannerClosed) {
       setIsBannerVisible(true);
     }
@@ -18,7 +23,7 @@ function Banner() {
 
   const handleClose = () => {
     setIsBannerVisible(false);
-    localStorage.setItem("isBannerClosed", "true");
+    sessionStorage.setItem("isBannerClosed", "true");
   };
 
   if (!isBannerVisible) return null;
@@ -30,14 +35,14 @@ function Banner() {
           className=" min-w-[20px] min-h-[20px]"
           width={20}
           height={20}
-          Svg={DeliveryIcon}
+          Svg={banner.icon}
         />
         <Typography color="white" fontFamily="primary" size="14px" tag="span">
-          Free delivery on all orders over £50 with code easter checkout
+          {banner.text}
         </Typography>
       </div>
       <div className=" flex justify-end">
-        <Button onClick={handleClose} variant="clear">
+        <Button title="close" onClick={handleClose} variant="clear">
           <Icon width={20} height={20} Svg={CloseIcon} />
         </Button>
       </div>

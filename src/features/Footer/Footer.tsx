@@ -18,9 +18,8 @@ function Footer() {
 
         <div className=" flex flex-col w-full gap-3 ">
           <Typography fontFamily="secondary" size="16px" color="white" tag="h5">
-            {joinUs.title}
+            {joinUs}
           </Typography>
-
           <EmailSignUpForm variant="dark" className=" w-full " />
         </div>
       </div>
@@ -31,6 +30,7 @@ function Footer() {
         <Typography fontFamily="primary" size="14px" color="white" tag="span">
           {copyright}
         </Typography>
+
         <SocialLinks />
       </div>
     </footer>
