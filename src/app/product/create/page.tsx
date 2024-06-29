@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, use, useEffect, useState } from "react";
 import {
   Brand,
   Designer,
@@ -11,20 +11,23 @@ import {
 import Page from "@/components/Page/Page";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
+import Typography from "@/components/Typography/Typography";
 
 const CreateProduct = () => {
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
   const [productData, setProductData] = useState<ProductCreate>({
     name: "",
     description: "",
     price: 0,
-    designer: "",
+    designer: Designer.BiggieSmalls,
     productType: ProductType.Accessories,
     category: ProductCategory.Ceramics,
     height: 0,
     width: 0,
     depth: 0,
-    brand: "",
+    brand: Brand.BestCeramics,
     imageSrc: "/",
   });
 
@@ -44,6 +47,16 @@ const CreateProduct = () => {
     });
   };
 
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage("");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
   const handleCreateProduct = async (e: FormEvent) => {
     setLoading(true);
     e.preventDefault();
@@ -60,13 +73,16 @@ const CreateProduct = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setLoading(false);
-        return data;
+        console.log(data);
+        setMessage(data);
+        return;
       } else {
         alert("Failed to create product");
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -172,13 +188,14 @@ const CreateProduct = () => {
               value={productData.designer}
               onChange={handleChange}
             >
-              {Object.values(Designer).map((type) => (
-                <option key={type} value={type}>
-                  {type}
+              {Object.values(Designer).map((designer) => (
+                <option key={designer} value={designer}>
+                  {designer}
                 </option>
               ))}
             </select>
           </div>
+
           <div className="flex items-center gap-10">
             <label htmlFor="productType">Product Type</label>
             <select
@@ -212,9 +229,20 @@ const CreateProduct = () => {
             </select>
           </div>
 
-          <Button disabled={loading} type="submit">
-            Create Product
-          </Button>
+          <div className=" relative t">
+            <Typography
+              className=" absolute top-2 left-0"
+              tag="span"
+              fontFamily="primary"
+              color="light"
+            >
+              {message}
+            </Typography>
+
+            <Button className=" mt-14" disabled={loading} type="submit">
+              Create Product
+            </Button>
+          </div>
         </form>
       </div>
     </Page>
