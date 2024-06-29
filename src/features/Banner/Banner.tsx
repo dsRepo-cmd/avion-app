@@ -24,7 +24,7 @@ function Banner() {
   if (!isBannerVisible) return null;
 
   return (
-    <div className=" flex justify-between bg-darkPrimary items-center w-full text-white p-2">
+    <div className=" flex justify-between bg-darkPrimary items-center w-full text-white p-2 z-50">
       <div className=" flex grow gap-6 self-center justify-center">
         <Icon
           className=" min-w-[20px] min-h-[20px]"
