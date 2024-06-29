@@ -23,7 +23,7 @@ function ListingItem({ product }: Props) {
             height={375}
           />
 
-          <Typography fontFamily="secondary" size="20px" tag="h4">
+          <Typography fontFamily="secondary" size="20px" tag="h3">
             {product.name}
           </Typography>
 

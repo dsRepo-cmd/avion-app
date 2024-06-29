@@ -37,6 +37,7 @@ function Input({
       <input
         type={isHide ? "password" : "text"}
         name={name}
+        id={name}
         className={cn(
           "peer block px-8 py-4 w-full bg-transparent  appearance-none  focus:ring-0 ",
           error && "text-error  outline-[#f44336]",

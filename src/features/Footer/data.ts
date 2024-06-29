@@ -100,8 +100,5 @@ export const ourCompany: LinksList = {
     },
   ],
 };
-export const joinUs = {
-  title: "Join our mailing list",
-  button: "Sign up",
-};
+export const joinUs = "Join our mailing list";
 export const copyright = "Copyright 2022 Avion LTD";

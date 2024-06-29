@@ -95,6 +95,7 @@ const Dropdown: FC<Props> = ({
         variant="clear"
         bgColor="white"
         onClick={toggleOpen}
+        aria-label="trigger"
       >
         {trigger}
         {isDownIcon && <Icon width={8} height={8} Svg={DownIcon} />}

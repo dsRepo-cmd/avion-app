@@ -1,7 +1,6 @@
 import Container from "@/components/Container/Container";
 import Icon from "@/components/Icon/Icon";
 import Typography from "@/components/Typography/Typography";
-
 import DeliveryIcon from "@/assets/delivery.svg";
 import CheckmarkIcon from "@/assets/checkmark-outline.svg";
 import PurchaseIcon from "@/assets/purchase.svg";

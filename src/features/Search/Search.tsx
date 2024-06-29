@@ -32,7 +32,13 @@ function Search() {
         }
       >
         <div className=" p-2">
-          <Input onChange={handleSearchChange} label="Search" name="search" />
+          <Input
+            onChange={handleSearchChange}
+            label="Search"
+            aria-label="Search"
+            name="search"
+            type="search"
+          />
         </div>
       </Dropdown>
     </div>
