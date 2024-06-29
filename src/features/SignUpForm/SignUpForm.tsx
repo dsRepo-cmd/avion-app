@@ -12,6 +12,8 @@ function SignUpForm() {
 
   const router = useRouter();
 
+  const isLoading = sessionStatus === "loading";
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -95,14 +97,15 @@ function SignUpForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  if (sessionStatus === "loading") {
-    return <h1>Loading...</h1>;
-  }
-
   return (
     sessionStatus !== "authenticated" && (
       <form className="flex flex-col gap-1" onSubmit={handleSubmit}>
-        <Typography size="24px" className=" mb-3" tag="h2">
+        <Typography
+          size="24px"
+          className=" mb-3"
+          fontFamily="secondary"
+          tag="h2"
+        >
           Sign Up
         </Typography>
 
@@ -114,6 +117,7 @@ function SignUpForm() {
           error={errors.name}
           label="Name"
           required
+          disabled={isLoading}
         />
 
         <Input
@@ -124,6 +128,7 @@ function SignUpForm() {
           error={errors.email}
           label="Email"
           required
+          disabled={isLoading}
         />
 
         <Input
@@ -134,10 +139,11 @@ function SignUpForm() {
           error={errors.password}
           label="Password"
           password
+          disabled={isLoading}
           required
         />
 
-        <Button className=" mt-4" type="submit">
+        <Button disabled={isLoading} className=" mt-4" type="submit">
           Sign Up
         </Button>
         {errors.signUp && <div className=" text-error">{errors.signUp}</div>}

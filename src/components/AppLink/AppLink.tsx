@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ComponentProps } from "react";
 
-type AppLinkVariant = "clear" | "filled";
+type AppLinkVariant = "clear" | "filled" | "clear-zommed";
 type BackgroundColor = "black" | "light" | "clear" | "gray" | "white";
 
 interface Props extends ComponentProps<typeof Link> {
@@ -13,8 +13,10 @@ interface Props extends ComponentProps<typeof Link> {
 }
 
 const variantClasses: { [key in AppLinkVariant]: string } = {
-  clear: "",
-  filled: "py-4 px-8 text-base  ",
+  clear: "hover-hover:hover:opacity-70 hover-none:active:opacity-70",
+  filled:
+    "py-4 px-8 text-base  hover-hover:hover:opacity-70 hover-none:active:opacity-70",
+  "clear-zommed": "hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2]",
 };
 
 const bgColorClasses: { [key in BackgroundColor]: string } = {
@@ -36,7 +38,8 @@ function AppLink({
   return (
     <Link
       className={cn(
-        " text-nowrap duration-300 hover:opacity-70 text-center ",
+        " text-nowrap duration-300 text-center ",
+
         variantClasses[variant],
         bgColorClasses[bgColor],
         className

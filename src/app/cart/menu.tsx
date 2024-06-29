@@ -54,7 +54,7 @@ function CartMenu() {
               <td className="py-4  flex items-center gap-5">
                 <Link
                   href={`/product/${cartItem.product._id}`}
-                  className=" duration-200 hover:scale-[1.04]"
+                  className=" duration-200 hover-hover:hover:scale-[1.04] hover-none:active:scale-[1.04] "
                   title="product"
                 >
                   <Image

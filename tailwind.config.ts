@@ -38,6 +38,10 @@ const config: Config = {
         second: ["var(--second-family)"],
         default: ["var(--second-family)"],
       },
+      screens: {
+        "hover-hover": { raw: "(hover: hover)" },
+        "hover-none": { raw: "(hover: none)" },
+      },
     },
   },
   plugins: [],

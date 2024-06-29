@@ -33,6 +33,11 @@ export enum Designer {
   TomYorke = "Tom Yorke",
 }
 
+export enum Brand {
+  BestFurniture = "Best Furniture",
+  BestCeramics = "Best Ceramics",
+}
+
 export enum ProductCategory {
   AllProducts = "All products",
   PlantPots = "Plant pots",

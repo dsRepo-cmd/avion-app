@@ -1,7 +1,13 @@
 "use client";
 
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { ProductCategory, ProductCreate, ProductType } from "../types";
+import {
+  Brand,
+  Designer,
+  ProductCategory,
+  ProductCreate,
+  ProductType,
+} from "../types";
 import Page from "@/components/Page/Page";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
@@ -101,16 +107,6 @@ const CreateProduct = () => {
           />
 
           <Input
-            label="Designer"
-            type="text"
-            id="designer"
-            name="designer"
-            value={productData.designer}
-            onChange={handleChange}
-            required
-          />
-
-          <Input
             label="Height"
             type="number"
             id="height"
@@ -141,15 +137,6 @@ const CreateProduct = () => {
           />
 
           <Input
-            label="Brand"
-            type="text"
-            id="brand"
-            name="brand"
-            value={productData.brand}
-            onChange={handleChange}
-            required
-          />
-          <Input
             label="Image URL"
             type="text"
             id="imageSrc"
@@ -158,6 +145,40 @@ const CreateProduct = () => {
             onChange={handleChange}
             required
           />
+
+          <div className="flex items-center gap-10">
+            <label htmlFor="brand">Brand</label>
+            <select
+              className="bg-lightGrey px-4 py-2"
+              id="brand"
+              name="brand"
+              value={productData.brand}
+              onChange={handleChange}
+            >
+              {Object.values(Brand).map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex items-center gap-10">
+            <label htmlFor="designer">Designer</label>
+            <select
+              className="bg-lightGrey px-4 py-2"
+              id="designer"
+              name="designer"
+              value={productData.designer}
+              onChange={handleChange}
+            >
+              {Object.values(Designer).map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="flex items-center gap-10">
             <label htmlFor="productType">Product Type</label>
             <select
