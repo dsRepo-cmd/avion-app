@@ -1,4 +1,5 @@
 import Container from "@/components/Container/Container";
+import Icon from "@/components/Icon/Icon";
 import Typography from "@/components/Typography/Typography";
 import { homeFeatures } from "@/data/home";
 
@@ -18,7 +19,12 @@ function Features() {
               className=" flex grow flex-col gap-2 bg-lightGrey p-12 w-full h-full  md:px-6 md:py-9"
               key={feature.id}
             >
-              {feature.icon}
+              <Icon
+                className=" text-darkPrimary"
+                Svg={feature.icon}
+                width={24}
+                height={24}
+              />
               <Typography
                 className=" mt-2"
                 fontFamily="secondary"
