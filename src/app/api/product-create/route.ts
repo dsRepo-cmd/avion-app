@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const newProduct = new ProductModel(formattedProductData);
     await newProduct.save();
 
-    return NextResponse.json({ newProduct });
+    return NextResponse.json("Product created successfully");
   } catch (error) {
     console.error("Error fetching stories:", error);
     return NextResponse.json(
