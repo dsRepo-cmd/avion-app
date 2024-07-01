@@ -1,4 +1,4 @@
-import { Link } from "@/app/types";
+import { Link } from "@/types/types";
 
 interface LinksList {
   title: string;

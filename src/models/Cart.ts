@@ -1,13 +1,12 @@
+import { CartBase } from "@/types/cart";
 import mongoose, { Model, Schema, Document, Types } from "mongoose";
-
-import { ICartBase } from "@/app/types";
 
 export interface ICartProduct {
   product: Types.ObjectId;
   quantity: number;
 }
 
-export interface ICart extends Document, ICartBase {
+export interface ICart extends Document, CartBase {
   _id: Types.ObjectId;
   updatedAt: Date;
   createdAt: Date;

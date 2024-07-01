@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ProductListing } from "@/app/types";
 import Typography from "../Typography/Typography";
+import { ProductListing } from "@/types/product";
 
 interface Props {
   product: ProductListing;
@@ -13,7 +13,7 @@ function ListingItem({ product }: Props) {
       <li>
         <Link
           className=" duration-300 flex flex-col gap-2 h-full w-full hover-hover:hover:scale-[1.04] hover-none:active:scale-[1.04]"
-          href={`/product/${product._id}`}
+          href={`/product/${product.id_}`}
         >
           <Image
             src={product.imageSrc}

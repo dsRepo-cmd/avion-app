@@ -1,5 +1,5 @@
 "use client";
-import { SortBy, SortOrder } from "@/app/types";
+
 import Typography from "@/components/Typography/Typography";
 import { useState } from "react";
 import ArrowIcon from "@/assets/arrow-up.svg";
@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown from "@/components/Dropdown/Dropdown";
+import { SortBy, SortOrder } from "@/types/product";
 
 interface Props {
   searchParams: Record<string, any>;

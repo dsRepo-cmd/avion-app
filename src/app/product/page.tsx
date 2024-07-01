@@ -5,10 +5,10 @@ import Typography from "@/components/Typography/Typography";
 import Page from "@/components/Page/Page";
 import { getProducts } from "@/lib/products";
 import { isMobile } from "@/lib/isMobile";
-import { SearchParams } from "../types";
 import SortPanel from "./sortPanel";
 import Title from "./title";
 import Spinner from "@/components/Spinner/Spinner";
+import { SearchParams } from "@/types/product";
 
 interface Props {
   searchParams: SearchParams;

@@ -1,16 +1,16 @@
 import { Types } from "mongoose";
-import { ICartData } from "@/app/types";
 import { transformCart } from "@/lib/cart";
 import dbConnect from "@/lib/dbConnect";
 import CartModel, { ICart } from "@/models/Cart";
 import ProductModel from "@/models/Product";
 import { NextRequest, NextResponse } from "next/server";
+import { CartData } from "@/types/cart";
 
 // ================================================= GET
 
 export const GET = async (
   req: NextRequest
-): Promise<NextResponse<Partial<ICartData>>> => {
+): Promise<NextResponse<Partial<CartData>>> => {
   await dbConnect();
   try {
     const url = new URL(req.url);
@@ -62,7 +62,7 @@ export const GET = async (
 
 export const POST = async (
   req: NextRequest
-): Promise<NextResponse<Partial<ICartData>>> => {
+): Promise<NextResponse<Partial<CartData>>> => {
   await dbConnect();
   try {
     const { userIdentifier, productId, quantity } = await req.json();
@@ -137,7 +137,7 @@ export const POST = async (
 
 export const DELETE = async (
   req: NextRequest
-): Promise<NextResponse<Partial<ICartData>>> => {
+): Promise<NextResponse<Partial<CartData>>> => {
   await dbConnect();
   try {
     const { userIdentifier, productId } = await req.json();

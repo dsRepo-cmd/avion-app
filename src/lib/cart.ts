@@ -1,7 +1,7 @@
-import { ICartBase } from "@/app/types";
 import { ICart } from "@/models/Cart";
+import { CartBase } from "@/types/cart";
 
-export const transformCart = (cart: ICart): ICartBase => ({
+export const transformCart = (cart: ICart): CartBase => ({
   id_: cart._id.toString(),
   userIdentifier: cart.userIdentifier,
   products: cart.products,

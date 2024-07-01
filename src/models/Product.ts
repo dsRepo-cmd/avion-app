@@ -1,4 +1,4 @@
-import { ProductType, ProductCategory, Product } from "@/app/types";
+import { Product, ProductCategory, ProductType } from "@/types/product";
 import mongoose, { Model, Document, Types } from "mongoose";
 
 export interface IProduct extends Document, Product {

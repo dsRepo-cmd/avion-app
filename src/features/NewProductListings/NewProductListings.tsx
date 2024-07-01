@@ -1,6 +1,6 @@
-import { SortBy } from "@/app/types";
 import Listings from "@/components/Listings/Listings";
 import { getNewProducts } from "@/lib/products";
+import { SortBy } from "@/types/product";
 
 async function NewProductListings() {
   const newProducts = await getNewProducts();

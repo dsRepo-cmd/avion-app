@@ -7,10 +7,10 @@ import React, {
 } from "react";
 import { useSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
-import { ICartBase, ICartData } from "@/app/types";
+import { CartBase, CartData } from "@/types/cart";
 
 interface CartContextType {
-  cart: ICartBase;
+  cart: CartBase;
   removeProduct: (productId: string) => Promise<void>;
   updateProductQuantity: (
     productId: string,
@@ -53,7 +53,7 @@ export const CartProvider = ({ children }: Props) => {
 
   const userIdentifier = userEmail || tempUserId;
 
-  const [cart, setCart] = useState<ICartBase>({
+  const [cart, setCart] = useState<CartBase>({
     id_: "",
     userIdentifier: userIdentifier,
     products: [],
@@ -91,7 +91,7 @@ export const CartProvider = ({ children }: Props) => {
     try {
       if (userIdentifier) {
         const res = await fetch(`/api/cart?userIdentifier=${userIdentifier}`);
-        const data: ICartData = await res.json();
+        const data: CartData = await res.json();
         if (res.ok) {
           setCart(data.cart);
         } else {
@@ -120,7 +120,7 @@ export const CartProvider = ({ children }: Props) => {
           },
           body: JSON.stringify({ userIdentifier, productId }),
         });
-        const data: ICartData = await res.json();
+        const data: CartData = await res.json();
         if (res.ok) {
           setCart(data.cart);
         } else {
@@ -146,7 +146,7 @@ export const CartProvider = ({ children }: Props) => {
           },
           body: JSON.stringify({ userIdentifier, productId, quantity }),
         });
-        const data: ICartData = await res.json();
+        const data: CartData = await res.json();
         if (res.ok) {
           setCart(data.cart);
           setSuccessMessage("Product has been added to cart.");
@@ -179,7 +179,7 @@ export const CartProvider = ({ children }: Props) => {
             quantity: newQuantity,
           }),
         });
-        const data: ICartData = await res.json();
+        const data: CartData = await res.json();
         if (res.ok) {
           setCart(data.cart);
         } else {

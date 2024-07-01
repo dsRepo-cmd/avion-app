@@ -1,9 +1,9 @@
-import { ProductListing } from "@/app/types";
 import { cn } from "@/lib/utils";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import AppLink from "../AppLink/AppLink";
 import ListingItem from "../ListingItem/ListingItem";
+import { ProductListing } from "@/types/product";
 
 interface Props {
   title?: string;
@@ -24,7 +24,7 @@ function Listings({ title = "", products, href }: Props) {
           )}
         >
           {products.map((product) => (
-            <ListingItem key={product._id} product={product} />
+            <ListingItem key={product.id_} product={product} />
           ))}
         </ul>
 

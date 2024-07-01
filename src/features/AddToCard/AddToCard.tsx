@@ -1,9 +1,10 @@
 "use client";
-import { Product } from "@/app/types";
+
 import Button from "@/components/Button/Button";
 import Counter from "@/components/Counter/Counter";
 import Typography from "@/components/Typography/Typography";
 import { useCart } from "@/lib/CartContext";
+import { Product } from "@/types/product";
 import { useCallback, useEffect, useState } from "react";
 
 interface Props {
