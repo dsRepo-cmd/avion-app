@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import type { InputHTMLAttributes } from "react";
 import Typography from "../Typography/Typography";
 import { cn } from "@/lib/utils";
 
@@ -30,7 +30,7 @@ function CheckBox({ value, onChange, className, ...props }: Props) {
       />
       <label
         onChange={onChange}
-        className="inline-block pl-[0.15rem] hover:cursor-pointer text-nowrap"
+        className="inline-block pl-[0.15rem] hover:cursor-pointer text-nowrap select-none"
         htmlFor={value}
       >
         <Typography color="black" size="16px" fontFamily="primary" tag="p">

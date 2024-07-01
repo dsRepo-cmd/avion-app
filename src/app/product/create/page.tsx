@@ -1,23 +1,28 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, use, useEffect, useState } from "react";
-import {
-  Brand,
-  Designer,
-  ProductCategory,
-  ProductCreate,
-  ProductType,
-} from "../../types";
+import React, {
+  type ChangeEvent,
+  type FormEvent,
+  useEffect,
+  useState,
+} from "react";
 import Page from "@/components/Page/Page";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import Typography from "@/components/Typography/Typography";
+import {
+  Brand,
+  Designer,
+  type Product,
+  ProductCategory,
+  ProductType,
+} from "@/types/product";
 
 const CreateProduct = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [productData, setProductData] = useState<ProductCreate>({
+  const [productData, setProductData] = useState<Partial<Product>>({
     name: "",
     description: "",
     price: 0,

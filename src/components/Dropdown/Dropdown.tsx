@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import DownIcon from "@/assets/chevron-down.svg";
 import Button from "../Button/Button";
@@ -9,21 +9,21 @@ import { cn } from "@/lib/utils";
 
 export interface DropdownItem {
   disabled?: boolean;
-  content?: ReactNode;
+  content?: React.ReactNode;
   onClick?: () => void;
   href?: string;
   id: string;
-  svg?: FC<React.SVGProps<SVGSVGElement>>;
+  svg?: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 type Position = "bottom" | "bottomStart" | "bottomEnd" | "right";
 
 interface Props {
   items?: DropdownItem[];
-  trigger: ReactNode;
+  trigger: React.ReactNode;
   isDownIcon?: boolean;
   className?: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
   classTrigger?: string;
   position?: Position;
 }
@@ -35,7 +35,7 @@ const positionClasses: { [key in Position]: string } = {
   right: "left-10 top-[-16px]",
 };
 
-const Dropdown: FC<Props> = ({
+const Dropdown: React.FC<Props> = ({
   items,
   trigger,
   isDownIcon = false,

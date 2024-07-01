@@ -21,7 +21,7 @@ function CartMenu() {
 
   return (
     <Container bgColor="light">
-      <Typography fontFamily="secondary" size="32px" tag="h1" className=" mb-8">
+      <Typography fontFamily="secondary" size="32px" tag="h2" className=" mb-8">
         Your shopping cart
       </Typography>
 
@@ -49,16 +49,16 @@ function CartMenu() {
 
         <tbody className="border-b border-b-borderGrey">
           {cart.products.map((cartItem) => (
-            <tr key={cartItem.product._id} className="border-none">
+            <tr key={cartItem.product.id} className="border-none">
               <td className="py-4  flex items-center gap-5">
                 <Link
-                  href={`/product/${cartItem.product._id}`}
+                  href={`/product/${cartItem.product.id}`}
                   className=" duration-200 hover-hover:hover:scale-[1.04] hover-none:active:scale-[1.04] "
                   title="product"
                 >
                   <Image
                     src={cartItem.product.imageSrc}
-                    alt={cartItem.product._id}
+                    alt={cartItem.product.id}
                     width={305}
                     height={375}
                     className="w-[109px] h-[134px] object-cover md:min-w-[133px] md:h-[166px] "
@@ -83,14 +83,15 @@ function CartMenu() {
                       value={cartItem.quantity}
                       className="bg-lightGrey "
                       onCountChange={(count) =>
-                        updateProductQuantity(cartItem.product._id, count)
+                        updateProductQuantity(cartItem.product.id, count)
                       }
                     />
 
                     <Button
-                      onClick={() => removeProduct(cartItem.product._id)}
+                      onClick={() => removeProduct(cartItem.product.id)}
                       variant="clear"
                       bgColor="gray"
+                      title="delete"
                     >
                       <DeleteIcon />
                     </Button>
@@ -103,16 +104,17 @@ function CartMenu() {
                     value={cartItem.quantity}
                     className="bg-lightGrey"
                     onCountChange={(count) =>
-                      updateProductQuantity(cartItem.product._id, count)
+                      updateProductQuantity(cartItem.product.id, count)
                     }
                   />
                 </div>
               </td>
               <td className=" py-4 ps-6 md:hidden">
                 <Button
-                  onClick={() => removeProduct(cartItem.product._id)}
+                  onClick={() => removeProduct(cartItem.product.id)}
                   variant="clear"
                   bgColor="gray"
+                  title="delete"
                 >
                   <DeleteIcon />
                 </Button>
@@ -134,7 +136,7 @@ function CartMenu() {
           size="24px"
           tag="h3"
         >
-          No product
+          The cart is empty
         </Typography>
       )}
 

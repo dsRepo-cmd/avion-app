@@ -1,7 +1,8 @@
-import { ProductType, ProductCategory, Product } from "@/app/types";
-import mongoose, { Model, Document, Types } from "mongoose";
+import mongoose from "mongoose";
+import { type Product, ProductCategory, ProductType } from "@/types/product";
+import type { Model, Document, Types } from "mongoose";
 
-export interface IProduct extends Document, Product {
+export interface IProduct extends Document, Omit<Product, "id"> {
   _id: Types.ObjectId;
 }
 

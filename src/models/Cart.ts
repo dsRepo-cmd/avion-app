@@ -1,14 +1,18 @@
-import mongoose, { Model, Schema, Document, Types } from "mongoose";
-
-import { ICartBase } from "@/app/types";
+import mongoose, { Schema } from "mongoose";
+import type { Model, Document, Types } from "mongoose";
+import type { IProduct } from "./Product";
 
 export interface ICartProduct {
-  product: Types.ObjectId;
+  product: IProduct;
   quantity: number;
 }
 
-export interface ICart extends Document, ICartBase {
+export interface ICart extends Document {
   _id: Types.ObjectId;
+  userIdentifier: string;
+  products: ICartProduct[];
+  totalPrice: number;
+  status: string;
   updatedAt: Date;
   createdAt: Date;
 }

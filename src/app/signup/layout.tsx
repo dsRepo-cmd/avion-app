@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: "Avionapp",
 };
 
-export default function RootLayout({
+export default function SignUpLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

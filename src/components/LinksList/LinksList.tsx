@@ -1,4 +1,4 @@
-import { Link } from "@/app/types";
+import type { Link } from "@/types/types";
 import AppLink from "../AppLink/AppLink";
 import Typography from "../Typography/Typography";
 
@@ -15,7 +15,7 @@ function LinksList({ links, title }: Props) {
         fontFamily="secondary"
         size="16px"
         color="white"
-        tag="h4"
+        tag="h3"
       >
         {title}
       </Typography>

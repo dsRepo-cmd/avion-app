@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import { ProductCategory } from "@/app/types";
 import { cn } from "@/lib/utils";
 import AppLink from "../AppLink/AppLink";
+import { ProductCategory } from "@/types/product";
 
 interface Props {
   className?: string;
