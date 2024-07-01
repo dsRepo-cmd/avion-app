@@ -1,4 +1,4 @@
-import { ProductListing } from "./product";
+import type { ProductListing } from "./product";
 
 export interface CartData {
   error?: string;
@@ -13,7 +13,7 @@ export interface CartProduct {
 
 export interface CartBase {
   userIdentifier: string;
-  id_: string;
+  id: string;
   products: CartProduct[];
   totalPrice: number;
   status: string;

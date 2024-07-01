@@ -1,9 +1,9 @@
 "use client";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Button from "@/components/Button/Button";
 import CategoryLinks from "@/components/CategoryLinks/CategoryLinks";
 import Portal from "@/components/Portal/Portal";
 import { cn } from "@/lib/utils";
-import { useCallback, useEffect, useRef, useState } from "react";
 
 function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);

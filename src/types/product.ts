@@ -52,7 +52,7 @@ export enum ProductType {
 }
 
 export interface ProductListing {
-  id_: string;
+  id: string;
   name: string;
   price: number;
   imageSrc: string;

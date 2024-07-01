@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
-import { CartBase, CartData } from "@/types/cart";
+import type { CartBase, CartData } from "@/types/cart";
 
 interface CartContextType {
   cart: CartBase;
@@ -54,7 +54,7 @@ export const CartProvider = ({ children }: Props) => {
   const userIdentifier = userEmail || tempUserId;
 
   const [cart, setCart] = useState<CartBase>({
-    id_: "",
+    id: "",
     userIdentifier: userIdentifier,
     products: [],
     totalPrice: 0,

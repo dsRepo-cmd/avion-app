@@ -8,7 +8,7 @@ import { isMobile } from "@/lib/isMobile";
 import SortPanel from "./sortPanel";
 import Title from "./title";
 import Spinner from "@/components/Spinner/Spinner";
-import { SearchParams } from "@/types/product";
+import type { SearchParams } from "@/types/product";
 
 interface Props {
   searchParams: SearchParams;

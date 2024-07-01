@@ -14,7 +14,7 @@ import SignOutIcon from "@/assets/sign-out.svg";
 import ProfileIcon from "@/assets/user-avatar.svg";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import useIsMobile from "@/lib/useIsMobile";
-import Dropdown, { DropdownItem } from "@/components/Dropdown/Dropdown";
+import Dropdown, { type DropdownItem } from "@/components/Dropdown/Dropdown";
 import { useCart } from "@/lib/CartContext";
 import Icon from "@/components/Icon/Icon";
 import Search from "../Search/Search";

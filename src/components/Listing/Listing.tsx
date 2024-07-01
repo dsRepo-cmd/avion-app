@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import AppLink from "../AppLink/AppLink";
 import ListingItem from "../ListingItem/ListingItem";
-import { ProductListing, SearchParams } from "@/types/product";
+import type { ProductListing, SearchParams } from "@/types/product";
 
 interface Props {
   products: ProductListing[];
@@ -28,7 +28,7 @@ function Listing({ products, currentPage, limit = "12", searchParams }: Props) {
         )}
       >
         {products.map((product) => (
-          <ListingItem key={product.id_} product={product} />
+          <ListingItem key={product.id} product={product} />
         ))}
       </ul>
 

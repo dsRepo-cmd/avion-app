@@ -49,16 +49,16 @@ function CartMenu() {
 
         <tbody className="border-b border-b-borderGrey">
           {cart.products.map((cartItem) => (
-            <tr key={cartItem.product.id_} className="border-none">
+            <tr key={cartItem.product.id} className="border-none">
               <td className="py-4  flex items-center gap-5">
                 <Link
-                  href={`/product/${cartItem.product.id_}`}
+                  href={`/product/${cartItem.product.id}`}
                   className=" duration-200 hover-hover:hover:scale-[1.04] hover-none:active:scale-[1.04] "
                   title="product"
                 >
                   <Image
                     src={cartItem.product.imageSrc}
-                    alt={cartItem.product.id_}
+                    alt={cartItem.product.id}
                     width={305}
                     height={375}
                     className="w-[109px] h-[134px] object-cover md:min-w-[133px] md:h-[166px] "
@@ -83,12 +83,12 @@ function CartMenu() {
                       value={cartItem.quantity}
                       className="bg-lightGrey "
                       onCountChange={(count) =>
-                        updateProductQuantity(cartItem.product.id_, count)
+                        updateProductQuantity(cartItem.product.id, count)
                       }
                     />
 
                     <Button
-                      onClick={() => removeProduct(cartItem.product.id_)}
+                      onClick={() => removeProduct(cartItem.product.id)}
                       variant="clear"
                       bgColor="gray"
                       title="delete"
@@ -104,14 +104,14 @@ function CartMenu() {
                     value={cartItem.quantity}
                     className="bg-lightGrey"
                     onCountChange={(count) =>
-                      updateProductQuantity(cartItem.product.id_, count)
+                      updateProductQuantity(cartItem.product.id, count)
                     }
                   />
                 </div>
               </td>
               <td className=" py-4 ps-6 md:hidden">
                 <Button
-                  onClick={() => removeProduct(cartItem.product.id_)}
+                  onClick={() => removeProduct(cartItem.product.id)}
                   variant="clear"
                   bgColor="gray"
                   title="delete"

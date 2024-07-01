@@ -1,5 +1,6 @@
-import ProductModel, { IProduct } from "@/models/Product";
 import dbConnect from "./dbConnect";
+import ProductModel, { type IProduct } from "@/models/Product";
+
 import {
   Product,
   ProductCategory,
@@ -10,7 +11,7 @@ import {
 } from "@/types/product";
 
 const transformProduct = (productModel: IProduct): Product => ({
-  id_: productModel._id.toString(),
+  id: productModel._id.toString(),
   name: productModel.name,
   price: productModel.price,
   imageSrc: productModel.imageSrc,
@@ -28,7 +29,7 @@ const transformProduct = (productModel: IProduct): Product => ({
 
 const transformProductListing = (products: IProduct[]): ProductListing[] => {
   return products.map((product) => ({
-    id_: product._id.toString(),
+    id: product._id.toString(),
     name: product.name,
     price: product.price,
     imageSrc: product.imageSrc,

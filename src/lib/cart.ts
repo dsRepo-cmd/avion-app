@@ -1,10 +1,19 @@
-import { ICart } from "@/models/Cart";
-import { CartBase } from "@/types/cart";
+import type { ICart } from "@/models/Cart";
+import type { CartBase } from "@/types/cart";
 
 export const transformCart = (cart: ICart): CartBase => ({
-  id_: cart._id.toString(),
+  id: cart._id.toString(),
   userIdentifier: cart.userIdentifier,
-  products: cart.products,
+  products: cart.products.map((product) => ({
+    product: {
+      id: product.product._id.toString(),
+      name: product.product.name,
+      price: product.product.price,
+      imageSrc: product.product.imageSrc,
+      description: product.product.description,
+    },
+    quantity: product.quantity,
+  })),
   totalPrice: cart.totalPrice,
   status: cart.status,
 });

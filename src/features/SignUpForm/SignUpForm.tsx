@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEventHandler, useEffect, useState } from "react";
+import { type FormEventHandler, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "../../components/Button/Button";
 import { useSession } from "next-auth/react";

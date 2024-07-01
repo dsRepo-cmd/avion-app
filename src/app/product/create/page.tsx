@@ -1,6 +1,11 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, {
+  type ChangeEvent,
+  type FormEvent,
+  useEffect,
+  useState,
+} from "react";
 import Page from "@/components/Page/Page";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
@@ -8,7 +13,7 @@ import Typography from "@/components/Typography/Typography";
 import {
   Brand,
   Designer,
-  Product,
+  type Product,
   ProductCategory,
   ProductType,
 } from "@/types/product";

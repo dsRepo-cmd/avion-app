@@ -5,7 +5,13 @@ import Icon from "@/components/Icon/Icon";
 import Portal from "@/components/Portal/Portal";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import {
+  type ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 function Search() {
   const router = useRouter();

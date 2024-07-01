@@ -1,10 +1,10 @@
 import { Types } from "mongoose";
 import { transformCart } from "@/lib/cart";
 import dbConnect from "@/lib/dbConnect";
-import CartModel, { ICart } from "@/models/Cart";
+import CartModel, { type ICart } from "@/models/Cart";
 import ProductModel from "@/models/Product";
 import { NextRequest, NextResponse } from "next/server";
-import { CartData } from "@/types/cart";
+import type { CartData } from "@/types/cart";
 
 // ================================================= GET
 
@@ -47,6 +47,7 @@ export const GET = async (
     if (!cartModel) {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
     }
+
     const cart = transformCart(cartModel);
 
     return NextResponse.json({ cart });

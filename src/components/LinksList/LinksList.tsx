@@ -1,4 +1,4 @@
-import { Link } from "@/types/types";
+import type { Link } from "@/types/types";
 import AppLink from "../AppLink/AppLink";
 import Typography from "../Typography/Typography";
 
