@@ -8,6 +8,7 @@ import { isMobile } from "@/lib/isMobile";
 import { SearchParams } from "../types";
 import SortPanel from "./sortPanel";
 import Title from "./title";
+import Spinner from "@/components/Spinner/Spinner";
 
 interface Props {
   searchParams: SearchParams;
@@ -21,7 +22,7 @@ async function Products({ searchParams }: Props) {
 
   const products = await getProducts({ ...searchParams, page, limit });
 
-  if (!products) null;
+  if (!products) return <Spinner />;
   return (
     <Page>
       <Title category={searchParams.category} />

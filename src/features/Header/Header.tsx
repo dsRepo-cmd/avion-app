@@ -7,7 +7,7 @@ interface Props {
 }
 function Header({ isMobile }: Props) {
   return (
-    <header className=" w-full px-4  ">
+    <header id="header" className=" w-full px-4 relative  ">
       <Navbar isMobile={isMobile} />
       <Divider />
       <div className=" flex justify-center items-center py-5 md:hidden">

@@ -65,6 +65,7 @@ function Counter({
         value={count}
         onChange={handleInputChange}
         id="quantity-input"
+        aria-label="quantity-input"
         className={cn(
           "flex-shrink-0 border-0 font-primary  text-sm  focus:outline-none focus:ring-0 max-w-[2.5rem] text-center",
           className

@@ -44,7 +44,7 @@ async function Menu({ id }: Props) {
             className=" mt-2"
             fontFamily="secondary"
             size="16px"
-            tag="h5"
+            tag="h4"
           >
             Product description
           </Typography>
@@ -62,14 +62,14 @@ async function Menu({ id }: Props) {
             className=" mb-2"
             fontFamily="secondary"
             size="16px"
-            tag="h5"
+            tag="h4"
           >
             Dimensions
           </Typography>
 
           <div className=" flex gap-20 mb-6">
             <div className=" flex flex-col gap-4">
-              <Typography fontFamily="secondary" size="16px" tag="h5">
+              <Typography fontFamily="secondary" size="16px" tag="h4">
                 Height
               </Typography>
 
@@ -79,7 +79,7 @@ async function Menu({ id }: Props) {
             </div>
 
             <div className=" flex flex-col gap-4">
-              <Typography fontFamily="secondary" size="16px" tag="h5">
+              <Typography fontFamily="secondary" size="16px" tag="h4">
                 Width
               </Typography>
 
@@ -89,7 +89,7 @@ async function Menu({ id }: Props) {
             </div>
 
             <div className=" flex flex-col gap-4">
-              <Typography fontFamily="secondary" size="16px" tag="h5">
+              <Typography fontFamily="secondary" size="16px" tag="h4">
                 Depth
               </Typography>
 
@@ -99,7 +99,7 @@ async function Menu({ id }: Props) {
             </div>
           </div>
 
-          <Typography fontFamily="secondary" size="16px" tag="h5">
+          <Typography fontFamily="secondary" size="16px" tag="h4">
             Quantitity
           </Typography>
 
