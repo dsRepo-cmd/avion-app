@@ -82,7 +82,7 @@ function Search() {
         />
       </Button>
 
-      <Portal>
+      <Portal mountId="header">
         <div
           ref={menuRef}
           className={cn(

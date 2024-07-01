@@ -94,12 +94,12 @@ function BurgerMenu() {
         </div>
       </Button>
 
-      <Portal>
+      <Portal mountId="header">
         <div
           ref={menuRef}
           className={cn(
             " duration-300 flex absolute items-center justify-center left-0 top-[73px] bg-white w-screen p-3  z-40 ",
-            isOpen ? " top-[73px]" : " top-[-100%]"
+            isOpen ? " top-[73px]" : " top-[-800px]"
           )}
         >
           <CategoryLinks className=" flex-col  gap-6 " />
