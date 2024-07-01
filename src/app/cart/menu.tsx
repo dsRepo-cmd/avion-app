@@ -21,7 +21,7 @@ function CartMenu() {
 
   return (
     <Container bgColor="light">
-      <Typography fontFamily="secondary" size="32px" tag="h1" className=" mb-8">
+      <Typography fontFamily="secondary" size="32px" tag="h2" className=" mb-8">
         Your shopping cart
       </Typography>
 
@@ -91,6 +91,7 @@ function CartMenu() {
                       onClick={() => removeProduct(cartItem.product._id)}
                       variant="clear"
                       bgColor="gray"
+                      title="delete"
                     >
                       <DeleteIcon />
                     </Button>
@@ -113,6 +114,7 @@ function CartMenu() {
                   onClick={() => removeProduct(cartItem.product._id)}
                   variant="clear"
                   bgColor="gray"
+                  title="delete"
                 >
                   <DeleteIcon />
                 </Button>
@@ -134,7 +136,7 @@ function CartMenu() {
           size="24px"
           tag="h3"
         >
-          No product
+          The cart is empty
         </Typography>
       )}
 

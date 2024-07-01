@@ -15,7 +15,7 @@ function LinksList({ links, title }: Props) {
         fontFamily="secondary"
         size="16px"
         color="white"
-        tag="h4"
+        tag="h3"
       >
         {title}
       </Typography>
