@@ -73,12 +73,13 @@ function Search() {
         variant="clear"
         bgColor="clear"
         onClick={toggleSearch}
+        className=" flex items-center"
       >
         {isOpen ? (
           <Icon
             className="duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2] active:scale-[1]"
-            width={16}
-            height={16}
+            width={20}
+            height={20}
             Svg={XIcon}
           />
         ) : (
