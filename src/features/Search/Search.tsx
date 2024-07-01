@@ -1,7 +1,7 @@
 import SearchIcon from "@/assets/search.svg";
+import XIcon from "@/assets/x.svg";
 import Button from "@/components/Button/Button";
 import Icon from "@/components/Icon/Icon";
-import Input from "@/components/Input/Input";
 import Portal from "@/components/Portal/Portal";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -74,28 +74,40 @@ function Search() {
         bgColor="clear"
         onClick={toggleSearch}
       >
-        <Icon
-          className="duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2] active:scale-[1]"
-          width={16}
-          height={16}
-          Svg={SearchIcon}
-        />
+        {isOpen ? (
+          <Icon
+            className="duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2] active:scale-[1]"
+            width={16}
+            height={16}
+            Svg={XIcon}
+          />
+        ) : (
+          <Icon
+            className="duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2] active:scale-[1]"
+            width={16}
+            height={16}
+            Svg={SearchIcon}
+          />
+        )}
       </Button>
 
       <Portal mountId="header">
         <div
           ref={menuRef}
           className={cn(
-            " duration-300 flex absolute items-center justify-center left-0 top-[73px] bg-white w-screen px-10 pt-3  z-40 ",
+            " duration-300 flex absolute items-center justify-center left-0 top-[73px] bg-white w-screen px-10 py-[11px]  z-40 ",
             isOpen ? " top-[73px]" : " top-[-100%]"
           )}
         >
-          <Input
-            onChange={handleSearchChange}
-            label="Search"
-            aria-label="Search"
-            name="search"
+          <input
             type="search"
+            name="search"
+            onChange={handleSearchChange}
+            id="search"
+            placeholder="Search"
+            className={cn(
+              "peer block px-8 py-2 w-full bg-transparent  appearance-none  focus:ring-0 border border-borderGrey rounded-sm "
+            )}
           />
         </div>
       </Portal>
