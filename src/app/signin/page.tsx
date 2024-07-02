@@ -6,6 +6,7 @@ import Divider from "@/components/Divider/Divider";
 import GoogleButton from "@/features/GoogleButton/GoogleButton";
 import Page from "@/components/Page/Page";
 import Typography from "@/components/Typography/Typography";
+import Spinner from "@/components/Spinner/Spinner";
 
 async function Signin() {
   return (
@@ -27,7 +28,7 @@ async function Signin() {
             <Divider className=" flex w-full border-b opacity-10" />
           </div>
 
-          <Suspense fallback={<>Loading...</>}>
+          <Suspense fallback={<Spinner />}>
             <GoogleButton title="Sign in with Google" />
           </Suspense>
 
