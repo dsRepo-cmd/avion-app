@@ -119,7 +119,7 @@ export const getProducts = async (searchParams: SearchParams) => {
       .skip(skip)
       .limit(Number(limit))
       .select("_id name price imageSrc")
-      .exec();
+      .lean();
 
     return transformProductListing(products);
   } catch (error) {
@@ -165,7 +165,7 @@ export async function getProductsByID(
 ): Promise<Product | undefined | null> {
   await dbConnect();
   try {
-    const productModel = await ProductModel.findById(id);
+    const productModel = await ProductModel.findById(id).lean();
 
     if (!productModel) {
       return null;

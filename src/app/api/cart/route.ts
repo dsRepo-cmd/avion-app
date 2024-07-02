@@ -25,12 +25,14 @@ export const GET = async (
 
     let cartModel: ICart | null = await CartModel.findOne({
       userIdentifier,
-    }).populate({
-      path: "products.product",
-      model: ProductModel,
-    });
+    })
+      .populate({
+        path: "products.product",
+        model: ProductModel,
+      })
+      .lean();
 
-    if (!cartModel) {
+    if (!cartModel && userIdentifier) {
       cartModel = new CartModel({
         userIdentifier,
         products: [],
@@ -39,11 +41,14 @@ export const GET = async (
       });
       await cartModel.save();
 
-      cartModel = await CartModel.findOne({ userIdentifier }).populate({
-        path: "products.product",
-        model: ProductModel,
-      });
+      cartModel = await CartModel.findOne({ userIdentifier })
+        .populate({
+          path: "products.product",
+          model: ProductModel,
+        })
+        .lean();
     }
+
     if (!cartModel) {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
     }
@@ -60,11 +65,11 @@ export const GET = async (
 };
 
 // ================================================= POST
-
 export const POST = async (
   req: NextRequest
 ): Promise<NextResponse<Partial<CartData>>> => {
   await dbConnect();
+
   try {
     const { userIdentifier, productId, quantity } = await req.json();
 
@@ -85,7 +90,7 @@ export const POST = async (
       });
     }
 
-    const product = await ProductModel.findById(productId);
+    const product = await ProductModel.findById(productId).lean();
     if (!product) {
       return NextResponse.json(
         { message: "Product not found" },
@@ -111,10 +116,12 @@ export const POST = async (
 
     await cartModel.save();
 
-    cartModel = await CartModel.findOne({ userIdentifier }).populate({
-      path: "products.product",
-      model: ProductModel,
-    });
+    cartModel = await CartModel.findOne({ userIdentifier })
+      .populate({
+        path: "products.product",
+        model: ProductModel,
+      })
+      .lean();
 
     if (!cartModel) {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
@@ -140,6 +147,7 @@ export const DELETE = async (
   req: NextRequest
 ): Promise<NextResponse<Partial<CartData>>> => {
   await dbConnect();
+
   try {
     const { userIdentifier, productId } = await req.json();
 
@@ -163,7 +171,7 @@ export const DELETE = async (
       );
     }
 
-    const product = await ProductModel.findById(productId);
+    const product = await ProductModel.findById(productId).lean();
     if (!product) {
       return NextResponse.json(
         { message: "Product not found" },
@@ -177,10 +185,12 @@ export const DELETE = async (
 
     await cartModel.save();
 
-    const cart = await CartModel.findOne({ userIdentifier }).populate({
-      path: "products.product",
-      model: ProductModel,
-    });
+    const cart = await CartModel.findOne({ userIdentifier })
+      .populate({
+        path: "products.product",
+        model: ProductModel,
+      })
+      .lean();
 
     if (!cart) {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
@@ -200,6 +210,7 @@ export const DELETE = async (
 
 export const PATCH = async (req: NextRequest) => {
   await dbConnect();
+
   try {
     const { userIdentifier, productId, quantity } = await req.json();
 
@@ -212,7 +223,7 @@ export const PATCH = async (req: NextRequest) => {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
     }
 
-    const product = await ProductModel.findById(productId);
+    const product = await ProductModel.findById(productId).lean();
     if (!product) {
       return NextResponse.json(
         { message: "Product not found" },
@@ -238,10 +249,12 @@ export const PATCH = async (req: NextRequest) => {
 
     await cartModel.save();
 
-    const cart = await CartModel.findOne({ userIdentifier }).populate({
-      path: "products.product",
-      model: ProductModel,
-    });
+    const cart = await CartModel.findOne({ userIdentifier })
+      .populate({
+        path: "products.product",
+        model: ProductModel,
+      })
+      .lean();
 
     if (!cart) {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 });
