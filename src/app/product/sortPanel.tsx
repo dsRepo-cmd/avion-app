@@ -9,7 +9,7 @@ interface Props {
 
 const SortPanel = ({ searchParams, isMobile }: Props) => {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between self-start items-center w-full p-4">
       <CheckboxFilter isMobile={isMobile} searchParams={searchParams} />
       <Sorting isMobile={isMobile} searchParams={searchParams} />
     </div>
