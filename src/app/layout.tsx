@@ -9,7 +9,7 @@ import { isMobile } from "@/lib/isMobile";
 import "./globals.css";
 
 const satoshi = localFont({
-  src: "./fonts/Satoshi-Regular.woff",
+  src: "./fonts/Satoshi-Regular.woff2",
   weight: "400",
   display: "swap",
   style: "normal",
@@ -17,7 +17,7 @@ const satoshi = localFont({
 });
 
 const clashDisplay = localFont({
-  src: "./fonts/ClashDisplay-Regular.woff",
+  src: "./fonts/ClashDisplay-Regular.woff2",
   weight: "400",
   display: "swap",
   style: "normal",
