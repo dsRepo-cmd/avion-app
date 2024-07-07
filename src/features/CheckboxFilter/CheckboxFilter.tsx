@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import Dropdown from "@/components/Dropdown/Dropdown";
@@ -9,6 +10,7 @@ import {
   ProductType,
   SortCategory,
 } from "@/types/product";
+import { cn } from "@/lib/utils";
 
 interface Props {
   searchParams: Record<string, any>;
@@ -22,39 +24,39 @@ const CheckboxFilter: React.FC<Props> = ({ searchParams, isMobile }) => {
   const isMobileClient = useIsMobile();
   const isShowMobile = isMobile || isMobileClient;
 
-  const handleCheckboxFilter = (
-    type: string,
-    category: SortCategory,
-    selectedItems: string[]
-  ) => {
-    const updatedItems = selectedItems.includes(type)
-      ? selectedItems.filter((item) => item !== type)
-      : [...selectedItems, type];
+  const handleCheckboxFilter = useCallback(
+    (type: string, category: SortCategory, selectedItems: string[]) => {
+      const updatedItems = selectedItems.includes(type)
+        ? selectedItems.filter((item) => item !== type)
+        : [...selectedItems, type];
 
-    const updatedParams = {
-      ...searchParams,
-      [category]: updatedItems.join(","),
-      page: "1",
-    };
+      const updatedParams = {
+        ...searchParams,
+        [category]: updatedItems.join(","),
+        page: "1",
+      };
 
-    const params = new URLSearchParams(updatedParams).toString();
-    router.push(`?${params}`);
-  };
+      const params = new URLSearchParams(updatedParams).toString();
+      router.push(`?${params}`);
+    },
+    [router, searchParams]
+  );
 
-  const renderCheckboxes = (
-    options: string[],
-    selectedOptions: string[],
-    category: SortCategory
-  ) =>
-    options.map((option) => (
-      <CheckBox
-        key={option}
-        name={option.toLowerCase()}
-        checked={selectedOptions.includes(option)}
-        value={option}
-        onChange={() => handleCheckboxFilter(option, category, selectedOptions)}
-      />
-    ));
+  const renderCheckboxes = useCallback(
+    (options: string[], selectedOptions: string[], category: SortCategory) =>
+      options.map((option) => (
+        <CheckBox
+          key={option}
+          name={option.toLowerCase()}
+          checked={selectedOptions.includes(option)}
+          value={option}
+          onChange={() =>
+            handleCheckboxFilter(option, category, selectedOptions)
+          }
+        />
+      )),
+    [handleCheckboxFilter]
+  );
 
   const renderCategorySection = (
     category: SortCategory,
@@ -70,7 +72,7 @@ const CheckboxFilter: React.FC<Props> = ({ searchParams, isMobile }) => {
   );
 
   return (
-    <div className={`flex ${isShowMobile ? "" : "gap-2"}`}>
+    <div className={cn("flex", isShowMobile ? "" : "gap-2")}>
       <Dropdown
         className={isShowMobile ? "w-screen" : "w-[210px]"}
         classTrigger="py-3 px-6"
