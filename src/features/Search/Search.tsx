@@ -84,8 +84,8 @@ function Search() {
         {isOpen ? (
           <Icon
             className="duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2] active:scale-[1]"
-            width={20}
-            height={20}
+            width={16}
+            height={16}
             Svg={XIcon}
           />
         ) : (

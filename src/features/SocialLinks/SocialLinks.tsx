@@ -1,48 +1,35 @@
 import AppLink from "@/components/AppLink/AppLink";
-import Icon from "@/components/Icon/Icon";
-import LinkedinIcon from "@/assets/linkedin.svg";
-import FacebookIcon from "@/assets/facebook.svg";
-import InstagramIcon from "@/assets/instagram.svg";
-import SkypeIcon from "@/assets/skype.svg";
-import TwitterIcon from "@/assets/twitter.svg";
-import PinterestIcon from "@/assets/pinterest.svg";
 
 const socialLinks = [
   {
-    id: "17",
+    id: "linkedin",
     title: "Linkedin",
     href: "#",
-    icon: LinkedinIcon,
   },
   {
-    id: "18",
+    id: "facebook",
     title: "Facebook",
     href: "#",
-    icon: FacebookIcon,
   },
   {
-    id: "19",
+    id: "instagram",
     title: "Instagram",
     href: "#",
-    icon: InstagramIcon,
   },
   {
-    id: "20",
+    id: "skype",
     title: "Skype",
     href: "#",
-    icon: SkypeIcon,
   },
   {
-    id: "21",
+    id: "twitter",
     title: "Twitter",
     href: "#",
-    icon: TwitterIcon,
   },
   {
-    id: "22",
+    id: "pinterest",
     title: "Pinterest",
     href: "#",
-    icon: PinterestIcon,
   },
 ];
 function SocialLinks() {
@@ -56,7 +43,9 @@ function SocialLinks() {
             title={link.title}
             href={link.href}
           >
-            <Icon width={18} height={18} Svg={link.icon} />
+            <svg width={18} height={18} className={"  text-white "}>
+              <use href={`/svg/social-links.svg#${link.id}`} />
+            </svg>
           </AppLink>
         </li>
       ))}
