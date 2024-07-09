@@ -3,7 +3,7 @@ import XIcon from "@/assets/x.svg";
 import Button from "@/components/Button/Button";
 import Icon from "@/components/Icon/Icon";
 import Portal from "@/components/Portal/Portal";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import { useRouter } from "next/navigation";
 import {
   type ChangeEvent,

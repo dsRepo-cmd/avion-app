@@ -10,7 +10,7 @@ import {
   ProductType,
   SortCategory,
 } from "@/types/product";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 
 interface Props {
   searchParams: Record<string, any>;

@@ -4,7 +4,7 @@ import Typography from "@/components/Typography/Typography";
 import { useState } from "react";
 import ArrowIcon from "@/assets/arrow-up.svg";
 import Icon from "@/components/Icon/Icon";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import { useRouter } from "next/navigation";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown from "@/components/Dropdown/Dropdown";

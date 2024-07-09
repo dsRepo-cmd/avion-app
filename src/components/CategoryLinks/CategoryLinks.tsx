@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import AppLink from "../AppLink/AppLink";
 import { ProductCategory } from "@/types/product";
 

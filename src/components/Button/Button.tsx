@@ -1,5 +1,5 @@
 import React, { type ButtonHTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 
 type ButtonVariant = "clear" | "filled";
 type BackgroundColor = "black" | "light" | "clear" | "gray" | "white";

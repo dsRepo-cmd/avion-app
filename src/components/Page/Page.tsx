@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

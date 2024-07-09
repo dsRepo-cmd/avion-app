@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import AppLink from "../../components/AppLink/AppLink";
 import ListingItem from "../../components/ListingItem/ListingItem";
 import type { SearchParams } from "@/types/product";
