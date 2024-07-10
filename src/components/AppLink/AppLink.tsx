@@ -1,11 +1,11 @@
 import { type ComponentProps } from "react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 
 type AppLinkVariant = "clear" | "filled" | "clear-zommed";
 type BackgroundColor = "black" | "light" | "clear" | "gray" | "white";
 
-interface Props extends ComponentProps<typeof Link> {
+export interface AppLinkProps extends ComponentProps<typeof Link> {
   className?: string;
   children?: React.ReactNode;
   variant?: AppLinkVariant;
@@ -34,7 +34,7 @@ function AppLink({
   bgColor = "clear",
 
   ...props
-}: Props) {
+}: AppLinkProps) {
   return (
     <Link
       className={cn(

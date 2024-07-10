@@ -3,7 +3,7 @@ import {
   type InputHTMLAttributes,
   useState,
 } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import EyeShowIcon from "@/assets/eye.svg";
 import EyeHideIcon from "@/assets/eye-hide.svg";
 import Icon from "../Icon/Icon";

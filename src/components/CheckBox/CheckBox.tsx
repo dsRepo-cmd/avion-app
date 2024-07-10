@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes } from "react";
 import Typography from "../Typography/Typography";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   value: string;

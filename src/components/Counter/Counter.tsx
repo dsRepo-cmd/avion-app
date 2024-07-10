@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import { useState, useEffect, useCallback, type ChangeEvent } from "react";
 
 interface Props {

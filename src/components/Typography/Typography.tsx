@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 
 type TagVariant = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
 type FontSizes = "14px" | "16px" | "18px" | "20px" | "24px" | "32px" | "36px";

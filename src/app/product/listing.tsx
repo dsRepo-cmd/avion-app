@@ -1,8 +1,9 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import AppLink from "../../components/AppLink/AppLink";
 import ListingItem from "../../components/ListingItem/ListingItem";
 import type { SearchParams } from "@/types/product";
 import { getProducts } from "@/lib/products";
+import Typography from "@/components/Typography/Typography";
 
 interface Props {
   searchParams: SearchParams;
@@ -20,6 +21,19 @@ async function Listing({ searchParams }: Props) {
     });
     return `?${params.toString()}`;
   };
+
+  if (!products.length) {
+    return (
+      <Typography
+        className=" text-center"
+        fontFamily="secondary"
+        size="24px"
+        tag="h2"
+      >
+        No products found.
+      </Typography>
+    );
+  }
 
   return (
     <div className="flex flex-col items-start gap-9  ">

@@ -5,7 +5,7 @@ import Link from "next/link";
 import DownIcon from "@/assets/chevron-down.svg";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 
 export interface DropdownItem {
   disabled?: boolean;

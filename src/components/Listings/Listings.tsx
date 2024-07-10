@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import AppLink from "../AppLink/AppLink";
