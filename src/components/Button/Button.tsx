@@ -25,7 +25,7 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "filled",
+      variant: "clear",
       bgColor: "black",
     },
   }

@@ -28,7 +28,7 @@ const linkVariants = cva("text-nowrap duration-300 text-center", {
     },
   },
   defaultVariants: {
-    variant: "filled",
+    variant: "clear",
     bgColor: "clear",
   },
 });
