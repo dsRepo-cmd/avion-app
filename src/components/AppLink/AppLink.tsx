@@ -1,49 +1,48 @@
-import { type ComponentProps } from "react";
+import { ComponentProps } from "react";
 import Link from "next/link";
+import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils/utils";
 
-type AppLinkVariant = "clear" | "filled" | "clear-zommed";
-type BackgroundColor = "black" | "light" | "clear" | "gray" | "white";
-
-export interface AppLinkProps extends ComponentProps<typeof Link> {
+export interface AppLinkProps
+  extends ComponentProps<typeof Link>,
+    VariantProps<typeof linkVariants> {
   className?: string;
   children?: React.ReactNode;
-  variant?: AppLinkVariant;
-  bgColor?: BackgroundColor;
 }
 
-const variantClasses: { [key in AppLinkVariant]: string } = {
-  clear: "hover-hover:hover:opacity-70 hover-none:active:opacity-70",
-  filled:
-    "py-4 px-8 text-base  hover-hover:hover:opacity-70 hover-none:active:opacity-70",
-  "clear-zommed": "hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2]",
-};
-
-const bgColorClasses: { [key in BackgroundColor]: string } = {
-  black: "bg-darkPrimary text-white",
-  light: "bg-buttonLight text-white",
-  gray: "bg-lightGrey text-darkPrimary",
-  white: " bg-white text-darkPrimary",
-  clear: "font-primary ",
-};
+const linkVariants = cva("text-nowrap duration-300 text-center", {
+  variants: {
+    variant: {
+      clear: "hover-hover:hover:opacity-70 hover-none:active:opacity-70",
+      filled:
+        "py-4 px-8 text-base hover-hover:hover:opacity-70 hover-none:active:opacity-70",
+      "clear-zommed":
+        "hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2]",
+    },
+    bgColor: {
+      black: "bg-darkPrimary text-white",
+      light: "bg-buttonLight text-white",
+      gray: "bg-lightGrey text-darkPrimary",
+      white: "bg-white text-darkPrimary",
+      clear: "font-primary",
+    },
+  },
+  defaultVariants: {
+    variant: "clear",
+    bgColor: "clear",
+  },
+});
 
 function AppLink({
   children,
   className = "",
   variant = "filled",
   bgColor = "clear",
-
   ...props
 }: AppLinkProps) {
   return (
     <Link
-      className={cn(
-        " text-nowrap duration-300 text-center ",
-
-        variantClasses[variant],
-        bgColorClasses[bgColor],
-        className
-      )}
+      className={cn(linkVariants({ variant, bgColor, className }))}
       {...props}
     >
       {children}

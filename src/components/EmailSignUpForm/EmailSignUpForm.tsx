@@ -1,26 +1,40 @@
+import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils/utils";
 import Button from "../Button/Button";
 
-type VariantForm = "light" | "dark";
-
-interface Props {
-  variant?: VariantForm;
+interface Props extends VariantProps<typeof formVariants> {
   className?: string;
 }
 
-const variantClasses: { [key in VariantForm]: string } = {
-  light: " bg-lightGrey ",
-  dark: " bg-[#FFFFFF1F] text-white ",
-};
+const formVariants = cva("flex", {
+  variants: {
+    variant: {
+      light: "bg-lightGrey",
+      dark: "bg-[#FFFFFF1F] text-white",
+    },
+  },
+  defaultVariants: {
+    variant: "light",
+  },
+});
+
+const inputVariants = cva("grow px-8 py-4 lg:w-[200px]", {
+  variants: {
+    variant: {
+      light: "bg-lightGrey",
+      dark: "bg-[#FFFFFF1F] text-white",
+    },
+  },
+  defaultVariants: {
+    variant: "light",
+  },
+});
 
 function EmailSignUpForm({ variant = "light", className = "" }: Props) {
   return (
-    <form className={cn(" flex", className)}>
+    <form className={cn(formVariants({ variant }), className)}>
       <input
-        className={cn(
-          "  grow px-8 py-4  lg:w-[200px]",
-          variantClasses[variant]
-        )}
+        className={cn(inputVariants({ variant }))}
         type="text"
         placeholder="your@email.com"
       />

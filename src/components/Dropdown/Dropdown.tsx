@@ -5,6 +5,7 @@ import Link from "next/link";
 import DownIcon from "@/assets/chevron-down.svg";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
+import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils/utils";
 
 export interface DropdownItem {
@@ -16,24 +17,36 @@ export interface DropdownItem {
   svg?: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
-type Position = "bottom" | "bottomStart" | "bottomEnd" | "right";
-
-interface Props {
+interface Props extends VariantProps<typeof dropdownVariants> {
   items?: DropdownItem[];
   trigger: React.ReactNode;
   isDownIcon?: boolean;
   className?: string;
   children?: React.ReactNode;
   classTrigger?: string;
-  position?: Position;
 }
 
-const positionClasses: { [key in Position]: string } = {
-  bottom: "",
-  bottomStart: "top-10 left-0",
-  bottomEnd: "top-10  right-0",
-  right: "left-10 top-[-16px]",
-};
+const dropdownVariants = cva(
+  "duration-200 absolute z-20 bg-white rounded-lg overflow-hidden shadow-lg",
+  {
+    variants: {
+      position: {
+        bottom: "",
+        bottomStart: "top-10 left-0",
+        bottomEnd: "top-10 right-0",
+        right: "left-10 top-[-16px]",
+      },
+      isOpen: {
+        true: "scale-100 opacity-100",
+        false: "scale-75 opacity-0 pointer-events-none",
+      },
+    },
+    defaultVariants: {
+      position: "bottomEnd",
+      isOpen: false,
+    },
+  }
+);
 
 const Dropdown: React.FC<Props> = ({
   items,
@@ -43,8 +56,9 @@ const Dropdown: React.FC<Props> = ({
   children,
   classTrigger,
   position = "bottomEnd",
+  isOpen: initialOpen = false,
 }) => {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(initialOpen);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleOpen = useCallback(() => {
@@ -101,16 +115,7 @@ const Dropdown: React.FC<Props> = ({
         {isDownIcon && <Icon width={8} height={8} Svg={DownIcon} />}
       </Button>
 
-      <div
-        className={cn(
-          "duration-200 absolute z-20  bg-white rounded-lg overflow-hidden shadow-lg",
-          isOpen
-            ? "scale-100 opacity-100"
-            : "scale-75 opacity-0 pointer-events-none",
-          positionClasses[position],
-          className
-        )}
-      >
+      <div className={cn(dropdownVariants({ position, isOpen }), className)}>
         <div>
           {items?.map((item) => {
             const content = (
