@@ -63,7 +63,6 @@ async function getCartModel(): Promise<ICart | undefined> {
 }
 
 async function fetchCart(cartId?: string): Promise<ICart | undefined> {
-  await dbConnect();
   try {
     if (cartId) {
       const cartModel = await CartModel.findById(cartId);
@@ -91,13 +90,15 @@ async function fetchCart(cartId?: string): Promise<ICart | undefined> {
   }
 }
 
-interface AddItemToCartProps {
-  productId: string;
-  quantity: number;
-}
 export async function addItemToCart(
   prevState: any,
-  { productId, quantity }: AddItemToCartProps
+  {
+    productId,
+    quantity,
+  }: {
+    productId: string;
+    quantity: number;
+  }
 ): Promise<CartBase | string | undefined> {
   dbConnect();
 
@@ -138,26 +139,25 @@ export async function addItemToCart(
 export async function removeItemFromCart(
   prevState: any,
   productId: string
-): Promise<CartBase | undefined> {
+): Promise<string | undefined> {
+  await dbConnect();
+
   const cartModel = await getCartModel();
   if (!cartModel) {
-    console.error("cartModel not found");
-    return undefined;
+    return "cartModel not found";
   }
 
   const productIndex = cartModel.products.findIndex(
     (item) => item.product.toString() === productId
   );
   if (productIndex === -1) {
-    console.error("Product not found in cart");
-    return undefined;
+    return "Product not found in cart";
   }
 
   try {
     const product = await ProductModel.findById(productId).lean();
     if (!product) {
-      console.error("Product not found");
-      return undefined;
+      return "Product not found";
     }
 
     cartModel.totalPrice -=
@@ -174,14 +174,17 @@ export async function removeItemFromCart(
   }
 }
 
-interface UpdateQuantityProps {
-  productId: string;
-  quantity: number;
-}
 export async function updateQuantity(
   prevState: any,
-  { productId, quantity }: UpdateQuantityProps
+  {
+    productId,
+    quantity,
+  }: {
+    productId: string;
+    quantity: number;
+  }
 ): Promise<CartBase | string | undefined> {
+  await dbConnect();
   const cartModel = await getCartModel();
   if (!cartModel) {
     return "cartModel not found";
