@@ -18,9 +18,11 @@ export const transformCart = (cart: ICart): CartBase => ({
   status: cart.status,
 });
 
-export const truncateDescription = (description: string, maxLength: number) => {
-  if (description.length > maxLength) {
-    return description.substring(0, maxLength) + "...";
-  }
-  return description;
+export const truncateDescription = (
+  description: string,
+  maxLength: number
+): string => {
+  return description.length > maxLength
+    ? description.substring(0, maxLength) + "..."
+    : description;
 };

@@ -1,9 +1,10 @@
 import Image from "next/image";
-import AddToCard from "@/features/AddToCard/AddToCard";
 import Container from "@/components/Container/Container";
 import Divider from "@/components/Divider/Divider";
 import Typography from "@/components/Typography/Typography";
 import { getProductsByID } from "@/lib/products";
+import { Suspense } from "react";
+import AddToCard from "@/features/AddToCard/AddToCard";
 
 interface Props {
   id: string;
@@ -103,7 +104,9 @@ async function Menu({ id }: Props) {
             Quantitity
           </Typography>
 
-          <AddToCard product={product} />
+          <Suspense fallback={null}>
+            <AddToCard product={product} />
+          </Suspense>
         </div>
       </div>
     </Container>

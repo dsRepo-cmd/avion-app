@@ -1,16 +1,19 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
+
 import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
-import Counter from "@/components/Counter/Counter";
 import Typography from "@/components/Typography/Typography";
-import DeleteIcon from "@/assets/x.svg";
-import { truncateDescription } from "@/lib/cart";
-import { useCart } from "@/lib/CartContext";
+import { CartBase } from "@/types/cart";
+import Spinner from "@/components/Spinner/Spinner";
+import CartItem from "../../features/CartItem/CartItem";
 
-function CartMenu() {
-  const { cart, removeProduct, updateProductQuantity, loading } = useCart();
+interface Props {
+  cart?: CartBase;
+}
+function CartMenu({ cart }: Props) {
+  if (!cart) {
+    return <Spinner />;
+  }
 
   const calculateSubtotal = () => {
     return cart.products.reduce(
@@ -50,80 +53,7 @@ function CartMenu() {
         <tbody className="border-b border-b-borderGrey">
           {cart.products.map((cartItem) => (
             <tr key={cartItem.product.id} className="border-none">
-              <td className="py-4  flex items-center gap-5">
-                <Link
-                  href={`/product/${cartItem.product.id}`}
-                  className=" duration-200 hover-hover:hover:scale-[1.04] hover-none:active:scale-[1.04] "
-                  title="product"
-                >
-                  <Image
-                    src={cartItem.product.imageSrc}
-                    alt={cartItem.product.id}
-                    width={305}
-                    height={375}
-                    className="w-[109px] h-[134px] object-cover md:min-w-[133px] md:h-[166px] "
-                  />
-                </Link>
-                <div className=" max-w-[250px] flex w-full  flex-col gap-2">
-                  <Typography tag="h3" size="20px" fontFamily="secondary">
-                    {cartItem.product.name}
-                  </Typography>
-                  <Typography tag="p" size="14px" fontFamily="primary">
-                    {truncateDescription(
-                      cartItem.product.description || "",
-                      60
-                    )}
-                  </Typography>
-                  <Typography tag="p" size="16px" fontFamily="primary">
-                    £{cartItem.product.price}
-                  </Typography>
-                  <div className=" hidden md:flex w-full  justify-between ">
-                    <Counter
-                      loading={loading}
-                      value={cartItem.quantity}
-                      className="bg-lightGrey "
-                      onCountChange={(count) =>
-                        updateProductQuantity(cartItem.product.id, count)
-                      }
-                    />
-
-                    <Button
-                      onClick={() => removeProduct(cartItem.product.id)}
-                      variant="clear"
-                      bgColor="gray"
-                      title="delete"
-                    >
-                      <DeleteIcon />
-                    </Button>
-                  </div>
-                </div>
-              </td>
-              <td className="py-4  md:hidden">
-                <div className=" flex gap-4">
-                  <Counter
-                    value={cartItem.quantity}
-                    className="bg-lightGrey"
-                    onCountChange={(count) =>
-                      updateProductQuantity(cartItem.product.id, count)
-                    }
-                  />
-                </div>
-              </td>
-              <td className=" py-4 ps-6 md:hidden">
-                <Button
-                  onClick={() => removeProduct(cartItem.product.id)}
-                  variant="clear"
-                  bgColor="gray"
-                  title="delete"
-                >
-                  <DeleteIcon />
-                </Button>
-              </td>
-              <td className="py-4 text-end md:hidden w-16">
-                <Typography tag="p" size="18px" fontFamily="primary">
-                  £{cartItem.product.price * cartItem.quantity}
-                </Typography>
-              </td>
+              <CartItem cartItem={cartItem} />
             </tr>
           ))}
         </tbody>
