@@ -14,19 +14,22 @@ import { useFormState, useFormStatus } from "react-dom";
 interface Props {
   cartItem: CartProduct;
 }
+
 function CartItem({ cartItem }: Props) {
   const [message, deleteformAction] = useFormState(removeItemFromCart, null);
   const [messageQty, updateformAction] = useFormState(updateQuantity, null);
   const { pending } = useFormStatus();
 
-  console.log(message);
+  const handleQuantityChange = (quantity: number) => {
+    updateformAction({ productId: cartItem.product.id, quantity });
+  };
 
   return (
     <>
-      <td className="py-4  flex items-center gap-5">
+      <td className="py-4 flex items-center gap-5">
         <Link
           href={`/product/${cartItem.product.id}`}
-          className=" duration-200 hover-hover:hover:scale-[1.04] hover-none:active:scale-[1.04] "
+          className="duration-200 hover-hover:hover:scale-[1.04] hover-none:active:scale-[1.04]"
           title="product"
         >
           <Image
@@ -34,10 +37,10 @@ function CartItem({ cartItem }: Props) {
             alt={cartItem.product.id}
             width={305}
             height={375}
-            className="w-[109px] h-[134px] object-cover md:min-w-[133px] md:h-[166px] "
+            className="w-[109px] h-[134px] object-cover md:min-w-[133px] md:h-[166px]"
           />
         </Link>
-        <div className=" max-w-[250px] flex w-full  flex-col gap-2">
+        <div className="max-w-[250px] flex w-full flex-col gap-2">
           <Typography tag="h3" size="20px" fontFamily="secondary">
             {cartItem.product.name}
           </Typography>
@@ -47,7 +50,7 @@ function CartItem({ cartItem }: Props) {
           <Typography tag="p" size="16px" fontFamily="primary">
             £{cartItem.product.price}
           </Typography>
-          <div className=" hidden md:flex w-full  justify-between ">
+          <div className="hidden md:flex w-full justify-between">
             <form
               action={updateformAction.bind(null, {
                 productId: cartItem.product.id,
@@ -57,10 +60,8 @@ function CartItem({ cartItem }: Props) {
               <Counter
                 loading={pending}
                 value={cartItem.quantity}
-                className="bg-lightGrey "
-                onCountChange={(quantity) => {
-                  quantity = quantity;
-                }}
+                className="bg-lightGrey"
+                onCountChange={handleQuantityChange}
               />
               <Button type="submit">upd</Button>
             </form>
@@ -78,8 +79,8 @@ function CartItem({ cartItem }: Props) {
           </div>
         </div>
       </td>
-      <td className="py-4  md:hidden">
-        <div className=" flex gap-4">
+      <td className="py-4 md:hidden">
+        <div className="flex gap-4">
           <form
             action={updateformAction.bind(null, {
               productId: cartItem.product.id,
@@ -87,15 +88,13 @@ function CartItem({ cartItem }: Props) {
             })}
           >
             <Counter
-              onCountChange={(quantity) => {
-                quantity = quantity;
-              }}
+              onCountChange={handleQuantityChange}
               value={cartItem.quantity}
             />
           </form>
         </div>
       </td>
-      <td className=" py-4 ps-6 md:hidden">
+      <td className="py-4 ps-6 md:hidden">
         <form action={deleteformAction.bind(null, cartItem.product.id)}>
           <Button type="submit" variant="clear" bgColor="gray" title="delete">
             <DeleteIcon />
