@@ -28,7 +28,6 @@ function updateCartCookie(cart: ICart): string | undefined {
 
 export async function getCart(): Promise<CartBase | undefined> {
   dbConnect();
-  await getCartModel();
 
   const cartId = cookies().get("sw-context-token")?.value;
   let cartModel: ICart | null = await CartModel.findOne({

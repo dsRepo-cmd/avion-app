@@ -4,22 +4,20 @@ import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import Typography from "@/components/Typography/Typography";
 import { CartBase } from "@/types/cart";
-import Spinner from "@/components/Spinner/Spinner";
 import CartItem from "../../features/CartItem/CartItem";
 
 interface Props {
   cart?: CartBase;
 }
-function CartMenu({ cart }: Props) {
-  if (!cart) {
-    return <Spinner />;
-  }
 
+function CartMenu({ cart }: Props) {
   const calculateSubtotal = () => {
-    return cart.products.reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0
-    );
+    return cart
+      ? cart.products.reduce(
+          (total, item) => total + item.product.price * item.quantity,
+          0
+        )
+      : 0;
   };
 
   return (
@@ -28,38 +26,7 @@ function CartMenu({ cart }: Props) {
         Your shopping cart
       </Typography>
 
-      <table className="min-w-full">
-        <thead className=" md:hidden">
-          <tr className="w-full bg-gray-100 text-left border-b border-b-borderGrey">
-            <th className="py-4">
-              <Typography fontFamily="secondary" size="14px" tag="span">
-                Product
-              </Typography>
-            </th>
-            <th className="py-4">
-              <Typography fontFamily="secondary" size="14px" tag="span">
-                Quantity
-              </Typography>
-            </th>
-            <th className="py-4 text-end"> </th>
-            <th className="py-4 text-end">
-              <Typography fontFamily="secondary" size="14px" tag="span">
-                Total
-              </Typography>
-            </th>
-          </tr>
-        </thead>
-
-        <tbody className="border-b border-b-borderGrey">
-          {cart.products.map((cartItem) => (
-            <tr key={cartItem.product.id} className="border-none">
-              <CartItem cartItem={cartItem} />
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {cart.products.length === 0 && (
+      {!cart || cart.products.length === 0 ? (
         <Typography
           className="my-10 w-full text-center"
           fontFamily="secondary"
@@ -68,6 +35,37 @@ function CartMenu({ cart }: Props) {
         >
           The cart is empty
         </Typography>
+      ) : (
+        <table className="min-w-full">
+          <thead className=" md:hidden">
+            <tr className="w-full bg-gray-100 text-left border-b border-b-borderGrey">
+              <th className="py-4">
+                <Typography fontFamily="secondary" size="14px" tag="span">
+                  Product
+                </Typography>
+              </th>
+              <th className="py-4">
+                <Typography fontFamily="secondary" size="14px" tag="span">
+                  Quantity
+                </Typography>
+              </th>
+              <th className="py-4 text-end"> </th>
+              <th className="py-4 text-end">
+                <Typography fontFamily="secondary" size="14px" tag="span">
+                  Total
+                </Typography>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody className="border-b border-b-borderGrey">
+            {cart.products.map((cartItem) => (
+              <tr key={cartItem.product.id} className="border-none">
+                <CartItem cartItem={cartItem} />
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
 
       <div className="flex self-end flex-col gap-3 mt-6 items-end md:self-stretch">
@@ -84,7 +82,7 @@ function CartMenu({ cart }: Props) {
         </Typography>
         <Button
           className=" md:self-stretch"
-          disabled={cart.products.length === 0}
+          disabled={!cart || cart.products.length === 0}
         >
           Go to checkout
         </Button>
