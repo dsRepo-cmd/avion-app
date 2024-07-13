@@ -1,18 +1,26 @@
 "use client";
 import Button from "@/components/Button/Button";
 import Typography from "@/components/Typography/Typography";
-import { removeItemFromCart } from "@/lib/actions";
+import { removeItemFromCart } from "@/lib/cart";
 import { CartProduct } from "@/types/cart";
 import Image from "next/image";
 import Link from "next/link";
 import DeleteIcon from "@/assets/x.svg";
-import { truncateDescription } from "@/lib/cart";
 import { useFormState } from "react-dom";
 import EditItemQuantityButton from "@/components/EditItemQuantityButton/EditItemQuantityButton";
 
 interface Props {
   cartItem: CartProduct;
 }
+
+const truncateDescription = (
+  description: string,
+  maxLength: number
+): string => {
+  return description.length > maxLength
+    ? description.substring(0, maxLength) + "..."
+    : description;
+};
 
 function CartItem({ cartItem }: Props) {
   const [message, deleteformAction] = useFormState(removeItemFromCart, null);

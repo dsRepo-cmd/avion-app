@@ -3,7 +3,7 @@
 import Button from "@/components/Button/Button";
 import Counter from "@/components/Counter/Counter";
 import Typography from "@/components/Typography/Typography";
-import { addItemToCart } from "@/lib/actions";
+import { addItemToCart } from "@/lib/cart";
 import type { Product } from "@/types/product";
 import { useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";

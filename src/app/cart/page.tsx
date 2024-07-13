@@ -1,4 +1,4 @@
-import { getCart } from "@/lib/actions";
+import { getCart } from "@/lib/cart";
 import CartMenu from "./menu";
 import Page from "@/components/Page/Page";
 

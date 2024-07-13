@@ -1,4 +1,4 @@
-import { updateQuantity } from "@/lib/actions";
+import { updateQuantity } from "@/lib/cart";
 import { cn } from "@/lib/utils/utils";
 import type { CartProduct } from "@/types/cart";
 

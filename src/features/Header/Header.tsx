@@ -2,7 +2,7 @@ import React from "react";
 import Divider from "../../components/Divider/Divider";
 import Navbar from "../Navbar/Navbar";
 import CategoryLinks from "@/components/CategoryLinks/CategoryLinks";
-import { getCart } from "@/lib/actions";
+import { getCart } from "@/lib/cart";
 interface Props {
   isMobile?: boolean;
 }
