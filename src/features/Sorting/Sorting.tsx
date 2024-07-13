@@ -2,13 +2,12 @@
 
 import Typography from "@/components/Typography/Typography";
 import { useState } from "react";
-import ArrowIcon from "@/assets/arrow-up.svg";
-import Icon from "@/components/Icon/Icon";
 import { cn } from "@/lib/utils/utils";
 import { useRouter } from "next/navigation";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown from "@/components/Dropdown/Dropdown";
 import { SortBy, SortOrder } from "@/types/product";
+import ArrowUpIcon from "@/components/SvgIcons/ArrowUpIcon";
 
 interface Props {
   searchParams: Record<string, any>;
@@ -81,14 +80,9 @@ function Sorting({ searchParams, isMobile }: Props) {
               {sortBy === currentSortBy && (
                 <span className="justify-self-end">
                   {sortOrder === SortOrder.asc ? (
-                    <Icon width={18} height={18} Svg={ArrowIcon} />
+                    <ArrowUpIcon size={18} />
                   ) : (
-                    <Icon
-                      className="rotate-180"
-                      width={18}
-                      height={18}
-                      Svg={ArrowIcon}
-                    />
+                    <ArrowUpIcon size={18} className="rotate-180" />
                   )}
                 </span>
               )}
