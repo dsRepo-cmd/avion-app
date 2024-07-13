@@ -185,28 +185,35 @@ export async function updateQuantity(
   }
 ): Promise<CartBase | string | undefined> {
   dbConnect();
-  const cartModel = await getCartModel();
-  if (!cartModel) {
-    return "cartModel not found";
-  }
 
-  const product = await ProductModel.findById(productId).lean();
-  if (!product) {
-    return "Product not found";
-  }
+  try {
+    if (quantity === 0) {
+      return await removeItemFromCart(prevState, productId);
+    }
+    const cartModel = await getCartModel();
+    if (!cartModel) {
+      return "cartModel not found";
+    }
 
-  const productIndex = cartModel.products.findIndex(
-    (item) => item.product.toString() === productId
-  );
-  if (productIndex === -1) {
-    return "Product not found in cart";
-  }
+    const product = await ProductModel.findById(productId).lean();
+    if (!product) {
+      return "Product not found";
+    }
 
-  const currentQuantity = cartModel.products[productIndex].quantity;
-  cartModel.products[productIndex].quantity = quantity;
-  cartModel.totalPrice += (quantity - currentQuantity) * product.price;
-  await cartModel.save();
+    const productIndex = cartModel.products.findIndex(
+      (item) => item.product.toString() === productId
+    );
+    if (productIndex === -1) {
+      return "Product not found in cart";
+    }
 
-  revalidateTag("cart");
+    const currentQuantity = cartModel.products[productIndex].quantity;
+    cartModel.products[productIndex].quantity = quantity;
+    cartModel.totalPrice += (quantity - currentQuantity) * product.price;
+    await cartModel.save();
+
+    revalidateTag("cart");
+  } catch (error) {}
+
   return;
 }

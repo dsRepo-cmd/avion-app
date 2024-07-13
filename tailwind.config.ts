@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
@@ -42,8 +43,36 @@ const config: Config = {
         "hover-hover": { raw: "(hover: hover)" },
         "hover-none": { raw: "(hover: none)" },
       },
+
+      keyframes: {
+        blink: {
+          "0%": { opacity: "0.2" },
+          "20%": { opacity: "1" },
+          "100% ": { opacity: "0.2" },
+        },
+      },
+
+      animation: {
+        blink: "blink 1.4s both infinite",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities(
+        {
+          "animation-delay": (value) => {
+            return {
+              "animation-delay": value,
+            };
+          },
+        },
+        {
+          values: theme("transitionDelay"),
+        }
+      );
+    }),
+  ],
 };
+
 export default config;

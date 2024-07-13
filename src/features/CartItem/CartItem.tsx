@@ -1,15 +1,14 @@
 "use client";
 import Button from "@/components/Button/Button";
-import Counter from "@/components/Counter/Counter";
 import Typography from "@/components/Typography/Typography";
-import { removeItemFromCart, updateQuantity } from "@/lib/actions";
+import { removeItemFromCart } from "@/lib/actions";
 import { CartProduct } from "@/types/cart";
 import Image from "next/image";
 import Link from "next/link";
-
 import DeleteIcon from "@/assets/x.svg";
 import { truncateDescription } from "@/lib/cart";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import EditItemQuantityButton from "@/components/EditItemQuantityButton/EditItemQuantityButton";
 
 interface Props {
   cartItem: CartProduct;
@@ -17,12 +16,6 @@ interface Props {
 
 function CartItem({ cartItem }: Props) {
   const [message, deleteformAction] = useFormState(removeItemFromCart, null);
-  const [messageQty, updateformAction] = useFormState(updateQuantity, null);
-  const { pending } = useFormStatus();
-
-  const handleQuantityChange = (quantity: number) => {
-    updateformAction({ productId: cartItem.product.id, quantity });
-  };
 
   return (
     <>
@@ -51,20 +44,11 @@ function CartItem({ cartItem }: Props) {
             £{cartItem.product.price}
           </Typography>
           <div className="hidden md:flex w-full justify-between">
-            <form
-              action={updateformAction.bind(null, {
-                productId: cartItem.product.id,
-                quantity: cartItem.quantity,
-              })}
-            >
-              <Counter
-                loading={pending}
-                value={cartItem.quantity}
-                className="bg-lightGrey"
-                onCountChange={handleQuantityChange}
-              />
-              <Button type="submit">upd</Button>
-            </form>
+            <div>
+              <EditItemQuantityButton type="minus" item={cartItem} />
+              <span> {cartItem.quantity}</span>
+              <EditItemQuantityButton type="plus" item={cartItem} />
+            </div>
 
             <form action={deleteformAction.bind(null, cartItem.product.id)}>
               <Button
@@ -80,18 +64,12 @@ function CartItem({ cartItem }: Props) {
         </div>
       </td>
       <td className="py-4 md:hidden">
-        <div className="flex gap-4">
-          <form
-            action={updateformAction.bind(null, {
-              productId: cartItem.product.id,
-              quantity: cartItem.quantity,
-            })}
-          >
-            <Counter
-              onCountChange={handleQuantityChange}
-              value={cartItem.quantity}
-            />
-          </form>
+        <div className="flex items-center justify-around max-w-[8rem] bg-white rounded-md">
+          <EditItemQuantityButton type="minus" item={cartItem} />
+          <span className=" font-primary  text-center w-[2.5rem] flex-shrink-0">
+            {cartItem.quantity}
+          </span>
+          <EditItemQuantityButton type="plus" item={cartItem} />
         </div>
       </td>
       <td className="py-4 ps-6 md:hidden">
