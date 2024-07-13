@@ -25,8 +25,6 @@ interface Props {
 function Navbar({ isMobile, cartItemsCount = 0 }: Props) {
   const session = useSession();
 
-  console.log(cartItemsCount);
-
   const isMobileClient = useIsMobile();
 
   const isShowMobile = isMobile || isMobileClient;

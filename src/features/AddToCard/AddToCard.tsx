@@ -27,8 +27,6 @@ function AddToCard({ product }: Props) {
     quantity: quantity,
   });
 
-  console.log(message);
-
   return (
     <>
       <Counter

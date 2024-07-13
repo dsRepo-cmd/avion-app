@@ -27,6 +27,7 @@ function updateCartCookie(cart: ICart): string | undefined {
 }
 
 export async function getCart(): Promise<CartBase | undefined> {
+  dbConnect();
   await getCartModel();
 
   const cartId = cookies().get("sw-context-token")?.value;
@@ -100,7 +101,7 @@ export async function addItemToCart(
     quantity: number;
   }
 ): Promise<CartBase | string | undefined> {
-  dbConnect();
+  await dbConnect();
 
   try {
     let cartModel = await getCartModel();
@@ -140,7 +141,7 @@ export async function removeItemFromCart(
   prevState: any,
   productId: string
 ): Promise<string | undefined> {
-  await dbConnect();
+  dbConnect();
 
   const cartModel = await getCartModel();
   if (!cartModel) {
@@ -184,7 +185,7 @@ export async function updateQuantity(
     quantity: number;
   }
 ): Promise<CartBase | string | undefined> {
-  await dbConnect();
+  dbConnect();
   const cartModel = await getCartModel();
   if (!cartModel) {
     return "cartModel not found";
