@@ -1,7 +1,6 @@
 "use client";
 
 import CartIcon from "@/assets/shopping-cart.svg";
-
 import UserAvatarIcon from "@/assets/user-avatar.svg";
 import Typography from "../../components/Typography/Typography";
 import AppLink from "../../components/AppLink/AppLink";
@@ -15,17 +14,15 @@ import ProfileIcon from "@/assets/user-avatar.svg";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown, { type DropdownItem } from "@/components/Dropdown/Dropdown";
-import { useCart } from "@/lib/CartContext";
 import Icon from "@/components/Icon/Icon";
 import Search from "../Search/Search";
 
 interface Props {
   isMobile?: boolean;
+  cartItemsCount?: number;
 }
 
-function Navbar({ isMobile }: Props) {
-  const { productCount } = useCart();
-
+function Navbar({ isMobile, cartItemsCount = 0 }: Props) {
   const session = useSession();
 
   const isMobileClient = useIsMobile();
@@ -94,9 +91,9 @@ function Navbar({ isMobile }: Props) {
           href={"/cart"}
           title="cart"
         >
-          {productCount && (
+          {cartItemsCount !== 0 && (
             <span className=" flex items-center justify-center absolute text-[12px] top-[-8px] right-[-8px] rounded-full  bg-borderGrey w-4 h-4">
-              {productCount}
+              {cartItemsCount}
             </span>
           )}
 

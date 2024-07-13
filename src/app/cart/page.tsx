@@ -1,11 +1,13 @@
-"use client";
+import { getCart } from "@/lib/cart";
 import CartMenu from "./menu";
 import Page from "@/components/Page/Page";
 
-function Cart() {
+async function Cart() {
+  const cart = await getCart();
+
   return (
     <Page>
-      <CartMenu />
+      <CartMenu cart={cart} />
     </Page>
   );
 }
