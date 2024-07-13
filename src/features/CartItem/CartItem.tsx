@@ -75,7 +75,7 @@ function CartItem({ cartItem }: Props) {
       <td className="py-4 md:hidden">
         <div className="flex items-center justify-around max-w-[8rem] bg-white rounded-md">
           <EditItemQuantityButton type="minus" item={cartItem} />
-          <span className=" font-primary  text-center w-[2.5rem] flex-shrink-0">
+          <span className=" font-primary py-3  text-center w-[2.5rem] flex-shrink-0">
             {cartItem.quantity}
           </span>
           <EditItemQuantityButton type="plus" item={cartItem} />

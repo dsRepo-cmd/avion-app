@@ -40,7 +40,7 @@ function Button({
 }: Props) {
   return (
     <button
-      className={cn(buttonVariants({ variant, bgColor, className }))}
+      className={cn(buttonVariants({ variant, bgColor }), className)}
       {...props}
     >
       {children}

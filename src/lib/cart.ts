@@ -43,39 +43,49 @@ function updateCartCookie(cart: ICart): string | undefined {
 }
 
 export async function getCart(): Promise<CartBase | undefined> {
-  dbConnect();
+  await dbConnect();
 
-  const cartId = cookies().get("sw-context-token")?.value;
-  let cartModel: ICart | null = await CartModel.findOne({
-    _id: cartId,
-  })
-    .populate({
-      path: "products.product",
-      model: ProductModel,
+  try {
+    const cartId = cookies().get("sw-context-token")?.value;
+    let cartModel: ICart | null = await CartModel.findOne({
+      _id: cartId,
     })
-    .lean();
+      .populate({
+        path: "products.product",
+        model: ProductModel,
+      })
+      .lean();
 
-  if (!cartModel) {
-    return;
+    if (!cartModel) {
+      return;
+    }
+    return transformCart(cartModel);
+  } catch (error) {
+    console.error("Error geting cart:", error);
+    return undefined;
   }
-  return transformCart(cartModel);
 }
 
 async function getCartModel(): Promise<ICart | undefined> {
-  const cartId = cookies().get("sw-context-token")?.value;
+  try {
+    const cartId = cookies().get("sw-context-token")?.value;
 
-  if (cartId) {
-    return await fetchCart(cartId);
+    if (cartId) {
+      return await fetchCart(cartId);
+    }
+
+    const newCartModel = await fetchCart();
+    if (newCartModel) {
+      updateCartCookie(newCartModel);
+    } else {
+      console.log("cartModel not found");
+    }
+
+    return newCartModel;
+  } catch (error) {
+    console.error("Error geting cartModel:", error);
+    return undefined;
   }
-
-  const newCartModel = await fetchCart();
-  if (newCartModel) {
-    updateCartCookie(newCartModel);
-  } else {
-    console.log("cartModel not found");
-  }
-
-  return newCartModel;
 }
 
 async function fetchCart(cartId?: string): Promise<ICart | undefined> {
@@ -156,7 +166,7 @@ export async function removeItemFromCart(
   prevState: any,
   productId: string
 ): Promise<string | undefined> {
-  dbConnect();
+  await dbConnect();
 
   const cartModel = await getCartModel();
   if (!cartModel) {
@@ -200,7 +210,7 @@ export async function updateQuantity(
     quantity: number;
   }
 ): Promise<CartBase | string | undefined> {
-  dbConnect();
+  await dbConnect();
 
   try {
     if (quantity === 0) {
@@ -229,7 +239,10 @@ export async function updateQuantity(
     await cartModel.save();
 
     revalidateTag("cart");
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error updating cart item quantity:", error);
+    return undefined;
+  }
 
   return;
 }
