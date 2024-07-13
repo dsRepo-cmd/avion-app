@@ -1,8 +1,8 @@
-import Features from "@/features/Features/Features";
-import JoinUs from "@/features/JoinUs/JoinUs";
-import NewProductListings from "@/features/NewProductListings/NewProductListings";
-import PopularProductListings from "@/features/PopularProductListings/PopularProductListings";
-import Page from "@/components/Page/Page";
+import Features from "@/components/features/Features/Features";
+import JoinUs from "@/components/features/JoinUs/JoinUs";
+import NewProductListings from "@/components/features/NewProductListings/NewProductListings";
+import PopularProductListings from "@/components/features/PopularProductListings/PopularProductListings";
+import Page from "@/components/shared/Page/Page";
 import Hero from "./hero";
 import Info from "./info";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
-import AppLink from "@/components/AppLink/AppLink";
-import Container from "@/components/Container/Container";
-import Typography from "@/components/Typography/Typography";
+import AppLink from "@/components/shared/AppLink/AppLink";
+import Container from "@/components/shared/Container/Container";
+import Typography from "@/components/shared/Typography/Typography";
 import { info } from "./data";
 
 function Info() {

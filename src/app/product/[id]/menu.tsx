@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Container from "@/components/Container/Container";
-import Divider from "@/components/Divider/Divider";
-import Typography from "@/components/Typography/Typography";
+import Container from "@/components/shared/Container/Container";
+import Divider from "@/components/shared/Divider/Divider";
+import Typography from "@/components/shared/Typography/Typography";
 import { getProductsByID } from "@/lib/products";
 import { Suspense } from "react";
-import AddToCard from "@/features/AddToCard/AddToCard";
+import AddToCard from "@/components/features/AddToCard/AddToCard";
 
 interface Props {
   id: string;

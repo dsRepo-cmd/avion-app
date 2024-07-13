@@ -1,6 +1,6 @@
 "use client";
-import CheckboxFilter from "@/features/CheckboxFilter/CheckboxFilter";
-import Sorting from "@/features/Sorting/Sorting";
+import CheckboxFilter from "@/components/features/CheckboxFilter/CheckboxFilter";
+import Sorting from "@/components/features/Sorting/Sorting";
 
 interface Props {
   searchParams: Record<string, any>;

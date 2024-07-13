@@ -1,7 +1,7 @@
-import Features from "@/features/Features/Features";
-import JoinUs from "@/features/JoinUs/JoinUs";
-import SimularProductListings from "@/features/SimularProductListings/SimularProductListings";
-import Page from "@/components/Page/Page";
+import Features from "@/components/features/Features/Features";
+import JoinUs from "@/components/features/JoinUs/JoinUs";
+import SimularProductListings from "@/components/features/SimularProductListings/SimularProductListings";
+import Page from "@/components/shared/Page/Page";
 import Menu from "./menu";
 
 interface Props {

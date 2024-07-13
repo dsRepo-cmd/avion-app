@@ -6,10 +6,10 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import Page from "@/components/Page/Page";
-import Input from "@/components/Input/Input";
-import Button from "@/components/Button/Button";
-import Typography from "@/components/Typography/Typography";
+import Page from "@/components/shared/Page/Page";
+import Input from "@/components/shared/Input/Input";
+import Button from "@/components/shared/Button/Button";
+import Typography from "@/components/shared/Typography/Typography";
 import {
   Brand,
   Designer,
