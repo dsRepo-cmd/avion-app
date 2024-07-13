@@ -41,7 +41,7 @@ function CartItem({ cartItem }: Props) {
             className="w-[109px] h-[134px] object-cover md:min-w-[133px] md:h-[166px]"
           />
         </Link>
-        <div className="max-w-[250px] flex w-full flex-col gap-2">
+        <div className=" flex w-full flex-col gap-2">
           <Typography tag="h3" size="20px" fontFamily="secondary">
             {cartItem.product.name}
           </Typography>
@@ -51,13 +51,14 @@ function CartItem({ cartItem }: Props) {
           <Typography tag="p" size="16px" fontFamily="primary">
             £{cartItem.product.price}
           </Typography>
-          <div className="hidden md:flex w-full justify-between">
-            <div>
+          <div className="hidden md:flex w-full justify-between items-center">
+            <div className="flex items-center justify-around max-w-[8rem] bg-white rounded-md">
               <EditItemQuantityButton type="minus" item={cartItem} />
-              <span> {cartItem.quantity}</span>
+              <span className=" font-primary  text-center w-[2.5rem] flex-shrink-0">
+                {cartItem.quantity}
+              </span>
               <EditItemQuantityButton type="plus" item={cartItem} />
             </div>
-
             <form action={deleteformAction.bind(null, cartItem.product.id)}>
               <Button
                 type="submit"
