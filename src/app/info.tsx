@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Button from "@/components/Button/Button";
-import Typography from "@/components/Typography/Typography";
+import Button from "@/components/shared/Button/Button";
+import Typography from "@/components/shared/Typography/Typography";
 
 const info = {
   title: "From a studio in London to a global brand with over 400 outlets",

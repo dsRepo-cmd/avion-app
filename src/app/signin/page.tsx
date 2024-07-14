@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
 import Link from "next/link";
-import SignInForm from "@/features/SignInForm/SignInForm";
-import Container from "@/components/Container/Container";
-import Divider from "@/components/Divider/Divider";
-import GoogleButton from "@/features/GoogleButton/GoogleButton";
-import Page from "@/components/Page/Page";
-import Typography from "@/components/Typography/Typography";
-import Spinner from "@/components/Spinner/Spinner";
+import SignInForm from "@/components/features/SignInForm/SignInForm";
+import Container from "@/components/shared/Container/Container";
+import Divider from "@/components/shared/Divider/Divider";
+import GoogleButton from "@/components/features/GoogleButton/GoogleButton";
+import Page from "@/components/shared/Page/Page";
+import Typography from "@/components/shared/Typography/Typography";
+import Spinner from "@/components/shared/Spinner/Spinner";
 
 async function Signin() {
   return (

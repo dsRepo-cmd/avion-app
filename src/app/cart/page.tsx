@@ -1,6 +1,6 @@
 import { getCart } from "@/lib/cart";
 import CartMenu from "./menu";
-import Page from "@/components/Page/Page";
+import Page from "@/components/shared/Page/Page";
 
 async function Cart() {
   const cart = await getCart();

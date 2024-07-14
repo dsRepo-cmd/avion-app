@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/configs/auth";
-import PopularProductListings from "@/features/PopularProductListings/PopularProductListings";
-import Container from "@/components/Container/Container";
-import Page from "@/components/Page/Page";
-import Typography from "@/components/Typography/Typography";
+import PopularProductListings from "@/components/features/PopularProductListings/PopularProductListings";
+import Container from "@/components/shared/Container/Container";
+import Page from "@/components/shared/Page/Page";
+import Typography from "@/components/shared/Typography/Typography";
 
 async function Profile() {
   const session = await getServerSession(authConfig);

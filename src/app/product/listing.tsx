@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils/utils";
-import AppLink from "../../components/AppLink/AppLink";
-import ListingItem from "../../components/ListingItem/ListingItem";
+import AppLink from "../../components/shared/AppLink/AppLink";
+import ListingItem from "../../components/shared/ListingItem/ListingItem";
 import type { SearchParams } from "@/types/product";
 import { getProducts } from "@/lib/products";
-import Typography from "@/components/Typography/Typography";
+import Typography from "@/components/shared/Typography/Typography";
 
 interface Props {
   searchParams: SearchParams;

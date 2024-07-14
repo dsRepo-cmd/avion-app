@@ -1,12 +1,12 @@
 "use client";
 import { Suspense } from "react";
 import Link from "next/link";
-import SignUpForm from "@/features/SignUpForm/SignUpForm";
-import GoogleButton from "@/features/GoogleButton/GoogleButton";
-import Container from "@/components/Container/Container";
-import Typography from "@/components/Typography/Typography";
-import Divider from "@/components/Divider/Divider";
-import Page from "@/components/Page/Page";
+import SignUpForm from "@/components/features/SignUpForm/SignUpForm";
+import GoogleButton from "@/components/features/GoogleButton/GoogleButton";
+import Container from "@/components/shared/Container/Container";
+import Typography from "@/components/shared/Typography/Typography";
+import Divider from "@/components/shared/Divider/Divider";
+import Page from "@/components/shared/Page/Page";
 
 const SignUp = () => {
   return (

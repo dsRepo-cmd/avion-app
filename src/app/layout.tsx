@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import localFont from "next/font/local";
-import Header from "@/features/Header/Header";
-import Footer from "@/features/Footer/Footer";
-import Banner from "@/features/Banner/Banner";
-import Providers from "@/components/Providers/Providers";
+import Header from "@/components/features/Header/Header";
+import Footer from "@/components/features/Footer/Footer";
+import Banner from "@/components/features/Banner/Banner";
+import Providers from "@/components/shared/Providers/Providers";
 import { isMobile } from "@/lib/isMobile";
 import "./globals.css";
 

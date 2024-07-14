@@ -1,10 +1,10 @@
 "use client";
 
-import Button from "@/components/Button/Button";
-import Container from "@/components/Container/Container";
-import Typography from "@/components/Typography/Typography";
+import Button from "@/components/shared/Button/Button";
+import Container from "@/components/shared/Container/Container";
+import Typography from "@/components/shared/Typography/Typography";
 import { CartBase } from "@/types/cart";
-import CartItem from "../../features/CartItem/CartItem";
+import CartItem from "../../components/features/CartItem/CartItem";
 
 interface Props {
   cart?: CartBase;
