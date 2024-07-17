@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import { type Product, ProductCategory, ProductType } from "@/types/product";
+import { type Product } from "@/types/product";
 import type { Model, Document, Types } from "mongoose";
+import { ProductCategory, ProductType } from "@/lib/enums";
 
 export interface IProduct extends Document, Omit<Product, "id"> {
   _id: Types.ObjectId;

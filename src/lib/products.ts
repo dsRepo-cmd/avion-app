@@ -1,14 +1,8 @@
 import dbConnect from "./dbConnect";
 import ProductModel, { type IProduct } from "@/models/Product";
 
-import {
-  Product,
-  ProductCategory,
-  ProductListing,
-  SearchParams,
-  SortBy,
-  SortOrder,
-} from "@/types/product";
+import { Product, ProductListing, SearchParams } from "@/types/product";
+import { ProductCategory, SortBy, SortOrder } from "./enums";
 
 const transformProduct = (productModel: IProduct): Product => ({
   id: productModel._id.toString(),
