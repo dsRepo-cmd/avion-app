@@ -5,8 +5,9 @@ import {
   ProductCategory,
   ProductType,
   SortBy,
+  SortOrder,
 } from "@/lib/enums";
-import { SortOrder } from "mongoose";
+
 
 export interface ProductListing {
   id: string;
