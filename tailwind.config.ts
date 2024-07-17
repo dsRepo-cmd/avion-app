@@ -55,6 +55,10 @@ const config: Config = {
       animation: {
         blink: "blink 1.4s both infinite",
       },
+
+      boxShadow: {
+        custom: "1px 1px 4px 0 #151515",
+      },
     },
   },
   plugins: [
