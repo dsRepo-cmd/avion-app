@@ -50,3 +50,7 @@ export enum ProductType {
   Sofas = "Sofas",
   Homeware = "Homeware",
 }
+
+export enum Tag {
+  CART = "cart",
+}
