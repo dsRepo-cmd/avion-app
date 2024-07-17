@@ -1,6 +1,6 @@
 import Listings from "@/components/shared/Listings/Listings";
+import { SortBy } from "@/lib/enums";
 import { getNewProducts } from "@/lib/products";
-import { SortBy } from "@/types/product";
 
 async function NewProductListings() {
   const newProducts = await getNewProducts();
