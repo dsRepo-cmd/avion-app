@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils/utils";
 import { useRouter } from "next/navigation";
 import useIsMobile from "@/lib/useIsMobile";
 import Dropdown from "@/components/shared/Dropdown/Dropdown";
-import { SortBy, SortOrder } from "@/types/product";
 import ArrowUpIcon from "@/components/icons/ArrowUpIcon";
+import { SortBy, SortOrder } from "@/lib/enums";
 
 interface Props {
   searchParams: Record<string, any>;

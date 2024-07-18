@@ -10,13 +10,8 @@ import Page from "@/components/shared/Page/Page";
 import Input from "@/components/shared/Input/Input";
 import Button from "@/components/shared/Button/Button";
 import Typography from "@/components/shared/Typography/Typography";
-import {
-  Brand,
-  Designer,
-  type Product,
-  ProductCategory,
-  ProductType,
-} from "@/types/product";
+import { type Product } from "@/types/product";
+import { Brand, Designer, ProductCategory, ProductType } from "@/lib/enums";
 
 const CreateProduct = () => {
   const [loading, setLoading] = useState(false);

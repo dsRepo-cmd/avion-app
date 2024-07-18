@@ -8,6 +8,7 @@ import CartModel from "@/models/Cart";
 import ProductModel from "@/models/Product";
 import { Types } from "mongoose";
 import { revalidateTag } from "next/cache";
+import { Tag } from "./enums";
 
 export const transformCart = (cart: ICart): CartBase => ({
   id: cart._id.toString(),
@@ -154,7 +155,7 @@ export async function addItemToCart(
 
     await cartModel.save();
 
-    revalidateTag("cart");
+    revalidateTag(Tag.CART);
     return "Product has been added to cart";
   } catch (error) {
     console.error("Error adding item to cart:", error);
@@ -192,7 +193,7 @@ export async function removeItemFromCart(
 
     await cartModel.save();
 
-    revalidateTag("cart");
+    revalidateTag(Tag.CART);
     return;
   } catch (error) {
     console.error("Error removing item from cart:", error);
@@ -238,7 +239,7 @@ export async function updateQuantity(
     cartModel.totalPrice += (quantity - currentQuantity) * product.price;
     await cartModel.save();
 
-    revalidateTag("cart");
+    revalidateTag(Tag.CART);
   } catch (error) {
     console.error("Error updating cart item quantity:", error);
     return undefined;

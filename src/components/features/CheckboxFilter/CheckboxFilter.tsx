@@ -4,13 +4,9 @@ import CheckBox from "@/components/shared/CheckBox/CheckBox";
 import Dropdown from "@/components/shared/Dropdown/Dropdown";
 import Typography from "@/components/shared/Typography/Typography";
 import useIsMobile from "@/lib/useIsMobile";
-import {
-  Designer,
-  PriceRange,
-  ProductType,
-  SortCategory,
-} from "@/types/product";
+
 import { cn } from "@/lib/utils/utils";
+import { Designer, PriceRange, ProductType, SortCategory } from "@/lib/enums";
 
 interface Props {
   searchParams: Record<string, any>;
