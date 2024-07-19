@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[avion-app-seven.vercel.app](https://avion-app-seven.vercel.app/)
 
-## Getting Started
 
-First, run the development server:
+# Avion App
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Overview
+Avion App is a web application built with Next.js, designed to be a modern, performant, and scalable solution. This application leverages a variety of tools and libraries to provide an efficient development and runtime environment.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+- **Next.js**: Framework for server-rendered React applications.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **Mongoose**: ODM for MongoDB.
+- **Next Auth**: Authentication for Next.js applications.
+- **Jest**: Testing framework.
+- **TypeScript**: Static typing for JavaScript.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
+To get started with the Avion App, follow these steps:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-repo/avion-app.git
+    cd avion-app
+    ```
 
-## Learn More
+2. **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
+Here are the primary scripts available for development and production:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Development**:
+    ```bash
+    npm run dev
+    ```
+    Starts the development server.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Build**:
+    ```bash
+    npm run build
+    ```
+    Builds the application for production.
 
-## Deploy on Vercel
+- **Start**:
+    ```bash
+    npm run start
+    ```
+    Starts the application in production mode.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Lint**:
+    ```bash
+    npm run lint
+    ```
+    Runs ESLint to check for linting errors.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Test**:
+    ```bash
+    npm run test
+    ```
+    Runs the test suite using Jest.
+
+## Dependencies
+- `@babel/preset-env`
+- `@svgr/webpack`
+- `bcryptjs`
+- `class-variance-authority`
+- `clsx`
+- `mongoose`
+- `next`
+- `next-auth`
+- `react`
+- `react-dom`
+- `tailwind-merge`
+
+## DevDependencies
+- `@babel/preset-typescript`
+- `@testing-library/jest-dom`
+- `@testing-library/react`
+- `@types/bcryptjs`
+- `@types/jest`
+- `@types/node`
+- `@types/react`
+- `@types/react-dom`
+- `eslint`
+- `eslint-config-next`
+- `jest`
+- `jest-environment-jsdom`
+- `postcss`
+- `tailwindcss`
+- `ts-node`
+- `typescript`
