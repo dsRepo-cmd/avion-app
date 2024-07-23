@@ -1,3 +1,4 @@
+"use server";
 import dbConnect from "./dbConnect";
 import ProductModel, { type IProduct } from "@/models/Product";
 
@@ -171,5 +172,23 @@ export async function getProductsByID(
   } catch (error) {
     console.error(error);
     return undefined;
+  }
+}
+
+export async function productCreate(prevState: any, product: Product) {
+  await dbConnect();
+
+  try {
+    const newProduct = new ProductModel(product);
+
+    if (!newProduct) {
+      return "Error product create in DB";
+    }
+    await newProduct.save();
+
+    return "Product has been created";
+  } catch (error) {
+    console.error(error);
+    return;
   }
 }
