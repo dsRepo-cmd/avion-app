@@ -1,9 +1,9 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
-import Button from "@/components/shared/Button/Button";
 
-import Portal from "@/components/shared/Portal/Portal";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils/utils";
+import Button from "@/components/shared/Button/Button";
+import Portal from "@/components/shared/Portal/Portal";
 import CategoryLinks from "@/components/shared/CategoryLinks/CategoryLinks";
 
 function BurgerMenu() {

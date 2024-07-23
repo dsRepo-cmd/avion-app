@@ -1,5 +1,4 @@
 import Button from "@/components/shared/Button/Button";
-
 import Portal from "@/components/shared/Portal/Portal";
 import SearchIcon from "@/components/icons/SearchIcon";
 import XIcon from "@/components/icons/XIcon";

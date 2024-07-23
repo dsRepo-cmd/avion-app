@@ -1,11 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 import Button from "@/components/shared/Button/Button";
 import Input from "@/components/shared/Input/Input";
 import Typography from "@/components/shared/Typography/Typography";
 import { Brand, Designer, ProductCategory, ProductType } from "@/lib/enums";
 import { productCreate } from "@/lib/products";
 import { Product } from "@/types/product";
-import { useFormState, useFormStatus } from "react-dom";
 
 function SubmitButton() {
   const { pending } = useFormStatus();

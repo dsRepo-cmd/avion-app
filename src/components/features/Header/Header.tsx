@@ -1,8 +1,8 @@
-import React from "react";
+import CategoryLinks from "@/components/shared/CategoryLinks/CategoryLinks";
 import Divider from "../../shared/Divider/Divider";
 import Navbar from "../Navbar/Navbar";
 import { getCart } from "@/lib/cart";
-import CategoryLinks from "@/components/shared/CategoryLinks/CategoryLinks";
+
 interface Props {
   isMobile?: boolean;
 }

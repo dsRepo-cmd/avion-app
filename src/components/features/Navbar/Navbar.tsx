@@ -1,23 +1,21 @@
 "use client";
 
-import Typography from "../../shared/Typography/Typography";
-import AppLink from "../../shared/AppLink/AppLink";
-import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
+import Typography from "../../shared/Typography/Typography";
+import AppLink from "../../shared/AppLink/AppLink";
+import Search from "../Search/Search";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
-import useIsMobile from "@/lib/useIsMobile";
 import Dropdown, {
   type DropdownItem,
 } from "@/components/shared/Dropdown/Dropdown";
-
-import Search from "../Search/Search";
-
 import SignOutIcon from "@/components/icons/SignOutIcon";
 import SignInIcon from "@/components/icons/SignInIcon";
 import SignUpIcon from "@/components/icons/SignUpIcon";
 import ShoppingCartIcon from "@/components/icons/ShoppingCartIcon";
 import UserAvatarIcon from "@/components/icons/UserAvatarIcon";
+import useIsMobile from "@/lib/useIsMobile";
 
 interface Props {
   isMobile?: boolean;

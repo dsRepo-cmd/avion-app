@@ -1,13 +1,13 @@
 "use client";
-import Button from "@/components/shared/Button/Button";
-import Typography from "@/components/shared/Typography/Typography";
-import { removeItemFromCart } from "@/lib/cart";
-import { CartProduct } from "@/types/cart";
+import { useFormState } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
-import { useFormState } from "react-dom";
+import Button from "@/components/shared/Button/Button";
+import Typography from "@/components/shared/Typography/Typography";
 import EditItemQuantityButton from "@/components/shared/EditItemQuantityButton/EditItemQuantityButton";
 import XIcon from "@/components/icons/XIcon";
+import { removeItemFromCart } from "@/lib/cart";
+import { CartProduct } from "@/types/cart";
 
 interface Props {
   cartItem: CartProduct;

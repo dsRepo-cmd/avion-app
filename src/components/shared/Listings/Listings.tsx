@@ -1,8 +1,8 @@
-import { cn } from "@/lib/utils/utils";
 import Container from "@/components/shared/Container/Container";
 import Typography from "@/components/shared/Typography/Typography";
 import AppLink from "../AppLink/AppLink";
 import ListingItem from "../ListingItem/ListingItem";
+import { cn } from "@/lib/utils/utils";
 import type { ProductListing } from "@/types/product";
 
 interface Props {

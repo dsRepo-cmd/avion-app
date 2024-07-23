@@ -1,11 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Button from "@/components/shared/Button/Button";
 import Counter from "@/components/shared/Counter/Counter";
 import Typography from "@/components/shared/Typography/Typography";
 import { addItemToCart } from "@/lib/cart";
 import type { Product } from "@/types/product";
-import { useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
 interface Props {

@@ -1,6 +1,6 @@
 "use client";
-import Page from "@/components/shared/Page/Page";
 
+import Page from "@/components/shared/Page/Page";
 import Form from "./form";
 
 const CreateProduct = () => {

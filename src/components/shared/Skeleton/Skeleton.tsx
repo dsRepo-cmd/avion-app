@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils/utils";
 import { CSSProperties, HTMLAttributes, memo } from "react";
+import { cn } from "@/lib/utils/utils";
 
 interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
