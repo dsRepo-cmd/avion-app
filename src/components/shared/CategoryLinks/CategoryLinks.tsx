@@ -22,7 +22,7 @@ function CategoryLinks({ className }: Props) {
               variant="clear"
               href={`/product?category=${category}`}
               className={cn(
-                " text-grey hover-hover:hover:underline hover-none:active:underline",
+                " text-grey hover-hover:hover:underline hover-none:active:underline underline-offset-2",
                 category === categoryParams && "underline"
               )}
             >
