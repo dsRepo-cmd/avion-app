@@ -1,6 +1,6 @@
 import { cva, VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils/utils";
 import Button from "../Button/Button";
+import { cn } from "@/lib/utils/utils";
 
 interface Props extends VariantProps<typeof formVariants> {
   className?: string;

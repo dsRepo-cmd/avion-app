@@ -1,12 +1,12 @@
 "use client";
 
-import Typography from "@/components/shared/Typography/Typography";
 import { useState } from "react";
-import { cn } from "@/lib/utils/utils";
 import { useRouter } from "next/navigation";
-import useIsMobile from "@/lib/useIsMobile";
+import Typography from "@/components/shared/Typography/Typography";
 import Dropdown from "@/components/shared/Dropdown/Dropdown";
 import ArrowUpIcon from "@/components/icons/ArrowUpIcon";
+import useIsMobile from "@/lib/useIsMobile";
+import { cn } from "@/lib/utils/utils";
 import { SortBy, SortOrder } from "@/lib/enums";
 
 interface Props {

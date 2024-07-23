@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils/utils";
 import AppLink from "../AppLink/AppLink";
@@ -22,7 +21,7 @@ function CategoryLinks({ className }: Props) {
               variant="clear"
               href={`/product?category=${category}`}
               className={cn(
-                " text-grey hover-hover:hover:underline hover-none:active:underline",
+                " text-grey hover-hover:hover:underline hover-none:active:underline underline-offset-2",
                 category === categoryParams && "underline"
               )}
             >

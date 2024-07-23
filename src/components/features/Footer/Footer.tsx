@@ -1,9 +1,8 @@
-import React from "react";
+import LinksList from "@/components/shared/LinksList/LinksList";
 import Typography from "../../shared/Typography/Typography";
 import Divider from "../../shared/Divider/Divider";
 import EmailSignUpForm from "../../shared/EmailSignUpForm/EmailSignUpForm";
 import SocialLinks from "../SocialLinks/SocialLinks";
-import LinksList from "@/components/shared/LinksList/LinksList";
 import { categories, copyright, joinUs, menu, ourCompany } from "./data";
 
 function Footer() {

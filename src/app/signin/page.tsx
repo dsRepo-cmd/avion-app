@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
 import SignInForm from "@/components/features/SignInForm/SignInForm";
 import Container from "@/components/shared/Container/Container";

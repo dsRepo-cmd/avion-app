@@ -1,4 +1,5 @@
 "use client";
+
 import { Suspense } from "react";
 import Link from "next/link";
 import SignUpForm from "@/components/features/SignUpForm/SignUpForm";
