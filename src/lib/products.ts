@@ -175,7 +175,7 @@ export async function getProductsByID(
   }
 }
 
-export async function productCreate(prevState: any, product: Product) {
+export async function productCreate(prevState: any, product: Partial<Product>) {
   await dbConnect();
 
   try {
