@@ -1,48 +1,37 @@
 "use client";
 import { cn } from "@/lib/utils/utils";
-import { useState, useEffect, useCallback, type ChangeEvent } from "react";
+import React, { useState } from "react";
 
-interface Props {
-  value?: number;
+type Props = {
   onCountChange?: (count: number) => void;
   className?: string;
   loading?: boolean;
-}
+};
 
-function Counter({
-  value = 1,
+const Counter: React.FC<Props> = ({
   onCountChange = () => {},
   className,
   loading = false,
-}: Props) {
-  const [count, setCount] = useState(value);
+}: Props) => {
+  const [count, setCount] = useState(1);
 
-  useEffect(() => {
-    setCount(value);
-  }, [value]);
+  const increment = () => {
+    const newCount = count + 1;
+    setCount(newCount);
+    onCountChange(newCount);
+  };
 
-  const increment = useCallback(() => {
-    setCount((prevCount) => {
-      const newCount = prevCount + 1;
-      setTimeout(() => onCountChange(newCount), 0);
-      return newCount;
-    });
-  }, [onCountChange]);
+  const decrement = () => {
+    const newCount = count - 1;
+    setCount(newCount);
+    onCountChange(newCount);
+  };
 
-  const decrement = useCallback(() => {
-    setCount((prevCount) => {
-      const newCount = Math.max(prevCount - 1, 1);
-      setTimeout(() => onCountChange(newCount), 0);
-      return newCount;
-    });
-  }, [onCountChange]);
-
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = parseInt(event.target.value, 10);
-    if (!isNaN(inputValue) && inputValue >= 1) {
-      setCount(inputValue);
-
-      setTimeout(() => onCountChange(inputValue), 0);
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newCount = parseInt(event.target.value, 10);
+    if (!isNaN(newCount)) {
+      setCount(newCount);
+      onCountChange(newCount);
     }
   };
 
@@ -80,6 +69,6 @@ function Counter({
       </button>
     </div>
   );
-}
+};
 
 export default Counter;
