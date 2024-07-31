@@ -32,7 +32,10 @@ const inputVariants = cva("grow px-8 py-4 lg:w-[200px]", {
 
 function EmailSignUpForm({ variant = "light", className = "" }: Props) {
   return (
-    <form className={cn(formVariants({ variant }), className)}>
+    <form
+      data-testid="email-signup-form"
+      className={cn(formVariants({ variant }), className)}
+    >
       <input
         className={cn(inputVariants({ variant }))}
         type="text"
