@@ -97,10 +97,6 @@ const Dropdown: React.FC<Props> = ({
     };
   }, [closeDropdown]);
 
-  const itemClassName = "w-full p-3 text-left hover:bg-lightGrey";
-  const disabledClassName = "opacity-50 cursor-not-allowed";
-  const enabledClassName = "cursor-pointer";
-
   return (
     <div ref={dropdownRef} className="relative">
       <Button
@@ -114,23 +110,27 @@ const Dropdown: React.FC<Props> = ({
         {isDownIcon && <ChevronDownIcon size={8} />}
       </Button>
 
-      <div className={cn(dropdownVariants({ position, isOpen }), className)}>
+      <div
+        data-testid="dropdown"
+        className={cn(dropdownVariants({ position, isOpen }), className)}
+      >
         <div>
           {items?.map((item) => {
             const content = (
               <button
                 type="button"
+                data-testid="dropdown-button"
                 disabled={item.disabled}
                 onClick={item.onClick}
                 className={cn(
-                  itemClassName,
-                  item.disabled ? disabledClassName : enabledClassName
+                  " flex gap-5 items-center w-full p-3 text-left hover:bg-lightGrey",
+                  item.disabled
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
                 )}
               >
-                <div className="flex gap-5 items-center">
-                  {item.svg && item.svg}
-                  {item.content}
-                </div>
+                {item.svg && item.svg}
+                {item.content}
               </button>
             );
 
