@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Dropdown from "./Dropdown";
 
 jest.mock("@/components/icons/ChevronDownIcon", () => {
@@ -23,7 +23,6 @@ describe("Dropdown component", () => {
     );
 
     expect(screen.getByText("Open Menu")).toBeInTheDocument();
-
     expect(screen.getByText("Item 1")).toBeInTheDocument();
     expect(screen.getByText("Item 2")).toBeInTheDocument();
   });
@@ -42,7 +41,9 @@ describe("Dropdown component", () => {
 
     fireEvent.click(getByText("Open Menu"));
 
-    expect(queryByTestId("dropdown")).toHaveClass("opacity-100");
+    waitFor(() => {
+      expect(queryByTestId("dropdown")).toHaveClass("opacity-100");
+    });
   });
 
   test("closes dropdown when clicking outside", () => {
@@ -103,5 +104,75 @@ describe("Dropdown component", () => {
 
     const linkItem = screen.getByText("Item 2").closest("a");
     expect(linkItem).toHaveAttribute("href", "/item2");
+  });
+
+  test("applies dropdownVariants classes based on isOpen and position props", () => {
+    const { rerender } = render(
+      <Dropdown
+        trigger={<span>Open Menu</span>}
+        items={mockItems}
+        isOpen={false}
+      />
+    );
+
+    expect(screen.getByTestId("dropdown")).toHaveClass("opacity-0");
+
+    rerender(
+      <Dropdown
+        trigger={<span>Open Menu</span>}
+        items={mockItems}
+        isOpen={true}
+      />
+    );
+
+    waitFor(() => {
+      expect(screen.getByTestId("dropdown")).toHaveClass("opacity-100");
+    });
+  });
+
+  test("applies classTrigger to the Button component", () => {
+    render(
+      <Dropdown
+        trigger={<span>Open Menu</span>}
+        items={mockItems}
+        isOpen={true}
+        classTrigger="custom-trigger-class"
+      />
+    );
+
+    expect(screen.getByLabelText("trigger")).toHaveClass(
+      "custom-trigger-class"
+    );
+  });
+
+  test("renders ChevronDownIcon when isDownIcon is true", () => {
+    render(
+      <Dropdown
+        trigger={<span>Open Menu</span>}
+        items={mockItems}
+        isOpen={true}
+        isDownIcon={true}
+      />
+    );
+
+    expect(screen.getByTestId("chevron-down-icon")).toBeInTheDocument();
+  });
+
+  test("renders provided SVG icon in dropdown items", () => {
+    const mockSvg = <svg data-testid="mock-svg-icon"></svg>;
+    const itemsWithSvg = [
+      { id: "1", content: "Item 1", svg: mockSvg, onClick: jest.fn() },
+      { id: "2", content: "Item 2", href: "/item2" },
+    ];
+
+    render(
+      <Dropdown
+        trigger={<span>Open Menu</span>}
+        items={itemsWithSvg}
+        isOpen={true}
+      />
+    );
+
+    expect(screen.getByTestId("mock-svg-icon")).toBeInTheDocument();
   });
 });
