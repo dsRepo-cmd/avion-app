@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import GoogleButton from "./GoogleButton";
 import { signIn } from "next-auth/react";
