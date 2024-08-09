@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import Container from "@/components/shared/Container/Container";
 import Page from "@/components/shared/Page/Page";
-import { isMobile } from "@/lib/isMobile";
+import { isMobile } from "@/lib/isMobile/isMobile";
 import SortPanel from "./sortPanel";
 import Title from "./title";
 import Listing from "./listing";
