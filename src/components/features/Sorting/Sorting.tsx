@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Typography from "@/components/shared/Typography/Typography";
 import Dropdown from "@/components/shared/Dropdown/Dropdown";
 import ArrowUpIcon from "@/components/icons/ArrowUpIcon";
-import useIsMobile from "@/lib/useIsMobile";
+import useIsMobile from "@/lib/useIsMobile/useIsMobile";
 import { cn } from "@/lib/utils/utils";
 import { SortBy, SortOrder } from "@/lib/enums";
 

@@ -33,7 +33,6 @@ function Input({
   const onChangeView = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setHide(!isHide);
-    console.log(EyeIcon, isHide);
   };
 
   return (

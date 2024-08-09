@@ -5,7 +5,7 @@ import Header from "@/components/features/Header/Header";
 import Footer from "@/components/features/Footer/Footer";
 import Banner from "@/components/features/Banner/Banner";
 import Providers from "@/components/shared/Providers/Providers";
-import { isMobile } from "@/lib/isMobile";
+import { isMobile } from "@/lib/isMobile/isMobile";
 import "./globals.css";
 
 const satoshi = localFont({

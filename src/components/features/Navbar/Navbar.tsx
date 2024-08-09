@@ -15,7 +15,7 @@ import SignInIcon from "@/components/icons/SignInIcon";
 import SignUpIcon from "@/components/icons/SignUpIcon";
 import ShoppingCartIcon from "@/components/icons/ShoppingCartIcon";
 import UserAvatarIcon from "@/components/icons/UserAvatarIcon";
-import useIsMobile from "@/lib/useIsMobile";
+import useIsMobile from "@/lib/useIsMobile/useIsMobile";
 
 interface Props {
   isMobile?: boolean;

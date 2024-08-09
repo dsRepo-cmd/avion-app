@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import LinksList from "./LinksList";
 import { Link } from "@/types/types";
