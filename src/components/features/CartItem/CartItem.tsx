@@ -1,5 +1,5 @@
 "use client";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/shared/Button/Button";
@@ -23,7 +23,7 @@ const truncateDescription = (
 };
 
 function CartItem({ cartItem }: Props) {
-  const [message, deleteformAction] = useFormState(removeItemFromCart, null);
+  const [message, deleteformAction] = useActionState(removeItemFromCart, null);
 
   return (
     <>

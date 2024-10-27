@@ -2,7 +2,7 @@
 
 import type { ICart } from "@/models/Cart";
 import type { CartBase } from "@/types/cart";
-import { cookies } from "next/headers";
+import { cookies, type UnsafeUnwrappedCookies } from "next/headers";
 import dbConnect from "./dbConnect";
 import CartModel from "@/models/Cart";
 import ProductModel from "@/models/Product";
@@ -10,7 +10,7 @@ import { Types } from "mongoose";
 import { revalidateTag } from "next/cache";
 import { Tag } from "./enums";
 
-export const transformCart = (cart: ICart): CartBase => ({
+export const transformCart = async (cart: ICart): Promise<CartBase> => ({
   id: cart._id.toString(),
   userIdentifier: cart.userIdentifier,
   products: cart.products.map((product) => ({
@@ -28,15 +28,23 @@ export const transformCart = (cart: ICart): CartBase => ({
 });
 
 function updateCartCookie(cart: ICart): string | undefined {
-  const cartId = cookies().get("sw-context-token")?.value;
+  const cartId = (cookies() as unknown as UnsafeUnwrappedCookies).get(
+    "sw-context-token"
+  )?.value;
 
   if (cartId && cart._id && cart._id.toString() !== cartId) {
-    cookies().set("sw-context-token", cart._id.toString());
+    (cookies() as unknown as UnsafeUnwrappedCookies).set(
+      "sw-context-token",
+      cart._id.toString()
+    );
     return cart._id.toString();
   }
 
   if (!cartId && cart._id.toString()) {
-    cookies().set("sw-context-token", cart._id.toString());
+    (cookies() as unknown as UnsafeUnwrappedCookies).set(
+      "sw-context-token",
+      cart._id.toString()
+    );
     return cart._id.toString();
   }
 
@@ -47,7 +55,7 @@ export async function getCart(): Promise<CartBase | undefined> {
   await dbConnect();
 
   try {
-    const cartId = cookies().get("sw-context-token")?.value;
+    const cartId = (await cookies()).get("sw-context-token")?.value;
     let cartModel: ICart | null = await CartModel.findOne({
       _id: cartId,
     })
@@ -69,7 +77,7 @@ export async function getCart(): Promise<CartBase | undefined> {
 
 async function getCartModel(): Promise<ICart | undefined> {
   try {
-    const cartId = cookies().get("sw-context-token")?.value;
+    const cartId = (await cookies()).get("sw-context-token")?.value;
 
     if (cartId) {
       return await fetchCart(cartId);

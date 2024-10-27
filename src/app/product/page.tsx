@@ -8,11 +8,12 @@ import Listing from "./listing";
 import type { SearchParams } from "@/types/product";
 
 interface Props {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }
 
-function Products({ searchParams }: Props) {
-  const userAgent = headers().get("user-agent") || "";
+async function Products(props: Props) {
+  const searchParams = await props.searchParams;
+  const userAgent = (await headers()).get("user-agent") || "";
   const mobileCheck = isMobile(userAgent);
 
   return (

@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import JoinUs from "./JoinUs";
 
+import type { JSX } from "react";
+
 jest.mock("@/components/shared/Container/Container", () => {
   const MockContainer: React.FC<{
     children: React.ReactNode;

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 import Button from "@/components/shared/Button/Button";
 import Counter from "@/components/shared/Counter/Counter";
 import Typography from "@/components/shared/Typography/Typography";
 import { addItemToCart } from "@/lib/cart";
 import type { Product } from "@/types/product";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import LoadingDots from "@/components/shared/LoadingDots/LoadingDots";
 
 function SubmitButton() {
@@ -28,7 +28,7 @@ interface Props {
 }
 
 function AddToCard({ product }: Props) {
-  const [message, formAction] = useFormState(addItemToCart, null);
+  const [message, formAction] = useActionState(addItemToCart, null);
   const [quantity, setQuantity] = useState(1);
 
   const getQuantity = (value: number) => {
