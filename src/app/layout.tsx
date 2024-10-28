@@ -29,14 +29,12 @@ export const metadata: Metadata = {
   description: "Avionapp",
 };
 
-export default async function RootLayout(
-  {
-    children,
-  }: Readonly<{
-    children: React.ReactNode;
-  }>
-) {
-  const userAgent = (await headers()).get("user-agent") || "";
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const userAgent = headers().get("user-agent") || "";
   const mobileCheck = isMobile(userAgent);
 
   return (

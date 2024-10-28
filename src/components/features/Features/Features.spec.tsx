@@ -1,8 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Features, { homeFeatures } from "./Features";
 
-import type { JSX } from "react";
-
 jest.mock("@/components/shared/Container/Container", () => {
   const Container = ({ children }: { children: React.ReactNode }) => (
     <div data-testid="container">{children}</div>

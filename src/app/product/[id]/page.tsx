@@ -5,11 +5,10 @@ import Page from "@/components/shared/Page/Page";
 import Menu from "./menu";
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
-async function Products(props: Props) {
-  const params = await props.params;
+function Products({ params }: Props) {
   return (
     <Page>
       <Menu id={params.id} />

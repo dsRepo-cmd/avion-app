@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import Button from "@/components/shared/Button/Button";
 import Input from "@/components/shared/Input/Input";
 import Typography from "@/components/shared/Typography/Typography";
@@ -17,7 +17,7 @@ function SubmitButton() {
 }
 
 function Form() {
-  const [message, createformAction] = useActionState(productCreate, null);
+  const [message, createformAction] = useFormState(productCreate, null);
   const [productData, setProductData] = useState<Partial<Product>>({
     name: "",
     description: "",

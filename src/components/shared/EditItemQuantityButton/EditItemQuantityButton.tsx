@@ -1,9 +1,8 @@
-import { useActionState } from "react";
 import { updateQuantity } from "@/lib/cart";
 import { cn } from "@/lib/utils/utils";
 import type { CartProduct } from "@/types/cart";
 
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import LoadingDots from "../LoadingDots/LoadingDots";
 import Button from "../Button/Button";
 import MinusIcon from "../../icons/MinusIcon";
@@ -48,7 +47,7 @@ function SubmitButton({ type }: { type: "plus" | "minus" }) {
 }
 
 function EditItemQuantityButton({ item, type }: Props) {
-  const [messageQty, updateformAction] = useActionState(updateQuantity, null);
+  const [messageQty, updateformAction] = useFormState(updateQuantity, null);
 
   const payload = {
     productId: item.product.id,
