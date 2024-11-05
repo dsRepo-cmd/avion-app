@@ -1,16 +1,11 @@
-"use client";
-
 import Button from "@/components/shared/Button/Button";
 import Container from "@/components/shared/Container/Container";
 import Typography from "@/components/shared/Typography/Typography";
-import { CartBase } from "@/types/cart";
 import CartItem from "../../components/features/CartItem/CartItem";
+import { getCart } from "@/lib/cart";
 
-interface Props {
-  cart?: CartBase;
-}
-
-function CartMenu({ cart }: Props) {
+async function CartMenu() {
+  const cart = await getCart();
   const calculateSubtotal = () => {
     return cart
       ? cart.products.reduce(
