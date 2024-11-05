@@ -3,7 +3,7 @@ import Typography from "@/components/shared/Typography/Typography";
 
 interface Props {
   isDisabled: boolean;
-  totalPrice: number;
+  totalPrice?: number;
 }
 function Calculation({ isDisabled, totalPrice = 0 }: Props) {
   return (

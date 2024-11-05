@@ -14,7 +14,7 @@ function CartSkeleton() {
         <LoadingDots className=" bg-darkPrimary " />
       </div>
 
-      <Calculation isDisabled={true} totalPrice={0} />
+      <Calculation isDisabled />
     </Container>
   );
 }
