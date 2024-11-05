@@ -1,8 +1,8 @@
-import Button from "@/components/shared/Button/Button";
 import Container from "@/components/shared/Container/Container";
 import Typography from "@/components/shared/Typography/Typography";
 import CartItem from "../../components/features/CartItem/CartItem";
 import { getCart } from "@/lib/cart";
+import Calculation from "./calculation";
 
 async function CartMenu() {
   const cart = await getCart();
@@ -14,6 +14,7 @@ async function CartMenu() {
         )
       : 0;
   };
+  const isCartEmpty = !cart || cart.products.length === 0;
 
   return (
     <Container bgColor="light">
@@ -21,7 +22,7 @@ async function CartMenu() {
         Your shopping cart
       </Typography>
 
-      {!cart || cart.products.length === 0 ? (
+      {isCartEmpty ? (
         <Typography
           className="my-10 w-full text-center"
           fontFamily="secondary"
@@ -62,26 +63,7 @@ async function CartMenu() {
           </tbody>
         </table>
       )}
-
-      <div className="flex self-end flex-col gap-3 mt-6 items-end md:self-stretch">
-        <div className=" flex gap-4 items-end">
-          <Typography tag="h3" size="20px" fontFamily="secondary">
-            Subtotal
-          </Typography>
-          <Typography tag="h3" size="24px" fontFamily="secondary">
-            £{calculateSubtotal()}
-          </Typography>
-        </div>
-        <Typography tag="p" size="14px" fontFamily="primary">
-          Taxes and shipping are calculated at checkout
-        </Typography>
-        <Button
-          className=" md:self-stretch"
-          disabled={!cart || cart.products.length === 0}
-        >
-          Go to checkout
-        </Button>
-      </div>
+      <Calculation isDisabled={isCartEmpty} totalPrice={calculateSubtotal()} />
     </Container>
   );
 }
