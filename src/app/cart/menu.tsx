@@ -3,6 +3,7 @@ import Typography from "@/components/shared/Typography/Typography";
 import CartItem from "../../components/features/CartItem/CartItem";
 import { getCart } from "@/lib/cart";
 import Calculation from "./calculation";
+import Heading from "./heading";
 
 async function CartMenu() {
   const cart = await getCart();
@@ -18,9 +19,7 @@ async function CartMenu() {
 
   return (
     <Container bgColor="light">
-      <Typography fontFamily="secondary" size="32px" tag="h2" className=" mb-8">
-        Your shopping cart
-      </Typography>
+      <Heading />
 
       {isCartEmpty ? (
         <Typography
