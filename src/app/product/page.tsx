@@ -1,9 +1,15 @@
+import dynamic from "next/dynamic";
 import Container from "@/components/shared/Container/Container";
 import Page from "@/components/shared/Page/Page";
 import SortPanel from "./sortPanel";
 import Title from "./title";
-import Listing from "./listing";
 import type { SearchParams } from "@/types/product";
+import ListingSkeleton from "./listing-skeleton";
+
+const Listing = dynamic(() => import("./listing"), {
+  ssr: false,
+  loading: () => <ListingSkeleton />,
+});
 
 interface Props {
   searchParams: SearchParams;
