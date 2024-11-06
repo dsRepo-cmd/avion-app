@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import SignInForm from "@/components/features/SignInForm/SignInForm";
@@ -39,7 +40,9 @@ async function Signin() {
             <Divider className=" flex w-full border-b opacity-10" />
           </div>
 
-          <GoogleButton title="Sign in with Google" />
+          <Suspense>
+            <GoogleButton title="Sign in with Google" />
+          </Suspense>
 
           <div className=" flex gap-3">
             <Typography
