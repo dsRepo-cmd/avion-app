@@ -7,7 +7,7 @@ const CartMenu = dynamic(() => import("./menu"), {
   loading: () => <CartSkeleton />,
 });
 
-async function Cart() {
+function Cart() {
   return (
     <Page>
       <CartMenu />

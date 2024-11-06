@@ -4,7 +4,8 @@ import Link from "next/link";
 
 async function CartLink() {
   const cart = await getCart();
-  const cartItemsCount = cart?.products.length || "";
+  const cartItemsCount = cart?.products.length || 0;
+  console.log(cartItemsCount);
   return (
     <Link
       className=" relative duration-200 hover-hover:hover:scale-[1.2] hover-none:active:scale-[1.2] active:scale-[1]"

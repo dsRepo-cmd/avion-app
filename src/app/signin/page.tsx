@@ -1,12 +1,23 @@
-import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import SignInForm from "@/components/features/SignInForm/SignInForm";
 import Container from "@/components/shared/Container/Container";
 import Divider from "@/components/shared/Divider/Divider";
-import GoogleButton from "@/components/features/GoogleButton/GoogleButton";
 import Page from "@/components/shared/Page/Page";
 import Typography from "@/components/shared/Typography/Typography";
-import Spinner from "@/components/shared/Spinner/Spinner";
+import LoadingDots from "@/components/shared/LoadingDots/LoadingDots";
+
+const GoogleButton = dynamic(
+  () => import("@/components/features/GoogleButton/GoogleButton"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className=" flex h-14 items-center justify-center w-full bg-white">
+        <LoadingDots className=" bg-darkPrimary " />
+      </div>
+    ),
+  }
+);
 
 async function Signin() {
   return (
@@ -28,9 +39,7 @@ async function Signin() {
             <Divider className=" flex w-full border-b opacity-10" />
           </div>
 
-          <Suspense fallback={<Spinner />}>
-            <GoogleButton title="Sign in with Google" />
-          </Suspense>
+          <GoogleButton title="Sign in with Google" />
 
           <div className=" flex gap-3">
             <Typography
