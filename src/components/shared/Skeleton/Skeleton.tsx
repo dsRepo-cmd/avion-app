@@ -3,24 +3,17 @@ import { cn } from "@/lib/utils/utils";
 
 interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  aspectRatio?: string;
+  style?: CSSProperties;
 }
 
 function Skeleton(props: SkeletonProps) {
-  const { className, aspectRatio } = props;
-
-  const styles: CSSProperties = {
-    aspectRatio,
-  };
+  const { className, style } = props;
 
   return (
     <div
-      className={cn(
-        "max-w-full shadow-custom bg-borderGrey overflow-hidden animate-pulse ",
-        className
-      )}
-      style={styles}
-    />
+      className={cn("bg-lightGrey rounded animate-pulse", className)}
+      style={style}
+    ></div>
   );
 }
 

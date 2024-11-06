@@ -10,7 +10,7 @@ describe("Skeleton component", () => {
   it("applies default classes", () => {
     const { container } = render(<Skeleton />);
     expect(container.firstChild).toHaveClass(
-      "max-w-full shadow-custom bg-borderGrey overflow-hidden animate-pulse"
+      "bg-lightGrey rounded animate-pulse"
     );
   });
 
@@ -20,7 +20,7 @@ describe("Skeleton component", () => {
   });
 
   it("applies aspectRatio as a style", () => {
-    const { container } = render(<Skeleton aspectRatio="16/9" />);
+    const { container } = render(<Skeleton style={{ aspectRatio: "16/9" }} />);
     const divElement = container.firstChild as HTMLElement;
     expect(divElement.style.aspectRatio).toBe("16/9");
   });
