@@ -1,13 +1,16 @@
-import { getCart } from "@/lib/cart";
-import CartMenu from "./menu";
+import dynamic from "next/dynamic";
 import Page from "@/components/shared/Page/Page";
+import CartSkeleton from "./cart-skeleton";
+
+const CartMenu = dynamic(() => import("./menu"), {
+  ssr: false,
+  loading: () => <CartSkeleton />,
+});
 
 async function Cart() {
-  const cart = await getCart();
-
   return (
     <Page>
-      <CartMenu cart={cart} />
+      <CartMenu />
     </Page>
   );
 }
