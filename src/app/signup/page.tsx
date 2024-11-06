@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import SignUpForm from "@/components/features/SignUpForm/SignUpForm";
@@ -40,9 +39,7 @@ const SignUp = () => {
             <Divider className=" flex w-full border-b opacity-10" />
           </div>
 
-          <Suspense>
-            <GoogleButton title="Sign up with Google" />
-          </Suspense>
+          <GoogleButton title="Sign up with Google" />
 
           <div className=" flex gap-3">
             <Typography
