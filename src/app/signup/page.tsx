@@ -1,13 +1,23 @@
-"use client";
-
-import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import SignUpForm from "@/components/features/SignUpForm/SignUpForm";
-import GoogleButton from "@/components/features/GoogleButton/GoogleButton";
 import Container from "@/components/shared/Container/Container";
 import Typography from "@/components/shared/Typography/Typography";
 import Divider from "@/components/shared/Divider/Divider";
 import Page from "@/components/shared/Page/Page";
+import LoadingDots from "@/components/shared/LoadingDots/LoadingDots";
+
+const GoogleButton = dynamic(
+  () => import("@/components/features/GoogleButton/GoogleButton"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className=" flex h-14 items-center justify-center w-full bg-white">
+        <LoadingDots className=" bg-darkPrimary " />
+      </div>
+    ),
+  }
+);
 
 const SignUp = () => {
   return (
@@ -28,9 +38,8 @@ const SignUp = () => {
             </Typography>
             <Divider className=" flex w-full border-b opacity-10" />
           </div>
-          <Suspense fallback={<>Loading...</>}>
-            <GoogleButton title="Sign up with Google" />
-          </Suspense>
+
+          <GoogleButton title="Sign up with Google" />
 
           <div className=" flex gap-3">
             <Typography

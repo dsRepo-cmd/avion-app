@@ -20,7 +20,7 @@ function Listings({ title = "", products, href }: Props) {
         </Typography>
         <ul
           className={cn(
-            "grid grid-cols-4  gap-5 lg:grid lg:grid-cols-2 lg:self-center"
+            "grid  grid-cols-4 gap-5 lg:grid-cols-3 lg:self-center md:grid-cols-2 w-full"
           )}
         >
           {products.map((product) => (
