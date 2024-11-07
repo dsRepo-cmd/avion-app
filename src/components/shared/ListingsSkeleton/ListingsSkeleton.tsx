@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils/utils";
 import Container from "../Container/Container";
+import Skeleton from "../Skeleton/Skeleton";
 
 function ListingsSkeleton() {
   return (
     <Container>
       <div className="flex flex-col items-start gap-9 ">
-        <div className="h-9 w-48 bg-lightGrey rounded animate-pulse"></div>
-        {/* Skeleton for product list */}
+        <Skeleton className="h-9 w-48" />
+
         <ul
           className={cn(
             "grid  grid-cols-4 gap-5 lg:grid-cols-3 lg:self-center md:grid-cols-2 w-full"
@@ -17,23 +18,21 @@ function ListingsSkeleton() {
               className=" duration-300 flex flex-col gap-2 h-full w-full hover-hover:hover:scale-[1.04] hover-none:active:scale-[1.04]"
               key={index}
             >
-              <div
-                className="animate-pulse bg-lightGrey w-full rounded"
+              <Skeleton
+                className="w-full"
                 style={{
                   aspectRatio: "305 / 375",
                   maxWidth: "100%",
                   height: "auto",
                 }}
-              ></div>
-              <div className="h-[28px] w-full bg-lightGrey rounded animate-pulse "></div>
-              <div className="h-[28px] w-full bg-lightGrey rounded animate-pulse "></div>
+              />
+              <Skeleton className="h-[28px] w-full " />
+              <Skeleton className="h-[28px] w-full " />
             </li>
           ))}
         </ul>
 
-        {/* Skeleton for pagination */}
-
-        <div className="self-center h-14 w-36 bg-lightGrey rounded animate-pulse lg:w-full"></div>
+        <Skeleton className="self-center h-14 w-36  lg:w-full" />
       </div>
     </Container>
   );

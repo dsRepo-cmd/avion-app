@@ -39,7 +39,7 @@ async function Listing({ searchParams }: Props) {
     <div className="flex flex-col items-start gap-9  ">
       <ul
         className={cn(
-          "grid  grid-cols-4 gap-5 lg:grid-cols-3 lg:self-center md:grid-cols-2"
+          "grid  grid-cols-4 gap-5 lg:grid-cols-3 lg:self-center md:grid-cols-2 w-full"
         )}
       >
         {products.map((product) => (
