@@ -22,7 +22,12 @@ function ListingItem({ product }: Props) {
           height={375}
         />
 
-        <Typography fontFamily="secondary" size="20px" tag="h2">
+        <Typography
+          fontFamily="secondary"
+          size="20px"
+          tag="h2"
+          className=" text-nowrap"
+        >
           {product.name}
         </Typography>
 
