@@ -6,9 +6,10 @@ import { ProductCategory } from "@/lib/enums";
 
 interface Props {
   className?: string;
+  onClick?: () => void;
 }
 
-function CategoryLinks({ className }: Props) {
+function CategoryLinks({ className, onClick }: Props) {
   const searchParams = useSearchParams();
   const categoryParams = searchParams.get("category");
 
@@ -18,6 +19,7 @@ function CategoryLinks({ className }: Props) {
         return (
           <li className=" flex justify-center" key={category}>
             <AppLink
+              onClick={onClick}
               variant="clear"
               href={`/product?category=${category}`}
               className={cn(

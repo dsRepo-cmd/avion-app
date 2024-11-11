@@ -103,7 +103,10 @@ function BurgerMenu() {
             isOpen ? " top-[73px]" : " top-[-800px]"
           )}
         >
-          <CategoryLinks className=" flex-col  gap-6 " />
+          <CategoryLinks
+            onClick={() => setIsOpen(false)}
+            className=" flex-col  gap-6 "
+          />
         </div>
       </Portal>
     </>
