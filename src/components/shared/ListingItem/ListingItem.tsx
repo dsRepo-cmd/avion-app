@@ -9,7 +9,7 @@ interface Props {
 
 function ListingItem({ product }: Props) {
   return (
-    <li>
+    <>
       <Link
         className=" duration-300 flex flex-col gap-2 h-full w-full hover-hover:hover:scale-[1.04] hover-none:active:scale-[1.04]"
         href={`/product/${product.id}`}
@@ -35,7 +35,7 @@ function ListingItem({ product }: Props) {
           £{product.price}
         </Typography>
       </Link>
-    </li>
+    </>
   );
 }
 

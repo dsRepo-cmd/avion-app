@@ -24,7 +24,9 @@ function Listings({ title = "", products, href }: Props) {
           )}
         >
           {products.map((product) => (
-            <ListingItem key={product.id} product={product} />
+            <li key={product.id}>
+              <ListingItem product={product} />
+            </li>
           ))}
         </ul>
 
