@@ -1,31 +1,64 @@
+"use client";
+
+import { useEffect, useState, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils/utils";
-import AppLink from "../../components/shared/AppLink/AppLink";
 import ListingItem from "../../components/shared/ListingItem/ListingItem";
-import type { SearchParams } from "@/types/product";
-import { getProducts } from "@/lib/products";
 import Typography from "@/components/shared/Typography/Typography";
+import { getProducts } from "@/lib/products";
+import type { ProductListing, SearchParams } from "@/types/product";
 
 interface Props {
   searchParams: SearchParams;
 }
 
-async function Listing({ searchParams }: Props) {
-  const { page = "1", limit = "12" } = searchParams;
-  const products = await getProducts({ ...searchParams, page, limit });
+function Listing({ searchParams }: Props) {
+  const [products, setProducts] = useState<ProductListing[]>([]);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const observer = useRef<IntersectionObserver | null>(null);
 
-  const createPaginationLink = (page: number) => {
-    const params = new URLSearchParams({
-      ...searchParams,
-      page: page.toString(),
-      limit: limit.toString(),
-    });
-    return `?${params.toString()}`;
-  };
+  const limit = 12;
 
-  if (!products.length) {
+  const lastProductRef = useCallback(
+    (node: HTMLLIElement | null) => {
+      if (isLoading) return;
+
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore]
+  );
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      setIsLoading(true);
+
+      const newProducts = await getProducts({
+        ...searchParams,
+        page: page.toString(),
+        limit: limit.toString(),
+      });
+
+      setProducts((prevProducts) => [...prevProducts, ...newProducts]);
+      setHasMore(newProducts.length === limit);
+      setIsLoading(false);
+    };
+
+    loadProducts();
+  }, [page, searchParams]);
+
+  if (!products.length && !isLoading) {
     return (
       <Typography
-        className=" text-center"
+        className="text-center"
         fontFamily="secondary"
         size="24px"
         tag="h2"
@@ -36,40 +69,39 @@ async function Listing({ searchParams }: Props) {
   }
 
   return (
-    <div className="flex flex-col items-start gap-9  ">
+    <div className="flex flex-col items-start gap-9">
       <ul
         className={cn(
-          "grid  grid-cols-4 gap-5 lg:grid-cols-3 lg:self-center md:grid-cols-2 w-full"
+          "grid grid-cols-4 gap-5 lg:grid-cols-3 lg:self-center md:grid-cols-2 w-full"
         )}
       >
-        {products.map((product) => (
-          <ListingItem key={product.id} product={product} />
-        ))}
+        {products.map((product, index) => {
+          if (index === products.length - 1) {
+            return (
+              <li key={product.id} ref={lastProductRef}>
+                <ListingItem product={product} />
+              </li>
+            );
+          } else {
+            return (
+              <li key={product.id}>
+                <ListingItem product={product} />
+              </li>
+            );
+          }
+        })}
       </ul>
 
-      <div className=" relative flex h-[56px]  w-full">
-        {Number(page) > 1 && (
-          <AppLink
-            className=" absolute left-0 top-0   "
-            bgColor="gray"
-            variant="filled"
-            href={createPaginationLink(Number(page) - 1)}
-          >
-            Previous
-          </AppLink>
-        )}
-
-        {Number(limit) === products.length && (
-          <AppLink
-            className=" absolute right-0 top-0 "
-            bgColor="gray"
-            variant="filled"
-            href={createPaginationLink(Number(page) + 1)}
-          >
-            Next
-          </AppLink>
-        )}
-      </div>
+      {isLoading && (
+        <Typography
+          className="text-center w-full"
+          fontFamily="secondary"
+          size="18px"
+          tag="p"
+        >
+          Loading...
+        </Typography>
+      )}
     </div>
   );
 }
