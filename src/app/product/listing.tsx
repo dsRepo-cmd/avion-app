@@ -105,5 +105,4 @@ function Listing({ searchParams }: Props) {
     </div>
   );
 }
-
 export default Listing;
